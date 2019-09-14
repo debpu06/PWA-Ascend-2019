@@ -1,0 +1,44 @@
+﻿@using EPiServer.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+
+@model EPiServer.Reference.Commerce.Site.Features.Bookmark.ViewModels.BookmarksViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <div class="bookmarks-table">
+                    <section>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 45%;">@Html.Translate("/Bookmarks/Page")</th>
+                                        <th style="width: 45%;">@Html.Translate("/Bookmarks/Url")</th>
+                                        <th>@Html.Translate("/Bookmarks/Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var bookmark in Model.Bookmarks)
+                                    {
+                                        <tr id="bookmark-@bookmark.ContentGuid">
+                                            <td><a href="@bookmark.Url">@bookmark.Name</a></td>
+                                            <td><a href="@bookmark.Url">@bookmark.Url</a></td>
+                                            <td><a class="remove-bookmark" contentguid="@bookmark.ContentGuid" href="#"><span title="Delete bookmark" class="glyphicon glyphicon-remove"></span></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

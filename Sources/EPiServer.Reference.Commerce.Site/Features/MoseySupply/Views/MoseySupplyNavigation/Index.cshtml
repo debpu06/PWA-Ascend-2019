@@ -1,0 +1,324 @@
+﻿@using EPiServer.Web.Routing
+@model EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels.NavigationViewModel
+@{
+    Layout = null;
+}
+<header>
+    <div class="header-container">
+        <div class="row nav-util">
+            <div class="container">
+                <ul class="list-inline pull-right top-links">
+                    <li>
+                        <div class="header-change-user">
+                            @if (Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                            {
+                                <div class="welcome-msg hidden-xs"> <span>@Html.Translate("/Header/Hello") @Model.Name! </span></div>
+                            }
+                            else
+                            {
+                                <div class="header-nav mobile-hide">
+                                    <div>
+                                        <a href="#" class="dropdown-toggle svg-icon-bg svg-icon-bg-down-arrow" data-toggle="dropdown" title="@Html.Translate("/Header/Login")">
+                                            <span class="hidden-xs">@Html.Translate("/Shared/ChangeUser")</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-login-box">
+                                            <h4 class="dropdown-title">@Html.Translate("/Header/SignInAs")</h4>
+                                            <a href="@Url.Action("Login", "Login", new { userName = "admin@example.com", returnUrl = Request.Url.ToString() })" class="list-group-item">
+                                                <span>
+                                                    <h4 class="list-group-item-heading">@Html.Translate("/Header/GlobalAdmin")</h4>
+                                                    <p class="list-group-item-text">@Html.Translate("/Header/GlobalAdminDescription")</p>
+                                                </span>
+                                            </a>
+                                            <a href="@Url.Action("Login", "Login", new { userName = "admin@smith.com", returnUrl = Request.Url.ToString() })" class="list-group-item">
+                                                <span>
+                                                    <h4 class="list-group-item-heading">@Html.Translate("/Header/CustomerCatalog")</h4>
+                                                    <p class="list-group-item-text">@Html.Translate("/Header/CustomerCatalogDescription")</p>
+                                                </span>
+                                            </a>
+                                            <a href="@Url.Action("Login", "Login", new {userName = "b2bAdmin@episerver.com", returnUrl = Request.Url.ToString()})" class="list-group-item">
+                                                <span>
+                                                    <h4 class="list-group-item-heading">@Html.Translate("/Header/B2BAdmin")</h4>
+                                                    <p class="list-group-item-text">@Html.Translate("/Header/B2BAdminDescription")</p>
+                                                </span>
+                                            </a>
+                                            <a href="@Url.Action("Login", "Login", new {userName = "b2bPurchaser@episerver.com", returnUrl = Request.Url.ToString()})" class="list-group-item">
+                                                <span>
+                                                    <h4 class="list-group-item-heading">@Html.Translate("/Header/B2BPurchaser")</h4>
+                                                    <p class="list-group-item-text">@Html.Translate("/Header/B2BPurchaserDescription")</p>
+                                                </span>
+                                            </a>
+                                            <a href="@Url.Action("Login", "Login", new {userName = "b2bApprover@episerver.com", returnUrl = Request.Url.ToString()})" class="list-group-item">
+                                                <span>
+                                                    <h4 class="list-group-item-heading">@Html.Translate("/Header/B2BApprover")</h4>
+                                                    <p class="list-group-item-text">@Html.Translate("/Header/B2BApproverDescription")</p>
+                                                </span>
+                                            </a>
+                                            <a href="@Url.Action("Login", "Login", new {userName = "salesrep@example.com", returnUrl ="/en/my-pages/my-accounts"})" class="list-group-item">
+                                                <span>
+                                                    <h4 class="list-group-item-heading">@Html.Translate("/Header/SalesRep")</h4>
+                                                    <p class="list-group-item-text">@Html.Translate("/Header/SalesRepDescription")</p>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                    <li>
+                        <div class="header-market">
+                            @{ Html.RenderAction("Index", "MoseySupplyMarket", new { contentLink = ViewContext.RequestContext.GetContentLink() }); }
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+@if (Model.StartPage.HeaderMenuStyle == null || Model.StartPage.HeaderMenuStyle.CompareTo("CenterLogo") == 0)
+{
+    <nav>
+        <div class="container">
+            <div class="row">
+                <div class="mm-toggle-wrap">
+                    <div class="mm-toggle">
+                        <div class="hamburger hamburger--squeeze js-hamburger">
+                            <div class="hamburger-box">
+                                <div class="hamburger-inner"></div>
+                            </div>
+                        </div>
+                        <span class="mm-label">@Html.Translate("/Header/Menu")</span>
+                    </div>
+                </div>
+                <div class="nav-inner col-lg-12">
+                    <!--mega menu-->
+                    <div class="col-sm-5 col-lg-5 col-md-5 hidden-xs">
+                        <ul id="nav" class="hidden-xs">
+                            @foreach (var linkItem in Model.RestrictedMenu)
+                            {
+                                <li class="mega-menu">
+                                    <a title="@linkItem.Title" href="@Url.ContentUrl(new EPiServer.Url(linkItem.Href))">
+                                        <span>@linkItem.Text</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!--logo-->
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 logo">
+                        <a title="@Model.StartPage.Name" href="@Url.ContentUrl(ContentReference.StartPage)">
+                            @Html.PropertyFor(model => model.StartPage.HeaderLogo)
+                        </a>
+                    </div>
+                    <div class="col-sm-5 col-lg-5 col-md-5 right-links-container">
+                        <div class="right-links">
+                            <div class="right-menu">
+                                <div class="header-links">
+                                    <ul class="list-inline text-right sm-row-3-2 hidden-xs shopping-btn-container">
+                                        @if (Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                                        {
+                                            if (Model.ShowSharedCart && Model.SharedMiniCart != null)
+                                            {
+                                                <li class="cart-dropdown">
+                                                    <button type="button" class="btn btn-favorites" data-toggle="dropdown" aria-expanded="false">
+                                                        <span class="fa fa-share-alt"></span> <span class="counter counter--small cartItemCountLabel">@Model.SharedMiniCart.ItemCount.ToString("F0")</span>
+                                                        Shared Cart
+                                                    </button>
+                                                    <div id="SharedMiniCart" class="dropdown-menu product-dropdown-container cart-dropdown-container jsCartDropdown">@{ Html.RenderPartial("_SharedMiniCartDetails", Model.SharedMiniCart); }</div>
+                                                </li>
+                                            }
+                                            <li class="cart-dropdown">
+                                                <button type="button" class="btn btn-favorites" data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="fa fa-star-o"></span> <span class="counter counter--small cartItemCountLabel">@Model.WishListMiniCart.ItemCount.ToString("F0")</span>
+                                                    Order Pad
+                                                </button>
+                                                <div id="WishListMiniCart" class="dropdown-menu product-dropdown-container cart-dropdown-container jsCartDropdown">@{ Html.RenderPartial("_WishListMiniCartDetails", Model.WishListMiniCart); }</div>
+                                            </li>
+                                        }
+                                        <li class="cart-dropdown">
+                                            <button type="button" class="btn btn-cart" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="fa fa-shopping-cart"></span> <span class="counter counter--small cartItemCountLabel">@Model.MiniCart.ItemCount.ToString("F0")</span>
+                                                Cart
+                                            </button>
+                                            <div id="MiniCart" class="dropdown-menu product-dropdown-container cart-dropdown-container jsCartDropdown">@{ Html.RenderPartial("_MiniCartDetails", Model.MiniCart); }</div>
+                                        </li>
+                                        <li>
+                                            @if (!Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                                            {
+                                                <a href="@Url.Action("Index", "Login", new { returnUrl = !ContentReference.IsNullOrEmpty(Model.CurrentContentLink) ? Url.ContentUrl(Model.CurrentContentLink) : "/"})" class="icon-account">
+                                                    <i class="fa fa-user fa-fw"></i>
+                                                    @Html.Translate("/Header/Login")
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="dropdown-toggle icon-account" data-toggle="dropdown">
+                                                    <i class="fa fa-user fa-fw"></i>
+                                                    @(Model.StartPage.MyAccountLabel ?? Html.Translate("/Dashboard/Labels/MyAccount"))
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-login-box">
+                                                    <h4 class="dropdown-title">@(Model.StartPage.MyAccountLabel ?? Html.Translate("/Dashboard/Labels/MyAccount"))</h4>
+                                                    @foreach (var menuItem in Model.UserLinks)
+                                                    {
+                                                        <a title="@menuItem.Title" href="@Url.ContentUrl(new EPiServer.Url(menuItem.Href))" class="list-group-item">
+                                                            <span>
+                                                                <span>@menuItem.Text</span>
+                                                            </span>
+                                                        </a>
+                                                    }
+                                                </div>
+                                            }
+                                        </li>
+                                    </ul>
+                                    <div class="icon-svg search-box-container mobile-hide">
+                                        <div class="search-box">
+                                            @using (Html.BeginForm("Index", null, new { node = Model.StartPage.SearchPage }, FormMethod.Get, htmlAttributes: new { role = "search" }))
+                                            {
+                                                <input autocomplete="off" maxlength="70" type="text" placeholder="@(Model.StartPage.SearchLabel ?? "Search")" class="jsQuickSearch jsSearchInput" id="search" name="search" data-url="@Url.Action("quicksearch", null, new { node = Model.StartPage.SearchPage })" />
+                                                <button type="button" class="search-btn-bg">
+                                                    <svg viewBox="0 0 32 32">
+                                                        <use xlink:href="#icon-search"></use>
+                                                    </svg>
+                                                </button>
+                                                <div class="jsQuickSearchResult product-dropdown-container" style="display: none;"></div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desktop-hide">
+                    <div class="form-group">
+                        @using (Html.BeginForm("Index", null, new { node = Model.StartPage.SearchPage }, FormMethod.Get, htmlAttributes: new { role = "search" }))
+                        {
+                            <input autocomplete="off" maxlength="70" type="text" placeholder="Search" class="form-control jsQuickSearch jsSearchInput" id="search" name="search" data-url="/Search/quicksearch?node=8">
+                            <div class="jsQuickSearchResult product-dropdown-container" style="display: none;"></div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+}
+else
+{
+    <nav>
+        <div class="container">
+            <div class="row nav-inner">
+                <!--logo-->
+                <div class="col-xs-3 col-sm-2 col-lg-1 logo logo-left">
+                    <a title="@Model.StartPage.Name" href="@Url.ContentUrl(ContentReference.StartPage)">
+                        @Html.PropertyFor(model => model.StartPage.HeaderLogo)
+                    </a>
+                </div>
+                <div class="col-xs-4 visible-xs mm-toggle-wrap">
+                    <div class="mm-toggle">
+                        <div class="hamburger hamburger--squeeze js-hamburger">
+                            <div class="hamburger-box">
+                                <div class="hamburger-inner"></div>
+                            </div>
+                        </div>
+                        <span class="mm-label">@Html.Translate("/Header/Menu")</span>
+                    </div>
+                </div>
+                <!--mega menu-->
+                <div class="col-sm-5 col-lg-6 hidden-xs mega-menu-left">
+                    <ul id="nav" class="hidden-xs">
+                        @foreach (var linkItem in Model.RestrictedMenu)
+                        {
+                            <li class="mega-menu">
+                                <a title="@linkItem.Title" href="@Url.ContentUrl(new EPiServer.Url(linkItem.Href))">
+                                    <span>@linkItem.Text</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-sm-5 right-links-container">
+                    <div class="right-links">
+                        <div class="right-menu">
+                            <div class="header-links">
+                                <ul class="list-inline text-right sm-row-3-2 hidden-xs shopping-btn-container">
+                                    @if (Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                                    {
+                                        if (Model.ShowSharedCart && Model.SharedMiniCart != null)
+                                        {
+                                            <li class="cart-dropdown">
+                                                <button type="button" class="btn btn-favorites" data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="fa fa-share-alt"></span> <span class="counter counter--small cartItemCountLabel">@Model.SharedMiniCart.ItemCount.ToString("F0")</span>
+                                                    Shared Cart
+                                                </button>
+                                                <div id="SharedMiniCart" class="dropdown-menu product-dropdown-container cart-dropdown-container jsCartDropdown">@{ Html.RenderPartial("_SharedMiniCartDetails", Model.SharedMiniCart); }</div>
+                                            </li>
+                                        }
+                                        <li class="cart-dropdown">
+                                            <button type="button" class="btn btn-favorites" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="fa fa-star-o"></span> <span class="counter counter--small cartItemCountLabel">@Model.WishListMiniCart.ItemCount.ToString("F0")</span>
+                                                Order Pad
+                                            </button>
+                                            <div id="WishListMiniCart" class="dropdown-menu product-dropdown-container cart-dropdown-container jsCartDropdown">@{ Html.RenderPartial("_WishListMiniCartDetails", Model.WishListMiniCart); }</div>
+                                        </li>
+                                    }
+                                    <li class="cart-dropdown">
+                                        <button type="button" class="btn btn-cart" data-toggle="dropdown" aria-expanded="false">
+                                            <span class="fa fa-shopping-cart"></span> <span class="counter counter--small cartItemCountLabel">@Model.MiniCart.ItemCount.ToString("F0")</span>
+                                            Cart
+                                        </button>
+                                        <div id="MiniCart" class="dropdown-menu product-dropdown-container cart-dropdown-container jsCartDropdown">@{ Html.RenderPartial("_MiniCartDetails", Model.MiniCart); }</div>
+                                    </li>
+                                    <li>
+                                        @if (!Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                                        {
+                                            <a href="@Url.Action("Index", "Login", new { returnUrl = !ContentReference.IsNullOrEmpty(Model.CurrentContentLink) ? Url.ContentUrl(Model.CurrentContentLink) : "/"})" class="icon-account">
+                                                <i class="fa fa-user fa-fw"></i>
+                                                @Html.Translate("/Header/Login")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="dropdown-toggle icon-account" data-toggle="dropdown">
+                                                <i class="fa fa-user fa-fw"></i>
+                                                @(Model.StartPage.MyAccountLabel ?? Html.Translate("/Dashboard/Labels/MyAccount"))
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-login-box">
+                                                <h4 class="dropdown-title">@(Model.StartPage.MyAccountLabel ?? Html.Translate("/Dashboard/Labels/MyAccount"))</h4>
+                                                @foreach (var menuItem in Model.UserLinks)
+                                                {
+                                                    <a title="@menuItem.Title" href="@Url.ContentUrl(new EPiServer.Url(menuItem.Href))" class="list-group-item">
+                                                        <span>
+                                                            <span>@menuItem.Text</span>
+                                                        </span>
+                                                    </a>
+                                                }
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                                <div class="desktop-hide">
+                                    <div class="form-group">
+                                        @using (Html.BeginForm("Index", null, new { node = Model.StartPage.SearchPage }, FormMethod.Get, htmlAttributes: new { role = "search" }))
+                                        {
+                                            <input autocomplete="off" maxlength="70" type="text" placeholder="Search" class="form-control jsQuickSearch jsSearchInput" id="search" name="search" data-url="/Search/quicksearch?node=8">
+                                            <div class="jsQuickSearchResult product-dropdown-container" style="display: none;"></div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="desktop-hide">
+                <div class="form-group">
+                    @using (Html.BeginForm("Index", null, new { node = Model.StartPage.SearchPage }, FormMethod.Get, htmlAttributes: new { role = "search" }))
+                    {
+                        <input maxlength="70" type="text" placeholder="Search" class="form-control jsQuickSearch jsSearchInput" id="search" name="search" data-url="/Search/quicksearch?node=8">
+                        <div class="jsQuickSearchResult product-dropdown-container" style="display: none;"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+}

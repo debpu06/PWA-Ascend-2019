@@ -1,0 +1,55 @@
+@using EPiBootstrapArea
+@using EPiServer.Reference.Commerce.Site.Extensions
+@using EPiServer.Web.Mvc.Html
+@using ImageProcessor.Web.Episerver
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Site.Features.Alloy.Models.Pages.ProductPage>
+
+@{ Layout = "~/Features/Alloy/Views/Shared/Layouts/_TwoPlusOne.cshtml"; }
+
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            <h1 class="heading-title" @Html.EditAttributes(x => x.CurrentContent.PageName)>@Model.CurrentContent.PageName</h1>
+            <p class="introduction" @Html.EditAttributes(x => x.CurrentContent.MetaDescription)>@Model.CurrentContent.MetaDescription</p>
+            <div class="row">
+                <div class="col-sm-12" @Html.EditAttributes(x => x.CurrentContent.MainBody)>
+                    @Html.DisplayFor(m => m.CurrentContent.MainBody)
+                </div>
+            </div>
+            @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row" })
+        </div>
+    </div>
+</section>
+
+
+@section RelatedContent
+{
+    <div @Html.EditAttributes(x => x.CurrentContent.PageImage)>
+        <div id="gallery">
+            @{
+                var image = Url.ContentUrl(Model.CurrentContent.PageImage);
+                if (!string.IsNullOrWhiteSpace(image))
+                {
+                    <a href="@Html.ProcessImage(image).Resize(800, 600)" title="@Model.CurrentContent.PageName">
+                        <img src="@image" class="img-responsive"/>
+                    </a>
+                    <a href="@Html.ProcessImage(image).Resize(400, 300)" title="@Model.CurrentContent.PageName"></a>
+                    <a href="@Html.ProcessImage(image).Resize(150, 75)" title="@Model.CurrentContent.PageName"></a>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="block colorBox @string.Join(" ", @Model.CurrentContent.GetThemeCssClassNames())">
+        <h2 @Html.EditAttributes(x => x.CurrentContent.PageName)>@Model.CurrentContent.PageName</h2>
+        @Html.PropertyFor(x => x.CurrentContent.UniqueSellingPoints)
+    </div>
+
+    @Html.PropertyFor(x => x.CurrentContent.RelatedContentArea, new { CssClass = "row", Tag = ContentAreaTags.OneThirdWidth })
+}
+<script type="text/javascript">
+    $(function () {
+        $('#gallery a').lightBox();
+    });
+</script>
+

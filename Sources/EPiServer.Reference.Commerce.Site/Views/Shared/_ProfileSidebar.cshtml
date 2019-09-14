@@ -1,0 +1,55 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model MyAccountNavigationViewModel
+<aside class="col-right col-xs-12 col-md-3">
+    <div class="bblock block-account">
+        <div class="block-title">@Html.Translate("/Dashboard/Labels/MyAccount")</div>
+        <div class="block-content">
+            <ul>
+                @foreach (var linkItem in Model.MenuItemCollection)
+                {
+                    <li class="@(!string.IsNullOrEmpty(Model.CurrentPageText) && Model.CurrentPageText.Equals(linkItem.Text) ? "current" : "")">
+                        <a href="@Url.PageUrl(linkItem.Href)">@linkItem.Text</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    @if (Model.Organization != null)
+    {
+        <div class="bblock block-account">
+            <div class="block-title">@Html.Translate("/Dashboard/Labels/Organization")</div>
+            <div class="block-content">
+                <ul>
+                    @if (Model.Organization.ParentOrganizationId != Guid.Empty)
+                    {
+                        <li class="@(Model.CurrentPageType == MyAccountPageType.Organization ? "current" : "")">
+                            <a href="@(Url.ContentUrl(Model.OrganizationPage))" class="@(Model.CurrentOrganization.Name == Model.Organization.ParentOrganization.Name ? "current" : "")">
+                                @Model.Organization.ParentOrganization.Name
+                            </a>
+                        </li>
+                        <li class="sub">
+                            <a href="@(Url.ContentUrl(Model.SubOrganizationPage))?suborg=@(Model.Organization.OrganizationId)" class="@(Model.CurrentOrganization.Name == Model.Organization.Name ? "current" : "")">
+                                @Model.Organization.Name
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li  class="@(Model.CurrentPageType == MyAccountPageType.Organization && Model.CurrentOrganization.Name == Model.Organization.Name ? "current" : "")">
+                            <a href="@(Url.ContentUrl(Model.OrganizationPage))">
+                                @Model.Organization.Name
+                            </a>
+                        </li>
+                        foreach (var subOrganization in Model.Organization.SubOrganizations)
+                        {
+                            <li class="@(Model.CurrentPageType == MyAccountPageType.Organization && Model.CurrentOrganization.Name == @subOrganization.Name ? "sub current" : "sub")">
+                                <a href="@(Url.ContentUrl(Model.SubOrganizationPage))?suborg=@(subOrganization.OrganizationId)">
+                                    @subOrganization.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</aside>

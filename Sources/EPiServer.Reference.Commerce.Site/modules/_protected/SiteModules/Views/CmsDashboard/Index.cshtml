@@ -1,0 +1,264 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Shell.Navigation
+@inherits WebViewPage
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+
+<head>
+    <title>Dashboard</title>
+</head>
+<div class="container dashboard-container">
+    <div class="content-header row">
+        <h4>Dashboard</h4>
+    </div>
+    <div class="content-info row">
+        <div class="table-content-info">
+            <div class="row container conversions-section">
+                <h4>Conversions</h4>
+                <div class="row container">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body easypiechart-panel">
+                                <h4>Bounce Rates</h4>
+                                <h2 class="bounce-rates">No data</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body easypiechart-panel">
+                                <h4>Visitors</h4>
+                                <h2 class="visitors-stats">No data</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body easypiechart-panel">
+                                <h4>Amount of Forms submitted</h4>
+                                <h2 class="amount-of-forms-submitted">No data</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row container topdata-section">
+                <h4>Top Data</h4>
+                <div class="row container">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Top Visitor Group
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover visitor-group-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Visitor group</th>
+                                                <th>Usages</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Top Page Types
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover page-type-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Page type</th>
+                                                <th>Usages</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Top block types
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover block-type-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Block type</th>
+                                                <th>Usages</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row container">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Top landing pages
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover top-landing-pages-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Page name</th>
+                                                <th>Amount of time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Bounce Rates
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive bouce-rates-table">
+                                    <table class="table">
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Recent running AB Test
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover top-AB-testing-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>A/B Testing</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row container topdata-section">
+                <h4>AB Testing Statistics</h4>
+                <div class="row container">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Most participation percentage
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover AB-participation-percentage-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>AB Testing name</th>
+                                                <th>Participation percentage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Most page views
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover AB-most-views-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>AB Testing name</th>
+                                                <th>Views</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Most conversions
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover AB-most-conversions-table">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>AB Testing name</th>
+                                                <th>Conversions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div class="content-footer">
+
+    @*<button class="btn-loading">
+            <i class="fa fa-spinner fa-spin"></i> Loading
+        </button>*@
+</div>
+
+@section AdditionalScripts
+{
+    <script type="text/javascript" src="~/Assets/Base/Scripts/Features/Selective/CmsDashboard.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            CmsDashboard.init();
+        });
+    </script>
+}

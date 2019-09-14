@@ -1,0 +1,253 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Shell.Navigation
+@inherits WebViewPage
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+
+<head>
+    <title>Dashboard</title>
+</head>
+<div class="container intent-analytics">
+    <div class="content-header row">
+        <h4>Dashboard</h4>
+    </div>
+    <div class="container">
+        <div class="row conversions-section">
+            <h4>Conversions</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body easypiechart-panel">
+                            <h4>Products sold</h4>
+                            <h2 class="products-sold-data">1459</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body easypiechart-panel">
+                            <h4>New customers</h4>
+                            <h2 class="new-customers-data">65</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body easypiechart-panel">
+                            <h4>Added to cart</h4>
+                            <h2 class="cart-data">89</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row topdata-section">
+            <h4>Top data</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Top products
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive top-products-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr><td>1</td><td>puglia-blue-40</td><td>Compression 2t</td><td>175</td></tr>
+                                        <tr><td>2</td><td>brinisini-gray-40</td><td>Apex 4r</td><td>121</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Top promotions
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive top-promotions-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Promotion name</th>
+                                            <th>Discount type</th>
+                                            <th>Total redemptions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr><td>1</td><td>20 % off Mens Shoes</td><td>LineItem</td><td>17</td></tr>
+                                        <tr><td>2</td><td>$50 off Order over $500</td><td>Order</td><td>1</td></tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row statistics-section">
+            <h4>Statistics</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Current month revenues
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive revenues-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Currency</th>
+                                            <th>Revenue</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>USD</td>
+                                            <td>8,321</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>USD</td>
+                                            <td>5,331</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Top Visitor Groups
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive revenues-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>New Visitor</td>
+                                            <td>3,191</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Big Spender</td>
+                                            <td>309</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row container">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Most participation percentage
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover AB-participation-percentage-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>AB Testing name</th>
+                                        <th>Participation percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Most page views
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover AB-most-views-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>AB Testing name</th>
+                                        <th>Views</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Most conversions
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover AB-most-conversions-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>AB Testing name</th>
+                                        <th>Conversions</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section AdditionalScripts
+{
+    <script type="text/javascript" src="~/Assets/Base/Scripts/Features/Selective/CommerceDashboard.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            CommerceDashboard.init();
+        });
+    </script>
+}*@

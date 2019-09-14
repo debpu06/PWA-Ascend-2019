@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="urn:api.broadmail.de/soap11/MailId" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns2="http://lang.java" xmlns:impl="urn:api.broadmail.de/soap11/MailId" targetNamespace="urn:api.broadmail.de/soap11/MailId" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:api.broadmail.de/soap11/MailId">
+      <xsd:import namespace="http://lang.java" />
+      <xsd:element name="getMailingId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMailingIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getMailingIdReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="WebserviceException">
+        <xsd:sequence>
+          <xsd:element name="cause" nillable="true" type="xsd:anyType" />
+          <xsd:element name="message" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="fault" type="impl:WebserviceException" />
+      <xsd:element name="getRecipientListId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecipientListIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getRecipientListIdReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecipientId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecipientIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getRecipientIdReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMandatorId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMandatorIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getMandatorIdReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getVersion">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getVersionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getVersionReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getMailingIdRequest">
+    <wsdl:part name="parameters" element="impl:getMailingId" />
+  </wsdl:message>
+  <wsdl:message name="WebserviceException">
+    <wsdl:part name="fault" element="impl:fault" />
+  </wsdl:message>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part name="parameters" element="impl:getVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientListIdResponse">
+    <wsdl:part name="parameters" element="impl:getRecipientListIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMandatorIdResponse">
+    <wsdl:part name="parameters" element="impl:getMandatorIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getVersionRequest">
+    <wsdl:part name="parameters" element="impl:getVersion" />
+  </wsdl:message>
+  <wsdl:message name="getMailingIdResponse">
+    <wsdl:part name="parameters" element="impl:getMailingIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientIdResponse">
+    <wsdl:part name="parameters" element="impl:getRecipientIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientListIdRequest">
+    <wsdl:part name="parameters" element="impl:getRecipientListId" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientIdRequest">
+    <wsdl:part name="parameters" element="impl:getRecipientId" />
+  </wsdl:message>
+  <wsdl:message name="getMandatorIdRequest">
+    <wsdl:part name="parameters" element="impl:getMandatorId" />
+  </wsdl:message>
+  <wsdl:portType name="MailIdWebservice">
+    <wsdl:operation name="getMailingId">
+      <wsdl:input name="getMailingIdRequest" message="impl:getMailingIdRequest" />
+      <wsdl:output name="getMailingIdResponse" message="impl:getMailingIdResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientListId">
+      <wsdl:input name="getRecipientListIdRequest" message="impl:getRecipientListIdRequest" />
+      <wsdl:output name="getRecipientListIdResponse" message="impl:getRecipientListIdResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientId">
+      <wsdl:input name="getRecipientIdRequest" message="impl:getRecipientIdRequest" />
+      <wsdl:output name="getRecipientIdResponse" message="impl:getRecipientIdResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMandatorId">
+      <wsdl:input name="getMandatorIdRequest" message="impl:getMandatorIdRequest" />
+      <wsdl:output name="getMandatorIdResponse" message="impl:getMandatorIdResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdl:input name="getVersionRequest" message="impl:getVersionRequest" />
+      <wsdl:output name="getVersionResponse" message="impl:getVersionResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MailIdSoapBinding" type="impl:MailIdWebservice">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getMailingId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getMailingIdRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMailingIdResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientListId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRecipientListIdRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRecipientListIdResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRecipientIdRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRecipientIdResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMandatorId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getMandatorIdRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMandatorIdResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getVersionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MailIdWebserviceService">
+    <wsdl:port name="MailId" binding="impl:MailIdSoapBinding">
+      <wsdlsoap:address location="https://api.campaign.episerver.net/soap11/MailId" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

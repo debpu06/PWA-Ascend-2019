@@ -1,0 +1,227 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.CheckoutViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+
+<section class="main-container col1-layout" id="CheckoutView">
+    <div class="main container">
+        <div class="col-main">
+            @Html.Partial("_CheckoutStatusBar", 5)
+        </div>
+        <div class="col-main">
+            <div class="row container--gutter-inner">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                @Html.Translate("/Checkout/Billing/Payment")
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            @if (Model.SelectedPayment != null)
+                            {
+                                @Model.SelectedPayment
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                @Html.Translate("/Checkout/Coupons/Heading")
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="qsdiscount">
+                                <label for="coupon_code">@Html.Translate("/Checkout/Coupons/CouponCode/Info")</label>
+                                @if (!(bool) ViewData["IsReadOnly"])
+                                {
+                                    <div>
+                                        <input type="text" class="input-text fullwidth" id="coupon_code">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="button coupon js-add-couponcode" data-url="@Url.Action("AddCouponCode", "Checkout", null)">
+                                                @Html.Translate("/Checkout/Coupons/CouponCode/Button")
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="alert alert-danger couponcode-errormessage" style="display: none">
+                                        <p>@Html.Translate("/Checkout/Coupons/CouponCode/ErrorMessage")</p>
+                                    </div>
+                                }
+                                @if (Model.AppliedCouponCodes != null && Model.AppliedCouponCodes.Any())
+                                {
+                                    <div class="col-xs-12">
+                                        <h5>@Html.Translate("/Checkout/Coupons/AppliedCoupons/Heading")</h5>
+                                        <ul>
+                                            @foreach (var couponCode in Model.AppliedCouponCodes)
+                                            {
+                                                <li>
+                                                    @Html.Label(couponCode)
+                                                    @Html.ActionLink(Html.Translate("/Checkout/Coupons/AppliedCoupons/RemoveButton"), "RemoveCouponCode", "Checkout", new
+                                                    {
+                                                    }, new
+                                                    {
+                                                        @class = "btn btn-danger btn-xs js-remove-couponcode"
+                                                    })
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @for (var shipmentIndex = 1; shipmentIndex <= Model.Shipments.Count(); shipmentIndex++)
+            {
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Shipment @shipmentIndex of @Model.Shipments.Count() - @Model.Shipments[shipmentIndex - 1].CurrentShippingMethodName - @Model.Shipments[shipmentIndex - 1].CurrentShippingMethodPrice.ToString()
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <address>
+                                    <strong>
+                                        @Html.Translate("/Shipment/ShippingTo")
+                                    </strong>
+                                    @string.Format("{0}, {1}, {2}, {3}", Model.Shipments[shipmentIndex - 1].Address.Line1,
+                                        Model.Shipments[shipmentIndex - 1].Address.City,
+                                        Model.Shipments[shipmentIndex - 1].Address.CountryRegion.Region,
+                                        Model.Shipments[shipmentIndex - 1].Address.PostalCode)
+                                </address>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td><strong>@Html.Translate("/Checkout/ItemName")</strong></td>
+                                            <td class="text-center"><strong>@Html.Translate("/Checkout/ItemPrice")</strong></td>
+                                            <td class="text-center"><strong>@Html.Translate("/Checkout/ItemQuantity")</strong></td>
+                                            <td class="text-right"><strong>@Html.Translate("/Checkout/Total")</strong></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach (var cartItem in Model.Shipments[shipmentIndex - 1].CartItems)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <a class="product-image" href="@cartItem.Url"><img src="@cartItem.ImageUrl" alt="@cartItem.Code" class="img-responsive product-image" width="50"/></a>
+                                                </td>
+                                                <td>
+                                                    <h2 class="product-name">
+                                                        <a href="@cartItem.Url">@cartItem.DisplayName</a>
+                                                    </h2>
+                                                </td>
+                                                <td class="text-center">
+                                                    @if (cartItem.DiscountedUnitPrice.HasValue)
+                                                    {
+                                                        <span class="price product-price product-price-has-discount">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                        <span class="product-price product-price--discount xs-vertical-margin">@cartItem.DiscountedUnitPrice.ToString()</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="product-price-total">
+                                                            @Helpers.RenderMoney(cartItem.PlacedPrice)
+                                                        </span>
+                                                    }
+                                                </td>
+                                                <td class="text-center">
+                                                    @cartItem.Quantity.ToString("0")
+                                                </td>
+                                                <td class="text-right product-price-total">
+                                                    @cartItem.DiscountedPrice.ToString()
+                                                </td>
+                                            </tr>
+                                        }
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td class="text-right product-price-final" colspan="5">
+                                                @Model.Shipments[shipmentIndex - 1].GetShipmentItemsTotal(Model.Currency).ToString()
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <table class="table table-condensed">
+                    <tbody>
+                    <tr>
+                        <td><h4>@Html.Translate("/Checkout/SubTotal")</h4></td>
+                        <td class="total-price"><h4 class="pull-right">@Model.OrderSummary.SubTotal.ToString()</h4></td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <h4> @Html.Translate("/Checkout/OrderLevelDiscounts")</h4>
+                        @foreach (var discount in Model.OrderSummary.OrderDiscounts)
+                        {
+                            @discount.DisplayName<br />
+                        }
+                        <td class="total-price text-right">
+                            <h4>- @Model.OrderSummary.OrderDiscountTotal.ToString()</h4>
+                            @foreach (var discount in Model.OrderSummary.OrderDiscounts)
+                            {
+                                <span>- </span>
+                                @discount.Discount.ToString()<br />
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>@Html.Translate("/Checkout/ShippingAndTax")</h4>
+                            @Html.Translate("/Checkout/ShippingSubtotal")<br />
+                            @Html.Translate("/Checkout/ShippingDiscount")<br />
+                            @Html.Translate("/Checkout/ShippingTotal")<br />
+                            @Html.Translate("/Checkout/TaxTotal")
+                        </td>
+                        <td class="total-price text-right">
+
+                            <h4>@Model.OrderSummary.ShippingTaxTotal.ToString()</h4>
+                            @Model.OrderSummary.ShippingSubtotal.ToString()<br />
+                            - @Model.OrderSummary.ShippingDiscountTotal.ToString()<br />
+                            @Model.OrderSummary.ShippingTotal.ToString()<br />
+                            @Model.OrderSummary.TaxTotal.ToString()
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><h4>@Html.Translate("/Checkout/CartTotal")</h4></td>
+                        <td class="total-price"><h4 class="pull-right">@Model.OrderSummary.CartTotal.ToString()</h4></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2" class="text-right">
+                            @using (Html.BeginForm("PlaceOrder", "Checkout", FormMethod.Post))
+                            {
+                                <button type="submit" class="button">
+                                    <span>
+                                        @Html.Translate("/Checkout/PlaceOrder")
+                                    </span>
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,46 @@
+﻿@using EPiServer.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+
+@model EPiServer.Reference.Commerce.Site.Features.Profile.ViewModels.GiftCardViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <div class="gift-cards-table">
+                    <section>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.Translate("/GiftCard/GiftCardName")</th>
+                                        <th>@Html.Translate("/GiftCard/InitialAmount")</th>
+                                        <th>@Html.Translate("/GiftCard/RemainBalance")</th>
+                                        <th>@Html.Translate("/GiftCard/RedemptionCode")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var giftcard in Model.GiftCardList)
+                                    {
+                                        <tr>
+                                            <td>@giftcard.GiftCardName</td>
+                                            <td>@giftcard.InitialAmount</td>
+                                            <td>@giftcard.RemainBalance</td>
+                                            <td>@giftcard.RedemptionCode</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

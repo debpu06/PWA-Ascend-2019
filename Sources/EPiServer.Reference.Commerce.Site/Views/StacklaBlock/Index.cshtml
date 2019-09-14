@@ -1,0 +1,19 @@
+@using EPiServer.Core
+@model EPiServer.Reference.Commerce.Site.Features.StacklaBlock.Blocks.StacklaBlock
+<div class="border">
+
+        <!-- Stackla Widget Embed Code (start) -->
+        <div class="stackla-widget" data-alias="episerver-sandbox.stackla.com" data-ct="" data-hash="@Model.StacklaHash" data-id="@Model.StacklaId" data-title="#@Model.StacklaTitle" data-ttl="30" style="width: 100%; overflow: hidden;"></div>
+        <script type="text/javascript">
+            (function (d, id) {
+                var t, el = d.scripts[d.scripts.length - 1].previousElementSibling;
+                if (el) el.dataset.initTimestamp = (new Date()).getTime();
+                if (d.getElementById(id)) return;
+                t = d.createElement('script');
+                t.src = '//assetscdn.stackla.com/media/js/widget/fluid-embed.js';
+                t.id = id;
+                (d.getElementsByTagName('head')[0] || d.getElementsByTagName('body')[0]).appendChild(t);
+            }(document, 'stackla-widget-js'));
+        </script>
+        <!-- Stackla Widget Embed Code (end) -->
+</div>

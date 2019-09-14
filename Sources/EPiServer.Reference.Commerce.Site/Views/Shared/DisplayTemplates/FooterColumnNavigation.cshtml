@@ -1,0 +1,14 @@
+﻿@using EPiServer.SpecializedProperties
+
+@model LinkItemCollection
+
+<ul class="links">
+    @foreach (var linkItem in Model ?? Enumerable.Empty<LinkItem>())
+    {
+        <li>
+            <a href="@Url.ContentUrl(new EPiServer.Url(linkItem.Href))" title="@linkItem.Title">
+                @linkItem.Text
+            </a>
+        </li>
+    }
+</ul>

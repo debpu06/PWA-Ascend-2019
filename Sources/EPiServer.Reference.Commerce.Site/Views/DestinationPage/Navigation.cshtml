@@ -1,0 +1,27 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Destinations.Models.DestinationNavigationModel
+
+<h2 class="section-title no-margin-top">Other destinations</h2>
+<div class="row">
+    @if(Model.CloseBy.Any()) {
+        <div class="col-xs-12 col-sm-6 col-md-12 ec-filters-menu">
+            <h4>Close by</h4>
+            <ul>
+                @foreach (var destination in Model.CloseBy) {
+                    <li>
+                        @Html.PageLink(destination)
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    <div class="col-xs-12 col-sm-6 col-md-12 ec-filters-menu">
+        <h4>@Model.CurrentDestination.Continent</h4>
+        <ul>
+            @foreach (var destination in Model.ContinentDestinations) { 
+                <li class="@(Model.CurrentDestination.PageLink.CompareToIgnoreWorkID(destination.PageLink) ? "active" : "")">
+                    @Html.PageLink(destination)
+                </li>
+            }
+        </ul>
+    </div>
+</div>

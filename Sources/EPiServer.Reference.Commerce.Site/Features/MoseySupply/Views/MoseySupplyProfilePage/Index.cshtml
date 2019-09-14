@@ -1,0 +1,92 @@
+﻿@using EPiServer.Reference.Commerce.B2B.Enums
+@model EPiServer.Reference.Commerce.Site.Features.MoseySupply.ViewModels.MoseySupplyProfilePageViewModel
+<div class="container">
+    <div class="row myPage">
+        @Html.Partial("_CmsNavigation", Model.CurrentContent)
+       
+         <main class="col-xs-12 col-md-9">
+            <div class="spacer-left-l">
+                <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                @Html.PropertyFor(x => x.CurrentContent.MainBody)
+                <div class="max-width">
+                    <div class="row spacer-top-l spacer-bottom-l">
+                        <div class="col-xs-6 col-sm-3">
+                            Name
+                        </div>
+                        <div class="col-xs-6">
+                            <strong>@Model.Contact.FullName</strong>
+                        </div>
+                    </div>
+                    @if (Model.Contact.Organization != null)
+                    {
+                        <div class="row spacer-bottom-l">
+                            <div class="col-xs-6 col-sm-3">
+                                User type
+                            </div>
+                            <div class="col-xs-6">
+                                <strong>@Model.Contact.UserRole</strong>
+                            </div>
+                        </div>
+                        <div class="row spacer-bottom-l">
+                            <div class="col-xs-6 col-sm-3">
+                                Organization
+                            </div>
+                            <div class="col-xs-6">
+                                <strong>@Model.Contact.Organization.Name</strong>
+                                @if (Model.Contact.UserRole == B2BUserRoles.Admin.ToString())
+                                {
+                                    <a class="btn btn-primary btn-xs mypages-new-address-btn" href="@(Url.ContentUrl(Model.OrganizationPage))?showForm=true">
+                                        <span class="fa fa-pencil"></span>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- Appears if there's no organization created -->
+                        <div class="row spacer-bottom-l">
+                            <div class="col-xs-6 col-sm-3">
+                                Organization
+                            </div>
+                            <div class="col-xs-6">
+                                <a class="btn btn-primary btn-sm mypages-new-address-btn" href="@(Url.ContentUrl(Model.OrganizationPage))?showForm=true">Create</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+                @if(Model.CurrentPersonalBudget != null)
+                {
+                <!-- Wireframe 5.0 starts here -->
+                    <h2 class="h3">Personal Budget</h2>
+                                <div class="max-width">
+                                    <div class="row spacer-top-l spacer-bottom-l">
+                                        <div class="col-xs-6 col-sm-3">
+                                            Budget
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <strong>@Model.CurrentPersonalBudget.Amount.ToString("N")</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row spacer-bottom-l">
+                                        <div class="col-xs-6 col-sm-3">
+                                            Spent
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <strong>@Model.CurrentPersonalBudget.SpentBudget.ToString("N") </strong>
+                                        </div>
+                                    </div>
+                                    <div class="row spacer-bottom-l">
+                                        <div class="col-xs-6 col-sm-3">
+                                            Remaining
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <strong class="text-success">@Model.CurrentPersonalBudget.RemainingBudget.ToString("N")</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                }
+            </div>
+        </main>
+    </div>
+</div>

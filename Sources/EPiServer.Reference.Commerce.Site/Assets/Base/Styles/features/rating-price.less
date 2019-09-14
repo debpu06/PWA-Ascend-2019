@@ -1,0 +1,254 @@
+﻿/*================== 8. Rating and Price ==================*/
+
+.no-rating {
+    margin: 0;
+}
+
+    .no-rating a {
+        color: #000;
+    }
+
+.ratings {
+    font-size: 11px;
+    line-height: normal;
+    margin: 2px 0;
+}
+
+    .ratings strong {
+        float: left;
+        margin: 1px 3px 0 0;
+    }
+
+    .ratings .rating-links {
+        margin: 0;
+        display: none;
+    }
+
+        .ratings .rating-links a {
+            margin: 0;
+            text-decoration: none;
+            color: #666;
+            font-family: @font-primary;
+            font-size: 12px
+        }
+
+        .ratings .rating-links .separator {
+            margin: 0 2px;
+        }
+
+.rating-box {
+    width: 80px;
+    height: 12px;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -999em;
+    overflow: hidden;
+}
+
+.rating-box .rating {
+    float: left;
+    height: 12px;
+    background: url(/Assets/Mosey/Images/star.svg) 0 100% repeat-x;
+}
+.item:hover {
+    .rating-box .rating {
+        background: url(/Assets/Mosey/Images/star-white.svg) 0 100% repeat-x;
+    }
+}
+
+.rating-1-star {
+    width: 20%;
+}
+.rating-2-star {
+    width: 40%;
+}
+.rating-3-star {
+    width: 60%;
+}
+.rating-4-star {
+    width: 80%;
+}
+.rating-5-star {
+    width: 100%;
+}
+.ratings .rating-box {
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.ratings .amount {
+}
+
+.ratings-table th, .ratings-table td {
+    font-size: 11px;
+    line-height: 1.15;
+    padding: 3px 0;
+}
+
+.ratings-table th {
+    font-weight: 900;
+    padding-right: 8px;
+}
+/* Price */
+.price {
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap !important;
+
+    &--original {
+        text-decoration: line-through;
+        margin-right: 10px;
+    }
+
+}
+
+.price--discount, .product-price--discount > span {
+    font-weight: bold;
+    color: @color-accent !important;
+}
+
+.price-box {
+    margin: 0;
+    padding: 5px 0px
+}
+/* Regular price */
+.regular-price {
+    display: inline
+}
+
+    .regular-price .price {
+        font-size: 20px;
+        color: #000;
+    }
+
+.bblock .regular-price, .bblock .regular-price .price {
+    color: #000;
+}
+
+.price-box .price-from .price {
+    font-weight: 900;
+    font-size: 14px;
+    color: #333;
+}
+
+.price-box .price-to .price {
+    font-weight: 900;
+    font-size: 14px;
+    color: #333;
+}
+
+.price-box .minimal-price .price {
+    font-weight: 900;
+    font-size: 14px;
+    color: #333;
+}
+/* Old price */
+.old-price .price-label {
+    white-space: nowrap;
+    color: #999;
+    display: none;
+}
+
+.old-price {
+    display: inline;
+    margin-right: 15px;
+}
+    /* Old price */
+    .old-price .price-label {
+        color: #777777;
+        display: none;
+        white-space: nowrap;
+    }
+
+    .old-price .price {
+        color: #999 !important;
+        font-size: 13px;
+        font-weight: normal;
+        text-decoration: line-through;
+        margin-right: 6px;
+    }
+
+.latest-product .old-price .price-label {
+    display: none;
+}
+/* Special price */
+.special-price {
+    margin: 0;
+    padding: 3px 0;
+    display: inline;
+}
+
+    .special-price .price-label {
+        color: #666;
+        display: none;
+        font-size: 13px;
+        font-weight: 400;
+        white-space: nowrap;
+    }
+
+    .special-price .price {
+        font-size: 16px;
+        color: #000;
+        font-weight: bold;
+    }
+
+    .special-price .price-label {
+        font-size: 13px;
+        font-weight: 900;
+        white-space: nowrap;
+        color: #666;
+        display: none;
+    }
+
+.latest-product .special-price .price-label {
+    display: none;
+}
+/* Minimal price (as low as) */
+.minimal-price {
+    margin: 0;
+}
+
+    .minimal-price .price-label {
+        white-space: nowrap;
+    }
+
+.minimal-price-link {
+    display: inline;
+}
+
+    .minimal-price-link .label {
+    }
+
+.products-grid .actions button.button.btn-cart {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin: 0;
+    padding: 9px 10px 9px 10px;
+    color: #333;
+    line-height: 14px;
+}
+
+.products-grid .item:hover .actions button.button.btn-cart {
+    background: #333;
+    border: 1px solid #333;
+    margin: 0 3px 0 3px;
+    padding: 9px 10px 9px 10px;
+    color: #FFFFFF;
+}
+
+.products-grid .actions button.button.btn-cart span {
+    font-family: @font-primary;
+    font-size: 11px;
+    padding: 0;
+    font-weight: bold;
+    margin-left: 0;
+    text-transform: uppercase
+}
+/* Special price */
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@using EPiServer.Reference.Commerce.Site.Extensions
+@using EPiServer.Web.Routing
+@model MobileNavigationViewModel
+
+
+@helper RenderItem(IList<MegaMenuItem> items)
+{
+    foreach (var linkItem in items)
+    {
+        <li>
+            <a title="@linkItem.DisplayName" href="@linkItem.Url">
+                @linkItem.DisplayName
+            </a>
+            @if (linkItem.Children.Any())
+            {
+                <ul>
+                    @RenderItem(linkItem.Children)
+                </ul>
+            }
+        </li>
+    }
+}
+
+<div id="mobile-menu">
+    <ul>
+        @RenderItem(Model.MenuModel.MenuItems)
+
+        @*Change User*@
+        @if (!Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+        {
+            <li>
+                <a title="@Html.Translate("/Shared/ChangeUser")" href="#">@Html.Translate("/Shared/ChangeUser")</a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Login", "Login", new { userName = "admin@example.com", returnUrl = Request.Url.ToString() })">
+                            <h4 class="list-group-item-heading">@Html.Translate("/Header/GlobalAdmin")</h4>
+                            <p class="list-group-item-text">@Html.Translate("/Header/GlobalAdminDescription")</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+
+    </ul>
+</div>
+

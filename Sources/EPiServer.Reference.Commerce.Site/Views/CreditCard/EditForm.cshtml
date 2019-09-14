@@ -1,0 +1,131 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@model EPiServer.Reference.Commerce.Site.Features.Profile.ViewModels.CreditCardViewModel
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter container--gutter-inner">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h1 class="heading-title">@Html.Translate("/Dashboard/Labels/MyAccount")</h1>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+
+                @{
+                    if (Model.IsB2B)
+                    {
+                        Html.RenderAction("Index", "B2BNavigation");
+
+                    }
+                }
+
+                <div class="col-xs-12 col-md-9">
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div>@Model.ErrorMessage</div>
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("Save", "CreditCard", FormMethod.Post))
+                        {
+                            <h3>
+                                @if (!string.IsNullOrEmpty(Model.CreditCard.CreditCardId))
+                                {
+                                    @Html.Translate("/CreditCard/Edit/Header")
+                                }
+                                else
+                                {
+                                    @Html.Translate("/CreditCard/AddNew/Header")
+                                }
+                            </h3>
+                            <br />
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(x => x.CreditCard.CreditCardType)
+                                    @Html.DropDownListFor(x => x.CreditCard.CreditCardType, Model.CreditCard.Types, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.CreditCard.CreditCardType)
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(x => x.CreditCard.CreditCardNumber)
+                                    @Html.TextBoxFor(x => x.CreditCard.CreditCardNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.CreditCard.CreditCardNumber)
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(x => x.CreditCard.ExpirationMonth)
+                                    @Html.DropDownListFor(x => x.CreditCard.ExpirationMonth, Model.CreditCard.Months, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.CreditCard.ExpirationMonth)
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(x => x.CreditCard.CreditCardSecurityCode)
+                                    @Html.TextBoxFor(x => x.CreditCard.CreditCardSecurityCode, new { @class = "form-control", maxlength = "3" })
+                                    @Html.ValidationMessageFor(x => x.CreditCard.CreditCardSecurityCode)
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(x => x.CreditCard.ExpirationYear)
+                                    @Html.DropDownListFor(x => x.CreditCard.ExpirationYear, Model.CreditCard.Years, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.CreditCard.ExpirationYear)
+                                </div>
+                            </div>
+
+                            if (Model.CreditCard.CurrentContact == null) //Edit CC of organization or add new CC
+                            {
+                                if (Model.CreditCard.Organization != null) //Edit CC of organization
+                                {
+                                    @Html.HiddenFor(x => x.CreditCard.Organization.OrganizationId)
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <div class="form-group">
+                                                <label>@Html.Translate("/B2B/Organization/Organization")</label>
+                                                <br />
+                                                <div class="custom-select">
+                                                    @Html.TextBoxFor(x => x.CreditCard.Organization.Name, new { disabled = "disabled", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.IsB2B)
+                                {
+                                    //Add new CC
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            @{
+                                                @Html.LabelFor(x => x.CreditCard.Organization)
+                                                @Html.DropDownListFor(x => x.CreditCard.OrganizationId, new SelectList(Model.Organizations, "OrganizationId", "Name", Model.CreditCard.OrganizationId), new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(x => x.CreditCard.Organization)
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                            @Html.HiddenFor(x => x.CreditCard.CreditCardId)
+                            @Html.HiddenFor(x => x.IsB2B)
+
+                            if (!(bool)ViewData["IsReadOnly"])
+                            {
+                                <button type="submit" class="btn btn-primary btn--blue float-left margin-right-lg">@Html.Translate("/Shared/Save")</button>
+                            }
+
+                            @Html.ActionLink(Html.Translate("/Shared/Cancel"), "Index", "CreditCard", new { @class = "btn btn-default button-light float-left" })
+
+                            <hr />
+
+                        }
+                    }
+                </div>
+            </div>
+
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Link });
+            }
+
+        </div>
+    </div>
+</section>

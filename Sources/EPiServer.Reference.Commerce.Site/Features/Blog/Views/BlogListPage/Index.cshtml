@@ -1,0 +1,27 @@
+﻿@using EPiServer.Web.Mvc.Html
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Site.Features.Blog.Models.Pages.BlogListPage>
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter-layout">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2 @Html.EditAttributes(x => x.CurrentContent.Name)>@Model.CurrentContent.Name</h2>
+                </div>
+                @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row equal-height" })
+                <div class="blog-wrapper" id="main">
+                    @Html.PropertyFor(x => x.CurrentContent.BlogList)
+                </div>
+            </div>
+            <aside class="col-right sidebar col-sm-3">
+                <div role="complementary" class="widget_wrapper13" id="secondary">
+                    @Html.PropertyFor(x => x.CurrentContent.TagCloud)
+
+                    @Html.PropertyFor(x => x.CurrentContent.Archive)
+
+                    @Html.PropertyFor(x => x.CurrentContent.RightContentArea, new { CssClass = "row equal-height" })
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

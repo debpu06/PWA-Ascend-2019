@@ -1,0 +1,14 @@
+﻿
+@using EPiServer.ServiceLocation
+@using EPiServer.Commerce.Catalog
+
+@model EPiServer.Reference.Commerce.Site.Features.Product.Models.GenericNode
+
+@{
+    var assetUrlResolver = ServiceLocator.Current.GetInstance<AssetUrlResolver>();
+    var imageUrl = assetUrlResolver.GetAssetUrl<IContentImage>(Model);
+}
+<a href="@Url.ContentUrl(Model.ContentLink)" style="text-align: center; margin: 0 auto; width: 100%; display: block;">
+    <img src="@imageUrl" style="margin: 0 auto; width: 100%;" />
+    <h4 style="text-align: center;">@Model.Name</h4>
+</a>

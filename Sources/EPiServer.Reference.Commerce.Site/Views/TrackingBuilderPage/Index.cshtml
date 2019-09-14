@@ -1,0 +1,31 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.TrackingBuilder.ViewModels.TrackingBuilderPageViewModel
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="hidable-Section">
+            <H2>Explanation:</H2>
+            <p>This page is designed to allow you to create a series of trackable events that can be pushed to the Profile Store so that you can demonstrate Insight's capabilities *over time*.
+            <p>The importance of this tools is to be able to inject custom tracking events that aren't easily added without code and allow those events to occur over time to represent a customer journey.</p>
+            <p>A user has to be specified to associate the tracking events with the user. The user needs to have already been created on the tracking user setup page (based on PageType "Tracking User Setup Page") prior to injecting the events. </p>
+            <p>Then, tracking event blocks are added in the Tracking Events property. Each tracking event block represents an event that will be added in Insight for the date specified. The order of the blocks doesn't matter.</p>
+
+            <p>Directions:</p>
+            <ol>
+                <li>As an admin/editor, create/amend the tracking events in the event listing content area below.</li>
+                <li>View the page outside of the CMS. Log in as the user you want to inject the events for.</li>
+                <li>Click the Inject button</li>
+                <li>Confirm data is in Insight.</li>
+            </ol>
+        </div>
+        @using (Html.BeginForm("InjectEvents", "TrackingBuilderPage", FormMethod.Post))
+        {
+            @Html.Hidden("userId", Model.CurrentUserEmail)
+            @Html.Hidden("pageContentLinkId", Model.ContentGuid.ToString())
+            <button type="submit" class="btn btn-primary btn--blue">Inject</button>
+        }
+        <h2>Event Timeline</h2>
+        <div class="category-page">
+            @Html.PropertyFor(x => x.TrackingItems, new { CssClass = "row" })
+        </div>
+    </div>
+</section>
+

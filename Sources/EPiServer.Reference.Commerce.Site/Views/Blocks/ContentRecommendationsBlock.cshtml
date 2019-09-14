@@ -1,0 +1,40 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@model EPiServer.Reference.Commerce.Site.Features.Blocks.ViewModels.ContentRecommendationsBlockViewModel
+
+<div class="row">
+    @foreach (var item in Model.ContentRecommendationItems)
+    {
+        <div class="col-xs-12 col-md-6">
+            <div class="teaser @item.Content.ThemeCssClass @item.Content.AlignmentCssClass @(item.Content.ApplyHoverEffect ? "show-details" : String.Empty)">
+                <div class="teaser-text-container">
+                    <div class="teaser-text">
+                        <h2>@item.Content.Name</h2>
+                        <div class="teaser-details">
+                            @if (!String.IsNullOrWhiteSpace(item.Content.TeaserText))
+                            {
+                                <p>@item.Content.TeaserText</p>
+                            }
+                            @if (!String.IsNullOrWhiteSpace(item.Content.TeaserButtonText))
+                            {
+                                <p><a class="button-dark" href="@Url.ContentUrl(item.Content.ContentLink)">@item.Content.TeaserButtonText</a></p>
+                            }
+                            else
+                            {
+                                <p><a class="button-dark" href="@Url.ContentUrl(item.Content.ContentLink)">@Html.Translate("/Shared/ReadMore")</a></p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="teaser-image" style="background-image: url('@Url.ContentUrl(item.Content.PageImage)'">
+                    @if (item.Content.TeaserVideo != null)
+                    {
+                        <video class="video-container" autoplay loop playsinline muted>
+                            <source src="@Url.ContentUrl(item.Content.TeaserVideo)" type="video/mp4">
+                        </video>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

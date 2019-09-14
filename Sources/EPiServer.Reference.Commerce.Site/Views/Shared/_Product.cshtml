@@ -1,0 +1,125 @@
+﻿@using ImageProcessor.Web.Episerver
+@model EPiServer.Reference.Commerce.Site.Features.Shared.Models.IProductModel
+@{
+    if (Model == null)
+    {
+        return;
+    }
+}
+
+<div class="item-inner">
+    <div class="item-img">
+        <div class="item-img-info">
+            <a class="product-image" title="@Model.DisplayName" href="@Model.Url">
+                <img alt="@Model.DisplayName" src="@Model.ImageUrl" class="img-responsive">
+                <span class="background"></span>
+            </a>
+
+            <div class="flag-container">
+                @if (Model.NewArrival)
+                {
+                        <div class="new-label new-top-left">@Html.Translate("/Shared/New")</div>
+            }
+                            @if (Model.OnSale)
+                {
+                        <div class="sale-label">@Html.Translate("/Shared/OnSale")</div>
+            }
+                            @if (Model.IsFeaturedProduct)
+                {
+                        <div class="featured-ribbon">@Html.Translate("/Shared/Featured")</div>
+            }
+                            @if (Model.IsBestBetProduct)
+                {
+                        <div class="bestbet-badge">@Html.Translate("/Shared/Recommended")</div>
+            }
+            </div>
+
+                <a data-toggle="modal" data-target="#ModalDialog" data-url="@Model.Url" class="quickview-btn" onclick="ProductPage.showQuickview('@Model.Url')">
+                    <span>@Html.Translate("/Product/Quickview")</span>
+                </a>
+
+                <a href="@Model.Url" class="details-btn hidden">
+                    <span>@Html.Translate("/Product/Details")</span>
+                </a>
+
+            </div>
+    </div>
+    <div class="item-info">
+        <div class="info-inner">
+            <div class="item-title">
+                <a title="@Model.DisplayName" href="@Model.Url">
+                    @Model.DisplayName
+                </a>
+            </div>
+            <div class="item-content">
+                @if (Model.ReviewStatistics != null)
+                {
+                <div class="rating">
+                    <div class="ratings">
+                        <div class="rating-box">
+                            @if (Model.ReviewStatistics == null || Model.ReviewStatistics.OverallRating < 1)
+                            {
+                                <div class="rating"></div>
+                            }
+                            else if (Model.ReviewStatistics.OverallRating >= 1 && Model.ReviewStatistics.OverallRating < 2)
+                            {
+                                <div class="rating rating-1-star"></div>
+                            }
+                            else if (Model.ReviewStatistics.OverallRating >= 2 && Model.ReviewStatistics.OverallRating < 3)
+                            {
+                                <div class="rating rating-2-star"></div>
+                            }
+                            else if (Model.ReviewStatistics.OverallRating >= 3 && Model.ReviewStatistics.OverallRating < 4)
+                            {
+                                <div class="rating rating-3-star"></div>
+                            }
+                            else if (Model.ReviewStatistics.OverallRating >= 4 && Model.ReviewStatistics.OverallRating < 4.5)
+                            {
+                                <div class="rating rating-4-star"></div>
+                            }
+                            else if (Model.ReviewStatistics.OverallRating >= 4.5)
+                            {
+                                <div class="rating rating-5-star"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <div class="item-price">
+                    <div class="price-box">
+                        <span class="regular-price XXXXX">
+
+                            @{
+                                var hasDiscount = Model.IsAvailable && Model.DiscountedPrice.GetValueOrDefault().
+                                    Amount < Model.PlacedPrice.Amount;
+                            }
+
+                            @if (Model.IsAvailable)
+                            {
+                                if (Model.DiscountedPrice.HasValue && Model.DiscountedPrice.Value.Amount > 0)
+                                {
+                                    if (hasDiscount)
+                                    {
+                                        <span class="price price--original">@Helpers.RenderMoney(Model.PlacedPrice)</span>
+                                        <span class="price price--discount">@Helpers.RenderMoney(Model.DiscountedPrice.GetValueOrDefault())</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="price">@Helpers.RenderMoney(Model.DiscountedPrice.GetValueOrDefault())</span>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <span class="price">@Html.Translate("/Product/NotAvailable")</span>
+                            }
+
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

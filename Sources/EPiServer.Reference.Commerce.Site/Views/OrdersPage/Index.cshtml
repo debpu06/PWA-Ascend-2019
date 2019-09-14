@@ -1,0 +1,69 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.Orders.ViewModels.OrdersPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div>
+                    @{ Html.RenderAction("Index", "B2BNavigation");}
+                    <section>
+                        <div class="section-title spacer-bottom-m">
+                            <label>@Html.Translate("/B2B/Orders/FilterByStatus")</label>
+                        </div>
+                        <div class="custom-select spacer-bottom-m">
+                            <span class="custom-select-split"></span>
+                            <span class="custom-select-arrow arrow-down"></span>
+                            <select class="selectpicker orderStatusPicker">
+                                <option value="All">@Html.Translate("/B2B/Orders/All")</option>
+                                <option value="OnHold">@Html.Translate("/B2B/Orders/OnHold")</option>
+                                <option value="InProgress">@Html.Translate("/B2B/Orders/InProgress")</option>
+                                <option value="Completed">@Html.Translate("/B2B/Orders/Completed")</option>
+                                <option value="RequestQuotation">@Html.Translate("/B2B/Orders/RequestQuote")</option>
+                                <option value="RequestQuotationFinished">@Html.Translate("/B2B/Orders/RequestQuoteFinished")</option>
+                                <option value="QuoteExpired">@Html.Translate("/B2B/Orders/QuoteExpired")</option>
+                                <option value="PendingApproval">@Html.Translate("/B2B/Orders/PendingApproval")</option>
+                            </select>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.Translate("/B2B/Orders/OrderNo")</th>
+                                        <th>@Html.Translate("/B2B/Orders/PlacedOn")</th>
+                                        <th>@Html.Translate("/Shared/Amount")</th>
+                                        <th>@Html.Translate("/B2B/Suborganization")</th>
+                                        <th>@Html.Translate("/Shared/User")</th>
+                                        <th>@Html.Translate("/B2B/Budgeting/Status")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model.OrdersOrganization)
+                                    {
+                                        <tr class="orderElement @order.Status">
+                                            <td><a href="@(Model.OrderDetailsPageUrl)?orderGroupId=@order.OrderGroupId">#@order.OrderNumber</a></td>
+                                            <td>@order.PlacedOrderDate</td>
+                                            <td>@order.Currency @order.Ammount</td>
+                                            <td>@order.SubOrganization</td>
+                                            <td>@order.User</td>
+                                            <td>@order.Status</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

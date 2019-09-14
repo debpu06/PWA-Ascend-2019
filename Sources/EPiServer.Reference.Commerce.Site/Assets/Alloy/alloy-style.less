@@ -1,0 +1,27 @@
+﻿// Global variables
+@import (less) "../Base/compilenotes.less";
+@import (less) "variables.less";
+
+// Bootstrap
+@import (less) "../Base/bootstrap/bootstrap";
+@import (inline) "../Base/bootstrap-slider/bootstrap-slider.css";
+@import (less) "../Base/bootstrap-social/bootstrap-social.less";
+
+// Features
+// Style for BlogPage, include style for post and paging
+@import (inline) "Features/blogmate.css";
+@import (less) "Features/blog-post.less";
+@import (less) "Features/product-toolbar.less";
+@import (less) "Features/grid.less";
+@import (less) "Features/alloy.less";
+
+
+// Fonts
+@import (less) "../Base/font-awesome/less/font-awesome.less";
+@import (less) "../Fonts/fonts.less";
+
+// Global overrides
+@import (less) "overrides.less";
+
+// FOR SITE-WIDE STYLING, USE main.less
+// FOR INDIVIDUAL FEATURES, CREATE A "Features/[featurename].less" FILE, AND REFERENCE IT HERE

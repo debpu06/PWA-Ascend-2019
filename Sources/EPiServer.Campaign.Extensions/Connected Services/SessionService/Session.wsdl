@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="urn:api.broadmail.de/soap11/Session" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns2="http://lang.java" xmlns:impl="urn:api.broadmail.de/soap11/Session" targetNamespace="urn:api.broadmail.de/soap11/Session" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:api.broadmail.de/soap11/Session">
+      <xsd:import namespace="http://lang.java" />
+      <xsd:element name="setMediaType">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setMediaTypeResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:complexType name="WebserviceException">
+        <xsd:sequence>
+          <xsd:element name="cause" nillable="true" type="xsd:anyType" />
+          <xsd:element name="message" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="fault" type="impl:WebserviceException" />
+      <xsd:element name="getMediaType">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMediaTypeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getMediaTypeReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="logout">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="logoutResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="login">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:long" />
+            <xsd:element name="in1" type="xsd:string" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="loginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="loginReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setLocale">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setLocaleResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getLocale">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getLocaleResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getLocaleReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getVersion">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getVersionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getVersionReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="WebserviceException">
+    <wsdl:part name="fault" element="impl:fault" />
+  </wsdl:message>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part name="parameters" element="impl:getVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="setLocaleResponse">
+    <wsdl:part name="parameters" element="impl:setLocaleResponse" />
+  </wsdl:message>
+  <wsdl:message name="setMediaTypeResponse">
+    <wsdl:part name="parameters" element="impl:setMediaTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMediaTypeRequest">
+    <wsdl:part name="parameters" element="impl:getMediaType" />
+  </wsdl:message>
+  <wsdl:message name="logoutResponse">
+    <wsdl:part name="parameters" element="impl:logoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="loginResponse">
+    <wsdl:part name="parameters" element="impl:loginResponse" />
+  </wsdl:message>
+  <wsdl:message name="loginRequest">
+    <wsdl:part name="parameters" element="impl:login" />
+  </wsdl:message>
+  <wsdl:message name="logoutRequest">
+    <wsdl:part name="parameters" element="impl:logout" />
+  </wsdl:message>
+  <wsdl:message name="getVersionRequest">
+    <wsdl:part name="parameters" element="impl:getVersion" />
+  </wsdl:message>
+  <wsdl:message name="getLocaleRequest">
+    <wsdl:part name="parameters" element="impl:getLocale" />
+  </wsdl:message>
+  <wsdl:message name="getLocaleResponse">
+    <wsdl:part name="parameters" element="impl:getLocaleResponse" />
+  </wsdl:message>
+  <wsdl:message name="setMediaTypeRequest">
+    <wsdl:part name="parameters" element="impl:setMediaType" />
+  </wsdl:message>
+  <wsdl:message name="getMediaTypeResponse">
+    <wsdl:part name="parameters" element="impl:getMediaTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="setLocaleRequest">
+    <wsdl:part name="parameters" element="impl:setLocale" />
+  </wsdl:message>
+  <wsdl:portType name="SessionWebservice">
+    <wsdl:operation name="setMediaType">
+      <wsdl:input name="setMediaTypeRequest" message="impl:setMediaTypeRequest" />
+      <wsdl:output name="setMediaTypeResponse" message="impl:setMediaTypeResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMediaType">
+      <wsdl:input name="getMediaTypeRequest" message="impl:getMediaTypeRequest" />
+      <wsdl:output name="getMediaTypeResponse" message="impl:getMediaTypeResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <wsdl:input name="logoutRequest" message="impl:logoutRequest" />
+      <wsdl:output name="logoutResponse" message="impl:logoutResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdl:input name="loginRequest" message="impl:loginRequest" />
+      <wsdl:output name="loginResponse" message="impl:loginResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setLocale">
+      <wsdl:input name="setLocaleRequest" message="impl:setLocaleRequest" />
+      <wsdl:output name="setLocaleResponse" message="impl:setLocaleResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getLocale">
+      <wsdl:input name="getLocaleRequest" message="impl:getLocaleRequest" />
+      <wsdl:output name="getLocaleResponse" message="impl:getLocaleResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdl:input name="getVersionRequest" message="impl:getVersionRequest" />
+      <wsdl:output name="getVersionResponse" message="impl:getVersionResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SessionSoapBinding" type="impl:SessionWebservice">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="setMediaType">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setMediaTypeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setMediaTypeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMediaType">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getMediaTypeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMediaTypeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="logout">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="logoutRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="logoutResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="loginRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="loginResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setLocale">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setLocaleRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setLocaleResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLocale">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getLocaleRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getLocaleResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getVersionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SessionWebserviceService">
+    <wsdl:port name="Session" binding="impl:SessionSoapBinding">
+      <wsdlsoap:address location="https://api.campaign.episerver.net/soap11/Session" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

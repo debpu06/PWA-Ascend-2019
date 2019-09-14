@@ -1,0 +1,8 @@
+﻿@model NotificationBlockViewModel
+
+<div class="alert alert-primary notification-message" role="alert" id="@((Model.CurrentBlock as IContent).ContentGuid)">
+    <span>@Model.CurrentBlock.Message</span>
+    <button type="button" class="close notification-acknowledged" data-dismiss="alert" aria-label="Close" id="@((Model.CurrentBlock as IContent).ContentGuid)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

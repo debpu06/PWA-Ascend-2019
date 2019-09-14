@@ -1,0 +1,158 @@
+﻿@using EPiServer.Commerce.Order
+@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@using Mediachase.Commerce
+
+@model EPiServer.Reference.Commerce.Site.modules._protected.SiteModules.Orders.ShipmentsViewModel
+<section class="panel general">
+    <header class="panel-heading bg-green-gradient">
+        Shipments
+    </header>
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            @for (var shipmentIndex = 0; shipmentIndex < Model.Shipments.Count; shipmentIndex++)
+            {
+                <li class="@(shipmentIndex == 0 ? " active" : "" )">
+                    <a data-toggle="tab" href="@(string.Format(" #shipment{0}", shipmentIndex))">@(string.Format("Shipment {0}", shipmentIndex + 1))</a>
+                </li>
+            }
+            <li>
+                <a href="#" id="btnAdd"><i class="fa fa-plus"></i> Add Shipment</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            @for (var shipmentIndex = 0; shipmentIndex < Model.Shipments.Count; shipmentIndex++)
+            {
+                <div id="@(string.Format(" shipment{0}", shipmentIndex))" class="@(shipmentIndex == 0 ? " tab-pane active" : "tab-pane" )">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4">
+                            <section class="panel">
+                                <header class="panel-heading bg-teal-gradient">
+                                    Shipment Details
+                                </header>
+                                <div class="panel-body">
+                                    @using (Html.BeginForm("UpdatePurchaseOrder", "EditModeOrders", new { }, FormMethod.Post, new { @class = "form-horizontal tasi-form" }))
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    @Html.LabelFor(x => x.Shipments[shipmentIndex].WarehouseCode, "Order Number", new { @class = "col-sm-2 col-sm-2 control-label" })
+                                                    <div class="col-sm-10">
+                                                        @Html.TextBoxFor(x => x.Shipments[shipmentIndex].WarehouseCode, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">
+                                                    Save Details
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-sm-12 col-md-8">
+                            <section class="panel">
+                                <header class="panel-heading bg-teal-gradient">
+                                    Shipment Line Items
+                                </header>
+                                <div class="panel-body">
+                                    @using (Html.BeginForm("UpdatePurchaseOrder", "EditModeOrders", new { }, FormMethod.Post, new { @class = "form-horizontal tasi-form" }))
+                                    {
+                                        var lineItemIndex = 0;
+                                        <table class="table table-responsive">
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Placed Price</th>
+                                                <th>Discount</th>
+                                                <th>Total</th>
+                                            </tr>
+                                            @foreach (var lineItem in Model.Shipments[shipmentIndex].LineItems)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <input class=" col-sm-10 form-control" name="@string.Format("lineItemCode{0}", lineItemIndex)" type="text" value="@lineItem.Code" />
+                                                    </td>
+                                                    <td>
+                                                        <input class=" col-sm-10 form-control" name="@string.Format("lineItemName{0}", lineItemIndex)" type="text" value="@lineItem.DisplayName" />
+                                                    </td>
+                                                    <td>
+                                                        <input class=" col-sm-10 form-control" name="@string.Format("lineItemQuantity{0}", lineItemIndex)" type="number" value="@lineItem.Quantity.ToString("f0")" />
+                                                    </td>
+                                                    <td>
+                                                        <input class=" col-sm-10 form-control" name="@string.Format("lineItemPlacedPrice{0}", lineItemIndex)" type="number" value="@lineItem.PlacedPrice.ToString("f2")" />
+                                                    </td>
+                                                    <td>
+                                                        <input class=" col-sm-10 form-control" name="@string.Format("lineItemDiscount{0}", lineItemIndex)" type="number" value="@lineItem.GetEntryDiscount().ToString("f2")" />
+                                                    </td>
+                                                    <td>
+                                                        @lineItem.GetExtendedPrice(new Currency(Model.Currency)).ToString()
+                                                    </td>
+                                                </tr>
+                                                lineItemIndex = lineItemIndex++;
+                                            }
+                                        </table>
+                                    }
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@*<div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Default</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Help text</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control">
+            <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Rounder</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control round-input">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Input focus</label>
+        <div class="col-sm-10">
+            <input class="form-control" id="focusedInput" type="text" value="This is focused...">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Disabled</label>
+        <div class="col-sm-10">
+            <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Placeholder</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="placeholder">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" placeholder="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 col-sm-2 control-label">Static control</label>
+        <div class="col-lg-10">
+            <p class="form-control-static">email@example.com</p>
+        </div>
+    </div>*@

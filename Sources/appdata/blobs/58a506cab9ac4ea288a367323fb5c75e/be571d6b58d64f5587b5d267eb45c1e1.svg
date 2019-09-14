@@ -1,0 +1,26 @@
+
+<svg width="720px" height="720px" viewBox="0 0 720 720" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="1.-Page-Design----Version-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landing-Page" transform="translate(0.000000, -1096.000000)">
+            <g id="Block:-Large-Square-+-4x1-Square" transform="translate(0.000000, 1096.000000)">
+                <g id="Block:-50%-Square">
+                    <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="720" height="720"></rect>
+                    <g id="Group" transform="translate(239.000000, 261.000000)">
+                        <g id="BG-shape-1" transform="translate(116.000000, 97.000000)" stroke="#FF553E" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="4">
+                            <path d="M47.7317714,181 C45.5280526,179.672384 43.3595202,178.247275 41.230084,176.725327 C-2.92313729,145.162232 -13.2353948,83.6338916 18.1959438,39.2971589 C33.0935265,18.282359 54.6947933,4.90216649 78,0" id="Stroke-1"></path>
+                            <path d="M82.875123,168 C73.4995828,165.934298 64.3773468,162.009855 56.0617361,156.135269 C22.7979777,132.638231 15.0284511,86.8310863 38.7087627,53.8229388 C56.4683385,29.0671546 86.8740376,18.5414741 115,24.7385811" id="Stroke-3"></path>
+                            <path d="M69.740588,137 C66.96423,135.036348 64.4540167,132.839787 62.2172125,130.456242 C46.5609045,113.770118 44.3181566,87.9119739 58.1537181,68.6048043 C65.0820653,58.9354735 74.8930964,52.5144028 85.5989811,49.6722572 C99.3249147,46.02838 114.521578,48.2682426 127,57.0931963" id="Stroke-5"></path>
+                        </g>
+                        <text id="Spring-News" font-family="Museo-500, Museo" font-size="74" font-weight="normal" letter-spacing="0.036194142" fill="#333333">
+                            <tspan x="0" y="70">Spring </tspan>
+                            <tspan x="0" y="159">News</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

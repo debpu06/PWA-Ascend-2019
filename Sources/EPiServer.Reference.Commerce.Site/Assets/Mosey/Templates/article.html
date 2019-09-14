@@ -1,0 +1,1193 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="">
+    <title> Mosey</title>
+    <link href="http://localhost:50244/en/" rel="canonical" />
+
+
+    <meta property="title" content="Mosey" />
+    <link rel="icon" href="/Assets/Images/episerver.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="/Assets/Images/episerver.png" type="image/x-icon" />
+
+    <link href="/Assets/Base/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/Assets/Base/lightbox/css/jquery.lightbox-0.5.css" rel="stylesheet" />
+
+    <link href="/Assets/Styles/vnextStyle.css" rel="stylesheet" />
+
+    <style>
+    </style>
+
+
+    <script type="text/javascript" src="/WebResource.axd?d=06BwN-V4cbMsRvf09OiYriflShDrAKRgv6Sa7dJozyenEQOwYlYAZAD1h4bJTER9ISSFUelEy5PVGIft6RIsUFn5x_U9GY5ZigzsVcBltaWI6dKkEmhwIvKBl5BXR2RQahyNQXLxe3_ZoW4BBKyFajKdP3xqZaKIv9c-TkCNfuW47tq8Nu4oSHhYlcR4wz1u0&t=636552394100000000"></script>
+    <script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-96291696-1', 'auto');if(window.epiGat)epiGat({"downloads":true,"extensions":"7z|aac|arc|arj|asf|avi|bin|csv|docx?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|png|pptx?|qtm?|ra(m|r)?|tar|tgz|txt|wav|wma|wmv|wpd|xlsx?|xml|z|zip","external":true,"mailto":true,"trackForms":true,"trackVisitorGroups":true,"trackLogins":true,"trackingOption":"Universal"});ga('set', 'userId', '7b1d80d4-89a6-4d85-9cea-551d637fd25c');ga('send', 'pageview');
+    </script>
+
+
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59a70b2039509a0011b10e4e&product=inline-share-buttons" async="async"></script>
+</head>
+<body class="cms-index-index cms-home-page theme-mosey">
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
+        <defs>
+            <g id="icon-cart">
+                <path d="M12,8 L12,6.21874691 C12,3.89492506 13.7837878,2 16,2 C18.2162122,2 20,3.89492506 20,6.21874691 L20,8 L27,8 L27,30 L5,30 L5,8 L12,8 Z M13,8 L19,8 L19,6.21874691 C19,4.43414967 17.6499632,3 16,3 C14.3500368,3 13,4.43414967 13,6.21874691 L13,8 Z M12,9 L6,9 L6,29 L26,29 L26,9 L20,9 L20,12.5 L19,12.5 L19,9 L13,9 L13,12.5 L12,12.5 L12,9 Z" id="path-1"></path>
+            </g>
+            <g id="icon-door">
+                <path d="M23,16.5 L23,3 L10,3 L10,29 L23,29 L23,17.5 L20,17.5 L20,16.5 L23,16.5 Z M9,30 L9,2 L24,2 L24,30 L9,30 Z" id="path-1"></path>
+            </g>
+            <g id="icon-facebook">
+                <path d="M1.7660944,0 C0.790606008,0 0,0.790603046 0,1.76608779 L0,30.2337923 C0,31.2091572 0.790606008,32 1.7660944,32 L17.0922688,32 L17.0922688,19.6078907 L12.921984,19.6078907 L12.921984,14.778426 L17.0922688,14.778426 L17.0922688,11.2168756 C17.0922688,7.08377452 19.6165969,4.83318159 23.3036936,4.83318159 C25.0699079,4.83318159 26.5878139,4.96458907 27.0301168,5.02333877 L27.0301168,9.34276026 L24.4729368,9.34395923 C22.4677662,9.34395923 22.0794173,10.2967834 22.0794173,11.6950261 L22.0794173,14.778426 L26.8617803,14.778426 L26.2391511,19.6078907 L22.0794173,19.6078907 L22.0794173,32 L30.2339056,32 C31.2092741,32 32,31.2091572 32,30.2337923 L32,1.76608779 C32,0.790603046 31.2092741,0 30.2339056,0 L1.7660944,0 Z" id="path-1"></path>
+            </g>
+            <g id="icon-search">
+                <path d="M14,23 C18.9705627,23 23,18.9705627 23,14 C23,9.02943725 18.9705627,5 14,5 C9.02943725,5 5,9.02943725 5,14 C5,18.9705627 9.02943725,23 14,23 Z M14,24 C8.4771525,24 4,19.5228475 4,14 C4,8.4771525 8.4771525,4 14,4 C19.5228475,4 24,8.4771525 24,14 C24,19.5228475 19.5228475,24 14,24 Z M21.2928932,22 L22,21.2928932 L27.2071068,26.5 L26.5,27.2071068 L21.2928932,22 Z" id="path-1"></path>
+            </g>
+            <g id="icon-twitter">
+                <path d="M10.06336,29 C22.13888,29 28.74368,18.9962435 28.74368,10.3210309 C28.74368,10.0368914 28.74368,9.7540319 28.72448,9.47245226 C30.0093841,8.54312537 31.118535,7.39244832 32,6.07429802 C30.8017652,6.6052059 29.5306615,6.95337512 28.22912,7.10718332 C29.5996723,6.28673969 30.6254381,4.99632412 31.11552,3.47608593 C29.8267616,4.24077343 28.416827,4.77968704 26.94656,5.06957069 C24.9114659,2.90575185 21.6777208,2.37614959 19.0586231,3.77773442 C16.4395254,5.17931926 15.086432,8.16352386 15.75808,11.0569777 C10.4792265,10.7923562 5.560929,8.2991909 2.2272,4.19795372 C0.484637128,7.19760203 1.37470449,11.0350394 4.25984,12.9614799 C3.21502874,12.9305158 2.1929976,12.6486874 1.28,12.1397794 C1.28,12.1666574 1.28,12.1948154 1.28,12.2229733 C1.28085521,15.3479863 3.4838419,18.0395577 6.5472,18.6583479 C5.58063308,18.9219321 4.56650315,18.9604628 3.58272,18.7709798 C4.44281335,21.4452476 6.90761544,23.2772572 9.71648,23.3300101 C7.39166085,25.1569908 4.51975617,26.1487857 1.56288,26.1458064 C1.04051657,26.1448037 0.518661204,26.1131784 0,26.0510933 C3.00241402,27.9777079 6.49588915,28.9996377 10.06336,28.9948804" id="path-1"></path>
+            </g>
+            <g id="icon-instagram">
+                <path d="M16.0000318,0 L15.9999047,0 C20.3452411,0 20.8902976,0.018418509 22.5966001,0.0966019042 C24.2996636,0.174023154 25.4626879,0.444457676 26.4804613,0.839693475 C27.5481547,1.24153453 28.5153728,1.87144754 29.3145392,2.68554564 C30.1284403,3.48471839 30.7582213,4.45181714 31.1599956,5.51945554 C31.5555459,6.53717343 31.8259782,7.70020701 31.9037164,9.40328397 C31.9815816,11.1096001 32,11.6547244 32,16.0000318 C32,20.3453391 31.9815816,20.8902094 31.9037164,22.5967795 C31.8259782,24.299793 31.5555459,25.4628266 31.1599956,26.4805445 C30.3287559,28.6297304 28.6297572,30.3287426 26.4807153,31.159989 C25.462942,31.5555423 24.2999176,31.8259768 22.5968542,31.9037157 C20.8905517,31.9815815 20.3454316,32 16.0001588,32 C11.6548859,32 11.1100199,31.9815815 9.40346337,31.9037157 C7.70046344,31.8259768 6.53743909,31.5555423 5.51966577,31.159989 C4.45209936,30.7582114 3.48494477,30.1284254 2.68577836,29.3145179 C1.87187726,28.5153451 1.24209628,27.5481829 0.840321924,26.4805445 C0.444771706,25.4628901 0.174339331,24.2998565 0.0966011373,22.5967795 C0.0184183628,20.8904635 0,20.3454026 0,16.0000318 C0,11.6546609 0.0184183628,11.1096001 0.0966011373,9.40328397 C0.174021773,7.70020701 0.444454148,6.53717343 0.839686808,5.51939203 C1.24158819,4.45175363 1.87155971,3.48459137 2.68565134,2.68548213 C3.48481775,1.87157456 4.45197233,1.24178858 5.51953875,0.840011035 C6.53724856,0.444457676 7.7002729,0.174023154 9.40333634,0.0962843437 C11.1096389,0.018418509 11.6546954,0 16.0000318,0 Z M15.9999047,2.88294125 L16.0000318,2.88287773 C11.7277337,2.88287773 11.2217368,2.89920034 9.5345513,2.97617701 C7.97457948,3.04731056 7.12739831,3.30796422 6.56360587,3.52708096 C5.86866199,3.78354282 5.24002421,4.19256075 4.72392899,4.72396649 C4.19246395,5.24006581 3.78344928,5.86870858 3.52692594,6.56372149 C3.30781093,7.12758192 3.04722286,7.97470631 2.97602636,9.53469051 C2.8990503,11.2220165 2.88272782,11.7278903 2.88272782,16.0002223 C2.88272782,20.2724907 2.8990503,20.7786187 2.97602636,22.4657541 C3.04715934,24.0257383 3.30781093,24.8729262 3.52692594,25.4367231 C3.78338576,26.1316725 4.19240044,26.7603153 4.72380196,27.2764146 C5.23989719,27.8078203 5.86853497,28.2167747 6.56347885,28.4732366 C7.1273348,28.6923533 7.97445246,28.953007 9.53442428,29.0242041 C11.2214828,29.1011807 11.7272891,29.1175033 15.9999047,29.1175033 C20.2725203,29.1175033 20.7785172,29.1011807 22.4653852,29.0242041 C24.025357,28.9530705 24.8725382,28.6924169 25.4363306,28.4732366 C26.8317439,27.9350351 27.9346228,26.8321474 28.4728835,25.4367231 C28.691935,24.8728627 28.9525866,24.0257383 29.0238466,22.4657541 C29.1007592,20.7784281 29.1170816,20.2725542 29.1170816,16.0002223 C29.1170816,11.7278903 29.1007592,11.2218894 29.0238466,9.53469051 C28.9526501,7.97470631 28.6919985,7.1275184 28.4728835,6.56372149 C28.2164237,5.86877209 27.807409,5.24012933 27.2760075,4.72403 C26.7599123,4.19262426 26.131338,3.78360634 25.4363306,3.52714448 C24.8724747,3.30802773 24.025357,3.04743758 22.4653852,2.97624052 C20.7780726,2.89926386 20.2720757,2.88294125 15.9999047,2.88294125 Z M16.1682377,7.84624635 C11.6584238,7.84624635 8.00246107,11.4689139 8.00246107,15.9376566 C8.00246107,20.4064619 11.6584238,24.0291294 16.1682377,24.0291294 C20.6780516,24.0291294 24.3340143,20.4064619 24.3340143,15.9376566 C24.3340143,11.4689139 20.6780516,7.84624635 16.1682377,7.84624635 M16.1682377,21.1899273 C13.240829,21.1899273 10.8676946,18.8383426 10.8677577,15.9375941 C10.8677577,13.0368455 13.2409553,10.685386 16.1683639,10.685386 C19.0957726,10.6854485 21.4688439,13.0369706 21.4688439,15.9376566 C21.4688439,18.8384052 19.0956463,21.1899273 16.1682377,21.1899273 Z M25.2934552,5.88468476 C26.5562623,5.88468476 27.5799105,6.89907263 27.5799105,8.15028839 C27.5799105,9.40157911 26.5562623,10.415892 25.2934552,10.415892 C24.0307238,10.415892 23.0070756,9.40157911 23.0070756,8.15028839 C23.0070756,6.89907263 24.0307238,5.88468476 25.2934552,5.88468476 Z" id="path-1"></path>
+            </g>
+        </defs>
+    </svg>
+
+
+
+
+
+
+    <div id="ModalDialog" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+        </div>
+    </div>
+    <div id="page">
+
+        <header>
+            <div class="header-container">
+
+
+                <div class="row nav-util">
+                    <div class="container">
+                        <ul class="list-inline pull-right top-links">
+
+                            <li class="nav-util-account hidden-xs">
+                                <div>
+
+                                    <div>
+                                        <a href="/en/my-pages/profile/">
+                                            <span>My Account</span>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a title="Sign in" href="/Login/Index?returnUrl=%2Fen%2F">
+                                            <span>Sign in</span>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="header-change-user">
+                                    <div class="header-nav">
+                                        <div>
+                                            <a href="#" class="dropdown-toggle svg-icon-bg svg-icon-bg-down-arrow" data-toggle="dropdown" title="Login">
+                                                <span class="hidden-xs">Change User</span>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-login-box">
+                                                <h4 class="dropdown-title">Sign in as</h4>
+                                                <a href="/Login/Login?userName=admin%40example.com&amp;returnUrl=http%3A%2F%2Fvnext%2F" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">Global Admin</h4>
+                                                        <p class="list-group-item-text">Has global admin rights</p>
+                                                    </span>
+                                                </a>
+                                                <a href="/Login/Login?userName=b2bAdmin%40episerver.com&amp;returnUrl=http%3A%2F%2Fvnext%2F" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">B2B Organization Admin</h4>
+                                                        <p class="list-group-item-text">Has admin rights for organization</p>
+                                                    </span>
+                                                </a>
+                                                <a href="/Login/Login?userName=b2bPurchaser%40episerver.com&amp;returnUrl=http%3A%2F%2Fvnext%2F" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">B2B Oraganization Purchaser</h4>
+                                                        <p class="list-group-item-text">Has purchasing rights for organization</p>
+                                                    </span>
+                                                </a>
+                                                <a href="/Login/Login?userName=b2bApprover%40episerver.com&amp;returnUrl=http%3A%2F%2Fvnext%2F" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">B2B Approver</h4>
+                                                        <p class="list-group-item-text">Has order approval rights for organization</p>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="header-market">
+                                    <div class="top-market-contain pull-right">
+                                        <div data-toggle="dropdown" data-hover="dropdown" class="market dropdown-toggle svg-icon-bg svg-icon-bg-down-arrow">
+                                            <a href="#">
+                                                <img src="/Assets/Mosey/images/flags/au.svg" alt="AUS" />
+                                            </a>
+                                        </div>
+                                        <div class="lang-curr dropdown-menu">
+                                            <div data-toggle="dropdown" data-hover="dropdown" class="market dropdown-toggle"></div>
+
+                                            <h4 class="dropdown-title">Market</h4>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="AUS" />                        <a href="" title="Australia" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/au.svg" alt="Australia" />
+                                                            <span>Australia</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="BRA" />                        <a href="" title="Brazil" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/br.svg" alt="Brazil" />
+                                                            <span>Brazil</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="CAN" />                        <a href="" title="Canada" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/ca.svg" alt="Canada" />
+                                                            <span>Canada</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="CHL" />                        <a href="" title="Chile" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/cl.svg" alt="Chile" />
+                                                            <span>Chile</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="DEFAULT" />                        <a href="" title="Default Market" class="jsMarketSelector">
+                                                            <img src="" alt="Default Market" />
+                                                            <span>Default Market</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="DEU" />                        <a href="" title="Germany" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/de.svg" alt="Germany" />
+                                                            <span>Germany</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="JPN" />                        <a href="" title="Japan" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/jp.svg" alt="Japan" />
+                                                            <span>Japan</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="NLD" />                        <a href="" title="Netherlands" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/nl.svg" alt="Netherlands" />
+                                                            <span>Netherlands</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="NOR" />                        <a href="" title="Norway" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/no.svg" alt="Norway" />
+                                                            <span>Norway</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="SAU" />                        <a href="" title="Saudi Arabia" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/sa.svg" alt="Saudi Arabia" />
+                                                            <span>Saudi Arabia</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="ESP" />                        <a href="" title="Spain" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/es.svg" alt="Spain" />
+                                                            <span>Spain</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="SWE" />                        <a href="" title="Sweden" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/se.svg" alt="Sweden" />
+                                                            <span>Sweden</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="UK" />                        <a href="" title="United Kingdom" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/gb.svg" alt="United Kingdom" />
+                                                            <span>United Kingdom</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                            <div class="list-group-item">
+                                                <span>
+                                                    <form action="/Market/Set?contentLink=7" method="post">
+                                                        <input id="MarketId" name="MarketId" type="hidden" value="US" />                        <a href="" title="USA" class="jsMarketSelector">
+                                                            <img src="/Assets/Mosey/images/flags/us.svg" alt="USA" />
+                                                            <span>USA</span>
+                                                        </a>
+                                                    </form>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li class="no-space">
+                                <div class="header-store">
+                                    <div class="top-market-contain pull-right">
+                                        <a id="map-toggle" href="/en/store-locator/">
+                                            <span class="glyphicon glyphicon-map-marker"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+
+
+
+
+
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <!--Move this to _Navigation.cshtml: Begin-->
+                <!--Move this to _Navigation.cshtml: end-->
+
+            </div>
+
+        </header>
+
+        <nav>
+            <div class="container">
+                <div class="row">
+                    <div class="mm-toggle-wrap">
+                        <div class="mm-toggle">
+                            <i class="fa fa-bars"></i>
+                            <span class="mm-label">Menu</span>
+                        </div>
+                    </div>
+                    <div class="nav-inner col-lg-12">
+
+                        <!--mega menu-->
+                        <div class="col-sm-5 col-lg-5 col-md-5 hidden-xs">
+                            <ul id="nav" class="hidden-xs">
+                                <li class="mega-menu">
+                                    <a title="Mens" href="/en/fashion/mens/">
+                                        <span>Mens</span>
+                                    </a>
+                                    <div class="level0-wrapper">
+                                        <div class="container">
+                                            <div class="level0-wrapper2">
+                                                <div class="nav-block nav-block-center grid20">
+                                                    <ul class="level0">
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/mens/mens-shoes/" title="Shoes">
+                                                                    <img src="/globalassets/catalog/nodes/mens-shoes.svg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Shoes</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/mens/mens-jackets/" title="Jackets">
+                                                                    <img src="/globalassets/catalog/nodes/mens-suits.svg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Jackets</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/mens/mens-shirts/" title="Shirts">
+                                                                    <img src="/globalassets/catalog/nodes/mens-shirts.svg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Shirts</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/mens/mens-sweatshirts/" title="Sweatshirts">
+                                                                    <img src="/globalassets/catalog/nodes/mens-sweatshirts.svg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Sweatshirts</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mega-menu">
+                                    <a title="Womens" href="/en/fashion/womens/">
+                                        <span>Womens</span>
+                                    </a>
+                                    <div class="level0-wrapper">
+                                        <div class="container">
+                                            <div class="level0-wrapper2">
+                                                <div class="nav-block nav-block-center grid20">
+                                                    <ul class="level0">
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/womens/womens-dresses/" title="Womens Dresses">
+                                                                    <img src="/globalassets/catalog/nodes/womens-dresses.jpg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Womens Dresses</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/womens/womens-tees/" title="Womens Tees">
+                                                                    <img src="/globalassets/catalog/nodes/womens-tshirts.jpg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Womens Tees</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/womens/womens-bottoms/" title="Womens Bottoms">
+                                                                    <img src="/globalassets/catalog/nodes/womens-bottoms.jpeg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Womens Bottoms</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/womens/womens-shoes/" title="Womens Shoes">
+                                                                    <img src="/globalassets/catalog/nodes/womens-shoes.jpeg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Womens Shoes</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/fashion/womens/womens-handbags/" title="Womens Handbags">
+                                                                    <img src="/globalassets/catalog/nodes/womens-handbags.jpeg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>Womens Handbags</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mega-menu">
+                                    <a title="Inspiration" href="/en/inspiration/">
+                                        <span>Inspiration</span>
+                                    </a>
+                                    <div class="level0-wrapper">
+                                        <div class="container">
+                                            <div class="level0-wrapper2">
+                                                <div class="nav-block nav-block-center grid20">
+                                                    <ul class="level0">
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/inspiration/the-new-trend-printed-t-shirts/" title="The New Trend: Printed T-Shirts">
+                                                                    <img src="/contentassets/3ea9bd3b7df84e038d415aaae10c152b/header_ps.jpg?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>The New Trend: Printed T-Shirts</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mega-menu">
+                                    <a title="Blog" href="/en/blog/">
+                                        <span>Blog</span>
+                                    </a>
+                                    <div class="level0-wrapper">
+                                        <div class="container">
+                                            <div class="level0-wrapper2">
+                                                <div class="nav-block nav-block-center grid20">
+                                                    <ul class="level0">
+                                                        <li>
+                                                            <div class="menu_image">
+                                                                <a href="/en/blog/2017/" title="2017">
+                                                                    <img src="/contentassets/6d8f49f4a5ce409987dc0b0b261596d9/glowing-in-2017-1865023_640.png?width=250&amp;mode=crop" class="img-responsive">
+                                                                    <span>2017</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <!--logo-->
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 logo">
+                            <a title="Mosey" href="/en/">
+                                <img src="/globalassets/mosey/mosey-logo.svg" class="img-responsive" />
+
+                            </a>
+                        </div>
+
+
+                        <div class="col-sm-5 col-lg-5 col-md-5 right-links-container">
+
+                            <!--Put links from _Header.cshtml right here-->
+                            <div class="right-links">
+
+                                <div class="right-menu">
+
+                                    <div class="header-cart">
+                                        <div id="MiniCart">
+
+                                            <div class="menu_top" id="headerCart">
+
+                                                <div class="top-cart-contain pull-right">
+                                                    <div class="mini-cart">
+                                                        <div class="basket">
+                                                            <a href="#" class="toggle-btn icon-svg">
+                                                                <svg viewBox="0 0 32 32">
+                                                                    <use xlink:href="#icon-cart"></use>
+                                                                </svg>
+                                                                <span>0</span>
+                                                                <div class="icon-text">Cart</div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="top-cart-content">
+                                                            <div class="block-subtitle">
+                                                                <div class="top-subtotal">
+                                                                    0 items, <span>$0.00</span>
+                                                                </div>
+                                                                <div class="pull-right">
+                                                                    <div class="basket">
+                                                                        <a href="#" class="toggle-btn">
+                                                                            My Cart
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <ul class="mini-products-list" id="cart-sidebar"></ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="ajaxconfig_info">
+                                                        <a href="#/"></a>
+                                                        <input value="" type="hidden">
+                                                        <input id="enable_module" value="1" type="hidden">
+                                                        <input class="effect_to_cart" value="1" type="hidden">
+                                                        <input class="title_shopping_cart" value="Go to shopping cart" type="hidden">
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="CartItemCount" value="0">
+                                                <input type="hidden" id="CartTotalAmount" value="$0.00">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="header-links">
+
+                                        <a href="#" class="dropdown-toggle icon-svg icon-account" data-toggle="dropdown">
+                                            <svg viewBox="0 0 32 32">
+                                                <use xlink:href="#icon-door"></use>
+                                            </svg>
+                                            <div class="icon-text">My Account</div>
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-login-box">
+                                            <h4 class="dropdown-title">My Account</h4>
+                                            <a href="#" class="list-group-item">
+                                                <span>
+                                                    <span>Account Profile</span>
+                                                </span>
+                                            </a>
+                                            <a title="Wishlist" href="#" class="list-group-item">
+                                                <span>
+                                                    <span>Wishlist</span>
+                                                </span>
+                                            </a>
+                                            <a title="Sign out" href="#" class="list-group-item">
+                                                <span>
+                                                    <span>Sign out</span>
+                                                </span>
+                                            </a>
+                                        </div>
+
+
+                                        <div class="icon-svg search-box-container">
+
+                                            <!--search-->
+                                            <div class="search-box">
+                                                <form action="/Search/Index?node=8" method="get" role="search">
+                                                    <input maxlength="70" type="text" placeholder="Search" class="jsQuickSearch jsSearchInput" id="search" name="search" data-url="/Search/quicksearch?node=8" />
+                                                    <button type="button" class="search-btn-bg">
+                                                        <svg viewBox="0 0 32 32">
+                                                            <use xlink:href="#icon-search"></use>
+                                                        </svg>
+                                                    </button>
+                                                    <div class="jsQuickSearchResult product-dropdown-container" style="display: none;"></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+        </nav>
+
+
+
+
+
+
+        <section class="main-container">
+            <div class="container">
+                <div class="row">
+                    <div class="row">
+
+                        <div class="col-sm-12 col-xs-12 col-lg-12 hero-image-bg" style="background-image: url(/Assets/Mosey/Images/Temp/article-hero-mountains.png)">
+
+                            <article class="article-container">
+
+                                <header class="hero-header text-center">
+                                    <!--Note to BE: The text color for these elements should be chosen in the TinyMCE and choose the style "Text Colors > Light" under the style dropdown-->
+                                    <h4 class="color-light">Lifestyle</h4>
+                                    <h1 class="color-light">Out in the wild</h1>
+                                </header>
+
+                                <section class="article-content">
+
+                                    <div class="block textblock col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <h3>Nec arcu habitant ornare himenaeos</h3>
+                                        <p>Imperdiet mauris convallis natoque dictum pellentesque placerat vehicula consequat curae penatibus eu nostra massa libero quam cursus cubilia scelerisque quis et duis ac pretium tortor vitae sociis pharetra litora magnis per sodales cum commodo risus neque suscipit inceptos nulla velit turpis lacinia aenean lorem porta diam magna a eleifend facilisi</p>
+                                    </div>
+
+                                    <div class="block textimageblock col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="textimageblock-text">
+                                            <h3>Lorem ipsum dolor sit </h3>
+                                            <p>Dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod  Ornare sapien hac erat fames elit porta interdum diam conubia mi vel natoque fringilla luctus habitant lacus enim . Dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, cons ectetuer adipiscing elit, sed diam nonummy nibh euismod  Ornare sapien hac erat fames elit porta interdum diam conubia mi vel natoque fringilla luctus habitant lacus enim.</p>
+                                        </div>
+                                        <div class="textimageblock-image">
+                                            <img src="/Assets/Mosey/Images/Temp/style-cocktail-large.jpg" alt="Cocktail Suit" />
+                                        </div>
+                                    </div>
+
+                                    <div class="block textblock col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <h4>Risus cum molestie sapien</h4>
+                                        <p>Imperdiet mauris convallis natoque dictum pellentesque placerat vehicula consequat curae penatibus eu nostra massa libero quam cursus cubilia scelerisque quis et duis ac pretium tortor vitae sociis pharetra litora magnis per sodales cum commodo risus neque suscipit inceptos nulla velit turpis lacinia aenean lorem porta diam magna a eleifend facilisi</p>
+                                    </div>
+
+                                    <!--block: image block-->
+                                    <div class="block imageblock col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <img src="http://via.placeholder.com/934x239" class="img-responsive">
+                                    </div>
+
+                                    <div class="block textblock col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <h4>Nec arcu habitant ornare himenaeos</h4>
+                                        <p>Imperdiet mauris convallis natoque dictum pellentesque placerat vehicula consequat curae penatibus eu nostra massa libero quam cursus cubilia scelerisque quis et duis ac pretium tortor vitae sociis pharetra litora magnis per sodales cum commodo risus neque suscipit inceptos nulla velit turpis lacinia aenean lorem porta diam magna a eleifend facilisi</p>
+                                        <h4>Aptent commodo</h4>
+                                        <p>Aliquam suscipit faucibus sociosqu ac dis torquent rutrum sit adipiscing potenti sapien arcu mus curabitur porta magna ligula metus ultricies ipsum blandit semper leo aptent netus urna nisi velit pellentesque etiam tempor malesuada venenatis sociis praesent lacinia at felis primis pharetra iaculis eget curae ornare elit augue parturient cras ad litora id aliquet volutpat turpis placerat consectetur enim dignissim tellus ullamcorper nullam convallis morbi dapibus taciti tortor donec fusce accumsan platea per egestas suspendisse purus fames magnis luctus habitant dictumst maecenas facilisi laoreet commodo vulputate ridiculus erat a lorem libero nunc nec tempus duis sollicitudin mollis imperdiet sed aenean dolor</p>
+                                    </div>
+
+                                    <div class="block textblock col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <h3>More styles</h3>
+                                    </div>
+
+                                    <div class="block col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <a class="product-image text-center" title="Denim Jacket" href="/en/fashion/mens/mens-jackets/p-37378633/">
+                                            <img alt="Black Tie" src="/Assets/Mosey/Images/Temp/style-blacktie.jpg" class="img-responsive">
+                                            <h4>Black Tie</h4>
+                                        </a>
+                                    </div>
+                                    <div class="block col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <a class="product-image text-center" title="Denim Jacket" href="/en/fashion/mens/mens-jackets/p-37378633/">
+                                            <img alt="Cocktail" src="/Assets/Mosey/Images/Temp/style-cocktail.jpg" class="img-responsive">
+                                            <h4>Cocktail</h4>
+                                        </a>
+                                    </div>
+                                    <div class="block col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                        <a class="product-image text-center" title="Denim Jacket" href="/en/fashion/mens/mens-jackets/p-37378633/">
+                                            <img alt="Casual" src="/Assets/Mosey/Images/Temp/style-casual.jpg" class="img-responsive">
+                                            <h4>Casual</h4>
+                                        </a>
+                                    </div>
+
+                                </section>
+
+                            </article>
+
+
+                            <section class="text-center margin-bottom-xlg">
+                                <h1 class="font-light margin-top-normal">New Arrivals</h1>
+
+                                <div class="bordered-grid margin-bottom-md">
+
+                                    <div class="block fashionproduct col-lg-3 col-md-6 col-sm-12 col-xs-12 displaymode-one-quarter ">
+                                        <ul class="products-grid">
+                                            <li class="item">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info">
+                                                            <a class="product-image" title="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" href="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617">
+                                                                <img alt="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" src="/globalassets/catalog/0000000083669_p698442_500x500" class="img-responsive">
+                                                                <span class="background"></span>
+                                                            </a>
+                                                            <a data-toggle="modal" data-target="#ModalDialog" data-url="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617" class="quickview-btn" onclick="ProductPage.showQuickview('/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617')">
+                                                                <svg viewBox="0 0 32 32">
+                                                                    <use xlink:href="#icon-search"></use>
+                                                                </svg>
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title">
+                                                                <a title="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" href="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617">
+                                                                    Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10
+                                                                </a>
+                                                            </div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating rating-3-star"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box">
+                                                                        <span class="regular-price">
+                                                                            <span class="price">
+                                                                                <span>
+                                                                                    <span class="product-price__currency-marker">$</span>39.50
+                                                                                </span>
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="block fashionproduct col-lg-3 col-md-6 col-sm-12 col-xs-12 displaymode-one-quarter ">
+                                        <ul class="products-grid">
+                                            <li class="item">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info">
+                                                            <a class="product-image" title="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" href="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617">
+                                                                <img alt="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" src="/globalassets/catalog/0002931170557_color_black_sw_500x500" class="img-responsive">
+                                                                <span class="background"></span>
+                                                            </a>
+                                                            <a data-toggle="modal" data-target="#ModalDialog" data-url="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617" class="quickview-btn" onclick="ProductPage.showQuickview('/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617')">
+                                                                <svg viewBox="0 0 32 32">
+                                                                    <use xlink:href="#icon-search"></use>
+                                                                </svg>
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title">
+                                                                <a title="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" href="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617">
+                                                                    Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10
+                                                                </a>
+                                                            </div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating rating-4-star"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box">
+                                                                        <span class="regular-price">
+                                                                            <span class="price">
+                                                                                <span>
+                                                                                    <span class="product-price__currency-marker">$</span>39.50
+                                                                                </span>
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!--A background color is applied to this since it contains a .png image inside.-->
+                                    <div class="block fashionproduct col-lg-3 col-md-6 col-sm-12 col-xs-12 displaymode-one-quarter">
+                                        <ul class="products-grid">
+                                            <li class="item background-solid-beige">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info">
+                                                            <a class="product-image" title="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" href="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617">
+                                                                <img alt="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" src="/Assets/Mosey/Images/Temp/shoe-transparent.png" class="img-responsive">
+                                                                <span class="background"></span>
+                                                            </a>
+                                                            <a data-toggle="modal" data-target="#ModalDialog" data-url="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617" class="quickview-btn" onclick="ProductPage.showQuickview('/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617')">
+                                                                <svg viewBox="0 0 32 32">
+                                                                    <use xlink:href="#icon-search"></use>
+                                                                </svg>
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title">
+                                                                <a title="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" href="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617">
+                                                                    Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10
+                                                                </a>
+                                                            </div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating rating-5-star"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box">
+                                                                        <span class="regular-price">
+                                                                            <span class="price">
+                                                                                <span>
+                                                                                    <span class="product-price__currency-marker">$</span>39.50
+                                                                                </span>
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!--A background color is applied to this since it contains a .png image inside.-->
+                                    <div class="block fashionproduct col-lg-3 col-md-6 col-sm-12 col-xs-12 displaymode-one-quarter">
+                                        <ul class="products-grid">
+                                            <li class="item background-solid-beige">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info">
+                                                            <a class="product-image" title="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" href="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617">
+                                                                <img alt="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" src="/Assets/Mosey/Images/Temp/shoe-transparent.png" class="img-responsive">
+                                                                <span class="background"></span>
+                                                            </a>
+                                                            <a data-toggle="modal" data-target="#ModalDialog" data-url="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617" class="quickview-btn" onclick="ProductPage.showQuickview('/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617')">
+                                                                <svg viewBox="0 0 32 32">
+                                                                    <use xlink:href="#icon-search"></use>
+                                                                </svg>
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title">
+                                                                <a title="Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10" href="/en/fashion/mens/mens-shoes/p-39813617/?variationCode=SKU-39813617">
+                                                                    Puma Roma LL NBK 2 Mens Size 11 Black Suede Athletic Sneakers Shoes UK 10
+                                                                </a>
+                                                            </div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating rating-5-star"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box">
+                                                                        <span class="regular-price">
+                                                                            <span class="price">
+                                                                                <span>
+                                                                                    <span class="product-price__currency-marker">$</span>39.50
+                                                                                </span>
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+
+                                <button class="button-dark">View All</button>
+                            </section>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <footer>
+
+            <div class="footer-top">
+                <div class="newsletter-wrap">
+                    <h3>Sign Up to our newsletter</h3>
+                    <form id="newsletter-validate-detail" method="post" action="#">
+                        <div id="container_form_news">
+                            <div id="container_form_news2">
+                                <input type="text" class="input-text required-entry validate-email" title="Sign Up to our newsletter" id="newsletter" name="email" placeholder="Email address">
+                                <button class="button subscribe" title="Subscribe" type="submit">
+                                    <span>
+                                        Subscribe
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-inner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12 col-lg-9">
+                            <div class="footer-column pull-left">
+                                <div class="footer-image">
+                                    <img src="/globalassets/mosey/footer-logo.svg" class="img-responsive" />
+
+                                    <div class="coppyright">
+                                        © 2015 Fabrikam. All Rights Reserved.
+                                    </div>
+                                    <div class="company-links">
+
+                                        <ul class="links"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-column pull-left">
+                                <h4>About Mosey</h4>
+
+                                <ul class="links"></ul>
+                            </div>
+                            <div class="footer-column pull-left">
+                                <h4>Contact EpiServer:</h4>
+
+
+                                <address class="footer-address">
+                                    <p>Phone: +(408) 394-7557</p>
+                                    <p>email: sales@fabia.com</p>
+                                    <p>123 Main Street, Anytown, CA 12345 USA</p>
+                                </address>
+
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-3">
+                            <div class="footer-column-last">
+                                <h4>Demo Scenarios</h4>
+
+                                <ul class="links">
+                                    <li>
+                                        <a href="/en/demo-scenarios/set-up-personalised-find-scenarios/">
+                                            Set up Personalised Find scenarios
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="social">
+                            <ul class="link">
+                                <li class="pull-left">
+                                    <a href="#">
+                                        <svg viewBox="0 0 32 32">
+                                            <use xlink:href="#icon-facebook"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="pull-left">
+                                    <a href="#">
+                                        <svg viewBox="0 0 32 32">
+                                            <use xlink:href="#icon-twitter"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li class="pull-left">
+                                    <a href="#">
+                                        <svg viewBox="0 0 32 32">
+                                            <use xlink:href="#icon-instagram"></use>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+
+    <div id="mobile-menu">
+        <ul>
+            <li>
+                <div class="home"><a href="/en/"><i class="icon-home"></i>Home</a> </div>
+            </li>
+
+            <li>
+                <a href="#">Pages</a>
+
+            </li>
+
+            <li>
+                <a title="Mens" href="/en/fashion/mens/">
+                    Mens
+                </a>
+                <ul>
+                    <li>
+                        <a title="Shoes" href="/en/fashion/mens/mens-shoes/">
+                            Shoes
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Jackets" href="/en/fashion/mens/mens-jackets/">
+                            Jackets
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Shirts" href="/en/fashion/mens/mens-shirts/">
+                            Shirts
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Sweatshirts" href="/en/fashion/mens/mens-sweatshirts/">
+                            Sweatshirts
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a title="Womens" href="/en/fashion/womens/">
+                    Womens
+                </a>
+                <ul>
+                    <li>
+                        <a title="Womens Dresses" href="/en/fashion/womens/womens-dresses/">
+                            Womens Dresses
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Womens Tees" href="/en/fashion/womens/womens-tees/">
+                            Womens Tees
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Womens Bottoms" href="/en/fashion/womens/womens-bottoms/">
+                            Womens Bottoms
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Womens Shoes" href="/en/fashion/womens/womens-shoes/">
+                            Womens Shoes
+                        </a>
+                    </li>
+                    <li>
+                        <a title="Womens Handbags" href="/en/fashion/womens/womens-handbags/">
+                            Womens Handbags
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a title="Inspiration" href="/en/inspiration/">
+                    Inspiration
+                </a>
+                <ul>
+                    <li>
+                        <a title="The New Trend: Printed T-Shirts" href="/en/inspiration/the-new-trend-printed-t-shirts/">
+                            The New Trend: Printed T-Shirts
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a title="Blog" href="/en/blog/">
+                    Blog
+                </a>
+                <ul>
+                    <li>
+                        <a title="2017" href="/en/blog/2017/">
+                            2017
+                        </a>
+                        <ul>
+                            <li>
+                                <a title="4" href="/en/blog/2017/4/">
+                                    4
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+
+
+        </ul>
+    </div>
+
+
+
+    <!-- JavaScript -->
+    <script src="/Assets/Base/jquery/jquery.min.js"></script>
+    <script src="/Assets/Base/bootstrap/bootstrap.min.js"></script>
+
+    <script src="/Assets/Base/jquery/jquery.validate.min.js"></script>
+    <script src="/Assets/Base/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <script src="/Assets/Base/lightbox/js/jquery.lightbox-0.5.js"></script>
+    <script src="/Assets/Base/slick/slick.min.js"></script>
+    <script src="/Assets/Base/jquery/jquery.easyautocomplete.min.js"></script>
+
+    <script src="/Assets/Base/jquery/jquery.easyautocomplete.min.js"></script>
+    <script src="/Assets/Base/slick/slick.min.js"></script>
+    <script src="/Assets/Mosey/js/parallax.js"></script>
+    <script src="/Assets/Mosey/js/revslider.js"></script>
+    <script src="/Assets/Mosey/js/common.js"></script>
+    <script src="/Assets/Mosey/js/jquery.bxslider.min.js"></script>
+    <script src="/Assets/Mosey/js/owl.carousel.min.js"></script>
+    <script src="/Assets/Mosey/js/jquery.mobile-menu.min.js"></script>
+    <script src="/Assets/Mosey/js/cloud-zoom.js"></script>
+    <script src="/Assets/Mosey/js/jquery.flexslider.js"></script>
+
+    <script src="/Assets/Scripts/Features/AddressBook.js"></script>
+    <script src="/Assets/Scripts/Features/Blog.js"></script>
+    <script src="/Assets/Scripts/Features/Cart.js"></script>
+    <script src="/Assets/Scripts/Features/Checkout.js"></script>
+    <script src="/Assets/Scripts/Features/Login.js"></script>
+    <script src="/Assets/Scripts/Features/Market.js"></script>
+    <script src="/Assets/Scripts/Features/Misc.js"></script>
+    <script src="/Assets/Scripts/Features/Navigation.js"></script>
+    <script src="/Assets/Scripts/Features/Product.js"></script>
+    <script src="/Assets/Scripts/Features/quicksilver.js"></script>
+    <script src="/Assets/Scripts/Features/Recommendations.js"></script>
+    <script src="/Assets/Scripts/Features/Registration.js"></script>
+    <script src="/Assets/Scripts/Features/Search.js"></script>
+    <script src="/Assets/Scripts/Features/Stores.js"></script>
+    <script src="/Assets/Scripts/Features/admin/ProfileStore.js"></script>
+    <script src="/Assets/Scripts/Features/b2b/Budget.js"></script>
+    <script src="/Assets/Scripts/Features/b2b/Budgeting.js"></script>
+    <script src="/Assets/Scripts/Features/b2b/OrderPads.js"></script>
+    <script src="/Assets/Scripts/Features/b2b/Orders.js"></script>
+    <script src="/Assets/Scripts/Features/b2b/Organization.js"></script>
+    <script src="/Assets/Scripts/Features/b2b/QuickOrderInterface.js"></script>
+    <script src="/Assets/Scripts/Features/b2b/uploadFile.js"></script>
+    <script src="/Assets/Scripts/Features/b2b/Users.js"></script>
+    <script src="/Assets/Scripts/Features/moment.min.js"></script>
+    <script src="/Assets/Scripts/Features/pickaday.min.js"></script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,101 @@
+﻿@using EPiServer.Reference.Commerce.Site.Extensions
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<IContent>
+@{ 
+    var hiddenSubNavClass = Model.StartPage.DoNotShowSvgDropdown ? "hidden-sub-nav" : "";
+}
+
+@if (Model.StartPage.HeaderMenuStyle == null || Model.StartPage.HeaderMenuStyle.CompareTo("CenterLogo") == 0)
+{
+    <nav>
+        <div class="container">
+            <div class="row">
+                <div class="mm-toggle-wrap">
+                    <div class="mm-toggle">
+                        <div class="hamburger hamburger--squeeze js-hamburger">
+                            <div class="hamburger-box">
+                                <div class="hamburger-inner"></div>
+                            </div>
+                        </div>
+                        <span class="mm-label">@Html.Translate("/Header/Menu")</span>
+                    </div>
+                </div>
+                <div class="nav-inner col-lg-12">
+
+                    <!--mega menu-->
+                    <div class="col-sm-5 col-lg-5 col-md-5 hidden-xs top-nav @hiddenSubNavClass">
+                        @Html.PropertyFor(x => x.StartPage.HeaderMainNavigation, new { CssClass = "mega-menu hidden-xs" })
+                    </div>
+
+                    <!--logo-->
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 logo">
+                        <a title="@Model.StartPage.Name" href="@Url.ContentUrl(ContentReference.StartPage)">
+                            @Html.PropertyFor(model => model.StartPage.HeaderLogo)
+                        </a>
+                    </div>
+
+
+                    <div class="col-sm-5 col-lg-5 col-md-5 right-links-container">
+                        @{
+                            Html.RenderAction("MyAccountHeaderMenu", "Navigation");
+                        }
+                    </div>
+                </div>
+                <div class="desktop-hide">
+                    <div class="form-group">
+                        @using (Html.BeginForm("Index", "Search", new { node = Html.GetSearchPage() }, FormMethod.Get, new { role = "search" }))
+                        {
+                            <input autocomplete="off" maxlength="70" type="text" placeholder="Search" class="form-control jsQuickSearch jsSearchInput" id="search" name="search" data-url="@Url.Action("quicksearch", "Search", new {node = Html.GetSearchPage()})" />
+                            <div class="jsQuickSearchResult product-dropdown-container" style="display: none;"></div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+}
+else
+{
+    <nav>
+        <div class="container">
+            <div class="row nav-inner">
+                <!--logo-->
+                <div class="col-xs-3 col-sm-2 col-lg-1 logo logo-left">
+                    <a title="@Model.StartPage.Name" href="@Url.ContentUrl(ContentReference.StartPage)">
+                        @Html.PropertyFor(model => model.StartPage.HeaderLogo)
+                    </a>
+                </div>
+
+                <div class="col-xs-4 visible-xs mm-toggle-wrap">
+                    <div class="mm-toggle">
+                        <div class="hamburger hamburger--squeeze js-hamburger">
+                            <div class="hamburger-box">
+                                <div class="hamburger-inner"></div>
+                            </div>
+                        </div>
+                        <span class="mm-label">@Html.Translate("/Header/Menu")</span>
+                    </div>
+                </div>
+
+                <!--mega menu-->
+                <div class="col-sm-5 col-lg-6 hidden-xs mega-menu-left top-nav @hiddenSubNavClass">
+                    @Html.PropertyFor(x => x.StartPage.HeaderMainNavigation, new { CssClass = "mega-menu hidden-xs" })
+                </div>
+
+                <div class="col-sm-5 right-links-container">
+                    @{
+                        Html.RenderAction("MyAccountHeaderMenu", "Navigation");
+                    }
+                </div>
+            </div>
+            <div class="desktop-hide">
+                <div class="form-group">
+                    @using (Html.BeginForm("Index", "Search", new { node = Html.GetSearchPage() }, FormMethod.Get, new { role = "search" }))
+                    {
+                        <input autocomplete="off" maxlength="70" type="text" placeholder="Search" class="form-control jsQuickSearch jsSearchInput" id="search" name="search" data-url="@Url.Action("quicksearch", "Search", new {node = Html.GetSearchPage()})" />
+                        <div class="jsQuickSearchResult product-dropdown-container" style="display: none;"></div>
+                    }
+                </div>                    
+            </div>
+        </div>
+    </nav>
+}

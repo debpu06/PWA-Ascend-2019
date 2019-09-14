@@ -1,0 +1,15 @@
+@using EPiBootstrapArea
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Site.Features.Alloy.Models.Pages.TwoColumnLandingPage>
+
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row", tag = ContentAreaTags.TwoThirdsWidth })
+            </div>
+            <div class="col-sm-12 col-md-4">
+                @Html.PropertyFor(x => x.CurrentContent.RightHandContentArea, new { CssClass = "row", tag = ContentAreaTags.OneThirdWidth })
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,31 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.Promotion.Pages
+
+@model EPiServer.Reference.Commerce.Site.Features.Promotion.ViewModels.DiscountViewModel<DiscountPage>
+
+<div class="row">
+  @Html.PropertyFor(m => m.CurrentContent.MainBody)
+</div>
+
+<div class="col-main category-listing-search">
+
+    <article class="col-main row">
+        <h2>@Model.Promotion.Name</h2>
+
+        <ul class="products-grid">
+            @foreach (var product in Model.Items)
+            {
+                <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                    @Html.Partial("_ProductGrid", product)
+                </li>
+            }
+        </ul>
+    </article>
+</div>
+
+
+
+<div class="row">
+    @Html.PropertyFor(m => m.CurrentContent.MainContentArea)
+</div>

@@ -1,0 +1,136 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@model EPiServer.Reference.Commerce.Site.Features.Cart.ViewModels.SharedCartViewModel
+@{ ViewBag.IsWishList = true;
+    string displayNoItemMsg = Model.CartItems.Any() ? "none" : string.Empty;
+}
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter container--gutter-inner">
+            <div class="col-main col-sm-9">
+                <div class="my-account">
+                    <div class="page-title">
+                        <h1 class="heading-title">
+                            @(Model.HasOrganization ? Html.Raw("Shared Cart") : Html.PropertyFor(x => x.CurrentContent.Name))
+                        </h1>
+                    </div>
+                    <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                    <div class="my-wishlist">
+                        <fieldset>
+                            <div class="table-responsive">
+                                <table id="wishlist-table" class="clean-table linearize-table data-table">
+                                    <thead>
+                                        <tr class="first last">
+                                            <th class="customer-wishlist-item-image">@Html.Translate("/Shared/Image")</th>
+                                            <th class="customer-wishlist-item-info">@Html.Translate("/WishList/Info")</th>
+                                            <th class="customer-wishlist-item-price">@Html.Translate("/Shared/Price")</th>
+                                            <th class="customer-wishlist-item-price">@Html.Translate("/Shared/Quantity")</th>
+                                            <th class="customer-wishlist-item-cart">@Html.Translate("/Product/Button/AddToCart")</th>
+                                            <th class="customer-wishlist-item-remove">@Html.Translate("/Shared/Remove")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var product in Model.CartItems)
+                                        {
+                                            <tr id="item_31" class="first odd">
+                                                <td class="wishlist-cell0 customer-wishlist-item-image">
+                                                    <a title="Softwear Women's Designer" href="product_detail.html" class="product-image">
+                                                        <img alt="@product.DisplayName" src="@product.ImageUrl" class="img-responsive product-image" width="75">
+                                                    </a>
+                                                </td>
+                                                <td class="wishlist-cell1 customer-wishlist-item-info">
+                                                    <h3 class="product-name">
+                                                        <a title="@product.DisplayName" href="@product.Url">@product.DisplayName</a>
+                                                    </h3>
+                                                    <div class="description std">
+                                                        <div class="inner">
+                                                            @Html.Raw(product.Description)
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td data-rwd-label="Price" class="wishlist-cell3 customer-wishlist-item-price">
+                                                    <div class="cart-cell">
+                                                        <div class="price-box">
+                                                            <span class="regular-price">
+                                                                <span class="price">
+                                                                    @if (product.DiscountedUnitPrice.HasValue)
+                                                                    {
+                                                                        <span class="price product-price product-price-has-discount">@Helpers.RenderMoney(product.PlacedPrice)</span>
+                                                                        <span class="product-price product-price--discount xs-vertical-margin">@product.DiscountedUnitPrice.ToString()</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="price">@Helpers.RenderMoney(product.PlacedPrice)</span>
+                                                                    }
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="wishlist-cell2 customer-wishlist-item-info">
+                                                        @product.Quantity
+                                                </td>
+                                                <td class="wishlist-cell4 customer-wishlist-item-cart">
+                                                    <div class="cart-cell">
+                                                        @using (@Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { @class = "form-inline", data_container = "MiniCart" }))
+                                                        {
+                                                            @Html.Hidden("code", product.Code)
+                                                            <button class="button btn-cart jsAddToCart" title="Add to Cart" type="submit" role="button">
+                                                                <span>
+                                                                    <span>
+                                                                        @Html.Translate("/Product/Button/AddToCart")
+                                                                    </span>
+                                                                </span>
+                                                            </button>
+                                                        }
+
+                                                    </div>
+                                                </td>
+                                                <td class="wishlist-cell5 customer-wishlist-item-remove last">
+                                                    @using (@Html.BeginForm("ChangeCartItem", "SharedCart", FormMethod.Post, new { @class = "form-inline", data_container = "SharedMiniCart" }))
+                                                    {
+                                                        @Html.Hidden("code", product.Code)
+                                                        @Html.Hidden("quantity", 0, new { @class = "jsChangeCartItem" })
+                                                        <button role="button" class="remove-item">
+                                                            <span>
+                                                                <span></span>
+                                                            </span>
+                                                        </button>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="buttons-set buttons-set2">
+                                @if (Model.HasOrganization)
+                                {
+                                    using (@Html.BeginForm("RequestSharedCartQuote", "SharedCart", FormMethod.Post))
+                                    {
+                                        <button type="submit" class="button btn-add">
+                                            <span>@Html.Translate("/Shared/RequestQuote")</span>
+                                        </button>
+                                    }
+                                }
+                                @using (@Html.BeginForm("AddAllToCart", "Cart", FormMethod.Post, new { @class = "form-inline", data_container = "MiniCart" }))
+                                {
+                                    <button type="submit" class="button btn-add jsAddToCart" title="Add All to Cart" type="button">
+                                        <span>@Html.Translate("/WishList/AddAll")</span>
+                                    </button>
+                                }
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="buttons-set">
+                        <p class="back_link"><a href="#"><small>« </small>@Html.Translate("/Shared/Back")</a></p>
+                    </div>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Link });
+            }
+        </div>
+    </div>
+</section>

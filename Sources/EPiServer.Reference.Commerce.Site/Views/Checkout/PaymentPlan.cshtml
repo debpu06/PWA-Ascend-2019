@@ -1,0 +1,19 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.CheckoutViewModel
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <label>@Html.CheckBoxFor(model => model.IsUsePaymentPlan) @Html.Translate("/Checkout/PaymentPlan/UseSubscription")</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div>
+            @Html.DropDownListFor(x => x.PaymentPlanSetting.CycleLength, Model.SubscriptionOption, new { @class = "form-control address-dropdown" })
+        </div>
+    </div>
+</div>
+@Html.HiddenFor(x => x.PaymentPlanSetting.IsActive)
+@Html.HiddenFor(x => x.PaymentPlanSetting.StartDate)
+@Html.HiddenFor(x => x.PaymentPlanSetting.CycleMode)

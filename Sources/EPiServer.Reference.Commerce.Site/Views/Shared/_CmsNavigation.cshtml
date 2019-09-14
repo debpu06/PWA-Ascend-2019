@@ -1,0 +1,21 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Shared.Extensions
+@model EPiServer.Core.PageData
+@{
+    var siblings = Model.GetSiblings();
+}
+<aside class="col-xs-12 col-sm-3 sidebar-nav">
+    <h2 class="h3">Account</h2>
+    <ul class="nav nav-stacked" role="tablist">
+        @{
+            foreach (var sibling in siblings.Where(page => page.VisibleInMenu))
+            {
+                var selected = sibling.ContentLink == Model.ContentLink;
+                <li role="presentation" class="@(selected ? "is-active" : "")">
+                    <a href="@Url.PageUrl(sibling.LinkURL)" aria-expanded="@Html.Raw(selected)">@sibling.Name</a>
+                </li>
+            }
+        }
+    </ul>
+
+    @Html.Action("OrgNavigation", "OrganizationNav")
+</aside>

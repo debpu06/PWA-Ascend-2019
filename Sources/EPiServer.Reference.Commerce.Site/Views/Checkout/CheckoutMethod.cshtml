@@ -1,0 +1,94 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.CheckoutMethodViewModel
+
+<section class="main-container col1-layout">
+<div class="main container container--gutter">
+    <div class="col-main">
+        @Html.Partial("_CheckoutStatusBar", 1)
+    </div>
+    <div id="checkout-step-login" class="step a-item">
+        <div class="row container--gutter-inner margin-v-md">
+            <div class="col-xs-12 col-md-6">
+                <h2>
+                    @Html.Translate("/Checkout/CheckoutMethod/CheckoutGuestOrRegister")
+                </h2>
+                <p>
+                    @Html.Translate("/Checkout/CheckoutMethod/Convience")
+                </p>
+                @using (Html.BeginForm("GuestOrRegister", "Checkout", FormMethod.Post))
+                {
+                    <ul class="form-list">
+                        <li class="control">
+                            <input type="radio" class="radio" value="guest" name="checkoutMethod">
+                            <label for="login:guest">
+                                @Html.Translate("/Checkout/CheckoutMethod/Guest")
+                            </label>
+                        </li>
+                        <li class="control">
+                            <input type="radio" class="radio" value="register" name="checkoutMethod">
+                            <label for="login:register">
+                                @Html.Translate("/Checkout/CheckoutMethod/Register")
+                            </label>
+                        </li>
+                    </ul>
+                    <h4></h4>
+                    <p>
+                        @Html.Translate("/Checkout/CheckoutMethod/Convience")
+                    </p>
+                    <ul class="ul">
+                        <li>
+                            @Html.Translate("/Checkout/CheckoutMethod/EasyCheckout")
+                        </li>
+                        <li>
+                            @Html.Translate("/Checkout/CheckoutMethod/EasyAccess")
+                        </li>
+                    </ul>
+                    <div class="buttons-set">
+                        <p class="required">&nbsp;</p>
+
+                        <button class="button-dark continue" type="submit">
+                            <span>
+                                <span>@Html.Translate("/Shared/Continue")</span>
+                            </span>
+                        </button>
+
+                    </div>
+                }
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <h2>@Html.Translate("/Shared/Login")</h2>
+                @using (Html.BeginForm("Login", "Checkout", FormMethod.Post))
+                {
+                    <fieldset>
+                        <h4>@Html.Translate("/Checkout/CheckoutMethod/AlreadyRegistered")</h4>
+                        <p>@Html.Translate("/Checkout/CheckoutMethod/PleaseLogin")</p>
+                        <ul class="form-list">
+                            <li>
+                                <div class="input-box">
+                                    @Html.LabelFor(x => x.LoginViewModel.Email)<span class="required">*</span>
+                                    @Html.TextBoxFor(x => x.LoginViewModel.Email, new { @class= "input-text validate-email" })
+                                    @Html.ValidationMessageFor(x => x.LoginViewModel.Email)
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-box">
+                                    @Html.LabelFor(x => x.LoginViewModel.Password)<span class="required">*</span>
+                                    @Html.PasswordFor(x => x.LoginViewModel.Password, new { @class = "input-text" })
+                                    @Html.ValidationMessageFor(x => x.LoginViewModel.Password)
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <div class="buttons-set">
+                        <button class="button login" type="submit">
+                            <span>
+                                <span>@Html.Translate("/Shared/Login")</span>
+                            </span>
+                        </button>
+                        @Html.ActionLink("Forgot your password?", "Index", "ResetPassword", new {}, new {@class = "f-right" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</section>

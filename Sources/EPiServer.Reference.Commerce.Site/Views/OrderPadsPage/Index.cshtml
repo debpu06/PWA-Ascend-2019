@@ -1,0 +1,105 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Commerce.Order
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.OrderPads.ViewModels.OrderPadsPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                @{ Html.RenderAction("Index", "B2BNavigation");}
+                <section>
+                    <table id="firstTable" class="table table-striped expandable-table">
+                        <thead>
+                            <tr>
+                                <th class="empty"></th>
+                                <th class="empty"></th>
+                                <th>@Html.Translate("/B2B/OrderPad/Sku")</th>
+                                <th>@Html.Translate("/B2B/OrderPad/ProductTitle")</th>
+                                <th>@Html.Translate("/B2B/OrderPad/Amount")</th>
+                                <th>@Html.Translate("/B2B/OrderPad/CreatedOn")</th>
+                                <th>@Html.Translate("/Shared/Quantity")</th>
+                                <th class="text-right">@Html.Translate("/B2B/Budgeting/Actions")</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.OrganizationOrderPadList != null && Model.OrganizationOrderPadList.Any())
+                            {
+                                foreach (var organization in Model.OrganizationOrderPadList)
+                                {
+                                    <tr class="first-row">
+                                        <td colspan="8">
+                                            <a href="#" class="btn btn-primary btn-xs js-second-row-collapsed" data-expand="@organization.OrganizationId">
+                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </a>
+                                            <span>@organization.OrganizationName</span>
+                                        </td>
+                                    </tr>
+                                    if (organization.UsersOrderPad != null && organization.UsersOrderPad.Any())
+                                    {
+                                        foreach (var user in organization.UsersOrderPad)
+                                        {
+                                            <tr class="second-row @organization.OrganizationId">
+                                                <td></td>
+                                                <td colspan="7">
+                                                    <a href="#" class="btn btn-primary btn-xs js-third-row-collapsed" data-expand="@user.UserId">
+                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                                    </a>
+                                                    <span>@user.UserName</span>
+                                                </td>
+                                            </tr>
+                                            if (user.WishCartList != null)
+                                            {
+                                                if (user.WishCartList.GetAllLineItems().Any())
+                                                {
+                                                    foreach (var lineItem in user.WishCartList.GetAllLineItems())
+                                                    {
+                                                        <tr class="third-row @user.UserId">
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><a href="#">#@lineItem.Code</a></td>
+                                                            <td>@lineItem.DisplayName</td>
+                                                            <td>@lineItem.PlacedPrice.ToString("N") @user.WishCartList.Currency.CurrencyCode</td>
+                                                            <td>@user.WishCartList.Created.ToShortDateString()</td>
+                                                            <td>@lineItem.Quantity</td>
+                                                            <td class="text-right">
+                                                                <div class="action-buttons wishlist-actions">
+                                                                    @using (@Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { @class = "form-inline", data_container = "MiniCart" }))
+                                                                    {
+                                                                        @Html.Hidden("code", @lineItem.Code)
+                                                                        <button type="submit" role="button" class="btn btn-primary btn-xs jsAddToCart">
+                                                                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                                        </button>
+                                                                    }
+                                                                    @using (@Html.BeginForm("RemoveCartItem", "WishList", FormMethod.Post, new { @class = "form-inline", data_container = "WishListMiniCart" }))
+                                                                    {
+                                                                        @Html.Hidden("code", @lineItem.Code)
+                                                                        @Html.Hidden("userId", @user.UserId)
+                                                                        <button role="button" type="submit" class="btn btn-danger btn-xs">
+                                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                                        </button>
+                                                                    }
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

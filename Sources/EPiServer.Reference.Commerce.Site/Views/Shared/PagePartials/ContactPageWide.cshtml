@@ -1,0 +1,17 @@
+@model EPiServer.Reference.Commerce.Site.Features.Alloy.Models.Pages.ContactPage
+<div class="border">
+    <div class="media">
+        @if (!ContentReference.IsNullOrEmpty(Model.PageImage))
+        {
+            <div class="mediaImg">
+                <img class="img-responsive" src="@Url.ContentUrl(Model.PageImage)" />
+            </div>
+        }
+        <h2>@Model.PageName</h2>
+        <p>@Model.TeaserText</p>
+        <p>
+            @Html.Translate("/contact/email"): @Html.DisplayFor(x => x.Email)<br />
+            @Html.Translate("/contact/phone"): @Model.Phone
+        </p>
+    </div>
+</div>

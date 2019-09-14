@@ -1,0 +1,17 @@
+@model IBlockViewModel<ButtonBlock>
+
+@{
+    var buttonModel = @Model.CurrentBlock;
+
+    <div style="@Model.CurrentBlock.PaddingStyles">
+        <a class="@buttonModel.ButtonStyle" title="@buttonModel.ButtonText" href="@Url.ContentUrl(@buttonModel.ButtonLink)" @Html.EditAttributes(m => m.CurrentBlock.ButtonText)>
+            @{
+                var buttonText = string.IsNullOrWhiteSpace(@buttonModel.ButtonText)
+                    ? Html.Translate("/blocks/buttonblockcontrol/buttondefaulttext")
+                    : @buttonModel.ButtonText;
+            }
+            @buttonText
+        </a>
+        <p>@Html.PropertyFor(m => m.CurrentBlock.ButtonCaption)</p>
+    </div>
+}

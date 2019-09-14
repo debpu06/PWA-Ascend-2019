@@ -1,0 +1,125 @@
+﻿@using EPiServer.Reference.Commerce.Shared.Constants
+@model IBlockViewModel<HeroBlock>
+
+@{
+    /**/
+
+    var backgroundStyle = (Model.CurrentBlock.Callout.ShowBackgroundColor) ? "background-color: " + Model.CurrentBlock.Callout.BackgroundColor + ";" : "";
+
+    var positionStyle = "";
+
+    if (!string.IsNullOrEmpty(Model.CurrentBlock.Callout.PositionTop))
+    {
+        positionStyle = "top: " + Model.CurrentBlock.Callout.PositionTop + "; " + positionStyle;
+    }
+
+    if (!string.IsNullOrEmpty(Model.CurrentBlock.Callout.PositionBottom))
+    {
+        positionStyle = "bottom: " + Model.CurrentBlock.Callout.PositionBottom + "; " + positionStyle;
+    }
+
+    if (!string.IsNullOrEmpty(Model.CurrentBlock.Callout.PositionLeft))
+    {
+        positionStyle = "left: " + Model.CurrentBlock.Callout.PositionLeft + "; " + positionStyle;
+    }
+
+    if (!string.IsNullOrEmpty(Model.CurrentBlock.Callout.PositionRight))
+    {
+        positionStyle = "right: " + Model.CurrentBlock.Callout.PositionRight + "; " + positionStyle;
+    }
+
+    if (string.IsNullOrEmpty(positionStyle))
+    {
+        positionStyle = "top: 0; left: 0;";
+    }
+
+    var paddingStyle = "padding: "
+        + Model.CurrentBlock.Callout.PaddingTop + "px "
+        + Model.CurrentBlock.Callout.PaddingRight + "px "
+        + Model.CurrentBlock.Callout.PaddingBottom + "px "
+        + Model.CurrentBlock.Callout.PaddingLeft + "px;";
+
+    string alignmentClass;
+    switch (Model.CurrentBlock.Callout.CalloutContentAlignment)
+    {
+        case CalloutContentAlignments.Left:
+            alignmentClass = "content-align-left";
+            break;
+        case CalloutContentAlignments.Right:
+            alignmentClass = "content-align-right";
+            break;
+        default:
+            alignmentClass = String.Empty;
+            break;
+    }
+}
+
+@if (IsMosey)
+{
+    <div blockId="@(((IContent)Model.CurrentBlock).ContentLink.ID)" id="heroBlock-@(((IContent)Model.CurrentBlock).ContentLink.ID)" name="@(((IContent)Model.CurrentBlock).Name)" class="heroBlock @alignmentClass">
+        <div class="heroblock-teaser teaser">
+            @if (!Url.ContentUrl(Model.CurrentBlock.Link).IsEmpty())
+            {
+                <div class="heroblock-link teaser-image" style="background-image: url('@Url.ContentUrl(Model.CurrentBlock.BackgroundImage)'" onclick="location.href='@Url.ContentUrl(Model.CurrentBlock.Link)'">
+                </div>
+            }
+            else
+            {
+                if (Model.CurrentBlock.MainBackgroundVideo != null)
+                {
+                    <div class="teaser-image" style="background-image: url('@Url.ContentUrl(Model.CurrentBlock.BackgroundImage)'">
+                        <video class="video-container" autoplay loop playsinline muted>
+                            <source src="@Url.ContentUrl(Model.CurrentBlock.MainBackgroundVideo)" type="video/mp4">
+                        </video>
+                    </div>
+                }
+                else
+                {
+                    <div class="teaser-image" style="background-image: url('@Url.ContentUrl(Model.CurrentBlock.BackgroundImage)'">
+                    </div>
+                }
+            }
+        </div>
+        <div class="heroBlockCallout" id="blockCallout" style="@positionStyle @paddingStyle">
+            @Html.PropertyFor(m => m.CurrentBlock.Callout)
+        </div>
+        <style>
+            #heroBlock-@(((IContent)Model.CurrentBlock).ContentLink.ID) .callout:after {
+                background: @(Model.CurrentBlock.Callout.ShowBackgroundColor ? Model.CurrentBlock.Callout.BackgroundColor: "none");
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: @Model.CurrentBlock.Callout.Opacity;
+            }
+        </style>
+    </div>
+}
+else
+{
+    <div blockId="@(((IContent)Model.CurrentBlock).ContentLink.ID)" name="@(((IContent)Model.CurrentBlock).Name)" class="heroblock-teaser teaser @alignmentClass">
+        <div>
+            <div class="teaser-text">
+                @Html.PropertyFor(model => model.CurrentBlock.Callout.CalloutContent)
+            </div>
+        </div>
+        @if (!Url.ContentUrl(Model.CurrentBlock.Link).IsEmpty())
+        {
+            <div class="heroblock-link teaser-image" style="background-image: url('@Url.ContentUrl(Model.CurrentBlock.BackgroundImage)'" onclick="location.href='@Url.ContentUrl(Model.CurrentBlock.Link)'">
+            </div>
+        }
+        else
+        {
+            <div class="teaser-image" style="background-image: url('@Url.ContentUrl(Model.CurrentBlock.BackgroundImage)'">
+                @if (Model.CurrentBlock.MainBackgroundVideo != null)
+                {
+                    <video class="video-container" autoplay loop playsinline muted>
+                        <source src="@Url.ContentUrl(Model.CurrentBlock.MainBackgroundVideo)" type="video/mp4">
+                    </video>
+                }
+            </div>
+        }
+    </div>
+}

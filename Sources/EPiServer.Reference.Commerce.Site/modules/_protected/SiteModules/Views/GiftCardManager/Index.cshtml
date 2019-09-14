@@ -1,0 +1,49 @@
+﻿@using EPiServer.Shell.Navigation
+@inherits WebViewPage
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter">
+            <div class="col-main col-sm-12">
+                <div class="page-title">
+                    <h2>Gift cards management</h2>
+                </div>
+                <div class="gift-cards-content">
+                    <section>
+                        <div class="section-title spacer-bottom-m">
+                            <button style="margin-bottom: 10px;" class="btn btn-primary btn-sm jsShowCreateRow">
+                                @Html.Translate("/GiftCard/Create")
+                            </button>
+                        </div>
+                        <div class="table-responsive gift-cards-table">
+                            <table class="table table-content">
+                                <thead>
+                                    <tr>
+                                        <th style="width:30%">@Html.Translate("/GiftCard/GiftCardName")</th>
+                                        <th style="width:30%">@Html.Translate("/GiftCard/ContactName")</th>
+                                        <th style="width:7%">@Html.Translate("/GiftCard/InitialAmount")</th>
+                                        <th style="width:7%">@Html.Translate("/GiftCard/RemainBalance")</th>
+                                        <th style="width:10%">@Html.Translate("/GiftCard/RedemptionCode")</th>
+                                        <th style="width:10%">@Html.Translate("/GiftCard/IsActive")</th>
+                                        <th style="width:6%" class="text-right">@Html.Translate("/GiftCard/Actions")</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section AdditionalScripts
+{
+    <script type="text/javascript" src="~/Assets/Base/Scripts/Features/Selective/GiftCards.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GiftCards.init();
+        });
+    </script>
+}

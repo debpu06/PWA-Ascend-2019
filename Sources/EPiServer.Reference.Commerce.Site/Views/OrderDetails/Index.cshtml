@@ -1,0 +1,327 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Commerce.Order
+@using EPiServer.Reference.Commerce.B2B.Enums
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@using EPiServer.Reference.Commerce.Site.Features.Shared.Extensions
+@using Mediachase.Commerce.Orders
+@using Constants = EPiServer.Reference.Commerce.B2B.Constants
+@model EPiServer.Reference.Commerce.Site.Features.OrderDetails.ViewModels.OrderDetailsViewModel
+@if (Model.PurchaseOrder != null)
+{
+    var isQuote = Model.PurchaseOrder.Properties[Constants.Quote.QuoteStatus] != null;
+    var isQuoteRequestStatus = isQuote && Model.PurchaseOrder.Properties[Constants.Quote.QuoteStatus].ToString().Equals(Constants.Quote.RequestQuotation);
+    var orderForm = Model.PurchaseOrder.GetFirstForm();
+    <section class="main-container col2-right-layout" id="orderDetailsView">
+        <div class="main container">
+            <div class="row">
+                <div class="col-main col-sm-9">
+                    <div class="page-title">
+                        <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+
+                    </div>
+                    <div class="row section-box">
+                        <div class="col-xs-12 col-sm-6">
+                            <h3 class="h4">@Html.Translate("/OrderHistory/Labels/OrderID") @Model.PurchaseOrder.OrderNumber</h3>
+                            @if (string.Join(", ", orderForm.Payments.Select(x => x.PaymentMethodName)).Equals("BudgetPayment"))
+                            {
+                                <p class="text-success">
+                                    <strong>@Html.Translate("/OrderHistory/Detail/OrganizationOrder")</strong>
+                                </p>
+                            }
+                            <p>
+                                @Html.Translate("/OrderHistory/Labels/OrderDate") @Model.PurchaseOrder.Created.ToLongDateString()
+                                <br />
+                                @Html.Translate("/OrderHistory/Labels/Status") <strong>@(Model.OrderStatus)</strong>
+                                <br />
+                                @if (orderForm.Payments.Any())
+                                {
+
+                                    <span>@Html.Translate("/OrderHistory/Detail/Payments")</span>
+                                    @orderForm.Payments.First().PaymentMethodName;
+                                    <br />
+                                }
+                                @if (isQuote && Model.PurchaseOrder.Properties[Constants.Quote.QuoteStatus].ToString().Equals("RequestQuotationFinished"))
+                                {
+                                    @Html.DisplayName("New Total") <strong> @Model.PurchaseOrder.GetTotal().ToString() </strong> <br />
+                                    @Html.DisplayName("Old Total") <strong> @Model.PurchaseOrder.Currency.Format.CurrencySymbol@Model.PurchaseOrder.Properties["PreQuoteTotal"].ToString().AsDecimal().ToString("N") </strong>
+                                }
+                                else
+                                {
+                                    @Html.Translate("/OrderHistory/Labels/TotalPrice") <strong> @Model.PurchaseOrder.GetTotal().ToString() </strong> <br />
+                                }
+                                @if (!isQuote)
+                                {
+                                    using (Html.BeginForm("Reorder", "OrderDetails", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("orderGroupId", Model.OrderGroupId)
+                                        <button type="submit" data-order-link="@Model.OrderGroupId" class="btn btn-danger btn-empty jsReorder">@Html.Translate("/OrderHistory/Labels/ReOrder")</button>
+                                    }
+                                }
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <h4>@Html.Translate("/OrderHistory/Labels/ShippedTo")</h4>
+                            @foreach (var shippingAddress in Model.ShippingAddresses)
+                            {
+                                @(Html.Partial("_Address", shippingAddress))
+                            }
+                        </div>
+
+                        <div class="col-xs-12 spacer-top-l">
+                            <h3>Order Items</h3>
+                            <table class="table table-striped no-border">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.Translate("/Shared/Product")
+                                        </th>
+                                        <th>
+                                            @Html.Translate("/Shared/Title")
+                                        </th>
+                                        <th>
+                                            @Html.Translate("/Shared/Quantity")
+                                        </th>
+                                        <th>
+                                            @Html.Translate("/Shared/Price")
+                                        </th>
+                                        <th>
+                                            @Html.Translate("/Shared/Total")
+                                        </th>
+                                        @if (!isQuote)
+                                        {
+                                            <th>
+                                                @Html.Translate("/OrderHistory/Labels/ReturnStatus")
+                                            </th>
+                                            <th>
+                                                @Html.Translate("/OrderHistory/Labels/ReturnOrder")
+                                            </th>
+                                        }
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Items)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="@item.LineItem.GetUrl()" class="link--black">
+                                                    <img src="@item.LineItem.GetThumbnailUrl()" />
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="@item.LineItem.GetUrl()" class="link--black">@item.LineItem.GetEntryContent().DisplayName</a>
+                                            </td>
+                                            <td class="a-center">
+                                                @if (isQuoteRequestStatus)
+                                                {
+                                                    using (Html.BeginForm("ChangeQuantity", "OrderDetails", FormMethod.Post, new { data_container = "orderDetailsView" }))
+                                                    {
+                                                        @Html.Hidden("shipmentId", item.Shipment.ShipmentId)
+                                                        @Html.Hidden("orderGroupId", item.PurchaseOrder.Id)
+                                                        @Html.Hidden("lineItemId", item.LineItem.LineItemId)
+                                                        @Html.TextBox("quantity", item.LineItem.Quantity.ToString("0"), new { @class = "form-control form-inline form-field--narrow jsChangeDetailsQuantity", size = 4 })
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @item.LineItem.Quantity.ToString("0")
+                                                }
+                                            </td>
+                                            <td class="a-center">
+                                                @if (isQuoteRequestStatus)
+                                                {
+                                                    using (Html.BeginForm("ChangePrice", "OrderDetails", FormMethod.Post, new { data_container = "orderDetailsView" }))
+                                                    {
+                                                        @Html.Hidden("shipmentId", item.Shipment.ShipmentId)
+                                                        @Html.Hidden("orderGroupId", item.PurchaseOrder.Id)
+                                                        @Html.Hidden("lineItemId", item.LineItem.LineItemId)
+                                                        @Html.TextBox("placedPrice", item.LineItem.PlacedPrice.ToString("f2"), new { @class = "form-control form-inline form-field--narrow jsChangeDetailsPrice", size = 4 })
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span class="cart-price">
+                                                        <span class="price">@item.LineItem.GetDiscountedPrice(((IPurchaseOrder)item.PurchaseOrder).Currency).ToString()</span>
+                                                    </span>
+                                                }
+
+                                            </td>
+                                            <td>
+                                                <span class="cart-price">
+                                                    <span class="price">@item.LineItem.GetExtendedPrice(((IPurchaseOrder)item.PurchaseOrder).Currency).ToString()</span>
+                                                </span>
+                                            </td>
+                                            @if (!isQuote)
+                                            {
+                                                <td>@item.ReturnFormStatus</td>
+                                                <td>
+                                                    <button type="submit" data-shipment-link="@item.Shipment.ShipmentId" data-order-link="@Model.OrderGroupId" data-total-return="@item.TotalCanReturn()" data-lineItem-link="@item.LineItem.LineItemId" class="btn btn-danger btn-empty jsCallReturnSettingDlg" data-toggle="modal" data-target="#returnSettingModal" @(!item.Shipment.OrderShipmentStatus.Equals(OrderShipmentStatus.Shipped) || !item.CanReturnOrder() ? "disabled" : "")>
+                                                        Return
+                                                    </button>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            @if (Model.IsOrganizationOrder && Model.CurrentCustomer.Role == B2BUserRoles.Approver)
+                            {
+                                if (Model.QuoteStatus != null && Model.QuoteStatus.Equals("RequestQuotationFinished"))
+                                {
+                                    using (Html.BeginForm("LoadOrder", "Checkout", FormMethod.Post))
+                                    {
+                                        <button type="button" class="btn btn-danger btn-empty jsCartLoadOrder" aria-expanded="false" data-order-link="@Model.OrderGroupId">
+                                            @Html.Translate("/Header/MiniCart/Button/GoToCheckout")
+                                        </button>
+                                    }
+                                }
+
+                                if (!Model.IsPaymentApproved)
+                                {
+                                    using (Html.BeginForm("ApproveOrder", "OrderDetails", FormMethod.Post))
+                                    {
+                                        <button type="button" data-order-link="@Model.OrderGroupId" class="btn btn-danger btn-empty jsApproveOrder" aria-expanded="false">
+                                            @Html.Translate("/OrderHistory/Detail/Approve")
+                                        </button>
+                                    }
+                                }
+                            }
+                            @if (Request.IsAuthenticated && string.IsNullOrEmpty(Model.PurchaseOrder.Properties[Constants.Quote.QuoteStatus] as string) && Model.CurrentCustomer.Role == B2BUserRoles.Purchaser)
+                            {
+                                using (@Html.BeginForm("RequestQuoteById", "Cart", FormMethod.Post))
+                                {
+                                    @Html.Hidden("orderId", Model.OrderGroupId)
+                                    ;
+                                    <div class="cart-item">
+                                        <button type="submit" class="btn btn-block btn-warning" aria-expanded="false">
+                                            @Html.Translate("/Header/MiniCart/Button/RequestQuotation")
+                                        </button>
+                                    </div>
+                                }
+                            }
+                            <div id="BudgetWarningMessage" class="col-md-5 col-xs-12 alert alert-danger pull-right" hidden>
+                                <button type="button" class="close" data-hide="alert">&times;</button>
+                                <span class="warning-message warning-message-data"></span>
+                                <a class="hidden cancelUpdateBudget" href="@Url.Action("Index", "OrderDetails", new {currentPage = Model.CurrentContent.ContentLink, orderGroupId = @Model.OrderGroupId})"></a>
+                            </div>
+
+                        </div>
+
+                        <div class="modal fade" id="returnSettingModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">@Html.Translate("/ReturnOrderSetting/Header")</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <lable>@Html.Translate("/ReturnOrderSetting/Quantity"):</lable>
+                                        <input type="text" id="txtQuantity" disabled />
+                                        <br /> <br />
+                                        <lable>@Html.Translate("/ReturnOrderSetting/Reason/Lable"):</lable>
+                                        <select id="optReason">
+                                            <option value="1">@Html.Translate("/ReturnOrderSetting/Reason/Faulty")</option>
+                                            <option value="3">@Html.Translate("/ReturnOrderSetting/Reason/IncorrectItem")</option>
+                                            <option value="2">@Html.Translate("/ReturnOrderSetting/Reason/UnwantedGift")</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        @using (Html.BeginForm("CreateReturn", "OrderDetails", FormMethod.Post))
+                                        {
+                                            <button type="button" id="btnCloseDlg" data-shipment-link="0" data-order-link="0" data-total-return="0" data-lineItem-link="0" class="button jsCreateReturn" data-dismiss="modal">@Html.Translate("/ReturnOrderSetting/Close")</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 spacer-top-l">
+                            <h3>Discounts</h3>
+                            <table class="table table-striped no-border">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.Translate("/Shared/DiscountType")
+                                        </th>
+                                        <th>
+                                            @Html.Translate("/Shared/Name")
+                                        </th>
+                                        <th>
+                                            @Html.Translate("/Shared/Description")
+                                        </th>
+                                        <th>
+                                            @Html.Translate("/Shared/SavedAmount")
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var promotion in Model.PurchaseOrder.GetFirstForm().Promotions)
+                                {
+                                    <tr>
+                                        <td>@promotion.DiscountType.ToString()</td>
+                                        <td>@promotion.Name</td>
+                                        <td>@promotion.Description</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                        @if (isQuote)
+                        {
+                            <div class="col-xs-12 spacer-top-l">
+                                <h3>Quote Notes</h3>
+                                <table class="table table-striped no-border">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.Translate("/Shared/Type")
+                                            </th>
+                                            <th>
+                                                @Html.Translate("/Shared/Title")
+                                            </th>
+                                            <th>
+                                                @Html.Translate("/Shared/Note")
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var orderNote in Model.PurchaseOrder.Notes.OrderByDescending(x => x.Created))
+                                        {
+                                            <tr>
+                                                <td>@orderNote.Type</td>
+                                                <td>@orderNote.Title</td>
+                                                <td>@orderNote.Detail</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <h3>@Html.Translate("/Shared/AddNote")</h3>
+                                @using (Html.BeginForm("AddNote", "OrderDetails", FormMethod.Post, new { data_container = "orderDetailsView" }))
+                                {
+                                    <div class="row">
+                                        <div class="form-group">
+                                            @Html.TextArea("note", new { @class = "form-control ", rows = 4 })
+                                        </div>
+                                    </div>
+
+                                    @Html.Hidden("orderGroupId", Model.PurchaseOrder.OrderLink.OrderGroupId)
+                                    <button role="button" class="button jsChangeDetailsNote">
+                                        <span><span>@Html.Translate("/Shared/Save")</span></span>
+                                    </button>
+                                }
+
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+                @{
+                    Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+                }
+            </div>
+        </div>
+    </section>
+}

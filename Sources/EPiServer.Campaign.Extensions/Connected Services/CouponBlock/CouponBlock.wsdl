@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns3="http://lang.java" xmlns:intf="urn:api.broadmail.de/soap11/addons/CouponBlock" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns2="http://soap11.api.broadmail" xmlns:impl="urn:api.broadmail.de/soap11/addons/CouponBlock" targetNamespace="urn:api.broadmail.de/soap11/addons/CouponBlock" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:api.broadmail.de/soap11/addons/CouponBlock">
+      <xsd:import namespace="http://lang.java" />
+      <xsd:import namespace="http://soap11.api.broadmail" />
+      <xsd:element name="getName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getNameReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="fault" type="tns2:WebserviceException" />
+      <xsd:element name="remove">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="removeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="removeReturn" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="create">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAllIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAllIdsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getAllIdsReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCodeCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCodeCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getCodeCountReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUnAssignedCodeCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUnAssignedCodeCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getUnAssignedCodeCountReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAssignedCodeCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAssignedCodeCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getAssignedCodeCountReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCreated">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCreatedResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getCreatedReturn" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getModified">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getModifiedResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getModifiedReturn" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAssignedMailings">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAssignedMailingsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getAssignedMailingsReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getVersion">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getVersionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getVersionReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://soap11.api.broadmail">
+      <xsd:import namespace="http://lang.java" />
+      <xsd:complexType name="WebserviceException">
+        <xsd:sequence>
+          <xsd:element name="cause" nillable="true" type="xsd:anyType" />
+          <xsd:element name="message" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="removeResponse">
+    <wsdl:part name="parameters" element="impl:removeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAssignedMailingsRequest">
+    <wsdl:part name="parameters" element="impl:getAssignedMailings" />
+  </wsdl:message>
+  <wsdl:message name="getModifiedResponse">
+    <wsdl:part name="parameters" element="impl:getModifiedResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCodeCountResponse">
+    <wsdl:part name="parameters" element="impl:getCodeCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="removeRequest">
+    <wsdl:part name="parameters" element="impl:remove" />
+  </wsdl:message>
+  <wsdl:message name="getUnAssignedCodeCountRequest">
+    <wsdl:part name="parameters" element="impl:getUnAssignedCodeCount" />
+  </wsdl:message>
+  <wsdl:message name="getUnAssignedCodeCountResponse">
+    <wsdl:part name="parameters" element="impl:getUnAssignedCodeCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAssignedMailingsResponse">
+    <wsdl:part name="parameters" element="impl:getAssignedMailingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part name="parameters" element="impl:getVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNameRequest">
+    <wsdl:part name="parameters" element="impl:getName" />
+  </wsdl:message>
+  <wsdl:message name="getVersionRequest">
+    <wsdl:part name="parameters" element="impl:getVersion" />
+  </wsdl:message>
+  <wsdl:message name="getNameResponse">
+    <wsdl:part name="parameters" element="impl:getNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAllIdsResponse">
+    <wsdl:part name="parameters" element="impl:getAllIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAllIdsRequest">
+    <wsdl:part name="parameters" element="impl:getAllIds" />
+  </wsdl:message>
+  <wsdl:message name="getCreatedRequest">
+    <wsdl:part name="parameters" element="impl:getCreated" />
+  </wsdl:message>
+  <wsdl:message name="getAssignedCodeCountResponse">
+    <wsdl:part name="parameters" element="impl:getAssignedCodeCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAssignedCodeCountRequest">
+    <wsdl:part name="parameters" element="impl:getAssignedCodeCount" />
+  </wsdl:message>
+  <wsdl:message name="getCodeCountRequest">
+    <wsdl:part name="parameters" element="impl:getCodeCount" />
+  </wsdl:message>
+  <wsdl:message name="WebserviceException">
+    <wsdl:part name="fault" element="impl:fault" />
+  </wsdl:message>
+  <wsdl:message name="getCreatedResponse">
+    <wsdl:part name="parameters" element="impl:getCreatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="createRequest">
+    <wsdl:part name="parameters" element="impl:create" />
+  </wsdl:message>
+  <wsdl:message name="getModifiedRequest">
+    <wsdl:part name="parameters" element="impl:getModified" />
+  </wsdl:message>
+  <wsdl:message name="createResponse">
+    <wsdl:part name="parameters" element="impl:createResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CouponBlockWebservice">
+    <wsdl:operation name="getName">
+      <wsdl:input name="getNameRequest" message="impl:getNameRequest" />
+      <wsdl:output name="getNameResponse" message="impl:getNameResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="remove">
+      <wsdl:input name="removeRequest" message="impl:removeRequest" />
+      <wsdl:output name="removeResponse" message="impl:removeResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="create">
+      <wsdl:input name="createRequest" message="impl:createRequest" />
+      <wsdl:output name="createResponse" message="impl:createResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllIds">
+      <wsdl:input name="getAllIdsRequest" message="impl:getAllIdsRequest" />
+      <wsdl:output name="getAllIdsResponse" message="impl:getAllIdsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCodeCount">
+      <wsdl:input name="getCodeCountRequest" message="impl:getCodeCountRequest" />
+      <wsdl:output name="getCodeCountResponse" message="impl:getCodeCountResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getUnAssignedCodeCount">
+      <wsdl:input name="getUnAssignedCodeCountRequest" message="impl:getUnAssignedCodeCountRequest" />
+      <wsdl:output name="getUnAssignedCodeCountResponse" message="impl:getUnAssignedCodeCountResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getAssignedCodeCount">
+      <wsdl:input name="getAssignedCodeCountRequest" message="impl:getAssignedCodeCountRequest" />
+      <wsdl:output name="getAssignedCodeCountResponse" message="impl:getAssignedCodeCountResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCreated">
+      <wsdl:input name="getCreatedRequest" message="impl:getCreatedRequest" />
+      <wsdl:output name="getCreatedResponse" message="impl:getCreatedResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getModified">
+      <wsdl:input name="getModifiedRequest" message="impl:getModifiedRequest" />
+      <wsdl:output name="getModifiedResponse" message="impl:getModifiedResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getAssignedMailings">
+      <wsdl:input name="getAssignedMailingsRequest" message="impl:getAssignedMailingsRequest" />
+      <wsdl:output name="getAssignedMailingsResponse" message="impl:getAssignedMailingsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdl:input name="getVersionRequest" message="impl:getVersionRequest" />
+      <wsdl:output name="getVersionResponse" message="impl:getVersionResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CouponBlockSoapBinding" type="impl:CouponBlockWebservice">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getName">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getNameRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getNameResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="remove">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="removeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="removeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="create">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAllIds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAllIdsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAllIdsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCodeCount">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCodeCountRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCodeCountResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getUnAssignedCodeCount">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getUnAssignedCodeCountRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getUnAssignedCodeCountResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAssignedCodeCount">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAssignedCodeCountRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAssignedCodeCountResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCreated">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCreatedRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCreatedResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getModified">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getModifiedRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getModifiedResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAssignedMailings">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAssignedMailingsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAssignedMailingsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getVersionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CouponBlockWebserviceService">
+    <wsdl:port name="CouponBlock" binding="impl:CouponBlockSoapBinding">
+      <wsdlsoap:address location="http://api.broadmail.de/soap11/addons/CouponBlock" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,161 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Recommendations
+@using EPiServer.Editor
+@using EPiServer.Find
+@using EPiServer.Security
+@using EPiServer.Find.Api.Facets
+@using EPiServer.Framework.Web.Resources
+@using System
+
+@model EPiServer.Reference.Commerce.Site.Features.Search.ViewModels.SearchViewModel<EPiServer.Reference.Commerce.Site.Features.Search.Pages.SearchPage>
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+<section class="main-container col2-left-layout">
+    <div class="category-description std">
+        <div class="container">
+            @Html.PropertyFor(x => x.CurrentContent.TopContentArea, new { CssClass = "row" })
+        </div>
+    </div>
+    <div class="container">
+        <div class="row container--gutter-layout">
+
+            <div class="category-listing-search">
+
+                <article class="col-main row">
+
+                    <div class="page-title">
+                        <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                    </div>
+                    @using (Html.BeginForm("Index", "Category", FormMethod.Get, new { @class = "jsSearchForm" }))
+                    {
+                        <input class="jsSearchPage" hidden id="FilterOption_Page" name="FilterOption.Page" type="text" value="@Model.FilterOption.Page" />
+                        <input class="jsSearchPageSize" hidden id="FilterOption_PageSize" name="FilterOption.PageSize" type="text" value="@Model.FilterOption.PageSize" />
+                        <input class="jsSearchSort" hidden id="FilterOption_Sort" name="FilterOption.Sort" type="text" value="@Model.FilterOption.Sort" />
+                        <input class="jsSearchSortDirection" hidden id="FilterOption_SortDirection" name="FilterOption.SortDirection" type="text" value="@Model.FilterOption.SortDirection" />
+                        <input class="jsSearchViewSwitcher" hidden id="FilterOption_ViewSwitcher" name="FilterOption.ViewSwitcher" type="text" value="@Model.FilterOption.ViewSwitcher" />
+                        <input class="jsSearchProduct" hidden id="FilterOption_SearchProduct" name="FilterOption.SearchProduct" type="text" value="true" />
+                        <input class="jsSearchContent" hidden id="FilterOption_SearchContent" name="FilterOption.SearchContent" type="text" value="false" />
+
+                        <div class="toolbar">
+                            <div class="pager">
+                                <div id="limiter">
+                                    <label>@Html.Translate("/Search/View"): </label>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                @Model.FilterOption.PageSize
+                                                <span class="right-arrow"></span>
+                                            </a>
+                                            <ul>
+                                                <li>
+                                                    <a onclick="Search.changePageSize(@(Model.FilterOption.PageSize == 15 ? 20 : 15))">@(Model.FilterOption.PageSize == 15 ? 20 : 15)</a>
+                                                </li>
+                                                <li>
+                                                    <a onclick="Search.changePageSize(@(Model.FilterOption.PageSize == 30 || Model.FilterOption.PageSize == 35 ? 20 : 30))">@(Model.FilterOption.PageSize == 30 || Model.FilterOption.PageSize == 35 ? 20 : 30)</a>
+                                                </li>
+                                                <li>
+                                                    <a onclick="Search.changePageSize(@(Model.FilterOption.PageSize == 35 ? 30 : 35))">@(Model.FilterOption.PageSize == 35 ? 30 : 35)</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @if (Model.FilterOption.TotalCount > 0)
+                                {
+                                    <div class="pages">
+                                        <label>@Html.Translate("/Search/Page"):</label>
+                                        <ul class="pagination">
+                                            <li>
+                                                <a onclick="Search.changePage(@(Model.FilterOption.Page > 1 ? Model.FilterOption.Page - 1 : Model.FilterOption.Page))">
+                                                    &laquo;
+                                                </a>
+                                            </li>
+
+                                            @foreach (var page in Model.FilterOption.Pages)
+                                            {
+                                                <li class="@(Model.FilterOption.Page == page ? "active" : "")">
+                                                    <a onclick="Search.changePage(@page)">
+                                                        @page.ToString()
+                                                    </a>
+                                                </li>
+                                            }
+                                            <li>
+                                                <a onclick="Search.changePage(@(Model.FilterOption.Page + 1 > Model.FilterOption.Pages.Last() ? Model.FilterOption.Pages.Last() : Model.FilterOption.Page + 1))">
+                                                    &raquo;
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="category-products">
+                            @if (Model.FilterOption.TotalCount > 0)
+                            {
+                                if (Model.FilterOption.ViewSwitcher == "Grid")
+                                {
+                                    <ul class="products-grid">
+                                        @foreach (var productViewModel in Model.ProductViewModels)
+                                        {
+                                            <li class="@(Model.ShowCommerceControls ? "item col-lg-4 col-md-3 col-sm-4 col-xs-6" : "item col-lg-3 col-md-3 col-sm-4 col-xs-6")">
+                                                @Html.Partial("_ProductGrid", productViewModel)
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <ol class="products-list">
+                                        @foreach (var productViewModel in Model.ProductViewModels)
+                                        {
+                                            <li class="item">
+                                                @Html.Partial("_ProductList", productViewModel)
+                                            </li>
+                                        }
+                                    </ol>
+                                }
+                            }
+                            else
+                            {
+                                if (!string.IsNullOrWhiteSpace(Model.Query))
+                                {
+                                    if (Model.DidYouMeans != null && Model.DidYouMeans.Hits.Any())
+                                    {
+                                        <div class="alert alert-info">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                            <i class="fa fa-info"></i> @Html.Translate("/Search/DidYouMean"):
+                                            @{ var first = true; }
+                                            @foreach (var item in Model.DidYouMeans.Hits)
+                                            {
+                                                if (!first)
+                                                {
+                                                    <text>@Html.Translate("/Shared/Or")</text>
+                                                }
+                                                <strong>@Html.ActionLink(item.Suggestion, null, new { search = item.Suggestion })</strong>
+                                                first = false;
+                                            }
+                                        </div>
+                                    }
+                                }
+                                <h2>@Html.Translate("/Search/Page")</h2>
+                            }
+                        </div>
+
+                    }
+
+                </article>
+
+                @{
+                    if (Model.ContentResult != null)
+                    {
+                        Html.RenderPartial("_SearchContent", Model.ContentResult);
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</section>

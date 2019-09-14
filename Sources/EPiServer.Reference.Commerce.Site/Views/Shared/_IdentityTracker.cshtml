@@ -1,0 +1,50 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.IdentityTracker
+
+<div id="sidebar-wrapper">
+    <h2 style="color: white;">Identity Tracker</h2>
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#Tepiserver" data-toggle="tab"><i class="fa fa-user fa-lg"></i><i class="fa fa-child"></i>&nbsp;&nbsp;<i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i></a></li>
+        <li class=""><a href="#Tlocation" data-toggle="tab"><i class="glyphicon glyphicon-globe"></i></a></li>
+        <li class=""><a href="#Tcommerce" data-toggle="tab"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
+    </ul>
+
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="Tepiserver">
+            <div class="panel panel-default">
+                <div class="panel-heading">Active Visitor Groups/Targeting</div>
+                <div class="panel-body">
+
+                    <ul class="list-group" style="color:black;">
+                        @foreach (var g in IdentityHelper.ActiveVisitorGroups())
+                        {
+
+                            <li class="list-group-item">@g</li>
+                        }
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="Tlocation">
+            <div class="panel panel-default">
+                <div class="panel-heading">Guessed Location</div>
+                <div class="panel-body" style="color:black">
+                    @IdentityHelper.GuessedLocation()
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="Tcommerce">
+            <div class="panel panel-default">
+                <div class="panel-heading">User</div>
+                <div class="panel-body" style="color:black">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

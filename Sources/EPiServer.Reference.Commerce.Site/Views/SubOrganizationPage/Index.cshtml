@@ -1,0 +1,74 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.SubOrganization.ViewModels.SubOrganizationPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            @if (Model.StartPage.PageTypeName.Equals(typeof(MoseySupplyStartPage).Name))
+            {
+                @Html.Partial("_CmsNavigation", Model.CurrentContent)
+            }
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="spacer-left-l">
+                    @{ Html.RenderAction("Index", "B2BNavigation");}
+                    <section class="spacer-bottom-l">
+                        <div class="section-title spacer-bottom-l">
+                            <h2 class="h3">@Html.Translate("/B2B/Organization/Info")</h2>
+                            @if (Model.IsAdmin)
+                            {
+                                <a href="@Url.Action("Edit", "SubOrganizationPage", new {suborg = Model.SubOrganizationModel.OrganizationId})" class="btn btn-primary btn-sm spacer-left-m">Edit</a>
+                            }
+                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label>@Html.Translate("/B2B/Organization/ParentOrganization")</label>
+                                <br />
+                                <input type="text" value="@Model.SubOrganizationModel.ParentOrganization.Name" disabled />
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.SubOrganizationModel.Name)
+                                <br />
+                                <input type="text" value="@Model.SubOrganizationModel.Name" disabled />
+                            </div>
+                        </form>
+                    </section>
+                    <section>
+                        <div class="section-title spacer-bottom-l">
+                            <h2 class="h3">@Html.Translate("/B2B/Organization/Locations")</h2>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>@Html.Translate("/Shared/Name")</th>
+                                    <th>@Html.Translate("/Shared/Address/Label/Address")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.SubOrganizationModel.Locations != null && Model.SubOrganizationModel.Locations.Any())
+                                {
+                                    foreach (var location in Model.SubOrganizationModel.Locations)
+                                    {
+                                        <tr>
+                                            <td>@(location.Name)</td>
+                                            <td>@(location.AddressString)</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+            @if (Model.StartPage.PageTypeName.CompareTo(typeof(StartPage).Name) == 0)
+            {
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

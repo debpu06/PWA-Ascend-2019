@@ -1,0 +1,103 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Blog.Models.ViewModels.BlogListModel
+@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.Blog.Models
+
+<!--Blog Item List-->
+<div class="site-content" id="primary">
+    <div role="main" id="content">
+        @foreach (var page in Model.Blogs)
+        {
+            @Html.Action("Preview", "BlogItem", new { currentPage = page, blogModel = Model })
+        }
+    </div>
+</div>
+
+<!--Paging-->
+@using (Html.BeginForm("BlogListBlock", "Test", FormMethod.Get, new { id = "jsGetBlogItemListPage" }))
+{
+    <input hidden id="PageId" name="PageId" type="text" value="@Model.PagingInfo.PageId" />
+    <input hidden id="PageIndex" name="PageIndex" type="text" value="@Model.PagingInfo.PageIndex" />
+    <input hidden id="PageSize" name="PageSize" type="text" value="@Model.PagingInfo.PageSize" />
+}
+
+<div class="toolbar toolbarFullWidth" >
+    <div class="pager">
+
+        <p class="amount">
+            <strong>
+                @Model.PagingInfo.TotalCount @Html.Translate("/Blog/Items")
+            </strong>
+        </p>
+
+        <div id="limiter">
+            <label>@Html.Translate("/Blog/Show"): </label>
+            <ul>
+                <li>
+                    @{
+                        var pageSizeOption = 5;
+                        var currentPageSize = Model.PagingInfo.PageSize;
+                        var strCurrentSize = currentPageSize == -1 ? @Html.Translate("/Blog/All") : currentPageSize.ToString();
+                    }
+                    <a>
+                        @strCurrentSize
+                        <span class="right-arrow"></span>
+                    </a>
+                    <ul>
+                        @{
+                            var lst = new List<int>();
+                            for (int i = 1; i <= pageSizeOption - 1; i++)
+                            {
+                                if (!(currentPageSize <= i * 5 && currentPageSize > (i - 1) * 5))
+                                {
+                                    lst.Add(i * 5);
+                                }
+                            }
+
+                            for (int i = 0; i < lst.Count; i++)
+                            {
+                                <li>
+                                    <a onclick="Blog.changeBlogListPageSize(@lst[i])">@lst[i]</a>
+                                </li>
+                            }
+
+                            <li>
+                                <a onclick="Blog.changeBlogListPageSize(-1)">@Html.Translate("/Blog/All")</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+            <label style="margin-left : 10px">@Html.Translate("/Blog/PerPage") </label>
+        </div>
+
+        @if (Model.PagingInfo.TotalCount > 0)
+        {
+            <div class="pages">
+                <label>@Html.Translate("/Blog/Page"):</label>
+                <ul class="pagination">
+                    <li>
+                        <a onclick="Blog.changeBlogListPage(@(Model.PagingInfo.PageIndex > 1 ? Model.PagingInfo.PageIndex - 1 : Model.PagingInfo.PageIndex))">
+                            &laquo;
+                        </a>
+                    </li>
+                    @for (int page = 1; page <= Model.PagingInfo.PageCount; page++)
+                    {
+                        <li class="@(Model.PagingInfo.PageIndex == page ? "active" : "")">
+                            <a onclick="Blog.changeBlogListPage(@page)">
+                                @page.ToString()
+                            </a>
+                        </li>
+                    }
+                    <li>
+                        <a onclick="Blog.changeBlogListPage(@(Model.PagingInfo.PageIndex + 1 > Model.PagingInfo.PageCount ? Model.PagingInfo.PageCount : Model.PagingInfo.PageIndex + 1))">
+                            &raquo;
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        }
+    </div>
+</div>
+
+<br/>
+

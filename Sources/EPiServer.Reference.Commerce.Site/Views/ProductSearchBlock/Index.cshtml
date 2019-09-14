@@ -1,0 +1,22 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Search.Controllers.ProductSearchResult
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-sm-12">
+        <h2>@Html.PropertyFor(p => p.Heading)</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="category-products">
+        <ul class="products-grid">
+
+            @foreach (var productViewModel in Model.Products)
+            {
+                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                    @Html.Partial("_Product", productViewModel)
+                </li>
+            }
+        </ul>
+    </div>
+</div>

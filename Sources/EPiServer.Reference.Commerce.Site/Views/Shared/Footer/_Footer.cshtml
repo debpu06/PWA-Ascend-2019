@@ -1,0 +1,94 @@
+﻿@Html.FullRefreshPropertiesMetaData(new[] { "FooterCopyrightText" })
+
+<footer>
+    <div class="footer-top">
+        <div class="newsletter-wrap">
+            <h3>@Html.Translate("/Footer/Newsletter/Header")</h3>
+            <form id="newsletter-validate-detail" method="post" action="#">
+                <div id="container_form_news">
+                    <div id="container_form_news2">
+                        <input type="text" class="input-text required-entry validate-email jsSubscribeEmail" title="@Html.Translate("/Footer/Newsletter/Header")" id="newsletter" name="email" placeholder="Email address">
+                        <button class="button subscribeEmail" id="subscribeEmail" title="@Html.Translate("/Footer/Subscribe")" type="button" onclick="Campaign.subscribeEmail()">
+                            <span>
+                                @Html.Translate("/Footer/Subscribe")
+                            </span>
+                        </button>
+                    </div>
+                    <h5 style="position:absolute; margin-left: 20px" class="subscribe-notification"></h5>
+                </div>
+            </form>
+            <div style="margin: 0 auto">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-inner">
+        <div class="container container--gutter">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-lg-9">
+                    <div class="footer-column pull-left">
+                        <div class="footer-image">
+                            @Html.PropertyFor(x => StartPage.FooterLogo)
+                            <div class="coppyright" @Html.EditAttributes(x => StartPage.FooterCopyrightText)>
+                                @Html.Raw(StartPage.FooterCopyrightText)
+                            </div>
+                            <div class="company-links">
+                                @Html.PropertyFor(x => StartPage.FooterCopyrightNavigation)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-column pull-left">
+                        <h4>@Html.PropertyFor(x => StartPage.FooterColumnHeader1)</h4>
+                        @Html.PropertyFor(x => StartPage.FooterColumnNavigation1)
+                    </div>
+                    <div class="footer-column pull-left">
+                        <h4>@Html.PropertyFor(x => StartPage.FooterColumnHeader2)</h4>
+                        <address class="footer-address">
+                            <p @Html.EditAttributes(x => StartPage.FooterCompanyPhone)>@StartPage.FooterCompanyPhone</p>
+                            <p @Html.EditAttributes(x => StartPage.FooterCompanyEmail)>@StartPage.FooterCompanyEmail</p>
+                            <p @Html.EditAttributes(x => StartPage.FooterCompanyAddress)>@StartPage.FooterCompanyAddress</p>
+                        </address>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-3">
+                    <div class="footer-column-last">
+                        <h4>@Html.PropertyFor(x => StartPage.FooterColumnHeader3)</h4>
+                        @Html.PropertyFor(x => StartPage.FooterColumnNavigation3)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="social">
+                    <ul class="link">
+                        <li class="pull-left">
+                            <a href="#">
+                                <svg viewBox="0 0 32 32">
+                                    <use xlink:href="#icon-facebook"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="pull-left">
+                            <a href="#">
+                                <svg viewBox="0 0 32 32">
+                                    <use xlink:href="#icon-twitter"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="pull-left">
+                            <a href="#">
+                                <svg viewBox="0 0 32 32">
+                                    <use xlink:href="#icon-instagram"></use>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

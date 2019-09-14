@@ -1,0 +1,102 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.Organization.ViewModels.OrganizationPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="spacer-left-l">
+                    @{ Html.RenderAction("Index", "B2BNavigation");}
+                    <section class="spacer-bottom-l">
+                        <div class="section-title spacer-bottom-l">
+                            @if (Model.Organization.ParentOrganizationId == Guid.Empty)
+                            {
+                                <h2 class="h3">@Html.Translate("/B2B/Organization/Info")</h2>
+                            }
+                            else
+                            {
+                                <h2 class="h3">@Html.Translate("/B2B/Organization/SubInfo")</h2>
+                            }
+                            @if (Model.IsAdmin)
+                            {
+                                <a href="@Url.Action("Edit", "OrganizationPage")" class="btn btn-primary btn-sm spacer-left-m">
+                                    @Html.Translate("/Shared/Edit")
+                                </a>
+                            }
+                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label>@(Model.Organization.ParentOrganizationId == Guid.Empty ? Html.Translate("/Shared/Name") : string.Format("{0} {1}", Html.Translate("/B2B/SubOrganization"), Html.Translate("/Shared/Name")))</label>
+                                <br />
+                                <input type="text" disabled value="@Model.Organization.Name" />
+                            </div>
+                            <div class="form-group">
+                                <label>@Html.Translate("/Shared/Address/Form/Label/Address")</label>
+                                <br />
+                                <textarea disabled>@Model.Organization.Address.Name : @Model.Organization.Address.AddressString</textarea>
+                            </div>
+                        </form>
+                    </section>
+                    @if (Model.Organization.ParentOrganizationId == Guid.Empty)
+                    {
+                        <section>
+                            <div class="section-title spacer-bottom-l">
+                                <h2 class="h3">Suborganizations</h2>
+                                <a href="@Url.Action("AddSub", "OrganizationPage")" class="btn btn-primary btn-sm spacer-left-m">Add New</a>
+                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.Translate("/Shared/Name")</th>
+                                        <th>@Html.Translate("/B2B/Budgeting/SpentBudget")</th>
+                                        <th>@Html.Translate("/B2B/Budgeting/Allocated")</th>
+                                        <th>@Html.Translate("/B2B/Budgeting/StartDate")</th>
+                                        <th>@Html.Translate("/B2B/Budgeting/EndDate")</th>
+                                        <th>@Html.Translate("/B2B/Budgeting/Status")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Organization != null && Model.Organization.SubOrganizations != null && Model.Organization.SubOrganizations.Any())
+                                    {
+                                        foreach (var subOrganization in Model.Organization.SubOrganizations)
+                                        {
+                                            <tr>
+                                                <td><a href="@(Url.ContentUrl(Model.SubOrganizationPage))?suborg=@(subOrganization.OrganizationId)">@subOrganization.Name</a></td>
+                                                @if (subOrganization.CurrentBudgetViewModel != null)
+                                                {
+                                                    <td>@subOrganization.CurrentBudgetViewModel.SpentBudget.ToString("N") @subOrganization.CurrentBudgetViewModel.Currency</td>
+                                                    <td>@subOrganization.CurrentBudgetViewModel.Amount.ToString("N") @subOrganization.CurrentBudgetViewModel.Currency</td>
+                                                    <td>@subOrganization.CurrentBudgetViewModel.StartDate.ToString("MMMM dd, yyyy")</td>
+                                                    <td>@subOrganization.CurrentBudgetViewModel.DueDate.ToString("MMMM dd, yyyy")</td>
+                                                    <td>@subOrganization.CurrentBudgetViewModel.Status</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                }
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </section>
+                    }
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

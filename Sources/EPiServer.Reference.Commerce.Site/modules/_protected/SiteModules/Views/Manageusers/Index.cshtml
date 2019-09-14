@@ -1,0 +1,63 @@
+﻿@using EPiServer.Shell.Navigation
+@model IEnumerable<EPiServer.Reference.Commerce.B2B.Models.Search.UserSearchResultModel>
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>Impersonate Users</h2>
+                </div>
+                <div class="spacer-left-l">
+                    <section>
+                        <div class="section-title spacer-bottom-m">
+                            <br />
+                            <form class="pull-right" action="" method="get" role="search">
+                                <div class="custom-search">
+                                    <input type="text" id="viewUsersAutocomplete" autocomplete="off" placeholder="@Html.Translate("/Shared/Search")" />
+                                    <span class="js-reset-icon close-icon" style="display: none"></span>
+                                    <span class="js-search-icon icon-search glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>@Html.Translate("/Shared/Name")</th>
+                                    <th>@Html.Translate("/Shared/Address/Form/Label/Address")</th>
+                                    <th>@Html.Translate("/B2B/Oganization/Organization")</th>
+                                    <th class="text-right">@Html.Translate("/B2B/Budgeting/Actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody class="js-users-table-body">
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td><a href="#" data-user="@user.FullName">@user.FullName</a></td>
+                                        <td class="user-email">@user.Email</td>
+                                        <td class="text-right">
+                                            <a href="#" class="btn btn-info btn-xs" title="@Html.Translate("/Shared/Impersonate")">
+                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section AdditionalScripts
+{
+    <script type="text/javascript" src="~/Assets/Base/jquery/jquery.easyautocomplete.min.js"></script>
+    <script type="text/javascript" src="~/Assets/Base/Scripts/Features/b2b/Users.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            viewUsersAutocompleteComponent.init();
+        });
+    </script>
+}

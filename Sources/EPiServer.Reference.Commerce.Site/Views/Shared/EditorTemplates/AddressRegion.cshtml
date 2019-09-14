@@ -1,0 +1,15 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.CountryRegionViewModel
+
+<div class="address-region">
+    @Html.LabelFor(formModel => formModel.Region) <span class="required">*</span><br />
+    @if (Model.RegionOptions != null && Model.RegionOptions.Any())
+    {
+        @Html.DropDownListFor(formModel => formModel.Region, new SelectList(Model.RegionOptions, Model.Region), new {@class = "input-text address-region-input jsChangeTaxAddress" })
+    }
+    else
+    {
+        @Html.TextBoxFor(formModel => formModel.Region, new {@class = "form-control input-text address-region-input jsChangeTaxAddress" })
+    }
+    @Html.ValidationMessageFor(formModel => formModel.Region)
+</div>
+

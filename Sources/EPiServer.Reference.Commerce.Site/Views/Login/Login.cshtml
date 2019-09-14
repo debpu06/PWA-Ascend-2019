@@ -1,0 +1,71 @@
+﻿@using Microsoft.Owin.Security
+@using EPiServer.Web.Mvc.Html
+
+@model EPiServer.Reference.Commerce.Site.Features.Login.ViewModels.LoginViewModel
+
+<div class="col-2 registered-users jsLoginBlockWrapper">
+
+    <strong>@Html.Translate("/Login/Form/Label/Heading")</strong>
+
+    <div class="content">
+
+        <p>@Html.Translate("/Login/Form/Label/LoginMessage")</p>
+
+        @using (Html.BeginForm("InternalLogin", "Login", FormMethod.Post, new { @class = "jsLoginBlock", @role = "form" }))
+        {
+            @Html.HiddenFor(x => x.ReturnUrl)
+            <ul class="form-list">
+                <li>
+                    @Html.LabelFor(x => x.Email) <span class="required">*</span><br/>
+                    @Html.TextBoxFor(x => x.Email, new { @class = "input-text", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(x => x.Email)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Password) <span class="required">*</span><br/>
+                    @Html.PasswordFor(x => x.Password, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(x => x.Password)
+                </li>
+                <li>
+                    <label>
+                        @Html.CheckBoxFor(x => x.RememberMe)
+                        @Html.Translate("/Login/Form/Label/RememberMe")
+                    </label>
+                </li>
+            </ul>
+
+            <p class="required">* Required Fields</p>
+
+            <div class="buttons-set">
+                <button type="submit" class="button login margin-right-sm"><span>@Html.Translate("/Login/Form/Label/Login")</span></button>
+                @if (Model.ResetPasswordPage != null)
+                {
+                    <a class="forgot-word" href="@Url.ContentUrl(Model.ResetPasswordPage)">@Html.Translate("/Login/Form/Label/ForgotPasswordLink")</a>
+                }
+            </div>
+        }
+
+    </div>
+
+    @{
+        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+        using (Html.BeginForm("ExternalLogin", "Login", new { returnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+
+            <div id="socialLoginList">
+
+                    <div>
+                        <button type="submit" class="btn btn-social btn-social--lg btn-facebook" name="provider" value="Facebook" id="Facebook" title="@Html.Translate("/Login/Form/Label/FacebookTitle")">
+                            <span class="fa fa-facebook"></span>@Html.Translate("/Login/Form/Label/SigninFacebook")
+                        </button>
+
+                    </div>
+
+            </div>
+        }
+    }
+
+</div>

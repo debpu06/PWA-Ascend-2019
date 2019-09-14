@@ -1,0 +1,110 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.Users.ViewModels.UsersPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="spacer-left-l">
+                    @{ Html.RenderAction("Index", "B2BNavigation");}
+                    <section class="spacer-bottom-l">
+                        <div class="section-title spacer-bottom-l">
+                            <h2 class="h3">@Html.Translate("/B2B/Users/Lookup")</h2>
+                        </div>
+                        <div class="custom-search">
+                            <input type="text" id="addUsersAutocomplete" autocomplete="off" placeholder="@Html.Translate("/B2B/Users/Lookup")" />
+                            <span class="js-reset-icon close-icon" style="display:none"></span>
+                            <span class="js-search-icon icon-search glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </div>
+                        <button class="btn js-autocomplete-result" type="button" style="display:none">
+                            <span class="js-user-name v-align-middle"></span><span class="js-close-icon close-icon v-align-middle"></span>
+                        </button>
+                    </section>
+                    <section class="spacer-bottom-l">
+                        <div class="section-title spacer-bottom-l">
+                            <h2 class="h3">@Html.Translate("/B2B/Users/UserDetails")</h2>
+                        </div>
+                        @using (Html.BeginForm("AddUser", "UsersPage", FormMethod.Post, new { @id = "addUserForm" }))
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Contact.FirstName)
+                                <br />
+                                @Html.TextBoxFor(x => x.Contact.FirstName)
+                                @Html.ValidationMessageFor(x => x.Contact.FirstName)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Contact.LastName)
+                                <br />
+                                @Html.TextBoxFor(x => x.Contact.LastName)
+                                @Html.ValidationMessageFor(x => x.Contact.LastName)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Contact.Email)
+                                <br />
+                                @Html.TextBoxFor(x => x.Contact.Email)
+                                @Html.ValidationMessageFor(x => x.Contact.Email)
+                            </div>
+                            <div class="form-group" id="organization-div" style="display: none">
+                                @Html.LabelFor(x => x.Contact.Organization, Html.Translate("/B2B/SubOrganization"))
+                                <br />
+                                <div class="custom-select">
+                                    <span class="custom-select-split"></span>
+                                    <span class="custom-select-arrow arrow-down"></span>
+                                    @Html.DropDownListFor(model => model.Contact.OrganizationId, new SelectList(Model.Organizations, "OrganizationId", "Name", Model.Contact.OrganizationId), new { @id = "select-suborganization" })
+                                    @Html.ValidationMessageFor(model => model.Contact.OrganizationId)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>@Html.Translate("/Shared/Role")</label>
+                                <br />
+                                <div class="custom-select">
+                                    <span class="custom-select-split"></span>
+                                    <span class="custom-select-arrow arrow-down"></span>
+                                    @Html.DropDownListFor(m => m.Contact.UserRole, new SelectList(new List<SelectListItem>
+                                                                                {
+                                                                                    new SelectListItem { Text = Html.Translate("/B2B/Admin"), Value = "Admin" },
+                                                                                    new SelectListItem { Text = Html.Translate("/B2B/Approver"), Value = "Approver" },
+                                                                                    new SelectListItem { Text = Html.Translate("/B2B/Purchaser"), Value = "Purchaser" }
+                                                                                }, "Value", "Text", Model.Contact.UserRole), new { @id = "select-role" })
+                                </div>
+                            </div>
+                            <div class="form-group" id="location-div" style="display: none">
+                                <label>@Html.LabelFor(x => x.Contact.Location)</label>
+                                <br />
+                                <div class="custom-select">
+                                    <span class="custom-select-split"></span>
+                                    <span class="custom-select-arrow arrow-down"></span>
+                                    @Html.DropDownListFor(model => model.Contact.Location, new List<SelectListItem>(), Html.Translate("/B2B/Users/SelectLocation"), new { @id = "select-location" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Contact.Location)
+                            </div>
+
+                            if (Model.Contact.ShowOrganizationError)
+                            {
+                                <div class="form-group">
+                                    <p class="text-danger">@Html.Translate("/B2B/Users/Already")</p>
+                                </div>
+                            }
+
+                            <div class="spacer-top-l">
+                                <button type="submit" class="btn btn-primary">
+                                    @Html.Translate("/Shared/Add")
+                                </button>
+                                <a href="@Url.Action("Index", "UsersPage")" class="btn btn-default">@Html.Translate("/Shared/Cancel")</a>
+                            </div>
+                        }
+                    </section>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

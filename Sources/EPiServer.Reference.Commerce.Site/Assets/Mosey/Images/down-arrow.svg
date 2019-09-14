@@ -1,0 +1,13 @@
+<svg width="13px" height="8px" viewBox="0 0 13 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <polygon id="path-1" points="21.908 12 22.6248177 12.6972607 16.3124088 19.1867223 10 12.6972607 10.7168177 12 16.3124088 17.7525384"></polygon>
+    </defs>
+    <g id="$$-Assets:-Setup-(Sketch)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="👁-Icons-/-Set-1-/-10---V_Arrow" transform="translate(-10.000000, -12.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="MASK" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

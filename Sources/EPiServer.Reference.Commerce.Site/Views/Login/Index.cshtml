@@ -1,0 +1,40 @@
+﻿@using EPiServer.Framework.Localization;
+@model EPiServer.Reference.Commerce.Site.Features.Login.ViewModels.LoginPageViewModel
+
+@{
+    if (Model.Layout != null && Model.Layout.LoginUrl != null)
+    {
+        var loginUrl = Model.Layout.LoginUrl.ToHtmlString();
+        loginUrl += Model.LoginViewModel.ReturnUrl;
+        Response.Redirect(loginUrl);
+    }
+    else
+    {
+        <section class="main-container">
+            <div class="container container--gutter">
+                <div class="account-login">
+                    <div class="page-title">
+                        <h2>Login or Create an Account</h2>
+                    </div>
+                    <fieldset class="col2-set">
+                        <legend>Login or Create an Account</legend>
+                        @if ((bool)ViewData["IsReadOnly"])
+                        {
+                            <div class="col-1">
+                                @Html.Raw(String.Format("{0}", LocalizationService.Current.GetString("/Readonly/Login")))
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.Partial("RegisterAccount", Model.RegisterAccountViewModel)
+                            @Html.Partial("Login", Model.LoginViewModel)
+                        }
+                    </fieldset>
+                </div>
+            </div>
+        </section>
+    }
+}
+
+
+

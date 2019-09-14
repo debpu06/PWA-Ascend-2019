@@ -1,0 +1,23 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Start.ViewModels
+
+@model StartPageViewModel
+
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row" })
+        </div>
+    </div>
+</section>
+
+@*<section class="upsell-pro">
+    <div class="container">
+        <div class="slider-items-products">
+            <div class="new_title center">
+                <h2>@Html.Translate("/Shared/RecommendationsForYou")</h2>
+            </div>
+            @{ Html.RenderAction("Index", "Recommendations", new { recommendations = Model.Recommendations });}
+        </div>
+    </div>
+</section>*@
+

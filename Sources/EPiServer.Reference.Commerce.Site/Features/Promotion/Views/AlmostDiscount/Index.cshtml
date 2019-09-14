@@ -1,0 +1,35 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Promotion.ViewModels;
+@using EPiServer.Commerce.Marketing.Promotions
+@using Mediachase.Commerce
+@using EPiServer.Commerce.Marketing
+
+@model AlmostDiscountViewModel
+
+@foreach (var reward in Model.Rewards)
+{
+    var orderDiscount = reward.Promotion as SpendAmountGetOrderDiscount;
+    if (orderDiscount != null)
+    {
+        <div class="row almost-promotion">
+            <div class="almost-promotion-circle">
+
+                <h2>
+                    @String.Format("Spend {0} more to receive", (orderDiscount.Condition.Amounts.First(x => x.Currency == Currency.USD).Amount - Model.Total).ToString("c"));
+                </h2>
+
+
+            </div>
+            <div class="almost-promotion-award">
+
+
+                @if (orderDiscount.Discount.Percentage > 0)
+                {
+                    <h1>@String.Format("{0}% Off", orderDiscount.Discount.Percentage) </h1>
+
+                }
+
+            </div>
+            @Html.PropertyFor(m => reward.Promotion.Banner)
+        </div>
+    }
+}

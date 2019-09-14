@@ -1,0 +1,27 @@
+@model EPiServer.Reference.Commerce.Site.Features.MappableImage.Model.MappableImageBlock
+
+<div class="mappableImageBlock" @Html.EditAttributes(model => model.Properties)>
+
+    <img class="mappableBackgroundImage" src="@Url.ContentUrl(Model.Properties.BackgroundImageContentReference)">
+
+    @if (Model.Properties.MappableCoordinateList != null && Model.Properties.MappableCoordinateList.Any())
+    {
+        foreach (var mappableCoordinate in Model.Properties.MappableCoordinateList)
+        {
+            <a data-toggle="modal"
+               data-target="#ModalDialog"
+               data-url="@Url.ContentUrl(mappableCoordinate.CommerceContentReference)"
+               href="@Url.ContentUrl(mappableCoordinate.CommerceContentReference)"
+               class="quickview-btn mappableLink"
+               onclick="ProductPage.showQuickview('@Url.ContentUrl(mappableCoordinate.CommerceContentReference)')"
+               style="top: @mappableCoordinate.TopPosition; 
+                      left: @mappableCoordinate.LeftPosition; 
+                      color: @mappableCoordinate.LinkColor;">
+
+                <i class="@mappableCoordinate.LinkClass"></i>
+
+            </a>
+        }
+    }
+
+</div>

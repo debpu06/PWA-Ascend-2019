@@ -1,0 +1,98 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Shared.Models.IProductModel
+@{
+    if (Model == null)
+    {
+        return;
+    }
+}
+
+
+<div class="product-image">
+    <a href="@Model.Url" title="@Model.DisplayName">
+        <img class="small-image" title="@Model.DisplayName" alt="@Model.DisplayName" src="@Model.ImageUrl">
+    </a>
+    @if (Model.NewArrival)
+    {
+        <div class="new-label new-top-left">@Html.Translate("/Shared/New")</div>
+    }
+    @if (Model.OnSale)
+    {
+        <div class="sale-label">@Html.Translate("/Shared/Sale")</div>
+    }
+    @if (Model.IsFeaturedProduct)
+    {
+        <div class="featured-ribbon">@Html.Translate("/Shared/Featured")</div>
+    }
+    @if (Model.IsBestBetProduct)
+    {
+        <div class="bestbet-badge"></div>
+    }
+    <a data-toggle="modal" data-target="#ModalDialog" data-url="@Model.Url" class="quickview-btn" onclick="ProductPage.showQuickview('@Model.Url')">
+        <span>@Html.Translate("/Shared/QuickOverview")</span>
+    </a>
+</div>
+<div class="product-shop">
+    <h2 class="product-name"><a href="@Model.Url" title="@Model.DisplayName">@Model.DisplayName</a></h2>
+    <div class="ratings">
+        <div class="rating-box">
+            @if (Model.ReviewStatistics == null || Model.ReviewStatistics.OverallRating < 1)
+            {
+                <div class="rating"></div>
+            }
+            else if (Model.ReviewStatistics.OverallRating >= 1 && Model.ReviewStatistics.OverallRating < 2)
+            {
+                <div class="rating rating-1-star"></div>
+            }
+            else if (Model.ReviewStatistics.OverallRating >= 2 && Model.ReviewStatistics.OverallRating < 3)
+            {
+                <div class="rating rating-2-star"></div>
+            }
+            else if (Model.ReviewStatistics.OverallRating >= 3 && Model.ReviewStatistics.OverallRating < 4)
+            {
+                <div class="rating rating-3-star"></div>
+            }
+            else if (Model.ReviewStatistics.OverallRating >= 4 && Model.ReviewStatistics.OverallRating < 4.5)
+            {
+                <div class="rating rating-4-star"></div>
+            }
+            else if (Model.ReviewStatistics.OverallRating >= 4.5)
+            {
+                <div class="rating rating-5-star"></div>
+            }
+        </div>
+        <p class="rating-links"> <a href="#/review/product/list/id/167/category/35/">1 Review(s)</a> <span class="separator">|</span> <a href="@Model.Url">Add Your Review</a> </p>
+    </div>
+    <div class="desc std">
+        @Html.Raw(Model.LongDescription)
+    </div>
+
+    <div class="price-box">
+        <span class="regular-price">
+            @{
+                var hasDiscount = Model.IsAvailable && Model.DiscountedPrice.GetValueOrDefault().
+                    Amount < Model.PlacedPrice.Amount;
+            }
+
+            @if (Model.IsAvailable)
+            {
+                if (Model.DiscountedPrice.HasValue && Model.DiscountedPrice.Value.Amount > 0)
+                {
+                    if (hasDiscount)
+                    {
+                        <span class="price" style="text-decoration: line-through;">@Helpers.RenderMoney(Model.PlacedPrice)</span><br />
+                        <span class="price" style="font-weight: bold; color: red;">@Helpers.RenderMoney(Model.DiscountedPrice.GetValueOrDefault())</span>
+                    }
+                    else
+                    {
+                        <span class="price">@Helpers.RenderMoney(Model.DiscountedPrice.GetValueOrDefault())</span>
+                    }
+                }
+            }
+            else
+            {
+                <span class="price">@Html.Translate("/Product/NotAvailable")</span>
+            }
+
+        </span>
+    </div>
+</div>

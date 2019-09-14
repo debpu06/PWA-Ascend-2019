@@ -1,0 +1,31 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Web.Mvc.Html
+
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Site.Features.Social.Pages.CommunityPage>
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.PropertyFor(x => x.CurrentContent.Ratings, new { CssClass = "row", Tag = EPiBootstrapArea.ContentAreaTags.FullWidth })
+                        @Html.PropertyFor(x => x.CurrentContent.Subscriptions, new { CssClass = "row", Tag = EPiBootstrapArea.ContentAreaTags.FullWidth })
+                        @Html.PropertyFor(x => x.CurrentContent.Memberships, new { CssClass = "row", Tag = EPiBootstrapArea.ContentAreaTags.FullWidth })
+                        @Html.PropertyFor(x => x.CurrentContent.GroupAdmission, new { CssClass = "row", Tag = EPiBootstrapArea.ContentAreaTags.FullWidth })
+                    </div>
+                    <div class="col-md-8">
+                        <h1 style="margin-top: 0;" @Html.EditAttributes(x => x.CurrentContent.PageName)>@Model.CurrentContent.PageName</h1>
+                        <p class="introduction" @Html.EditAttributes(x => x.CurrentContent.MetaDescription)>@Model.CurrentContent.MetaDescription</p>
+
+                        <div class="col-md-8 clearfix" @Html.EditAttributes(x => x.CurrentContent.MainBody)>
+                            @Html.DisplayFor(m => m.CurrentContent.MainBody)
+                        </div>
+                        @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row", Tag = EPiBootstrapArea.ContentAreaTags.FullWidth })
+                        @Html.PropertyFor(x => x.CurrentContent.Comments, new { CssClass = "row", Tag = EPiBootstrapArea.ContentAreaTags.FullWidth })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,113 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.NewAddessViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+
+<section class="main-container col2-layout" id="singleAddressView">
+    <div class="main container container--gutter-layout">
+        <div class="col-main">
+            @Html.Partial("_CheckoutStatusBar", 2)
+        </div>
+        <div class="row">
+            <div class="col-main col-sm-9">
+                @using (Html.BeginForm("AddNewAddress", "Checkout", FormMethod.Post))
+                {
+                    <fieldset class="group-select">
+                        @Html.HiddenFor(model => model.Address.Name)
+                        @Html.HiddenFor(model => model.Address.DaytimePhoneNumber)
+                        @Html.HiddenFor(model => model.Address.BillingDefault)
+                        @Html.HiddenFor(model => model.Address.ShippingDefault)
+                        <ul>
+                            <li>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.FirstName)
+                                        @Html.TextBoxFor(model => model.Address.FirstName, new { @class = "form-control input-text" })
+                                        @Html.ValidationMessageFor(model => model.Address.FirstName)
+                                    </div>
+
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.LastName)
+                                        @Html.TextBoxFor(model => model.Address.LastName, new { @class = "form-control input-text" })
+                                        @Html.ValidationMessageFor(model => model.Address.LastName)
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.Email)
+                                        @Html.TextBoxFor(model => model.Address.Email, new { @class = "form-control input-text" })
+                                        @Html.ValidationMessageFor(model => model.Address.Email)
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.Organization)
+                                        @Html.TextBoxFor(model => model.Address.Organization, new { @class = "form-control input-text" })
+                                        @Html.ValidationMessageFor(model => model.Address.Organization)
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.Line1)
+                                        @Html.TextBoxFor(model => model.Address.Line1, new { @class = "form-control input-text" })
+                                        @Html.ValidationMessageFor(model => model.Address.Line1)
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.Line2)
+                                        @Html.TextBoxFor(model => model.Address.Line2, new { @class = "form-control input-text" })
+                                        @Html.ValidationMessageFor(model => model.Address.Line2)
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.City)
+                                        @Html.TextBoxFor(model => model.Address.City, new { @class = "form-control input-text" })
+                                        @Html.ValidationMessageFor(model => model.Address.City)
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.PostalCode)
+                                        @Html.TextBoxFor(model => model.Address.PostalCode, new { @class = "form-control input-text" })
+                                        @Html.ValidationMessageFor(model => model.Address.PostalCode)
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.EditorFor(model => model.Address.CountryRegion, Model.Address.CountryRegion)
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        @Html.LabelFor(model => model.Address.CountryCode)
+                                        @Html.DropDownListFor(model => model.Address.CountryCode,
+                                        new SelectList(Model.Address.CountryOptions, "Code", "Name", Model.Address.CountryCode), new
+                                        {
+                                            @class = "form-control input-text jsChangeCountry jsChangeTaxAddress"
+                                        })
+                                        @Html.ValidationMessageFor(model => model.Address.CountryCode)
+                                        @Html.Hidden("address-htmlfieldprefix", "Model.Address.CountryRegion")
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="pull-right">
+                                <button class="button new-address" title="@Html.Translate("/Checkout/Address/Labels/SaveAddress")">
+                                    <span>@Html.Translate("/Checkout/Address/Labels/SaveAddress")</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

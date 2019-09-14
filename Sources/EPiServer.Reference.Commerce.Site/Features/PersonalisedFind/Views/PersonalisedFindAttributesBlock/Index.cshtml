@@ -1,0 +1,42 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.PersonalisedFind.Models.ViewModels
+@model PersonalisedFindAttributesViewModel
+
+<div data-toggle="collapse in" id="personalisationAttributesBlue">
+    <button type="button" class="@Model.CurrentBlock.ShowAttributesButtonClass" data-toggle="collapse" data-target="#personalisationAttributes" onclick="$('#personalisationAttributesBlue').toggle();" @Html.EditAttributes(x => x.CurrentBlock.ShowAttributesText)>@Model.CurrentBlock.ShowAttributesText</button>
+</div>
+
+@{ 
+
+    var editMode = EPiServer.Editor.PageEditing.PageIsInEditMode;
+}
+
+<div class="@(editMode ? string.Empty : "collapse")" id="@(editMode ? string.Empty : "personalisationAttributes")">
+
+    <button type="button" class="@Model.CurrentBlock.HideAttributesButtonClass" data-toggle="collapse" data-target="#personalisationAttributes" onclick="$('#personalisationAttributesBlue').toggle();" @Html.EditAttributes(x => x.CurrentBlock.HideAttributesText)>@Model.CurrentBlock.HideAttributesText</button>
+
+    <div @Html.EditAttributes(x => x.CurrentBlock.ListHeading)>@Model.CurrentBlock.ListHeading</div>
+
+    <div class="row">
+        <b>
+            <span class="col-lg-2" @Html.EditAttributes(x => x.CurrentBlock.AttributeNameHeading)>@Model.CurrentBlock.AttributeNameHeading</span>
+            <span class="col-lg-2" @Html.EditAttributes(x => x.CurrentBlock.AttributeValueHeading)>@Model.CurrentBlock.AttributeValueHeading</span>
+            <span class="col-lg-2" @Html.EditAttributes(x => x.CurrentBlock.AttributeBoostFactorHeading)>@Model.CurrentBlock.AttributeBoostFactorHeading</span>
+        </b>
+    </div>
+    @if (Model.CurrentPersonalizationAttributes != null)
+    {
+        foreach (var attribute in Model.CurrentPersonalizationAttributes)
+        {
+            <div class="row">
+                <span class="col-lg-2">@attribute.Name</span>
+                <span class="col-lg-2">@attribute.Value</span>
+                <span class="col-lg-2">@attribute.Score</span>
+            </div>
+        }
+        <br /><br />
+    }
+
+</div>

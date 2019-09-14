@@ -1,0 +1,39 @@
+﻿@using EPiServer.Reference.Commerce.Site.Extensions
+@model EPiServer.Reference.Commerce.Site.Features.Destinations.Models.TagsViewModel
+
+<div class="container">
+	<h2 class="section-title">@Html.PropertyFor(x => x.CurrentContent.Name) 
+		@((Model.Continent != null) ? string.Format(" {0} ", Html.Translate("/Shared/In")) + Model.Continent : "") 
+		@((Model.AdditionalCategories!=null) ? string.Format(" {0} ", Html.Translate("/Shared/With")) + string.Join(", ", Model.AdditionalCategories.ToArray()) : "")</h2>
+
+
+	@Html.Partial("CarouselSimple", Model.Carousel)
+
+	@Html.PropertyFor(m => m.CurrentContent.TopArea, new {CssClass="row"})
+
+	@if (!string.IsNullOrWhiteSpace(Model.CurrentContent.MainIntro) || EPiServer.Editor.PageEditing.PageIsInEditMode)
+	{
+		<p class="lead margin-top" @Html.EditAttributes(x => x.CurrentContent.MainIntro)>@Model.CurrentContent.MainIntro</p>
+	}
+	@Html.PropertyFor(x => x.CurrentContent.MainBody)
+
+	@if (string.IsNullOrEmpty(Model.Continent))
+    {
+        foreach (var lst in Model.Destinations.GroupBy(dp => dp.Continent).OrderBy(dp => dp.Key))
+        {
+            <a href="@Url.GetSegmentedUrl(Model.CurrentContent,lst.Key)">
+                <h2 class="section-lines">@lst.Key</h2>
+            </a>
+			foreach(var d in lst.ToList()){
+				<div>@{Html.RenderContentData(d, false, "displaymode-full");}</div>
+			}
+		}
+	} else {
+		foreach (var d in Model.Destinations.OrderBy(dp => dp.Promoted).ThenBy(dp => dp.Name))
+		{
+			<div>@{Html.RenderContentData(d, false, "displaymode-full");}</div>
+		}
+	}
+
+	@Html.PropertyFor(m => m.CurrentContent.BottomArea, new {CssClass="row"})
+</div>

@@ -1,0 +1,59 @@
+﻿@using EPiServer.Reference.Commerce.Site.Extensions
+@model EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels.NavigationViewModel
+
+<div class="right-links">
+
+    <div class="right-menu">
+
+        @if (Model.ShowCommerceControls)
+        {
+            if (Model.ShowSharedCart)
+            {
+                <div class="header-cart hidden-xs">
+                    <div id="SharedMiniCart">
+                        @Html.Partial("Header/_HeaderCart", Model.SharedMiniCart)
+                    </div>
+                </div>
+            }
+
+            <div class="header-cart hidden-xs">
+                <div id="WishListMiniCart">
+                    @Html.Partial("_WishListMiniCartDetails", Model.WishListMiniCart)
+                </div>
+            </div>
+            <div class="header-cart hidden-xs">
+                <div id="MiniCart">
+                    @Html.Partial("Header/_HeaderCart", Model.MiniCart)
+                </div>
+            </div>
+
+        }
+
+        <div class="header-links">
+            <div class="icon-svg search-box-container mobile-hide">
+                <div class="search-box">
+                    <input hidden class="search-option" value="@Model.StartPage.SearchOption" />
+                    @using (Html.BeginForm("Index", "Search", new { node = Html.GetSearchPage() }, FormMethod.Get, new { role = "search", @class = "search-form-submit" }))
+                    {
+                        @Html.Hidden("confidence", "0")
+                        <input autocomplete="off" maxlength="70" type="text" placeholder="@(Model.StartPage.SearchLabel ?? "Search")" class="jsQuickSearch jsSearchInput" id="search" name="search" data-url="@Url.Action("quicksearch", "Search", new {node = Html.GetSearchPage()})" />
+                        <span class="image-upload hidden-xs">
+                            <label for="file-input">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="3.2"></circle>
+                                    <path d="M9 2l-1.83 2h-3.17c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-12c0-1.1-.9-2-2-2h-3.17l-1.83-2h-6zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"></path>
+                                    <path d="M0 0h24v24h-24z" fill="none"></path>
+                                </svg>
+                            </label>
+                            <input id="file-input" type="file" onchange="Search.processImage(this.files)" accept="image/x-png,image/jpeg,image/png" data-url="@Url.Action("quicksearch", null, new { node = Model.StartPage.SearchPage })" />
+                        </span>
+                        <div class="jsQuickSearchResult product-dropdown-container" style="display: none;"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

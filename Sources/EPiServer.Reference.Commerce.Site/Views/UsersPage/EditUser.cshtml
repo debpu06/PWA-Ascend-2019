@@ -1,0 +1,79 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.Users.ViewModels.UsersPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="spacer-left-l">
+                    @{ Html.RenderAction("Index", "B2BNavigation");}
+                    <section class="spacer-bottom-l">
+                        <div class="section-title spacer-bottom-l">
+                            <h2 class="h3">@Html.Translate("/B2B/Users/EditUserRole")</h2>
+                        </div>
+                        @using (Html.BeginForm("UpdateUser", "UsersPage", FormMethod.Post, new { @id = "editUserForm" }))
+                        {
+                            <div class="form-group">
+                                <label>@Html.Translate("/Shared/Name")</label>
+                                <br />
+                                @Html.TextBoxFor(x => x.Contact.FullName, new { disabled = "disabled" })
+                            </div>
+                            <div class="form-group">
+                                <label>@Html.Translate("/Shared/Email")</label>
+                                <br />
+                                @Html.TextBoxFor(x => x.Contact.Email, new { disabled = "disabled" })
+                            </div>
+                            <div class="form-group">
+                                <label>@Html.Translate("/B2B/Organization/Organization")</label>
+                                <br />
+                                <div class="custom-select">
+                                    <span class="custom-select-split"></span>
+                                    <span class="custom-select-arrow arrow-down"></span>
+                                    @Html.TextBoxFor(x => x.Contact.Organization.Name, new { disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>@Html.Translate("/Shared/Role")</label>
+                                <br />
+                                <div class="custom-select">
+                                    <span class="custom-select-split"></span>
+                                    <span class="custom-select-arrow arrow-down"></span>
+                                    @Html.DropDownListFor(m => m.Contact.UserRole, new SelectList(new List<SelectListItem>
+                                                                                {
+                                                                                    new SelectListItem {Text = Html.Translate("/B2B/Approver"), Value = "Approver"},
+                                                                                    new SelectListItem {Text = Html.Translate("/B2B/Purchaser"), Value = "Purchaser"}
+                                                                                }, "Value", "Text", Model.Contact.UserRole))
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>@Html.Translate("/B2B/Users/Location")</label>
+                                <br />
+                                <div class="custom-select">
+                                    <span class="custom-select-split"></span>
+                                    <span class="custom-select-arrow arrow-down"></span>
+                                    @Html.DropDownListFor(
+                                               model => model.Contact.Location,
+                                               new SelectList(Model.SubOrganization.Locations, "AddressId", "Name", Model.Contact.Location), new { @id = "select-location" })
+                                </div>
+                            </div>
+                            <div class="spacer-top-l">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <a href="@Url.Action("Index", "UsersPage")" class="btn btn-primary">Cancel</a>
+                            </div>
+                            @Html.HiddenFor(m => m.Contact.ContactId)
+                        }
+                    </section>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

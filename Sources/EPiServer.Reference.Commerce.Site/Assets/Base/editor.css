@@ -1,0 +1,209 @@
+﻿/* Styles used by the TinyMCE editor */
+
+h1 {
+    EditMenuName: Header 1;
+}
+
+h2 {
+    EditMenuName: Header 2;
+}
+
+h3 {
+    EditMenuName: Header 3;
+}
+
+h4 {
+    EditMenuName: Header 4;
+}
+
+h5 {
+    EditMenuName: Header 5;
+}
+
+p {
+    EditMenuName: Normal;
+}
+
+.h1 {
+    EditMenuName: Text Large H1 Style;
+}
+
+.color-primary {
+    EditMenuTitle: Text Colors;
+    EditMenuName: Primary;
+}
+
+.color-accent {
+    EditMenuName: Accent;
+}
+
+.color-light {
+    EditMenuName: Light;
+}
+
+a.button-light {
+    EditMenuTitle: Buttons;
+    EditMenuName: Light;
+    ChangeElementType: true;
+}
+
+a.button-dark {
+    EditMenuName: Dark;
+    ChangeElementType: true;
+}
+
+a.button-light--alt {
+    EditMenuName: Alternate Light;
+    ChangeElementType: true;
+}
+
+a.button-dark--alt {
+    EditMenuName: Alternate Dark;
+    ChangeElementType: true;
+}
+
+ul.link-list {
+    EditMenuName: Link List;
+    ChangeElementType: true;
+}
+
+/* Style from Mosey */
+@font-face {
+    font-family: 'Museo300-Regular';
+    src: url('/Assets/Mosey/Fonts/Museo300-Regular-webfont.woff2') format('woff2'), url('/Assets/Mosey/Fonts/Museo300-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Museo500-Regular';
+    src: url('/Assets/Mosey/Fonts/Museo500-Regular-webfont.woff2') format('woff2'), url('/Assets/Mosey/Fonts/Museo500-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Museo700-Regular';
+    src: url('/Assets/Mosey/Fonts/Museo700-Regular-webfont.woff2') format('woff2'), url('/Assets/Mosey/Fonts/Museo700-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Museo500-Regular', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+h1, .h1 {
+    font-size: 3.25em;
+    font-family: 'Museo300-Regular', Arial, sans-serif;
+}
+
+@media (min-width: 768px) {
+    h1, .h1 {
+        font-size: 5em;
+    }
+}
+
+h2, .h2, .heading-title {
+    font-size: 2.429em;
+    font-family: 'Museo700-Regular', Arial, sans-serif;
+}
+
+h3, .h3 {
+    font-size: 1.857em;
+    font-family: 'Museo700-Regular', Arial, sans-serif;
+}
+
+h4, .h4 {
+    font-size: 1.5em;
+    font-family: 'Museo500-Regular', Arial, sans-serif;
+}
+
+h5, .h5 {
+    font-size: 1.286em;
+}
+
+h6, .h6 {
+    font-size: 0.85em;
+}
+
+h4 a {
+    font-size: inherit;
+}
+
+p {
+    line-height: 2em;
+    margin-bottom: 1.2em;
+}
+
+.link-list {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    margin: 4em 0 1em;
+    padding: 0;
+}
+
+    .link-list li {
+        margin: 0 1em;
+    }
+
+@media only screen and (min-width: 768px) {
+    .link-list li {
+        margin: 0 2em;
+    }
+}
+
+.link-list a {
+    font-size: 1.4em;
+}
+
+    .link-list a:after {
+        font-family: 'FontAwesome';
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+        -webkit-font-smoothing: antialiased;
+        content: "\f105";
+        text-transform: none;
+        font-size: 18px;
+        padding: 6px 6px 6px 6px;
+        line-height: 30px;
+    }
+
+.link-list.color-light a {
+    color: #fff;
+}
+
+    .link-list.color-light a:hover {
+        color: #FF553E;
+    }
+
+a.button-dark,
+a.button-light {
+    padding: .5em 2em;
+    font-size: 1.4rem;
+    font-family: 'Museo300-Regular', Arial, sans-serif;
+    transition: background 200ms ease-in, color 200ms ease-in;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 0;
+    border-width: 1px;
+}
+
+.color-accent {    
+    color: #FF553E;
+}
+
+.color-primary {
+    color: #020202;
+}
+
+.color-light {
+    color: #EEEEEE;
+}

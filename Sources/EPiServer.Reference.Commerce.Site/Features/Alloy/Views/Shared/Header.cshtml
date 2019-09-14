@@ -1,0 +1,60 @@
+@using System.Web.Mvc.Html
+@using EPiServer.Editor
+@using EPiServer.Core
+@using EPiServer.Reference.Commerce.Site.Extensions
+@using EPiServer.Web
+@using EPiServer.Web.Mvc.Html
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Shared.SitePageData>
+<div class="row">
+    <div id="header">
+        <div class="col-md-2">
+            <a href="@Model.Layout.LogotypeLinkUrl" title="@Model.Layout.Logotype.Title">
+                @Html.PropertyFor(x => x.Layout.Logotype)
+            </a>
+        </div>
+        <div class="col-lg-10">
+
+            <div class="alloyMenu">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="@(Model.CurrentContent.ContentLink.CompareToIgnoreWorkID(SiteDefinition.Current.StartPage) ? "active" : null)">
+                                @Html.ContentLink(SiteDefinition.Current.StartPage)
+                            </li>
+                            @Html.MenuList(Model.CurrentContent.NavigationRoot,
+                                @<li class="@(item.Selected ? "active" : null)">
+                                    @Html.PageLink(item.Page, null, new { @class = string.Join(" ", item.Page.GetThemeCssClassNames()) })
+                                </li>
+                                )
+                        </ul>
+                        <div class="pull-right">
+                            @{Html.RenderPartial("~/Features/Alloy/Views/Shared/LanguageSelector.cshtml", Model.CurrentContent);}
+                            @using (Html.BeginForm(null, null, Model.Layout.SearchPageRouteValues, PageEditing.PageIsInEditMode ? FormMethod.Post : FormMethod.Get, new { @class = "navbar-form", role = "search" }))
+                            {
+                                <input type="text" class="form-control search-query" name="q" id="SearchKeywords" placeholder="@Html.Translate("/mainnavigation/search")" />
+                                <button class="btn btn-primary searchButton" type="submit" id="SearchButton">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                                
+                            }
+                        </div>
+                        
+                    </div>
+                </nav>
+               
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<hr />

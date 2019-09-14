@@ -1,0 +1,50 @@
+﻿@using ImageProcessor.Web.Episerver
+
+@model EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels.MegaMenuModel
+
+
+<ul id="nav" class="hidden-xs">
+    @foreach (var linkItem in Model.MenuItems)
+    {
+        if (!linkItem.Children.Any())
+        {
+            <li>
+                <a title="@linkItem.DisplayName" href="@linkItem.Url">
+                    <span>@linkItem.DisplayName</span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="mega-menu">
+                <a title="@linkItem.DisplayName" href="@linkItem.Url">
+                    <span>@linkItem.DisplayName</span>
+                </a>
+                <div class="level0-wrapper">
+                    <div class="container">
+                        <div class="level0-wrapper2">
+                            <div class="nav-block nav-block-center grid20">
+                                <ul class="level0">
+                                    @foreach (var child in linkItem.Children)
+                                    {
+                                    <li>
+                                        @if (!string.IsNullOrEmpty(child.ImageUrl))
+                                        {
+                                        <div class="menu_image">
+                                            <a href="@child.Url" title="@child.DisplayName">
+                                                <img src="@Html.ProcessImage(child.ImageUrl).Resize(250,null,ImageProcessor.Imaging.ResizeMode.Crop)" class="img-responsive">
+                                                <span>@child.DisplayName</span>
+                                            </a>
+                                        </div>
+                                        }
+                                    </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    }
+</ul>

@@ -1,0 +1,27 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.SocialProfile.ViewModels.SocialCommentViewModel
+
+@using (Html.BeginForm("AddAComment", "SocialProfilePage", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    @Html.HiddenFor(m => m.User)
+    <div class="review1">
+        <ul class="form-list">
+            <li>
+                <label class="required" for="Nickname">@Html.Translate("/Reviews/Nickname")<em>*</em></label>
+                <div>
+                    @Html.TextBoxFor(m => m.Nickname, htmlAttributes: new { @class = "input-text", placeholder = "Example: abby2012" })
+                </div>
+            </li>
+            <li>
+                <label class="required " for="Body">Add Comment<em>*</em></label>
+                <div class="input-box">
+                    @Html.TextAreaFor(m => m.Body, htmlAttributes: new { @class = "input-text social-comment", placeholder = "Enter your comment", rows = 8 })
+                </div>
+            </li>
+        </ul>
+        <div class="buttons-set">
+            <button class="button submit" title="Add comment" type="submit"><span>Add Comment</span></button>
+        </div>
+    </div>
+}
+

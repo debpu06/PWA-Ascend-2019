@@ -1,0 +1,468 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Cart.ViewModels.LargeCartViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+<section class="main-container col1-layout" id="CheckoutView">
+    <div class="main container">
+        <div class="col-main">
+            <div class="cart">
+                <div class="page-title">
+                    <h1 class="heading-title">@Html.PropertyFor(x => x.CurrentContent.Name)</h1>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert alert-warning">
+                        @Model.Message
+                    </div>
+                }
+                @Html.PropertyFor(x => x.CurrentContent.MainContentArea)
+                @if (Request.Browser.IsMobileDevice)
+                {
+                    <div class="row" id="shopping-cart-mobile">
+                        <div class="col-sm-12">
+                            <ul class="list-group cart-product-mobile">
+                                <li class="list-group-item active">
+                                    <span class="nobr product-label">@Html.Translate("/Cart/Labels/Product")</span>
+                                </li>
+                                @if (Model.HasOrganization)
+                                {
+                                    using (@Html.BeginForm("RequestQuote", "Cart", FormMethod.Post, new { @class = "form-horizontal-block" }))
+                                    {
+                                        <li class="list-group-item" style="text-align:center;">
+                                            <button type="button" class="button jsCartRequestQuote">
+                                                <span>
+                                                    @Html.Translate("/Shared/RequestQuote")
+                                                </span>
+                                            </button>
+                                        </li>
+                                    }
+                                }
+                                @foreach (var shipment in Model.Shipments)
+                                {
+                                    foreach (var cartItem in shipment.CartItems)
+                                    {
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-4" style="padding: 0 5px;">
+                                                    <a class="product-image" href="@cartItem.Url"><img src="@cartItem.ImageUrl" alt="@cartItem.Code" class="img-responsive product-image" width="75" /></a>
+                                                </div>
+                                                <div class="col-xs-6" style="padding: 0 5px;">
+                                                    <a href="@cartItem.Url">@cartItem.DisplayName</a>
+                                                </div>
+                                                <div class="col-xs-2" style="padding: 0 5px;">
+                                                    @if (!(bool)ViewData["IsReadOnly"])
+                                                    {
+                                                        using (Html.BeginForm("RemoveItem", "Cart", FormMethod.Post, new { data_container = "MiniCart" }))
+                                                        {
+                                                            @Html.Hidden("shipmentId", shipment.ShipmentId)
+                                                            @Html.Hidden("code", cartItem.Code)
+                                                            <button role="button" class="button remove-item">
+                                                                <span><span>@Html.Translate("/Cart/Labels/RemoveItem")</span></span>
+                                                            </button>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3" style="padding: 0 5px;">
+                                                    <span class="nobr product-detail-label">@Html.Translate("/ProductPage/Size")</span>
+                                                </div>
+                                                <div class="col-xs-3" style="padding: 0 5px;">
+                                                    <span class="nobr product-detail-label">@Html.Translate("/Cart/Labels/UnitPrice")</span>
+                                                </div>
+                                                <div class="col-xs-3" style="padding: 0 5px;">
+                                                    <span class="nobr product-detail-label">@Html.Translate("/Cart/Labels/Quantity")</span>
+                                                </div>
+                                                <div class="col-xs-3" style="padding: 0 5px;">
+                                                    <span class="nobr product-detail-label">@Html.Translate("/Cart/Labels/Subtotal")</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-3" style="padding: 0 5px;">
+                                                    @if ((bool)ViewData["IsReadOnly"])
+                                                    {
+                                                        @Helpers.RenderSize(cartItem.Entry);
+                                                    }
+                                                    else
+                                                    {
+                                                        @Helpers.RenderSizeDropDown(cartItem);
+                                                    }
+                                                </div>
+                                                <div class="col-xs-3" style="padding: 0 5px;">
+                                                    @if (cartItem.DiscountedUnitPrice.HasValue)
+                                                    {
+                                                        <span class="price product-price product-price-has-discount">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                        <span class="product-price product-price--discount xs-vertical-margin">@cartItem.DiscountedUnitPrice.ToString()</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="price">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                    }
+                                                </div>
+                                                <div class="col-xs-3" style="padding: 0 5px;">
+                                                    @using (Html.BeginForm("ChangeCartItem", "Cart", FormMethod.Post, new { data_container = "CheckoutView" }))
+                                                    {
+                                                        @Html.Hidden("shipmentId", shipment.ShipmentId)
+                                                        if ((bool)ViewData["IsReadOnly"])
+                                                        {
+                                                            @Html.TextBox("quantity", cartItem.Quantity.ToString("0"), new { @class = "form-control form-inline form-field--narrow jsChangeCartItem", disabled = "disabled", size = 4 })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBox("quantity", cartItem.Quantity.ToString("0"), new { @class = "form-control form-inline form-field--narrow jsChangeCartItem", size = 4 })
+                                                        }
+                                                        @Html.Hidden("code", cartItem.Code)
+                                                    }
+                                                </div>
+                                                <div class="col-xs-3" style="padding: 0 5px;">
+                                                    <span class="cart-price">
+                                                        <span class="price">@cartItem.DiscountedPrice.ToString()</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12" style="text-align:center;padding: 0 5px;">
+                                                    <br />
+                                                    <form>
+                                                        @Html.Hidden("code", cartItem.Code)
+                                                        <a class="link-wishlist1" href="#" data-url="@Url.Action("AddToWishlist", "Cart", null)">Move To Wish List</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-7" style="padding: 0 5px;">
+                                            <button role="button" onclick="window.location.href = '@Model.ReferrerUrl'" class="button btn-continue" title="@Html.Translate("/Checkout/Continue/Button")">
+                                                <span>@Html.Translate("/Checkout/Continue/Button")</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-5" style="text-align:right;padding: 0 5px;">
+                                            @using (Html.BeginForm("ClearCart", "Cart", FormMethod.Post, new { @class = "form-horizontal-block" }))
+                                            {
+                                                <button id="empty_cart_button" class="button" title="Clear Cart" name="update_cart_action" type="Submit">
+                                                    <span>@Html.Translate("/Cart/Labels/ClearCart")</span>
+                                                </button>
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <fieldset>
+                            <table class="data-table cart-table" id="shopping-cart-table">
+                                <thead>
+                                    <tr class="first last">
+                                        <th rowspan="1">&nbsp;</th>
+                                        <th rowspan="1">
+                                            <span class="nobr">@Html.Translate("/Cart/Labels/Product")</span>
+                                        </th>
+                                        <th rowspan="1">
+                                            @Html.Translate("/Cart/Labels/MoveToWishlist")
+                                        </th>
+                                        <th rowspan="1">
+                                            <span class="nobr">@Html.Translate("/ProductPage/Size")</span>
+                                        </th>
+                                        <th colspan="1" class="a-center">
+                                            <span class="nobr">@Html.Translate("/Cart/Labels/UnitPrice")</span>
+                                        </th>
+                                        <th class="a-center " rowspan="1">@Html.Translate("/Cart/Labels/Quantity")</th>
+                                        <th colspan="1" class="a-center">@Html.Translate("/Cart/Labels/Subtotal")</th>
+                                        <th class="a-center" rowspan="1">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr class="first last">
+                                        <td class="a-right last" colspan="8">
+                                            <button role="button" onclick="window.location.href = '@Model.ReferrerUrl'" class="button btn-continue" title="@Html.Translate("/Checkout/Continue/Button")">
+                                                <span>@Html.Translate("/Checkout/Continue/Button")</span>
+                                            </button>
+                                            @if (Model.HasOrganization)
+                                            {
+                                                using (@Html.BeginForm("RequestQuote", "Cart", FormMethod.Post, new { @class = "form-horizontal-block" }))
+                                                {
+                                                    <button type="button" class="button jsCartRequestQuote">
+                                                        <span>
+                                                            @Html.Translate("/Shared/RequestQuote")
+                                                        </span>
+                                                    </button>
+                                                }
+                                            }
+
+                                            @using (Html.BeginForm("ClearCart", "Cart", FormMethod.Post, new { @class = "form-horizontal-block" }))
+                                            {
+                                                <button id="empty_cart_button" class="button" title="Clear Cart" name="update_cart_action" type="Submit">
+                                                    <span>@Html.Translate("/Cart/Labels/ClearCart")</span>
+                                                </button>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @foreach (var shipment in Model.Shipments)
+                                    {
+                                        foreach (var cartItem in shipment.CartItems)
+                                        {
+                                            <tr class="first odd">
+
+                                                <td class="image">
+                                                    <a class="product-image" href="@cartItem.Url"><img src="@cartItem.ImageUrl" alt="@cartItem.Code" class="img-responsive product-image" width="75" /></a>
+                                                </td>
+                                                <td>
+                                                    <h2 class="product-name">
+                                                        <a href="@cartItem.Url">@cartItem.DisplayName</a>
+                                                    </h2>
+                                                </td>
+                                                <td class="a-center hidden-table">
+                                                    <form>
+                                                        @Html.Hidden("code", cartItem.Code)
+                                                        <a class="link-wishlist1" href="#" data-url="@Url.Action("AddToWishlist", "Cart", null)">Move</a>
+                                                    </form>
+
+                                                </td>
+                                                <td class="a-center hidden-table">
+                                                    @if ((bool)ViewData["IsReadOnly"])
+                                                    {
+                                                        @Helpers.RenderSize(cartItem.Entry);
+                                                    }
+                                                    else
+                                                    {
+                                                        @Helpers.RenderSizeDropDown(cartItem);
+                                                    }
+                                                </td>
+                                                <td class="a-center hidden-table">
+                                                    <span class="cart-price">
+                                                        @if (cartItem.DiscountedUnitPrice.HasValue)
+                                                        {
+                                                            <span class="price product-price product-price-has-discount">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                            <span class="product-price product-price--discount xs-vertical-margin">@cartItem.DiscountedUnitPrice.ToString()</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="price">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                        }
+                                                    </span>
+                                                </td>
+                                                <td class="a-center">
+                                                    @using (Html.BeginForm("ChangeCartItem", "Cart", FormMethod.Post, new { data_container = "CheckoutView" }))
+                                                    {
+                                                        @Html.Hidden("shipmentId", shipment.ShipmentId)
+                                                        if ((bool)ViewData["IsReadOnly"])
+                                                        {
+                                                            @Html.TextBox("quantity", cartItem.Quantity.ToString("0"), new { @class = "form-control form-inline form-field--narrow jsChangeCartItem", disabled = "disabled", size = 4 })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBox("quantity", cartItem.Quantity.ToString("0"), new { @class = "form-control form-inline form-field--narrow jsChangeCartItem", size = 4 })
+                                                        }
+                                                        @Html.Hidden("code", cartItem.Code)
+                                                    }
+                                                </td>
+                                                <td class="a-center">
+                                                    <span class="cart-price">
+                                                        <span class="price">@cartItem.DiscountedPrice.ToString()</span>
+                                                    </span>
+                                                </td>
+                                                <td class="a-center last">
+                                                    @if (!(bool)ViewData["IsReadOnly"])
+                                                    {
+                                                        using (Html.BeginForm("RemoveItem", "Cart", FormMethod.Post, new { data_container = "MiniCart" }))
+                                                        {
+                                                            @Html.Hidden("shipmentId", shipment.ShipmentId)
+                                                            @Html.Hidden("code", cartItem.Code)
+                                                            <button role="button" class="button remove-item">
+                                                                <span><span>@Html.Translate("/Cart/Labels/RemoveItem")</span></span>
+                                                            </button>
+                                                        }
+
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                }
+                <div class="cart-collaterals row container--gutter-inner">
+                    <div class="col-sm-4">
+                        <div class="shipping">
+                            <h3>@Html.Translate("/Cart/Labels/EstimateShipping")</h3>
+                            <div class="shipping-form">
+                                @using (Html.BeginForm("EstimateShipping", "Cart", FormMethod.Post))
+                                {
+                                    <p>@Html.Translate("/Cart/Labels/ShippingEstimate")</p>
+                                    <ul class="form-list">
+                                        <li>
+                                            <label class="required" for="country"><em>*</em>Country</label>
+                                            <div class="input-box">
+                                                @Html.DropDownListFor(x => x.AddressModel.CountryCode, new SelectList(Model.AddressModel.CountryOptions, "Code", "Name", Model.AddressModel.CountryCode), new { @class = "validate-select jsChangeCountry" })
+                                                @Html.Hidden("address-htmlfieldprefix", "AddressModel.CountryRegion")
+                                            </div>
+                                        </li>
+                                        <li>
+                                            @Html.EditorFor(x => x.AddressModel.CountryRegion, Model.AddressModel.CountryRegion)
+                                        </li>
+                                        <li>
+                                            <label for="postcode">Zip/Postal Code</label>
+                                            <div class="input-box">
+                                                @Html.TextBoxFor(x => x.AddressModel.PostalCode, new { @class = "input-text validate-postcode" })
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="buttons-set11">
+                                        @if (!(bool)ViewData["IsReadOnly"])
+                                        {
+                                            <button class="button get-quote" title="Get a Quote" type="Submit">
+                                                <span>@Html.Translate("/Cart/Labels/Estimate")</span>
+                                            </button>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="discount">
+                            <h3>@Html.Translate("/Checkout/Coupons/Heading")</h3>
+                            <div class="qsdiscount">
+                                <label for="coupon_code">@Html.Translate("/Checkout/Coupons/CouponCode/Info")</label>
+                                @if (!(bool)ViewData["IsReadOnly"])
+                                {
+                                    <div>
+                                        <input type="text" class="input-text fullwidth" id="coupon_code">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="button coupon js-add-couponcode" data-url="@Url.Action("AddCouponCode", "Cart", null)">
+                                                @Html.Translate("/Checkout/Coupons/CouponCode/Button")
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <div class="alert alert-danger couponcode-errormessage" style="display: none">
+                                        <p>@Html.Translate("/Checkout/Coupons/CouponCode/ErrorMessage")</p>
+                                    </div>
+                                }
+                                @if (Model.AppliedCouponCodes != null && Model.AppliedCouponCodes.Any())
+                                {
+                                    <div class="col-xs-12">
+                                        <h5>@Html.Translate("/Checkout/Coupons/AppliedCoupons/Heading")</h5>
+                                        <ul>
+                                            @foreach (var couponCode in Model.AppliedCouponCodes)
+                                            {
+                                                <li>
+                                                    @Html.Label(couponCode)
+                                                    @Html.ActionLink(Html.Translate("/Checkout/Coupons/AppliedCoupons/RemoveButton"), "RemoveCouponCode", "Cart", new { }, new { @class = "btn btn-danger btn-xs js-remove-couponcode" })
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="totals">
+                            <h3>@Html.Translate("/Cart/Labels/ShoppingCartTotal")</h3>
+                            <div class="inner">
+                                <table class="table shopping-cart-table-total" id="shopping-cart-totals-table">
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="1" class="a-left">
+                                                <strong>@Html.Translate("/Cart/Labels/Total")</strong>
+                                            </td>
+                                            <td class="a-right">
+                                                <strong>
+                                                    <span class="price">@Model.Total.ToString()</span>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="1" class="a-left">
+                                                @Html.Translate("/Cart/Labels/Subtotal")
+                                            </td>
+                                            <td class="a-right">
+                                                <span class="price">@Model.Subtotal.ToString()</span>
+                                            </td>
+                                        </tr>
+                                        @if (Model.TotalDiscount.Amount > 0)
+                                        {
+                                            <tr>
+                                                <td colspan="1" class="a-left">
+                                                    @Html.Translate("/Cart/Labels/DiscountsApplied")
+                                                </td>
+                                                <td class="a-right">
+                                                    <strong>-@Model.TotalDiscount.ToString()</strong>
+                                                </td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td colspan="1" class="a-left">
+                                                @Html.Translate("/Cart/Labels/TaxTotal")
+                                            </td>
+                                            <td class="a-right">
+                                                <span class="price">@Model.TaxTotal.ToString()</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="1" class="a-left">
+                                                @Html.Translate("/Cart/Labels/ShippingTotal")
+                                            </td>
+                                            <td class="a-right">
+                                                <span class="price">@Model.ShippingTotal.ToString()</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <ul class="checkout">
+                                    <li>
+                                        <button class="button btn-proceed-checkout" title="Proceed to Checkout" type="button" onclick="window.location.href = '@Url.ContentUrl(Model.CheckoutPage)'">
+                                            <span>
+                                                @Html.Translate("/Cart/Labels/Checkout")
+                                            </span>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <br>
+                                    </li>
+                                    <li>
+                                        <a title="Checkout with Multiple Addresses" href="@Url.ContentUrl(Model.MultiShipmentPage)">
+                                            @Html.Translate("/Cart/Labels/MultipleAddresses")
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <br>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.ShowRecommendations)
+                {
+                    <div class="slider-items-products">
+                        <div class="new_title center">
+                            <h2>@Html.Translate("/Shared/RecommendationsForYou")</h2>
+                        </div>
+                        @{ Html.RenderAction("Index", "Recommendations", new { recommendations = Model.Recommendations });}
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>

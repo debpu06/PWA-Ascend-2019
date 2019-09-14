@@ -1,0 +1,27 @@
+﻿@using EPiServer
+@using EPiServer.AddOns.Helpers
+@using EPiServer.Reference.Commerce.Site.Features.Blog.Models.Pages
+@model EPiServer.Reference.Commerce.Site.Features.Blog.Models.Blocks.BlogArchiveBlock
+
+<div class="popular-posts widget widget_categories" id="categories-2">
+    <h3 class="widget-title">@Html.Translate("/Blog/Archive")</h3>
+    @if (Model.BlogStart != null)
+    {
+        <ul>
+            @foreach (var year in DataFactory.Instance.GetChildren<BlogListPage>(Model.BlogStart))
+            {
+                <li>
+                    @Html.ContentLink(year)
+                    <ul>
+                        @foreach (var month in DataFactory.Instance.GetChildren<BlogListPage>(year.ContentLink))
+                        {
+                            <li>@Html.ContentLink(month)</li>
+                        }
+
+                    </ul>
+                </li>
+            }
+        </ul>
+    }
+    
+</div>

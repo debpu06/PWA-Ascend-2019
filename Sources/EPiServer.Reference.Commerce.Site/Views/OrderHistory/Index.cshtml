@@ -1,0 +1,78 @@
+﻿@using EPiServer.Commerce.Order
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.OrderHistory.ViewModels.OrderHistoryViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter container--gutter-inner">
+            <div class="col-xs-12 col-md-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="recent-orders">
+                    <div class="table-responsive">
+                        <table class="data-table" id="my-orders-table">
+                            <thead>
+                                <tr class="first last">
+                                    <th>@Html.Translate("/OrderHistory/Labels/OrderID")</th>
+                                    <th>@Html.Translate("/OrderHistory/Labels/OrderDate")</th>
+                                    <th>@Html.Translate("/OrderHistory/Labels/ShippedTo")</th>
+                                    <th><span class="nobr">@Html.Translate("/OrderHistory/Labels/TotalPrice")</span></th>
+                                    <th>@Html.Translate("/OrderHistory/Labels/Status")</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model.Orders)
+                                {
+                                    <tr>
+                                        <td><a href="@(Model.OrderDetailsPageUrl)?orderGroupId=@order.PurchaseOrder.OrderLink.OrderGroupId">#@order.PurchaseOrder.OrderNumber</a></td>
+
+                                        <td>@order.PurchaseOrder.Created.ToString()</td>
+                                        <td>
+                                            @foreach (var shippingAddress in order.ShippingAddresses)
+                                            {
+                                                @Html.Partial("_Address", shippingAddress)
+                                            }
+                                        </td>
+                                        <td><span class="price">@order.PurchaseOrder.GetTotal().ToString()</span></td>
+                                        <td><em>@order.PurchaseOrder.OrderStatus</em></td>
+                                        <td class="a-center">
+                                            @using (Html.BeginForm("Reorder", "Cart", FormMethod.Post, new { @class = "form-inline", data_container = "MiniCart" }))
+                                            {
+                                                @Html.Hidden("orderId", order.PurchaseOrder.OrderLink.OrderGroupId.ToString())
+                                                <button type="submit" role="button" class="btn btn-primary button--sm" data-container="MiniCart">
+                                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                    @Html.Translate("/OrderHistory/Labels/ReOrder")
+                                                </button>
+                                            }
+                                            
+                                        </td>
+                                        <td class="a-center last">
+                                            @using (Html.BeginForm("SaveAsPaymentPlan", "OrderHistory", FormMethod.Post, new { @class = "form-inline", data_container = "MiniCart" }))
+                                            {
+                                                @Html.Hidden("orderId", order.PurchaseOrder.OrderLink.OrderGroupId.ToString())
+                                                @Html.DropDownListFor(x => x.CycleMode, Model.Modes, new { @class="form-control"})
+                                                @Html.TextBoxFor(x => x.CycleLength, new { @class= "form-control", type="number"})
+                                                <button type="submit" role="button" class="btn btn-primary button--sm" data-container="MiniCart">
+                                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                    New Subscription
+                                                </button>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Link });
+            }
+        </div>
+    </div>
+</section>

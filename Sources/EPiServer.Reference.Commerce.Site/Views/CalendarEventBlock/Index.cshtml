@@ -1,0 +1,22 @@
+﻿@using EPiServer.Framework.Web.Resources
+@model CalendarEventBlockModel
+@Html.FullRefreshPropertiesMetaData(new[] { "ViewMode", "Root", "CategoryFilter", "Recursive" })
+@{
+    ClientResources.RequireStyle("/Assets/Base/fullcalendar/fullcalendar.min.css");
+    ClientResources.RequireScript("/Assets/Base/jquery/jquery.min.js");
+    ClientResources.RequireScript("/Assets/Base/Scripts/moment.min.js");
+    ClientResources.RequireScript("/Assets/Base/Scripts/fullcalendar.min.js");
+}
+<div class='calendar-block'></div>
+<script type="text/javascript">
+    var events = [
+        @foreach (var item in Model.Events)
+        {
+            @Html.Raw("{ title:'" + @item.Name + "', start:'" + @item.GetPropertyValue("StartDate") + "', end:'" + @item.GetPropertyValue("EndDate") + "', url:'" + @item.LinkURL + "' },")
+        }
+    ];
+    $('div[class="calendar-block"][class!="fc"]').fullCalendar({
+        defaultView: '@Model.ViewMode',
+        events: events
+    });
+</script>   

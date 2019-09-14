@@ -1,0 +1,15 @@
+﻿
+@model EPiServer.Reference.Commerce.Site.Features.ErrorHandling.ViewModels.ErrorViewModel
+<section class="content-wrapper">
+    <div class="container">
+        <div class="std">
+            <div class="page-not-found">
+                <h2>404</h2>
+                <h3><img src="/Assets/Mosey/Images/signal.png" alt="error image">@Html.PropertyFor(model => model.CurrentContent.MainBody)</h3>
+                <div><a href="/" class="btn-home"><span>@Html.Translate("/Error/BackToHome")</span></a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

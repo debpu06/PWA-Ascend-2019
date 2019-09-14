@@ -1,0 +1,145 @@
+﻿.btn {
+    border-radius: 3px;
+
+
+    &.btn-default {
+        color: @brand-red;
+        background-color: transparent;
+        border-color: #eee;
+        border-width: 2px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 12px;
+        padding: 9px 12px 8px 12px;
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: #f2f2f2;
+            box-shadow: none;
+        }
+
+        &.active {
+            background: #f2f2f2;
+            box-shadow: none;
+        }
+    }
+
+    &.btn-primary {
+        background: #111;
+        border-color: #111;
+        transition: .1s ease background;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 9px 12px 8px 12px;
+
+        &:hover,
+        &:active,
+        &:focus {
+            box-shadow: none;
+            background: #333;
+        }
+    }
+
+    &.btn-cart,
+    &.btn-favorites {
+        position: static;
+        border-radius: 0;
+        padding: 0;
+        border: none;
+        padding: 13px 16px 12px 16px;
+        box-shadow: none;
+        margin: 0;
+        background: transparent;
+        transition: .1s ease all;
+        text-transform: uppercase;
+        font-weight: bold;
+
+        &:hover {
+            background: #444;
+        }
+    }
+
+    &.btn-favorites {
+    }
+
+    &.btn-danger {
+        &.btn-empty {
+            background: transparent;
+            border-color: @brand-red;
+            color: @brand-red;
+            transition: .1s ease all;
+            border-width: 2px;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 9px 12px 8px 12px;
+            text-transform: uppercase;
+
+            &:hover,
+            &:active,
+            &:focus {
+                background: @brand-red;
+                color: #fff;
+            }
+        }
+    }
+
+    &.btn-sm {
+        padding: 5px 10px;
+    }
+
+    &.btn-xs {
+        padding: 1px 5px;
+    }
+}
+
+.input-group-btn {
+    .btn-default {
+        border-width: 1px;
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+.close-icon {
+    display: inline-block;
+    background: transparent;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.15s linear;
+    vertical-align: middle;
+    margin-left: 3px;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 4px;
+        right: 0;
+        background-color: #c9302c;
+        left: 0;
+        margin: 0 auto;
+        margin-top: -2px;
+        top: 50%;
+    }
+
+    &::before {
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        transform: rotate(-45deg);
+    }
+}
+
+.delete-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(calc(-50%));
+    margin-top: -7.5px;
+}

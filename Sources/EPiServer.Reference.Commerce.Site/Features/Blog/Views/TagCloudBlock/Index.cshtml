@@ -1,0 +1,16 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.Blog.Models.ViewModels
+@using EPiServer.Web.Mvc.Html
+@model TagCloudModel
+
+<div class="popular-posts widget widget_categories" id="categories-2">
+    <h3 class="widget-title" @Html.EditAttributes(x => x.Heading)>
+        @Html.DisplayFor(x => x.Heading)
+    </h3>
+    <ul>
+        @foreach (var tag in Model.Tags)
+        {
+            <li class="cat-item cat-item-19599"><a href="@tag.Url">@tag.Title (@tag.Count)</a></li>
+        }
+    </ul>
+</div>

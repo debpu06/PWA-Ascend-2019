@@ -1,0 +1,7 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Tracking.Models.TrackingEventBlock
+@{ 
+    string display = string.Format("{0} - {1} - {2} - {3}", Model.DateAndTime.ToShortDateString(), Model.DateAndTime.ToShortTimeString(), Model.EventType, Model.Description);
+
+}
+<div> @display </div>
+

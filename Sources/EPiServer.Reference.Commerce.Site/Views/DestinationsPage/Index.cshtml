@@ -1,0 +1,102 @@
+﻿@using EPiServer
+@using EPiServer.Core
+@using EPiServer.Find
+@using EPiServer.Framework.Web.Resources
+@using EPiServer.Reference.Commerce.Site.Extensions
+@using EPiServer.Reference.Commerce.Site.Features.Destinations.Models
+
+@model DestinationsViewModel
+
+@{
+    <script type="text/javascript">
+        if (typeof (google) == "undefined") {
+            @{
+                ClientResources.RequireScript("//maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyACr-GvqhpGTWmJbYFmuVsQ8fnffYAwGEk&libraries=places").AtFooter();
+            }
+        }
+    </script>
+    ClientResources.RequireScript(Href("/Assets/Base/Scripts/jsuri-1.1.1.min.js")).AtFooter();
+    ClientResources.RequireScript(Href("/Assets/Base/bootstrap-slider/bootstrap-slider.js")).AtFooter();
+    ClientResources.RequireScript(Href("/Assets/Base/Scripts/Features/Selective/DestinationsPage.js")).AtFooter();
+}
+
+@section Top
+{
+    <div class="hidden-xs hidden-sm margin-bottom">
+        <div id="destinations-map" class="map"
+                data-mapcenter-lat="@Model.MapCenter.Latitude"
+                data-mapcenter-lon="@Model.MapCenter.Longitude">
+        </div>
+    </div>
+}
+<section class="main-container col2-right-layout wow bounceInUp animated">
+    <div class="main container">
+        <div class="row container--gutter-layout margin-top-md">
+            <div class="col-md-3">
+                <div class="block animated fadeInDown animation-delay-12">
+                    <div class="portfolio-menu">
+                        <h3>@Html.Translate("/common/filters")</h3>
+                        @if (Model.CurrentContent.FilterArea != null)
+                        {
+                            foreach (var item in Model.CurrentContent.FilterArea.FilteredItems)
+                            {
+                                var b = DataFactory.Instance.Get<BlockData>(item.ContentLink) as IFilterBlock;
+                                if (b != null)
+                                {
+                                    @Html.Partial(b.GetOriginalType().Name, Model)
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div id="destinations">
+                    @foreach (var destination in Model.Destinations)
+                    {
+                        <article class="post animated fadeInRight animation-delay-8 destination"
+                                 data-maplat="@destination.Latitude" data-maplon="@destination.Longitude"
+                                 data-mapname="@destination.PageName" data-mapurl="@destination.LinkURL">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h3 class="post-title"><a href="@Url.ContentUrl(destination.ContentLink)" class="transicion">@destination.Name</a></h3>
+                                    <div class="row container--gutter-inner">
+                                        <div class="col-lg-5">
+                                            <img src="@Url.ImageExternalUrl(destination.Image, "Medium")" class="img-post img-responsive" alt="@destination.Name">
+                                        </div>
+                                        <div class="col-lg-7 post-content">
+                                            @destination.MainIntro
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer post-info-b">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-9 col-xs-8">
+                                            <i class="fa fa-globe"></i> @destination.Continent / @destination.Country
+                                        </div>
+                                        <div class="col-lg-2 col-md-3 col-xs-4">
+                                            <a href="@Url.ContentUrl(destination.ContentLink)" class="pull-right">@Html.Translate("/common/readmore")</a>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            @if (destination.Tags != null)
+                                            {
+                                                <i class="fa fa-tags"></i>
+                                                foreach (var tag in destination.Tags.FilteredItems)
+                                                {
+                                                    <span data-epi-block-id="@tag.ContentLink.ToString()">
+                                                        <a href="@Url.ContentUrl(tag.ContentLink)"><span class="badge badge-round">@tag.GetContent().Name</span></a>
+                                                    </span>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,82 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Social.ViewModels.ReviewSubmissionViewModel
+<div class="box-reviews1">
+    <div class="form-add">
+        @using (Html.BeginForm("AddAReview", "Product", FormMethod.Post))
+        {
+            <h3>@Html.Translate("/Reviews/WrtieYorOwn")</h3>
+            <fieldset>
+                @Html.ValidationSummary()
+                @Html.HiddenFor(m => m.ProductCode) 
+                <h4> @Html.Translate("/Reviews/HowRate")<em class="required">*</em></h4>
+                <span id="input-message-box"></span>
+                <table id="product-review-table" class="data-table">
+                    <thead>
+                    <tr class="first last">
+                        <th>&nbsp;</th>
+                        <th><span class="nobr">1 *</span></th>
+                        <th><span class="nobr">2 *</span></th>
+                        <th><span class="nobr">3 *</span></th>
+                        <th><span class="nobr">4 *</span></th>
+                        <th><span class="nobr">5 *</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="first odd">
+                        <th>@Html.Translate("/Reviews/Rating")</th>
+                        <td class="value">
+                            @Html.RadioButtonFor(x => x.Rating, 1, new { @class = "radio" })
+                        </td>
+                        <td class="value">
+                            @Html.RadioButtonFor(x => x.Rating, 2, new { @class = "radio" })
+                        </td>
+                        <td class="value">
+                            @Html.RadioButtonFor(x => x.Rating, 3, new { @class = "radio" })
+                        </td>
+                        <td class="value">
+                            @Html.RadioButtonFor(x => x.Rating, 4, new { @class = "radio" })
+                        </td>
+                        <td class="value">
+                            @Html.RadioButtonFor(x => x.Rating, 5, new { @class = "radio" })
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="review1">
+                    <ul class="form-list">
+                        <li>
+                            <label class="required" for="nickname_field">@Html.Translate("/Reviews/Nickname")<em>*</em></label>
+                            <div>
+                                @Html.TextBoxFor(m => m.Nickname, new { @class = "input-text", placeholder = "Example: abby2012" })
+                            </div>
+                        </li>
+                        <li>
+                            <label class="required" for="Title">@Html.Translate("/Shared/Title")<em>*</em></label>
+                            <div>
+                                @Html.TextBoxFor(m => m.Title, new {@class = "input-text", placeholder = "Great product!"})
+                            </div>
+                        </li>
+                        <li>
+                            <label class="required" for="Location">@Html.Translate("/Shared/Location")<em>*</em></label>
+                            <div>
+                                @Html.TextBoxFor(m => m.Location, new { @class = "input-text", placeholder = "Example: Las Vegas, NV" })
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="review2">
+                    <ul>
+                        <li>
+                            <label class="required " for="Body">@Html.Translate("/Reviews/Review")<em>*</em></label>
+                            <div class="input-box">
+                                @Html.TextAreaFor(m => m.Body, new { @class = "input-text", placeholder = "Example: I love this product. I will recommend it to all of my friends...", rows=8 })
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="buttons-set">
+                        <button class="button submit" title="Submit Review" type="submit"><span>@Html.Translate("/Reviews/SubmitReview")</span></button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>

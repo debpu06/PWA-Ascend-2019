@@ -1,0 +1,19 @@
+@using EPiServer.Reference.Commerce.Site.Features.Alloy.Models.Pages
+@using EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels
+@using EPiBootstrapArea
+@using EPiServer.Editor;
+@model ContentViewModel<LandingPage>
+
+<section class="main-container">
+    <div class="container">
+        @if ((Model.CurrentContent.MainBody != null && !Model.CurrentContent.MainBody.IsEmpty) || PageEditing.PageIsInEditMode)
+        {
+            <div class="row">
+                @Html.PropertyFor(m => m.CurrentContent.MainBody)
+            </div>
+        }
+        <div class="row">
+            @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row equal-height", tag = ContentAreaTags.FullWidth })
+        </div>
+    </div>
+</section>

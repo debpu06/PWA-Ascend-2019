@@ -1,0 +1,19 @@
+﻿@using EPiServer.SpecializedProperties
+
+@model LinkItemCollection
+
+@foreach (var linkItem in Model ?? Enumerable.Empty<LinkItem>())
+{
+    {
+        var Css = "";
+        if (linkItem.Attributes.ContainsKey("css"))
+        {
+            Css = linkItem.Attributes["css"];
+        }
+        <div>
+            <a title="@linkItem.Title" href="@Url.ContentUrl(new EPiServer.Url(linkItem.Href))">
+                <span>@linkItem.Text</span>
+            </a>
+        </div>
+    }
+}

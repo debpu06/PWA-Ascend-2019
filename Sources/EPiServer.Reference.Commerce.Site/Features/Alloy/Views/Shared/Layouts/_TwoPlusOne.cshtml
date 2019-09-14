@@ -1,0 +1,24 @@
+@using EPiBootstrapArea
+@using EPiServer.Reference.Commerce.Site.Features.Alloy.Models.Pages
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Shared.SitePageData>
+@{ Layout = Model.Layout.MasterName; }
+
+@{Html.RenderPartial("~/Features/Alloy/Views/Shared/Breadcrumbs.cshtml");}
+
+<div class="row">
+
+    <div class="col-sm-12 col-md-8">
+        @RenderBody()
+    </div>
+
+    <div class="col-sm-12 col-md-4">
+        @if (IsSectionDefined("RelatedContent"))
+        {
+            @RenderSection("RelatedContent")
+       }
+        else if (Model.CurrentContent is IHasRelatedContent)
+        {
+            @Html.PropertyFor(x => ((IHasRelatedContent)x.CurrentContent).RelatedContentArea, new { CssClass = "row", Tag = ContentAreaTags.OneThirdWidth })
+       }
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Alloy.ViewModels.AlloyProfilePageViewModel
+<div class="row">
+    <div class="col-sm-12 col-md-4">
+        <div class="row">
+            <div>
+                @Html.PropertyFor(m => m.CurrentContent.ProfileHeader)
+            </div>
+            <hr />
+            <div>
+                @using (Html.BeginForm("Save", "AlloyProfilePage"))
+                {
+                    <h4>First Name</h4>
+                    @Html.EditorFor(m => m.Profile.FirstName)
+
+                    <h4>Last Name</h4>
+                    @Html.EditorFor(m => m.Profile.LastName)
+
+                    <h4>Title</h4>
+                    @Html.EditorFor(m => m.Profile.Title)
+
+                    <h4>Email</h4>
+                    @Html.EditorFor(m => m.Profile.Email)
+
+                    <h4>Company</h4>
+                    @Html.EditorFor(m => m.Profile.Company)
+
+
+                    <input type="submit" value="Save Your Profile" class="btn btn-blue" />
+
+                }
+            </div>
+            <div>
+                @Html.PropertyFor(m => m.CurrentContent.LeftHandContentArea)
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div>
+            @Html.PropertyFor(m => m.CurrentContent.MainBody)
+        </div>
+        <br />
+        <div>
+            @Html.PropertyFor(m => m.CurrentContent.MainContentArea)
+        </div>
+    </div>
+</div>

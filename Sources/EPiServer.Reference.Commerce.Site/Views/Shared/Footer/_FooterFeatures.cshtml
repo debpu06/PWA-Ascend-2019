@@ -1,0 +1,11 @@
+﻿
+@model EPiServer.Reference.Commerce.Site.Features.Shared.Models.BaseStartPage
+
+@if (Model.BottomFeatureBox != null && Model.BottomFeatureBox.FilteredItems != null && Model.BottomFeatureBox.FilteredItems.Any())
+{
+    <div class="our-features-box">
+        <div class="container">
+            @Html.PropertyFor(x => x.BottomFeatureBox)
+        </div>
+    </div>
+}

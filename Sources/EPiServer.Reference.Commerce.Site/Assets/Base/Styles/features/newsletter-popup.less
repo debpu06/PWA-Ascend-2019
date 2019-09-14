@@ -1,0 +1,170 @@
+﻿/*================= 22. Newsletter Popup =================*/
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block !important;
+    height: 100%;
+    background-color: #000;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+    z-index: 1000;
+    display: none;
+}
+
+.popup1 {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    z-index: 101;
+}
+
+    .popup1 .newsletter {
+        width: 420px;
+    }
+
+.newsletter-sign-box {
+    border-radius: 0;
+    margin: auto;
+    min-height: 150px;
+    min-width: 450px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10000;
+    background: #fff;
+    padding: 40px;
+    border-bottom: 8px @color-primary solid;
+}
+
+.popup1 .x {
+    position: absolute;
+    right: 45%;
+    top: -105px;
+    z-index: 10000;
+}
+
+    .popup1 .x:hover {
+        cursor: pointer;
+    }
+
+.newsletter-sign-box h3 {
+    color: @color-primary;
+    font-family: @font-secondary;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: #ddd double;
+    padding-bottom: 15px;
+    letter-spacing: 1px
+}
+
+.newsletter-sign-box h4 {
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 35px;
+    text-align: center;
+    color: #666;
+    text-transform: none;
+    margin-top: 15px
+}
+
+.newsletter-sign-box .input-box {
+    margin-bottom: 15px;
+}
+
+    .newsletter-sign-box .input-box input {
+        display: inline-block;
+        margin: 0px;
+        margin-right: 0px;
+        padding: 10px;
+        width: 280px;
+        border: 2px solid #ddd;
+    }
+
+.newsletter-sign-box .subscribe {
+    background: none repeat scroll 0 0 @color-primary;
+    border-radius: 0;
+    color: #FFFFFF;
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 13px;
+    margin-bottom: 20px;
+    padding: 14px 20px !important;
+    border: none !important;
+}
+
+    .newsletter-sign-box .subscribe:hover {
+        background: none repeat scroll 0 0 #000000;
+        border-radius: 0;
+        color: #FFFFFF;
+        display: inline-block;
+        float: right;
+        font-size: 12px;
+        letter-spacing: 1px;
+        line-height: 13px;
+        margin-bottom: 20px;
+        padding: 14px 20px !important;
+        border: none !important;
+    }
+
+.newsletter-sign-box button.button span {
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.newsletter-sign-box .subscribe-bottom {
+    color: #666;
+    font-size: 12px;
+    line-height: 3px !important;
+    margin-top: 30px;
+    text-align: center;
+    display: block;
+}
+
+    .newsletter-sign-box .subscribe-bottom input {
+        margin: 0px 8px 0 0;
+        vertical-align: middle;
+    }
+
+#formSuccess1 {
+    font-size: 18px;
+    padding: 48px 0;
+    text-align: center;
+    display: none;
+}
+
+#formSuccess {
+    font-size: 18px;
+    padding: 48px 0;
+    text-align: center;
+}
+
+.popup1 .newsletter .validation-advice {
+    padding-left: 10px;
+    padding-top: 5px;
+    position: absolute;
+}
+
+#loader1 {
+    display: none;
+    margin-left: 120px;
+    margin-top: 10px;
+}
+
+.popup1 .line {
+    background: #ddd;
+    height: 5px;
+    width: 100px;
+    margin: auto;
+    margin-bottom: 20px
+}

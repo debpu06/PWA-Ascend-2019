@@ -1,0 +1,17 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.CheckoutMethodViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+<section class="main-container col1-layout" id="CheckoutView">
+    <div class="main container">
+        <div class="col-main">
+            <h2>@Html.Translate("/Checkout/EmptyCart")</h2>
+        </div>
+       
+    </div>
+</section>
+
+

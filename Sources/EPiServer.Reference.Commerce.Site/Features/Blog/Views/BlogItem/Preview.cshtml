@@ -1,0 +1,53 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.AddOns.Helpers
+@using EPiServer.Core
+@using EPiServer.Editor
+@using EPiServer.Web.Mvc.Html
+@model EPiServer.Reference.Commerce.Site.Features.Blog.Models.ViewModels.BlogItemPageModel
+
+<article class="blog_entry clearfix">
+    <header class="blog_entry-header clearfix">
+        <div class="blog_entry-header-inner">
+            <h3 class="blog_entry-title">
+                @Html.ContentLink(Model.CurrentContent, new {}, new { rel = "bookmark" })
+            </h3>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="featured-thumb">
+            <a href="@Model.CurrentContent.ContentLink.GetPublicUrl()">
+                @if (!ContentReference.IsNullOrEmpty(Model.CurrentContent.PageImage))
+                {
+                    <img alt="Blog Image" src="@Url.ContentUrl(Model.CurrentContent.PageImage)"/>
+                }
+                else
+                {
+                    <img alt="Blog Image" src="/Assets/Mosey/images/blog-img1.jpg">
+                }
+            </a>
+        </div>
+        <div class="entry-content">
+            <p>@Model.PreviewText</p>
+        </div>
+        <p>
+            <a class="btn" href="@Model.CurrentContent.ContentLink.GetPublicUrl()">
+                @Html.Translate("/Blog/ReadMore")
+            </a>
+        </p>
+    </div>
+    <footer class="entry-meta">
+        @Html.Translate("/Blog/Posted")
+        <time datetime="@Model.StartPublish.ToString(Model.CurrentContent.Language)" class="entry-date">@Model.StartPublish.ToString(Model.CurrentContent.Language)</time>
+
+        @if (Model.Tags.Any())
+        {
+            @Html.Raw(" with the following tags ")
+            foreach (var tag in Model.Tags)
+            {
+                <a rel="category tag" title="@tag.DisplayName" href="@tag.Url">
+                    @tag.DisplayName
+                </a>
+            }
+        }
+    </footer>
+</article>

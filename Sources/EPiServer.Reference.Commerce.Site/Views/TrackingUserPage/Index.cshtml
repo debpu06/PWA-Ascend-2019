@@ -1,0 +1,70 @@
+﻿@using EPiServer.Web.Routing
+@model EPiServer.Reference.Commerce.Site.Features.TrackingBuilder.ViewModels.TrackingUserPageViewModel
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="hidable-Section">
+            <H2>Explanation:</H2>
+            <p>This page will:</p>
+            <ul>
+                <li>Create a CMS and Commerce user that will be added to the CMS users (if not already existing). </li>
+                <li>Create the user in Profile Store and store the deviceId</li>
+                <li>Add that user to the quick login dropdown for easy access</li>
+            </ul>
+            <p>The user is only added if they don't already exist. The new user is assigned no permissions (just for viewing, demonstrating tracking).</p>
+            <p>The user password is set to Episerver1!</p>
+            <p>The user is also added to the start page only if they aren't already there. If the user exists in Profile Store, the first user with the username is used and their deviceId is retrieved to ensure correct tracking</p>
+            <p style="color:red;">Warning: This process will update and publish the home page.</p>
+            <p>Directions:</p>
+            <ol>
+                <li>As an Admin, add user here</li>
+                @if (String.IsNullOrEmpty(@Model.TrackingPageUrl))
+                {
+                    <li>Navigate to the tracking injection page to add tracking events</li>
+                }
+                else
+                {
+                    <li>Navigate to <strong><a href="@Model.TrackingPageUrl">this page</a></strong> to add tracking events</li>
+                }
+            </ol>
+        </div>
+        @using (Html.BeginForm("SetupUser", "TrackingUserPage", FormMethod.Post))
+        {
+        <div class="row">
+            <div class="col-sm-1">
+                <div>User Id: </div>
+            </div>
+            <div class="col-sm-11">
+                @Html.TextBoxFor(x => x.UserName)
+            </div>
+            <div class="col-sm-1">
+                <div>First Name:</div>
+            </div>
+            <div class="col-sm-11">
+                @Html.TextBoxFor(x => x.FirstName)
+            </div>
+            <div class="col-sm-1">
+                <div>Last Name: </div>
+            </div>
+            <div class="col-sm-11">
+                @Html.TextBoxFor(x => x.LastName)
+            </div>
+            <div class="col-sm-1">
+                <div>Description: </div>
+            </div>
+            <div class="col-sm-11">
+                @Html.TextBoxFor(x => x.Description)
+            </div>
+        </div>
+
+            if (Model.IsUserAdmin)
+            {
+                <button type="submit" class="btn btn-primary btn--blue">Add/Create User</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary btn--blue" disabled="disabled">Add/Create User</button>
+                <span style="color:red;">User must be admin to add user</span>
+            }
+        }
+</section>
+

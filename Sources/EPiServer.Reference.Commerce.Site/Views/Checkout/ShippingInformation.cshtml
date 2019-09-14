@@ -1,0 +1,206 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.CheckoutViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+
+<section class="main-container col2-layout" id="shippingInformationView">
+    <div class="main container container--gutter margin-bottom-lg">
+        <div class="col-main">
+            @Html.Partial("_CheckoutStatusBar", 3)
+        </div>
+
+        <div class="col-main">
+            @using (Html.BeginForm("UpdateShippingMethods", "Checkout", FormMethod.Post))
+            {
+                for (var shipmentIndex = 1; shipmentIndex <= Model.Shipments.Count(); shipmentIndex++)
+                {
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.AddressId)
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.Name)
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.FirstName)
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.LastName)
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.PostalCode)
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.City)
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.CountryCode)
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.CountryRegion.Region)
+                    @Html.HiddenFor(model => model.Shipments[shipmentIndex - 1].Address.Line1)
+                    <div class="row container--gutter-inner">
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h1 class="heading-title">@Html.Translate("/Checkout/Shipment/Labels/Shipment") @shipmentIndex @Html.Translate("/Checkout/Shipment/Labels/Of") @Model.Shipments.Count()</h1>
+                                    <address>
+                                        <strong>
+                                            @Html.Translate("/Shipment/ShippingTo")
+                                        </strong>
+                                        @string.Format("{0}, {1}, {2}, {3}", Model.Shipments[shipmentIndex - 1].Address.Line1,
+                                            Model.Shipments[shipmentIndex - 1].Address.City,
+                                            Model.Shipments[shipmentIndex - 1].Address.CountryRegion.Region,
+                                            Model.Shipments[shipmentIndex - 1].Address.PostalCode)
+                                    </address>
+                                </div>
+                            </div>
+                            @if (Request.Browser.IsMobileDevice)
+                            {
+                                <div class="row" id="shopping-cart-mobile">
+                                    <div class="col-sm-12">
+                                        <ul class="list-group cart-product-mobile">
+                                            <li class="list-group-item active">
+                                                <span class="nobr product-label">@Html.Translate("/Cart/Labels/Product")</span>
+                                            </li>
+                                            @foreach (var cartItem in Model.Shipments[shipmentIndex - 1].CartItems)
+                                            {
+                                                <li class="list-group-item">
+                                                    <div class="row">
+                                                        <div class="col-xs-4" style="padding: 0 5px;">
+                                                            <a class="product-image" href="@cartItem.Url"><img src="@cartItem.ImageUrl" alt="@cartItem.Code" class="img-responsive product-image" width="75" /></a>
+                                                        </div>
+                                                        <div class="col-xs-8" style="padding: 0 5px;">
+                                                            <a href="@cartItem.Url">@cartItem.DisplayName</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-3" style="padding: 0 5px;">
+                                                            <span class="nobr product-detail-label">@Html.Translate("/ProductPage/Size")</span>
+                                                        </div>
+                                                        <div class="col-xs-3" style="padding: 0 5px;">
+                                                            <span class="nobr product-detail-label">@Html.Translate("/Cart/Labels/UnitPrice")</span>
+                                                        </div>
+                                                        <div class="col-xs-3" style="padding: 0 5px;">
+                                                            <span class="nobr product-detail-label">@Html.Translate("/Cart/Labels/Quantity")</span>
+                                                        </div>
+                                                        <div class="col-xs-3" style="padding: 0 5px;">
+                                                            <span class="nobr product-detail-label">@Html.Translate("/Cart/Labels/Subtotal")</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-3" style="padding: 0 5px;">
+                                                            @Helpers.RenderSize(cartItem.Entry)
+                                                        </div>
+                                                        <div class="col-xs-3" style="padding: 0 5px;">
+                                                            @if (cartItem.DiscountedUnitPrice.HasValue)
+                                                            {
+                                                                <span class="price product-price product-price-has-discount">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                                <span class="product-price product-price--discount xs-vertical-margin">@cartItem.DiscountedUnitPrice.ToString()</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="price">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                            }
+                                                        </div>
+                                                        <div class="col-xs-3" style="padding: 0 5px;">
+                                                            @cartItem.Quantity.ToString("0")
+                                                        </div>
+                                                        <div class="col-xs-3" style="padding: 0 5px;">
+                                                            <span class="cart-price">
+                                                                <span class="price">@cartItem.DiscountedPrice.ToString()</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="table-responsive">
+                                    <fieldset>
+                                        <table class="data-table cart-table" id="shopping-cart-table">
+                                            <thead>
+                                                <tr class="first last">
+                                                    <th rowspan="1">&nbsp;</th>
+                                                    <th rowspan="1">
+                                                        <span class="nobr">@Html.Translate("/Cart/Labels/Product")</span>
+                                                    </th>
+                                                    <th rowspan="1">
+                                                        <span class="nobr">@Html.Translate("/ProductPage/Size")</span>
+                                                    </th>
+                                                    <th colspan="1" class="a-center">
+                                                        <span class="nobr">@Html.Translate("/Cart/Labels/UnitPrice")</span>
+                                                    </th>
+                                                    <th class="a-center " rowspan="1">@Html.Translate("/Cart/Labels/Quantity")</th>
+                                                    <th colspan="1" class="a-center">@Html.Translate("/Cart/Labels/Subtotal")</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var cartItem in Model.Shipments[shipmentIndex - 1].CartItems)
+                                                {
+                                                    <tr class="first odd">
+                                                        <td class="image">
+                                                            <a class="product-image" href="@cartItem.Url"><img src="@cartItem.ImageUrl" alt="@cartItem.Code" class="img-responsive product-image" width="75" /></a>
+                                                        </td>
+                                                        <td>
+                                                            <h2 class="product-name">
+                                                                <a href="@cartItem.Url">@cartItem.DisplayName</a>
+                                                            </h2>
+                                                        </td>
+                                                        <td class="a-center">
+                                                            @Helpers.RenderSize(cartItem.Entry)
+                                                        </td>
+                                                        <td class="a-center">
+                                                            <span class="cart-price">
+                                                                @if (cartItem.DiscountedUnitPrice.HasValue)
+                                                                {
+                                                                    <span class="price product-price product-price-has-discount">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                                    <span class="product-price product-price--discount xs-vertical-margin">@cartItem.DiscountedUnitPrice.ToString()</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="price">@Helpers.RenderMoney(cartItem.PlacedPrice)</span>
+                                                                }
+                                                            </span>
+                                                        </td>
+                                                        <td class="a-center">
+                                                            @cartItem.Quantity.ToString("0")
+                                                        </td>
+                                                        <td class="a-center movewishlist">
+                                                            <span class="cart-price">
+                                                                <span class="price">@cartItem.DiscountedPrice.ToString()</span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </fieldset>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <h2>&nbsp;</h2>
+                            <strong>@Html.Translate("/Checkout/MultiShipment/DeliveryOption")</strong><br />
+                            @foreach (var shippingMethodViewModel in Model.Shipments[shipmentIndex - 1].ShippingMethods)
+                            {
+                                <div class="radio">
+                                    <label>
+                                        @Html.RadioButtonFor(model => Model.Shipments[shipmentIndex - 1].ShippingMethodId, shippingMethodViewModel.Id, new { @id = shippingMethodViewModel.Id, @class = "jsChangeShipment" })
+                                        @shippingMethodViewModel.DisplayName
+                                        @shippingMethodViewModel.Price.ToString()
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                <div class="row margin-top-md">
+                    <div class="col-xs-12 pull-left">
+                        <a class="button-light back margin-right-sm float-left" href="@Url.Action("SingleShipment", new { node = Model.CurrentContent.ContentLink })" title=@Html.Translate("/Shared/Back")>
+                            <span>
+                                @Html.Translate("/Shared/Back")
+                            </span>
+                        </a>
+                        <button class="button-dark continue" type="submit">
+                            <span>
+                                <span>@Html.Translate("/Shared/Continue")</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,39 @@
+﻿@using EPiServer.Reference.Commerce.Site.Extensions
+@model EPiServer.Reference.Commerce.Site.Features.Destinations.Models.CarouselViewModel
+
+<section class="carousel-section">
+    <div id="carousel-example-generic" class="carousel carousel-images slide" data-ride="carousel" data-interval="5000">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            @for (int i = 0; i < Model.Items.Count; i++)
+            {
+                <li data-target="#carousel-example-generic" data-slide-to="@i" class="@(i == 0 ? "active" : "")"></li>
+            }
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            @foreach (var item in Model.Items.Select((value, i) => new { i, value }))
+            {
+                <div class="@(item.i == 0 ? "item active" : "item")">
+                    <img src="@Url.ImageExternalUrl(item.value.Image, "Large")"/>
+                    @if (!string.IsNullOrWhiteSpace(item.value.Title))
+                    {
+                        <div class="carousel-caption animated fadeInUpBig">
+                            <h3>@item.value.Title</h3>
+                        </div>
+                    }
+                </div>
+                
+            }
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</section> <!-- carousel -->

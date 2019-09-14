@@ -1,0 +1,5 @@
+@model IBlockViewModel<SiteLogotypeBlock>
+
+<div style="@Model.CurrentBlock.PaddingStyles">
+    <img src="@Url.ContentUrl(Model.CurrentBlock.Url)" />
+</div>

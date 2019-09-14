@@ -1,0 +1,45 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Shell.Navigation
+@inherits WebViewPage
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+
+<head>
+    <title>Comments Manager</title>
+</head>
+<div class="container comment-container">
+    <div class="comment-header row">
+        <h4><span class="glyphicon glyphicon-comment"></span> Comments Manager</h4>
+    </div>
+    <hr />
+    <div class="comment-counter">
+        <div class="comment-numberOfItems-wrapper" id="commentItemCount">
+            <span>
+                <span class="comment-numberOfItems">0</span> of <span class="comment-total">0</span>
+            </span>
+        </div>
+    </div>
+    <hr />
+    <div class="content-info row">
+        <div class="table-content-info">
+        </div>
+    </div>
+    <div class="content-footer row">
+        <button class="comment-show-more">
+            <span>Show more</span>
+        </button>
+    </div>
+    <button class="btn-loading">
+        <i class="fa fa-spinner fa-spin"></i> Loading
+    </button>
+</div>
+
+@section AdditionalScripts
+{
+    <script type="text/javascript" src="~/Assets/Base/Scripts/Features/Selective/CommentManager.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            CommentManager.init();
+        });
+    </script>
+}

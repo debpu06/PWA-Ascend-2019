@@ -1,0 +1,299 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Social.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.Product.ViewModels.FashionBundleViewModel
+@{
+    var activeReviewTab = Request.QueryString["leavecomment"] != null;
+}
+<section class="main-container col1-layout">
+    <div class="main container">
+        <div class="col-main">
+            <div class="row">
+                <div class="product-view">
+                    <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div>
+                    <div class="product-essential container--gutter-inner">
+                        <div class="product-img-box col-sm-5 col-xs-12">
+                            @if (Model.CurrentContent.NewArrival)
+                            {
+                                <div class="new-label new-top-left"> @Html.Translate("/Shared/New") </div>
+                            }
+                            @if (Model.CurrentContent.OnSale)
+                            {
+                                <div class="sale-label">@Html.Translate("/Shared/Sale")</div>
+                            }
+
+                            <div class="product-image">
+                                <div class="large-image">
+                                    @if (Model.Images.Any())
+                                    {
+                                        <a href="@Model.Images.First()" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20">
+                                            <img src="@Model.Images.First()" alt="">
+                                        </a>
+                                    }
+
+                                </div>
+                                <div class="flexslider flexslider-thumb">
+                                    <ul class="previews-list slides">
+                                        @foreach (var image in Model.Images)
+                                        {
+                                            <li>
+                                                <a href='@image' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '@image' ">
+                                                    <img src="@image" alt="" />
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="product-shop col-sm-7 col-xs-12">
+
+                            <div class="product-name">
+                                <h1>@Model.CurrentContent.DisplayName</h1>
+                            </div>
+                            <p>
+                                <strong>@Html.Translate("/Shared/Package"):</strong> @Html.PropertyFor(x => x.CurrentContent.Code)
+                            </p>
+                            <div class="ratings">
+                                <div class="rating-box">
+                                    @if (Model.Reviews.Statistics == null || Model.Reviews.Statistics.OverallRating < 1)
+                                    {
+                                        <div class="rating"></div>
+                                    }
+                                    else if (Model.Reviews.Statistics.OverallRating >= 1 && Model.Reviews.Statistics.OverallRating < 2)
+                                    {
+                                        <div class="rating rating-1-star"></div>
+                                    }
+                                    else if (Model.Reviews.Statistics.OverallRating >= 2 && Model.Reviews.Statistics.OverallRating < 3)
+                                    {
+                                        <div class="rating rating-2-star"></div>
+                                    }
+                                    else if (Model.Reviews.Statistics.OverallRating >= 3 && Model.Reviews.Statistics.OverallRating < 4)
+                                    {
+                                        <div class="rating rating-3-star"></div>
+                                    }
+                                    else if (Model.Reviews.Statistics.OverallRating >= 4 && Model.Reviews.Statistics.OverallRating < 4.5)
+                                    {
+                                        <div class="rating rating-4-star"></div>
+                                    }
+                                    else if (Model.Reviews.Statistics.OverallRating >= 4.5)
+                                    {
+                                        <div class="rating rating-5-star"></div>
+                                    }
+                                </div>
+                                <p class="rating-links">
+                                    <a href="#reviews_tabs" data-toggle="tab">
+                                        @(Model.Reviews.Reviews == null ? 0 : Model.Reviews.Reviews.Count()) @Html.Translate("/Shared/Reviews")
+                                    </a>
+                                    <span class="separator">|</span>
+                                    <a href="#reviews_tabs" data-toggle="tab">
+                                        @Html.Translate("/Shared/AddYourReview")
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="price-block">
+                                <div class="price-box">
+                                    <p class="availability in-stock pull-right">
+                                        <span>@Html.Translate("/Shared/Instock")</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="short-description">
+                                <h2>@Html.Translate("/Shared/QuickOverview")</h2>
+                                @Html.PropertyFor(x => x.CurrentContent.Description)
+                            </div>
+
+                            <div class="add-to-box">
+                                <div class="add-to-cart">
+                                    @if (!(bool)ViewData["IsReadOnly"])
+                                    {
+                                        using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { @class = "form-inline", data_container = "MiniCart" }))
+                                        {
+                                            <div class="row">
+                                                @Html.Partial("_Stores", Model.Stores)
+                                            </div>
+                                            @Html.Hidden("code", Model.CurrentContent.Code)
+                                            <div class="pull-left">
+                                                <div class="custom pull-left">
+                                                    <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                                </div>
+                                            </div>
+                                            <button type="submit" role="button" class="button btn-cart jsAddToCart" data-container="MiniCart">
+                                                <span>
+                                                    <i class="icon-basket"></i>
+                                                    @Html.Translate("/Product/Button/AddToCart")
+                                                </span>
+                                            </button>
+                                        }
+                                        <div id="CartWarningMessage" class="col-md-5 col-xs-12 alert alert-danger pull-right" hidden>
+                                            <button type="button" class="close" data-hide="alert">&times;</button>
+                                            <span class="warning-message"></span>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                            <div class="email-addto-box">
+                                <p class="email-friend">
+                                    <a href="#" class="">
+                                        <span>@Html.Translate("/Shared/EmailAFriend")</span>
+                                    </a>
+                                </p>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <ul class="add-to-links">
+                                        <li>
+                                            @using (Html.BeginForm("AddToCart", "WishList", FormMethod.Post, new { @class = "form-inline jsAddToWishList", data_container = "WishListMiniCart" }))
+                                            {
+                                                @Html.Hidden("code", Model.CurrentContent.Code)
+                                                <button type="submit" role="button" class="link-wishlist jsAddToCart" data-container="WishListMiniCart">
+                                                    <span>
+                                                        @Html.Translate("/Product/Button/AddToWishList")
+                                                    </span>
+                                                </button>
+                                            }
+                                        </li>
+                                    </ul>
+                                }
+                            </div>
+                            <div class="social">
+                                <ul class="link">
+                                    <li class="fb"><a href="#"></a></li>
+                                    <li class="tw"><a href="#"></a></li>
+                                    <li class="googleplus"><a href="#"></a></li>
+                                    <li class="rss"><a href="#"></a></li>
+                                    <li class="pintrest"><a href="#"></a></li>
+                                    <li class="linkedin"><a href="#"></a></li>
+                                    <li class="youtube"><a href="#"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-collateral col-lg-12 col-sm-12 col-xs-12">
+                    <div class="add_info">
+                        <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
+                            <li @(!activeReviewTab ? "class = active" : "")>
+                                <a href="#product_tabs_description" data-toggle="tab">@Html.Translate("/Shared/ProductDescription")</a>
+                            </li>
+                            <li @(activeReviewTab ? "class = active" : "")>
+                                <a href="#reviews_tabs" data-toggle="tab">@Html.Translate("/Shared/Reviews")</a>
+                            </li>
+                            @if (Model.StaticAssociations.Any())
+                            {
+                                <li>
+                                    <a href="#associations_tabs" data-toggle="tab">@Html.Translate("/Shared/StaticAssociations")</a>
+                                </li>
+                            }
+                            @if (Model.IsSalesRep)
+                            {
+                                <li>
+                                    <a href="#sales_tab" data-toggle="tab">@Html.Translate("/Shared/SalesRep")</a>
+                                </li>
+                            }
+                        </ul>
+                        <div id="productTabContent" class="tab-content">
+                            <div class="tab-pane @(!activeReviewTab ? "fade in active" : "fade")" id="product_tabs_description">
+                                <div class="std">
+                                    @Html.PropertyFor(x => x.CurrentContent.LongDescription)
+                                </div>
+                            </div>
+                            <div class="tab-pane @(activeReviewTab ? "fade in active" : "fade")" id="reviews_tabs">
+                                <a name="tab"></a>
+                                <div class="box-collateral box-reviews" id="customer-reviews">
+                                    @Html.Partial("~/Views/Product/ReviewForm.cshtml", new ReviewSubmissionViewModel(Model.CurrentContent.Code))
+                                    @Html.Partial("~/Views/Product/Reviews.cshtml", Model.Reviews)
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            @if (Model.StaticAssociations.Any())
+                            {
+                                <div class="tab-pane fade" id="associations_tabs">
+                                    <div class="category-products">
+                                        <ul class="products-grid">
+
+                                            @foreach (var productViewModel in Model.StaticAssociations)
+                                            {
+                                                <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                    @Html.Partial("_Product", productViewModel)
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.IsSalesRep)
+                            {
+                                <div class="tab-pane fade in active" id="sales_tab">
+                                    @foreach (var media in Model.SalesMaterials)
+                                    {
+                                        <div>
+                                            <a href="@Model.UrlResolver.Service.GetUrl(media.ContentLink)">@media.Name</a>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (Model.ShowRecommendations)
+{
+    <section class="related-pro">
+        <div class="container">
+            <div class="slider-items-products">
+                <div class="new_title center">
+                    <h2>@Html.Translate("/Shared/RelatedProducts")</h2>
+                </div>
+                @{ Html.RenderAction("Index", "Recommendations", new { recommendations = Model.AlternativeProducts });}
+            </div>
+        </div>
+    </section>
+}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            @Html.PropertyFor(x => x.Bundle.ContentArea, new { CssClass = "row" })
+        </div>
+    </div>
+</section>
+
+@if (Model.ShowRecommendations)
+{
+    <section class="upsell-pro">
+        <div class="container">
+            <div class="slider-items-products">
+                <div class="new_title center">
+                    <h2>@Html.Translate("/Shared/RecommendationsForYou")</h2>
+                </div>
+                @{ Html.RenderAction("Index", "Recommendations", new { recommendations = Model.CrossSellProducts });}
+            </div>
+        </div>
+    </section>
+
+}
+
+@section Meta {
+    @{
+        if (!String.IsNullOrEmpty(Model.Bundle.SeoInformation.Description))
+        {
+            <meta property="description" content="@Html.AttributeEncode(Model.Bundle.SeoInformation.Description)" />
+        }
+        else if (Model.Bundle.Description != null && !Model.Bundle.Description.IsEmpty)
+        {
+            <meta property="description" content="@Html.AttributeEncode(Model.Bundle.Description)" />
+        }
+        if (!String.IsNullOrEmpty(Model.Bundle.SeoInformation.Keywords))
+        {
+            <meta property="keywords" content="@Html.AttributeEncode(Model.Bundle.SeoInformation.Keywords)" />
+        }
+    }
+}

@@ -1,0 +1,48 @@
+@using EPiServer.Core
+@using EPiServer.Reference.Commerce.Site.Extensions
+@model EPiServer.Reference.Commerce.Shared.SitePageData
+
+@if (!IsMosey)
+{
+	<div class="border teaser-page @(ContentReference.IsNullOrEmpty(Model.PageImage) ? "teaser-no-img" : "")">
+		@using (Html.BeginConditionalLink(Model.HasTemplate(), Url.PageLinkUrl(Model), Model.PageName))
+		{
+			<div class="teaser-page-text">
+				<h2>@Model.PageName</h2>
+				<p>@Model.TeaserText</p>
+			</div>
+			if (!ContentReference.IsNullOrEmpty(Model.PageImage))
+			{
+				<img class="teaser-page-img img-responsive" src="@Url.ContentUrl(Model.PageImage)" />
+			}
+		}
+	</div>
+}
+else
+{
+	<div class="teaser @Model.ThemeCssClass @Model.AlignmentCssClass @(Model.ApplyHoverEffect ? "show-details" : String.Empty)">
+        <div class="teaser-text-container">
+            <div class="teaser-text">
+                <h2>@Model.PageName</h2>
+                <div class="teaser-details">
+                    @if (!String.IsNullOrWhiteSpace(Model.TeaserText))
+            {
+                <p>@Model.TeaserText</p>
+    }
+                    @if (!String.IsNullOrWhiteSpace(Model.TeaserButtonText))
+            {
+                <p><a class="button" href="@Url.ContentUrl(Model.ContentLink)">@Model.TeaserButtonText</a></p>
+    }
+                </div>
+            </div>
+        </div>
+        <div class="teaser-image" style="background-image: url('@Url.ContentUrl(Model.PageImage)'">
+            @if (Model.TeaserVideo != null)
+            {
+                <video class="video-container" autoplay loop playsinline muted>
+                    <source src="@Url.ContentUrl(Model.TeaserVideo)" type="video/mp4">
+                </video>
+            }
+        </div>
+	</div>
+}

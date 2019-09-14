@@ -1,0 +1,399 @@
+﻿/*================ 13. Product Sorting Toolbar ===============*/
+/* Pager */
+.pager {
+    margin: 0;
+    text-align: center;
+    padding: 0;
+}
+
+    .pager .amount {
+        float: left;
+    }
+
+    .pager .limiter label {
+        float: left;
+        font-size: 14px;
+        padding: 6px 0;
+        margin-right: 10px;
+        display: inline;
+    }
+
+    .pager .pages {
+        margin: 0 0;
+    }
+
+.pages .pagination {
+    margin: auto;
+}
+
+.pager .pages li {
+    display: inline-block;
+}
+
+    .pager .pages li a {
+        box-shadow: none;
+        border: 1px solid #eaeaea;
+        padding: 5px 10px;
+        border-radius: 0px;
+        color: #333;
+        background: #f8f8f8
+    }
+
+        .pager .pages li a:hover {
+            border: 1px solid #eaeaea;
+            color: #fff;
+            background: @color-primary;
+        }
+
+.pages .pagination > .active > a, .pages .pagination > .active > span, .pages .pagination > .active > a:hover, .pages .pagination > .active > span:hover, .pages .pagination > .active > a:focus, .pages .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: @color-primary;
+    border-color: @color-primary;
+}
+/* Sorter */
+.sorter {
+    padding: 0;
+    margin: 0;
+}
+
+    .sorter .actions {
+        float: left;
+    }
+
+    .sorter .view-mode {
+        float: left;
+        margin-top: 6px;
+        margin-right: 20px;
+        margin-left: 0px;
+    }
+
+    .sorter .sort-by {
+        float: left;
+        margin-top: 6px;
+    }
+/* Toolbar */
+.toolbar {
+    clear: both;
+    margin-top: 0px;
+    padding: 10px 0 0 0px;
+    display: inline-block;
+    width: 100%;
+}
+
+    .toolbar .sorter {
+        float: left;
+    }
+
+.toolbar-bottom {
+    margin-top: 0;
+}
+
+.toolbar .pager .pages ol {
+    float: none;
+}
+
+#sort-by .button-asc {
+    background-color: #f8f8f8;
+    box-shadow: none;
+    float: right;
+    height: 33px;
+    line-height: 33px;
+    margin-left: 5px;
+    text-align: center;
+    width: 35px;
+    border: 1px #eaeaea solid;
+}
+
+    #sort-by .button-asc:hover {
+        background: @color-primary;
+        color: #fff
+    }
+
+.top_arrow:before {
+    content: '\f106';
+    font-family: FontAwesome;
+    font-size: 16px;
+}
+
+#sort-by .button-desc {
+    background-color: #f8f8f8;
+    box-shadow: none;
+    float: right;
+    height: 33px;
+    line-height: 33px;
+    margin-left: 5px;
+    text-align: center;
+    width: 35px;
+    border: 1px #eaeaea solid;
+}
+
+    #sort-by .button-desc:hover {
+        background: @color-primary;
+        color: #fff
+    }
+
+#sort-by {
+    float: right;
+    font-size: 14px;
+}
+
+    #sort-by ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: inline;
+    }
+
+    #sort-by a:link, #sort-by a:visited {
+        color: #333;
+        text-decoration: none;
+    }
+
+    #sort-by li {
+        background: none repeat scroll 0 0 #f8f8f8;
+        cursor: pointer;
+        margin: 0 auto;
+        outline: medium none;
+        padding: 5px 15px;
+        position: relative;
+        width: 140px;
+        float: left;
+        color: #333;
+        border: 1px solid #eaeaea;
+    }
+
+        #sort-by li li {
+            width: 140px;
+            margin-top: 0px;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+        }
+
+            #sort-by li li a:hover {
+                color: @color-primary
+            }
+
+        #sort-by li:hover {
+            background-color: #fff;
+        }
+
+        #sort-by li li:hover {
+            background-color: #fff;
+            color: @color-primary;
+        }
+
+    #sort-by ul ul {
+        position: absolute;
+        visibility: hidden;
+        left: -1px;
+        top: 27px;
+        background: none repeat scroll 0 0 #F8F8F8;
+        z-index: 10000;
+        border-top: none;
+        border: 1px #f5f5f5 solid;
+    }
+
+        #sort-by ul ul ul {
+            position: absolute;
+            left: 100%;
+            top: -2px;
+            border: solid 1px transparent;
+        }
+
+    #sort-by li:hover > ul {
+        visibility: visible;
+    }
+
+.right-arrow {
+    float: right;
+}
+
+    .right-arrow:after {
+        content: "\f107";
+        font-family: 'FontAwesome';
+        color: #666;
+        font-size: 14px;
+    }
+
+#limiter {
+    float: right;
+    font-size: 14px;
+    margin-top: 0px;
+}
+
+    #limiter ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: inline;
+    }
+
+    #limiter a {
+        text-decoration: none;
+        background-color: #f8f8f8;
+        border: 0px solid #ddd;
+        border-radius: 0px;
+        display: inline-block;
+        padding: 0px;
+    }
+
+    #limiter li {
+        background: none repeat scroll 0 0 #f8f8f8;
+        cursor: pointer;
+        margin: 0 auto;
+        outline: medium none;
+        padding: 5px 0px 5px 10px;
+        position: relative;
+        width: 50px;
+        float: left;
+        color: #333;
+        text-align: left;
+        border: 1px solid #eaeaea;
+    }
+
+    #limiter .right-arrow {
+        float: right;
+        margin-left: 6px;
+    }
+
+    #limiter li li {
+        width: 50px;
+        border-top: 0px #f5f5f5 solid;
+    }
+
+        #limiter li li a:hover {
+            color: @color-primary;
+        }
+
+    #limiter li:hover {
+        color: #fff;
+    }
+
+    #limiter ul ul {
+        position: absolute;
+        visibility: hidden;
+        left: -1px;
+        top: 27px;
+        background: none repeat scroll 0 0 #fff;
+        z-index: 10000;
+        color: #000;
+        border-top: none;
+        border: 0px #f5f5f5 solid;
+    }
+
+        #limiter ul ul ul {
+            position: absolute;
+            left: 100%;
+            top: -2px;
+            border: solid 1px transparent;
+        }
+
+    #limiter li:hover > ul {
+        visibility: visible;
+    }
+/* Category Toolbar, Pager */
+
+.toolbar {
+    .view-button {
+        padding: 7px 15px;
+        color: #333;
+        border: 1px #eaeaea solid;
+        border-radius: 3px;
+        text-transform: none;
+        cursor: pointer;
+    }
+
+    .button-active {
+        color: #fff;
+        border: 1px @color-primary solid;
+    }
+
+    .button-list {
+        background: #f8f8f8 url(/Assets/Mosey/images/icon_list.png) no-repeat 8px center;
+
+        &.button-active {
+            background: @color-primary url(/Assets/Mosey/images/icon_list_act.png) no-repeat 8px center;
+        }
+    }
+
+    .button-grid {
+        background: #f8f8f8 url(/Assets/Mosey/images/icon_grid_over.png) no-repeat 9px center;
+
+        &.button-active {
+            background: @color-primary url(/Assets/Mosey/images/icon_grid_act.png) no-repeat 9px center;
+        }
+    }
+}
+
+.toolbar .pager {
+    text-align: left;
+    margin: 0 10px 0 0;
+    padding: 0;
+    float: right;
+    width: 45%;
+}
+
+.pager .amount, .sorter .amount {
+    padding-left: 10px;
+    margin-top: 4px;
+    display: inline-block;
+}
+
+.toolbar .pager .limiter {
+    margin-top: 2px;
+    float: left;
+}
+
+.toolbar-bottom .pager .limiter {
+    position: static;
+}
+
+.pager .button {
+    padding: 4px 5px;
+    background-color: #fff;
+}
+
+    .pager .button :hover {
+        padding: 4px 5px;
+        background-color: #fff;
+    }
+
+.toolbar .actions {
+    margin-right: 30px;
+}
+
+.pager .limiter label, .toolbar label {
+    display: inline;
+    float: left;
+    margin-right: 10px;
+    padding: 7px 0px 5px 0px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.toolbar .sorter .sort-by {
+    margin-right: 30px;
+}
+
+.pager .amount {
+    margin-right: 20px;
+}
+/* Category Page */
+.category-title {
+    border-bottom: 1px solid #ddd;
+    margin: 0 0 10px;
+}
+
+.category-image {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 15px;
+}
+
+.category-products {
+    padding-bottom: 5px;
+}

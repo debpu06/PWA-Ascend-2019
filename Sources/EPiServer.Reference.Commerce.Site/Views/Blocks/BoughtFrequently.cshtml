@@ -1,0 +1,29 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Shared.Extensions
+@model BoughtFrequentlyViewModel
+
+@if (Model.Entries.Values.Any())
+{
+    <div class="row">
+        <div class="alert alert-info">
+            <h3>@Model.CurrentBlock.Heading</h3>
+            @foreach (var product in Model.Entries.Where(x => x.Value.Any()))
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @string.Format(Html.Translate("/BoughtFrequently/Message"), product.Key.Percentage) 
+                    </div>
+                    <div class="panel-body">
+                        @foreach (var item in product.Value)
+                        {
+                            <div>
+                                <a href="@item.GetUrl()">
+                                    @item.DisplayName - @item.Code
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>    
+}

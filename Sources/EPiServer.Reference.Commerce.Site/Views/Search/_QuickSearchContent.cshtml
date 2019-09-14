@@ -1,0 +1,47 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Alloy.ViewModels
+@using EPiServer.Find
+
+@model FindSearchContentModel
+@{
+    Layout = null;
+}
+
+@if (Model.Hits != null && Model.Hits.Any())
+{
+<ul class="product-dropdown product-row list-unstyled">
+    <li class="list-group-item product-item search-title">
+        <a class="link--black">
+            <div class="media">
+                <div class="media-body">
+                    <h3 class="product-row__item__title"><b>Articles</b></h3>
+                </div>
+            </div>
+        </a>
+    </li>
+    @foreach (var hit in Model.Hits)
+    {
+        <li class="list-group-item product-item">
+            <a href="@hit.Url" class="link--black">
+                <div class="media">
+                    @if (hit.ImageUri != null)
+                    {
+                        <div class="media-left">
+                            <img src="@hit.ImageUri" alt="@hit.Title" class="media-object product-row__item__image" />
+                        </div>
+                    }
+                    <div class="media-body">
+                        <h3 class="product-row__item__title">@Html.Raw(hit.Title)</h3>
+                        <div class="product-row__item__price article_preview">
+                            <p>@Html.Raw(hit.Excerpt)</p>
+                        </div>
+                        <div class="product-row__item__action">
+                            <input type="button" class="button" onclick="window.open(@hit.Url);" value="Read" data-container="MiniCart" />
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+    }
+</ul>
+}
+

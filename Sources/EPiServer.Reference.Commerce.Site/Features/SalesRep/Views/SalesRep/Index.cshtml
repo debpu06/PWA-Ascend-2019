@@ -1,0 +1,64 @@
+﻿@using EPiServer.Core
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@using EPiServer.Reference.Commerce.Site.Features.PartsSupply.Models
+@using EPiServer.Web.Mvc.Html
+
+@model EPiServer.Reference.Commerce.Site.Features.SalesRep.SalesRepViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            @if (Model.StartPage.PageTypeName.Equals(typeof(PartsSupplyStartPage).Name))
+            {
+                @Html.Partial("_CmsNavigation", Model.CurrentContent)
+            }
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="spacer-left-l">
+                    <section>
+                        <div class="section-title spacer-bottom-m">
+                            <form class="pull-right" action="" method="get" role="search">
+                                <div class="custom-search">
+                                    <input type="text" id="viewUsersAutocomplete" autocomplete="off" placeholder="@Html.Translate("/Shared/Search")" />
+                                    <span class="js-reset-icon close-icon" style="display: none"></span>
+                                    <span class="js-search-icon icon-search glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </div>
+                            </form>
+
+                        </div>
+                        
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>@Html.Translate("/Shared/Name")</th>
+                                    <th class="text-right">@Html.Translate("/B2B/Budgeting/Actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody class="js-users-table-body">
+                                @foreach (var user in Model.Organizations)
+                                {
+                                    <tr>
+                                        <td>@user.Name</td>
+                                        <td class="text-right">
+                                            
+                                            <a onclick="accounts.impersonateUser('@(user.MainContact != null && !string.IsNullOrEmpty(user.MainContact.Email) ? user.MainContact.Email : "")')" class="btn btn-info btn-xs" title="@Html.Translate("/Shared/Impersonate")">
+                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+            @if (Model.StartPage.PageTypeName.CompareTo(typeof(StartPage).Name) == 0)
+            {
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

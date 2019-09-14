@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>👁 Icons / Set 1 / 01 - Shopping Cart</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12,8 L12,6.21874691 C12,3.89492506 13.7837878,2 16,2 C18.2162122,2 20,3.89492506 20,6.21874691 L20,8 L27,8 L27,30 L5,30 L5,8 L12,8 Z M13,8 L19,8 L19,6.21874691 C19,4.43414967 17.6499632,3 16,3 C14.3500368,3 13,4.43414967 13,6.21874691 L13,8 Z M12,9 L6,9 L6,29 L26,29 L26,9 L20,9 L20,12.5 L19,12.5 L19,9 L13,9 L13,12.5 L12,12.5 L12,9 Z" id="path-1"></path>
+    </defs>
+    <g id="👁-Icons-/-Set-1-/-01---Shopping-Cart" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="MASK" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="🌈-Color-/-Fill-/-BLACK-#000" mask="url(#mask-2)"></g>
+    </g>
+</svg>

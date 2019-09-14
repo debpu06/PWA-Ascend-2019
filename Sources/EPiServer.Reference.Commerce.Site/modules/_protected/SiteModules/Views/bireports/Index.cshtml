@@ -1,0 +1,5 @@
+﻿@using EPiServer.Shell.Navigation
+@inherits WebViewPage<EPiServer.Reference.Commerce.Site.modules._protected.SiteModules.PowerBi.ReportsViewModel>
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+<iframe width="100%" height="900" src="@Model.FrameSource" frameborder="0" allowFullScreen="true"></iframe>
+

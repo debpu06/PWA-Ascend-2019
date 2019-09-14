@@ -1,0 +1,86 @@
+﻿﻿﻿@model EPiServer.Reference.Commerce.Site.Features.CampaignTriggers.ViewModels.CampaignTriggerViewModel
+
+<div class="container">
+    <div class="row">
+        <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+        <div class="row">
+            <h3>Send test emails</h3>
+            <ul class="col-xs-12 col-md-8">
+                <li>Emails are seperated by commas, semicolons or space</li>
+                <li>
+                    <p>Emails typed in the textbox must exist in the Demo_Team recipient list</p>
+                    <img src="@Url.ContentUrl(Model.CurrentContent.PageImage)" height="550">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row campaign-trigger-area">
+        <div class="row">
+            <br />
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "jsQuickSendMailForm" }))
+            {
+                @Html.AntiForgeryToken();
+                @* Value here is the Id of the Demo_Team recipient list in Campaign (hard coded) *@
+                @Html.HiddenFor(x => x.RecipientListId, new { @Value = "207868515265" })
+                <div class="form-group">
+                    @Html.LabelFor(x => x.EmailList)
+                    @Html.TextBoxFor(x => x.EmailList, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(x => x.EmailList)
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Email template</th>
+                            <th>Description</th>
+                            <th>Triggers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Abandoned basket</td>
+                            <td>We are targeting customers who have abandoned their cart within the last 2 hours</td>
+                            <td><button class="button" type="button" onclick="Campaign.sendTestMailsForTriggers(0)">Send email</button></td>
+                        </tr>
+                        <tr>
+                            <td>Purchased 3 days</td>
+                            <td>We are targeting customers who have purchased their product within the last 3 days</td>
+                            <td><button class="button" type="button" onclick="Campaign.sendTestMailsForTriggers(1)">Send email</button></td>
+                        </tr>
+                        <tr>
+                            <td>Abandoned browse</td>
+                            <td>We are targeting customers who have abandoned their browser within the last 30 minutes</td>
+                            <td><button class="button" type="button" onclick="Campaign.sendTestMailsForTriggers(2)">Send email</button></td>
+                        </tr>
+                        <tr>
+                            <td>No login for 60 days</td>
+                            <td>We are targeting customers who have not logged in for 60 days</td>
+                            <td><button class="button" type="button" onclick="Campaign.sendTestMailsForTriggers(3)">Send email</button></td>
+                        </tr>
+                        <tr>
+                            <td>Sign up for Loyalty</td>
+                            <td>We are targeting customers who made a purchase 3 days ago and are not a loyalty member to sign up for the loyalty program</td>
+                            <td><button class="button" type="button" onclick="Campaign.sendTestMailsForTriggers(4)">Send email</button></td>
+                        </tr>
+                        <tr>
+                            <td>Inactive customers</td>
+                            <td>We are targeting customers who have not placed order </td>
+                            <td><button class="button" type="button" onclick="Campaign.sendTestMailsForTriggers(5)">Send email</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>You can type mailing Id here to send an email you want</h4>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.MailingId)
+                    @Html.TextBoxFor(x => x.MailingId, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(x => x.MailingId)
+                </div>
+                <button class="button" type="button" onclick="Campaign.sendTestMailsForTriggers(-1)">Send email</button>
+
+                <h6 class="quick-send-mail-result"></h6>
+            }
+        </div>
+    </div>
+</div>

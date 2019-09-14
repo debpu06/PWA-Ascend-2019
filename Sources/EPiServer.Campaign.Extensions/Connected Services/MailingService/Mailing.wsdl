@@ -1,0 +1,2941 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="urn:api.broadmail.de/soap11/Mailing" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns2="http://lang.java" xmlns:impl="urn:api.broadmail.de/soap11/Mailing" targetNamespace="urn:api.broadmail.de/soap11/Mailing" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:api.broadmail.de/soap11/Mailing">
+      <xsd:import namespace="http://lang.java" />
+      <xsd:element name="getHeader">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getHeaderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getHeaderReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="WebserviceException">
+        <xsd:sequence>
+          <xsd:element name="cause" nillable="true" type="xsd:anyType" />
+          <xsd:element name="message" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="fault" type="impl:WebserviceException" />
+      <xsd:element name="getDataSet">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDataSetResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getDataSetReturn" type="impl:ArrayOf_xsd_string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ArrayOf_xsd_string">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getColumnNames">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getColumnNamesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getColumnNamesReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDataSetFlat">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDataSetFlatResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getDataSetFlatReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setMimeType">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setMimeTypeResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="setDefaultRecipientFilterEnabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setDefaultRecipientFilterEnabledResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="isDefaultRecipientFilterEnabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="isDefaultRecipientFilterEnabledResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="isDefaultRecipientFilterEnabledReturn" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setOpenTrackingEnabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setOpenTrackingEnabledResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="isOpenTrackingEnabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="isOpenTrackingEnabledResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="isOpenTrackingEnabledReturn" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setClickTrackingEnabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setClickTrackingEnabledResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="isClickTrackingEnabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="isClickTrackingEnabledResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="isClickTrackingEnabledReturn" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecipientListIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecipientListIdsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getRecipientListIdsReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setRecipientListIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element maxOccurs="unbounded" name="in2" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setRecipientListIdsResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getMaxRecipients">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMaxRecipientsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getMaxRecipientsReturn" type="xsd:float" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="isMaxRecipientsRandomOrder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="isMaxRecipientsRandomOrderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="isMaxRecipientsRandomOrderReturn" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setMaxRecipients">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:int" />
+            <xsd:element name="in3" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setMaxRecipientsResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="setMaxRecipientsPercentage">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:float" />
+            <xsd:element name="in3" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setMaxRecipientsPercentageResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="isMaxRecipientsPercentage">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="isMaxRecipientsPercentageResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="isMaxRecipientsPercentageReturn" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMaxMailsPerHour">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMaxMailsPerHourResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getMaxMailsPerHourReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setMaxMailsPerHour">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setMaxMailsPerHourResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getOverallRecipientCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getOverallRecipientCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getOverallRecipientCountReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSentRecipientCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSentRecipientCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getSentRecipientCountReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFailedRecipientCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFailedRecipientCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getFailedRecipientCountReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPredictedRecipientCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPredictedRecipientCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getPredictedRecipientCountReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pause">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="pauseResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="restart">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="restartResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getSendingStartedDate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSendingStartedDateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getSendingStartedDateReturn" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSendingFinishedDate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSendingFinishedDateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getSendingFinishedDateReturn" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendMail">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:long" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendMailResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sendMailReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendMails">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:long" />
+            <xsd:element maxOccurs="unbounded" name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendMailsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="sendMailsReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendTestMail">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:long" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendTestMailResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sendTestMailReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendTestMail2">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:long" />
+            <xsd:element name="in4" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendTestMail2Response">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sendTestMail2Return" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendTestMails">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:long" />
+            <xsd:element maxOccurs="unbounded" name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendTestMailsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="sendTestMailsReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendTestMailToAll">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendTestMailToAllResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="sendTestMailToAllReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSendingStatus">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:long" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSendingStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getSendingStatusReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getIdsInStatus">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getIdsInStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getIdsInStatusReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getScheduleDate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getScheduleDateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getScheduleDateReturn" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCreatedDate">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCreatedDateResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getCreatedDateReturn" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFromName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFromNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getFromNameReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFromEmailPrefix">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getFromEmailPrefixResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getFromEmailPrefixReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setReplyToName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setReplyToNameResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="setReplyToAddress">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setReplyToAddressResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="encodeTrackingLinks">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="encodeTrackingLinksResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="encodeTrackingLinksReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="decodeTrackingLinks">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="decodeTrackingLinksResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="decodeTrackingLinksReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setVerpEnabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setVerpEnabledResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="isVerpEnabled">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="isVerpEnabledResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="isVerpEnabledReturn" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="validateContent">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="validateContentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="validateContentReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setAttachmentIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element maxOccurs="unbounded" name="in2" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setAttachmentIdsResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getAttachmentIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAttachmentIdsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getAttachmentIdsReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setRecipientFilterId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setRecipientFilterIdResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="setRecipientFilterIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element maxOccurs="unbounded" name="in2" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setRecipientFilterIdsResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getRecipientFilterId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecipientFilterIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getRecipientFilterIdReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecipientFilterIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRecipientFilterIdsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getRecipientFilterIdsReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setContent">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setContentResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="setFrom">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setFromResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getCharset">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCharsetResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getCharsetReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setCharset">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setCharsetResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getMimeType">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMimeTypeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getMimeTypeReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setSubject">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setSubjectResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getIdsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getIdsReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSubject">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getSubjectResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getSubjectReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDescription">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDescriptionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getDescriptionReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setDescription">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setDescriptionResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getCount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getCountReturn" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cancel">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="cancelResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getStatus">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getStatusResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getStatusReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setHeader">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setHeaderResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="remove">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="removeResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="setProperty">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setPropertyResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getProperty">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPropertyResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getPropertyReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getNameResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getNameReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="start">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="startResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="create">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:string" />
+            <xsd:element name="in2" type="xsd:string" />
+            <xsd:element name="in3" type="xsd:string" />
+            <xsd:element maxOccurs="unbounded" name="in4" type="xsd:long" />
+            <xsd:element name="in5" type="xsd:string" />
+            <xsd:element name="in6" type="xsd:string" />
+            <xsd:element name="in7" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="resume">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="resumeResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="setName">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setNameResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="copy">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="copyResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="copyReturn" type="xsd:long" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getContent">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+            <xsd:element name="in1" type="xsd:long" />
+            <xsd:element name="in2" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getContentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getContentReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getVersion">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getVersionResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getVersionReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="isMaxRecipientsPercentageResponse">
+    <wsdl:part name="parameters" element="impl:isMaxRecipientsPercentageResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientFilterIdRequest">
+    <wsdl:part name="parameters" element="impl:getRecipientFilterId" />
+  </wsdl:message>
+  <wsdl:message name="setVerpEnabledRequest">
+    <wsdl:part name="parameters" element="impl:setVerpEnabled" />
+  </wsdl:message>
+  <wsdl:message name="getFromEmailPrefixRequest">
+    <wsdl:part name="parameters" element="impl:getFromEmailPrefix" />
+  </wsdl:message>
+  <wsdl:message name="pauseRequest">
+    <wsdl:part name="parameters" element="impl:pause" />
+  </wsdl:message>
+  <wsdl:message name="getSendingStatusResponse">
+    <wsdl:part name="parameters" element="impl:getSendingStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="setHeaderRequest">
+    <wsdl:part name="parameters" element="impl:setHeader" />
+  </wsdl:message>
+  <wsdl:message name="sendMailsRequest">
+    <wsdl:part name="parameters" element="impl:sendMails" />
+  </wsdl:message>
+  <wsdl:message name="setRecipientFilterIdResponse">
+    <wsdl:part name="parameters" element="impl:setRecipientFilterIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="setAttachmentIdsRequest">
+    <wsdl:part name="parameters" element="impl:setAttachmentIds" />
+  </wsdl:message>
+  <wsdl:message name="getDataSetFlatResponse">
+    <wsdl:part name="parameters" element="impl:getDataSetFlatResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNameResponse">
+    <wsdl:part name="parameters" element="impl:getNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPredictedRecipientCountRequest">
+    <wsdl:part name="parameters" element="impl:getPredictedRecipientCount" />
+  </wsdl:message>
+  <wsdl:message name="getScheduleDateRequest">
+    <wsdl:part name="parameters" element="impl:getScheduleDate" />
+  </wsdl:message>
+  <wsdl:message name="isVerpEnabledResponse">
+    <wsdl:part name="parameters" element="impl:isVerpEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCountRequest">
+    <wsdl:part name="parameters" element="impl:getCount" />
+  </wsdl:message>
+  <wsdl:message name="setMaxMailsPerHourResponse">
+    <wsdl:part name="parameters" element="impl:setMaxMailsPerHourResponse" />
+  </wsdl:message>
+  <wsdl:message name="resumeRequest">
+    <wsdl:part name="parameters" element="impl:resume" />
+  </wsdl:message>
+  <wsdl:message name="isDefaultRecipientFilterEnabledRequest">
+    <wsdl:part name="parameters" element="impl:isDefaultRecipientFilterEnabled" />
+  </wsdl:message>
+  <wsdl:message name="setClickTrackingEnabledRequest">
+    <wsdl:part name="parameters" element="impl:setClickTrackingEnabled" />
+  </wsdl:message>
+  <wsdl:message name="cancelRequest">
+    <wsdl:part name="parameters" element="impl:cancel" />
+  </wsdl:message>
+  <wsdl:message name="getFromEmailPrefixResponse">
+    <wsdl:part name="parameters" element="impl:getFromEmailPrefixResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSendingStatusRequest">
+    <wsdl:part name="parameters" element="impl:getSendingStatus" />
+  </wsdl:message>
+  <wsdl:message name="isClickTrackingEnabledResponse">
+    <wsdl:part name="parameters" element="impl:isClickTrackingEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendTestMailsRequest">
+    <wsdl:part name="parameters" element="impl:sendTestMails" />
+  </wsdl:message>
+  <wsdl:message name="WebserviceException">
+    <wsdl:part name="fault" element="impl:fault" />
+  </wsdl:message>
+  <wsdl:message name="startResponse">
+    <wsdl:part name="parameters" element="impl:startResponse" />
+  </wsdl:message>
+  <wsdl:message name="setRecipientFilterIdsRequest">
+    <wsdl:part name="parameters" element="impl:setRecipientFilterIds" />
+  </wsdl:message>
+  <wsdl:message name="startRequest">
+    <wsdl:part name="parameters" element="impl:start" />
+  </wsdl:message>
+  <wsdl:message name="setReplyToNameRequest">
+    <wsdl:part name="parameters" element="impl:setReplyToName" />
+  </wsdl:message>
+  <wsdl:message name="getCreatedDateResponse">
+    <wsdl:part name="parameters" element="impl:getCreatedDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="setDescriptionResponse">
+    <wsdl:part name="parameters" element="impl:setDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="setOpenTrackingEnabledRequest">
+    <wsdl:part name="parameters" element="impl:setOpenTrackingEnabled" />
+  </wsdl:message>
+  <wsdl:message name="getVersionRequest">
+    <wsdl:part name="parameters" element="impl:getVersion" />
+  </wsdl:message>
+  <wsdl:message name="getColumnNamesResponse">
+    <wsdl:part name="parameters" element="impl:getColumnNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSendingStartedDateRequest">
+    <wsdl:part name="parameters" element="impl:getSendingStartedDate" />
+  </wsdl:message>
+  <wsdl:message name="removeRequest">
+    <wsdl:part name="parameters" element="impl:remove" />
+  </wsdl:message>
+  <wsdl:message name="sendMailResponse">
+    <wsdl:part name="parameters" element="impl:sendMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="getIdsInStatusRequest">
+    <wsdl:part name="parameters" element="impl:getIdsInStatus" />
+  </wsdl:message>
+  <wsdl:message name="sendTestMail2Request">
+    <wsdl:part name="parameters" element="impl:sendTestMail2" />
+  </wsdl:message>
+  <wsdl:message name="getMaxMailsPerHourResponse">
+    <wsdl:part name="parameters" element="impl:getMaxMailsPerHourResponse" />
+  </wsdl:message>
+  <wsdl:message name="setClickTrackingEnabledResponse">
+    <wsdl:part name="parameters" element="impl:setClickTrackingEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="setHeaderResponse">
+    <wsdl:part name="parameters" element="impl:setHeaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="setMaxRecipientsResponse">
+    <wsdl:part name="parameters" element="impl:setMaxRecipientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="restartResponse">
+    <wsdl:part name="parameters" element="impl:restartResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSentRecipientCountResponse">
+    <wsdl:part name="parameters" element="impl:getSentRecipientCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="setOpenTrackingEnabledResponse">
+    <wsdl:part name="parameters" element="impl:setOpenTrackingEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="setFromResponse">
+    <wsdl:part name="parameters" element="impl:setFromResponse" />
+  </wsdl:message>
+  <wsdl:message name="getHeaderResponse">
+    <wsdl:part name="parameters" element="impl:getHeaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="createResponse">
+    <wsdl:part name="parameters" element="impl:createResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientFilterIdsResponse">
+    <wsdl:part name="parameters" element="impl:getRecipientFilterIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="setCharsetRequest">
+    <wsdl:part name="parameters" element="impl:setCharset" />
+  </wsdl:message>
+  <wsdl:message name="pauseResponse">
+    <wsdl:part name="parameters" element="impl:pauseResponse" />
+  </wsdl:message>
+  <wsdl:message name="setFromRequest">
+    <wsdl:part name="parameters" element="impl:setFrom" />
+  </wsdl:message>
+  <wsdl:message name="getSendingFinishedDateRequest">
+    <wsdl:part name="parameters" element="impl:getSendingFinishedDate" />
+  </wsdl:message>
+  <wsdl:message name="getContentRequest">
+    <wsdl:part name="parameters" element="impl:getContent" />
+  </wsdl:message>
+  <wsdl:message name="setCharsetResponse">
+    <wsdl:part name="parameters" element="impl:setCharsetResponse" />
+  </wsdl:message>
+  <wsdl:message name="isOpenTrackingEnabledResponse">
+    <wsdl:part name="parameters" element="impl:isOpenTrackingEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="setSubjectResponse">
+    <wsdl:part name="parameters" element="impl:setSubjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPredictedRecipientCountResponse">
+    <wsdl:part name="parameters" element="impl:getPredictedRecipientCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="decodeTrackingLinksResponse">
+    <wsdl:part name="parameters" element="impl:decodeTrackingLinksResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCharsetRequest">
+    <wsdl:part name="parameters" element="impl:getCharset" />
+  </wsdl:message>
+  <wsdl:message name="setContentRequest">
+    <wsdl:part name="parameters" element="impl:setContent" />
+  </wsdl:message>
+  <wsdl:message name="setMimeTypeRequest">
+    <wsdl:part name="parameters" element="impl:setMimeType" />
+  </wsdl:message>
+  <wsdl:message name="setAttachmentIdsResponse">
+    <wsdl:part name="parameters" element="impl:setAttachmentIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendMailRequest">
+    <wsdl:part name="parameters" element="impl:sendMail" />
+  </wsdl:message>
+  <wsdl:message name="getVersionResponse">
+    <wsdl:part name="parameters" element="impl:getVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="createRequest">
+    <wsdl:part name="parameters" element="impl:create" />
+  </wsdl:message>
+  <wsdl:message name="setRecipientListIdsRequest">
+    <wsdl:part name="parameters" element="impl:setRecipientListIds" />
+  </wsdl:message>
+  <wsdl:message name="sendMailsResponse">
+    <wsdl:part name="parameters" element="impl:sendMailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNameRequest">
+    <wsdl:part name="parameters" element="impl:getName" />
+  </wsdl:message>
+  <wsdl:message name="isMaxRecipientsPercentageRequest">
+    <wsdl:part name="parameters" element="impl:isMaxRecipientsPercentage" />
+  </wsdl:message>
+  <wsdl:message name="isDefaultRecipientFilterEnabledResponse">
+    <wsdl:part name="parameters" element="impl:isDefaultRecipientFilterEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendTestMailToAllRequest">
+    <wsdl:part name="parameters" element="impl:sendTestMailToAll" />
+  </wsdl:message>
+  <wsdl:message name="getMaxRecipientsRequest">
+    <wsdl:part name="parameters" element="impl:getMaxRecipients" />
+  </wsdl:message>
+  <wsdl:message name="copyResponse">
+    <wsdl:part name="parameters" element="impl:copyResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendTestMail2Response">
+    <wsdl:part name="parameters" element="impl:sendTestMail2Response" />
+  </wsdl:message>
+  <wsdl:message name="getIdsInStatusResponse">
+    <wsdl:part name="parameters" element="impl:getIdsInStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="isClickTrackingEnabledRequest">
+    <wsdl:part name="parameters" element="impl:isClickTrackingEnabled" />
+  </wsdl:message>
+  <wsdl:message name="setDescriptionRequest">
+    <wsdl:part name="parameters" element="impl:setDescription" />
+  </wsdl:message>
+  <wsdl:message name="getSentRecipientCountRequest">
+    <wsdl:part name="parameters" element="impl:getSentRecipientCount" />
+  </wsdl:message>
+  <wsdl:message name="getContentResponse">
+    <wsdl:part name="parameters" element="impl:getContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="setReplyToAddressRequest">
+    <wsdl:part name="parameters" element="impl:setReplyToAddress" />
+  </wsdl:message>
+  <wsdl:message name="isVerpEnabledRequest">
+    <wsdl:part name="parameters" element="impl:isVerpEnabled" />
+  </wsdl:message>
+  <wsdl:message name="setVerpEnabledResponse">
+    <wsdl:part name="parameters" element="impl:setVerpEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientFilterIdsRequest">
+    <wsdl:part name="parameters" element="impl:getRecipientFilterIds" />
+  </wsdl:message>
+  <wsdl:message name="isOpenTrackingEnabledRequest">
+    <wsdl:part name="parameters" element="impl:isOpenTrackingEnabled" />
+  </wsdl:message>
+  <wsdl:message name="isMaxRecipientsRandomOrderResponse">
+    <wsdl:part name="parameters" element="impl:isMaxRecipientsRandomOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="getFailedRecipientCountResponse">
+    <wsdl:part name="parameters" element="impl:getFailedRecipientCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="getColumnNamesRequest">
+    <wsdl:part name="parameters" element="impl:getColumnNames" />
+  </wsdl:message>
+  <wsdl:message name="setDefaultRecipientFilterEnabledResponse">
+    <wsdl:part name="parameters" element="impl:setDefaultRecipientFilterEnabledResponse" />
+  </wsdl:message>
+  <wsdl:message name="getStatusResponse">
+    <wsdl:part name="parameters" element="impl:getStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendTestMailRequest">
+    <wsdl:part name="parameters" element="impl:sendTestMail" />
+  </wsdl:message>
+  <wsdl:message name="setMaxRecipientsPercentageResponse">
+    <wsdl:part name="parameters" element="impl:setMaxRecipientsPercentageResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSendingFinishedDateResponse">
+    <wsdl:part name="parameters" element="impl:getSendingFinishedDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="setRecipientFilterIdsResponse">
+    <wsdl:part name="parameters" element="impl:setRecipientFilterIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getStatusRequest">
+    <wsdl:part name="parameters" element="impl:getStatus" />
+  </wsdl:message>
+  <wsdl:message name="isMaxRecipientsRandomOrderRequest">
+    <wsdl:part name="parameters" element="impl:isMaxRecipientsRandomOrder" />
+  </wsdl:message>
+  <wsdl:message name="getCharsetResponse">
+    <wsdl:part name="parameters" element="impl:getCharsetResponse" />
+  </wsdl:message>
+  <wsdl:message name="setNameRequest">
+    <wsdl:part name="parameters" element="impl:setName" />
+  </wsdl:message>
+  <wsdl:message name="setRecipientFilterIdRequest">
+    <wsdl:part name="parameters" element="impl:setRecipientFilterId" />
+  </wsdl:message>
+  <wsdl:message name="getFromNameResponse">
+    <wsdl:part name="parameters" element="impl:getFromNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAttachmentIdsResponse">
+    <wsdl:part name="parameters" element="impl:getAttachmentIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="setMaxMailsPerHourRequest">
+    <wsdl:part name="parameters" element="impl:setMaxMailsPerHour" />
+  </wsdl:message>
+  <wsdl:message name="resumeResponse">
+    <wsdl:part name="parameters" element="impl:resumeResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendTestMailsResponse">
+    <wsdl:part name="parameters" element="impl:sendTestMailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendTestMailToAllResponse">
+    <wsdl:part name="parameters" element="impl:sendTestMailToAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="validateContentRequest">
+    <wsdl:part name="parameters" element="impl:validateContent" />
+  </wsdl:message>
+  <wsdl:message name="decodeTrackingLinksRequest">
+    <wsdl:part name="parameters" element="impl:decodeTrackingLinks" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientListIdsRequest">
+    <wsdl:part name="parameters" element="impl:getRecipientListIds" />
+  </wsdl:message>
+  <wsdl:message name="getDescriptionResponse">
+    <wsdl:part name="parameters" element="impl:getDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="setSubjectRequest">
+    <wsdl:part name="parameters" element="impl:setSubject" />
+  </wsdl:message>
+  <wsdl:message name="getCountResponse">
+    <wsdl:part name="parameters" element="impl:getCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataSetResponse">
+    <wsdl:part name="parameters" element="impl:getDataSetResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientListIdsResponse">
+    <wsdl:part name="parameters" element="impl:getRecipientListIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="setContentResponse">
+    <wsdl:part name="parameters" element="impl:setContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="sendTestMailResponse">
+    <wsdl:part name="parameters" element="impl:sendTestMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="setMaxRecipientsPercentageRequest">
+    <wsdl:part name="parameters" element="impl:setMaxRecipientsPercentage" />
+  </wsdl:message>
+  <wsdl:message name="getSubjectRequest">
+    <wsdl:part name="parameters" element="impl:getSubject" />
+  </wsdl:message>
+  <wsdl:message name="getAttachmentIdsRequest">
+    <wsdl:part name="parameters" element="impl:getAttachmentIds" />
+  </wsdl:message>
+  <wsdl:message name="copyRequest">
+    <wsdl:part name="parameters" element="impl:copy" />
+  </wsdl:message>
+  <wsdl:message name="getMaxRecipientsResponse">
+    <wsdl:part name="parameters" element="impl:getMaxRecipientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="validateContentResponse">
+    <wsdl:part name="parameters" element="impl:validateContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSubjectResponse">
+    <wsdl:part name="parameters" element="impl:getSubjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDataSetRequest">
+    <wsdl:part name="parameters" element="impl:getDataSet" />
+  </wsdl:message>
+  <wsdl:message name="getMaxMailsPerHourRequest">
+    <wsdl:part name="parameters" element="impl:getMaxMailsPerHour" />
+  </wsdl:message>
+  <wsdl:message name="setReplyToNameResponse">
+    <wsdl:part name="parameters" element="impl:setReplyToNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getIdsRequest">
+    <wsdl:part name="parameters" element="impl:getIds" />
+  </wsdl:message>
+  <wsdl:message name="getFailedRecipientCountRequest">
+    <wsdl:part name="parameters" element="impl:getFailedRecipientCount" />
+  </wsdl:message>
+  <wsdl:message name="setDefaultRecipientFilterEnabledRequest">
+    <wsdl:part name="parameters" element="impl:setDefaultRecipientFilterEnabled" />
+  </wsdl:message>
+  <wsdl:message name="setNameResponse">
+    <wsdl:part name="parameters" element="impl:setNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSendingStartedDateResponse">
+    <wsdl:part name="parameters" element="impl:getSendingStartedDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMimeTypeRequest">
+    <wsdl:part name="parameters" element="impl:getMimeType" />
+  </wsdl:message>
+  <wsdl:message name="getScheduleDateResponse">
+    <wsdl:part name="parameters" element="impl:getScheduleDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="encodeTrackingLinksRequest">
+    <wsdl:part name="parameters" element="impl:encodeTrackingLinks" />
+  </wsdl:message>
+  <wsdl:message name="setMaxRecipientsRequest">
+    <wsdl:part name="parameters" element="impl:setMaxRecipients" />
+  </wsdl:message>
+  <wsdl:message name="encodeTrackingLinksResponse">
+    <wsdl:part name="parameters" element="impl:encodeTrackingLinksResponse" />
+  </wsdl:message>
+  <wsdl:message name="getOverallRecipientCountResponse">
+    <wsdl:part name="parameters" element="impl:getOverallRecipientCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="getHeaderRequest">
+    <wsdl:part name="parameters" element="impl:getHeader" />
+  </wsdl:message>
+  <wsdl:message name="getDataSetFlatRequest">
+    <wsdl:part name="parameters" element="impl:getDataSetFlat" />
+  </wsdl:message>
+  <wsdl:message name="getPropertyRequest">
+    <wsdl:part name="parameters" element="impl:getProperty" />
+  </wsdl:message>
+  <wsdl:message name="getPropertyResponse">
+    <wsdl:part name="parameters" element="impl:getPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="setRecipientListIdsResponse">
+    <wsdl:part name="parameters" element="impl:setRecipientListIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="setMimeTypeResponse">
+    <wsdl:part name="parameters" element="impl:setMimeTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="setReplyToAddressResponse">
+    <wsdl:part name="parameters" element="impl:setReplyToAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="setPropertyRequest">
+    <wsdl:part name="parameters" element="impl:setProperty" />
+  </wsdl:message>
+  <wsdl:message name="getOverallRecipientCountRequest">
+    <wsdl:part name="parameters" element="impl:getOverallRecipientCount" />
+  </wsdl:message>
+  <wsdl:message name="setPropertyResponse">
+    <wsdl:part name="parameters" element="impl:setPropertyResponse" />
+  </wsdl:message>
+  <wsdl:message name="getFromNameRequest">
+    <wsdl:part name="parameters" element="impl:getFromName" />
+  </wsdl:message>
+  <wsdl:message name="getMimeTypeResponse">
+    <wsdl:part name="parameters" element="impl:getMimeTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCreatedDateRequest">
+    <wsdl:part name="parameters" element="impl:getCreatedDate" />
+  </wsdl:message>
+  <wsdl:message name="removeResponse">
+    <wsdl:part name="parameters" element="impl:removeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDescriptionRequest">
+    <wsdl:part name="parameters" element="impl:getDescription" />
+  </wsdl:message>
+  <wsdl:message name="restartRequest">
+    <wsdl:part name="parameters" element="impl:restart" />
+  </wsdl:message>
+  <wsdl:message name="getIdsResponse">
+    <wsdl:part name="parameters" element="impl:getIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRecipientFilterIdResponse">
+    <wsdl:part name="parameters" element="impl:getRecipientFilterIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="cancelResponse">
+    <wsdl:part name="parameters" element="impl:cancelResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MailingWebservice">
+    <wsdl:operation name="getHeader">
+      <wsdl:input name="getHeaderRequest" message="impl:getHeaderRequest" />
+      <wsdl:output name="getHeaderResponse" message="impl:getHeaderResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataSet">
+      <wsdl:input name="getDataSetRequest" message="impl:getDataSetRequest" />
+      <wsdl:output name="getDataSetResponse" message="impl:getDataSetResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getColumnNames">
+      <wsdl:input name="getColumnNamesRequest" message="impl:getColumnNamesRequest" />
+      <wsdl:output name="getColumnNamesResponse" message="impl:getColumnNamesResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getDataSetFlat">
+      <wsdl:input name="getDataSetFlatRequest" message="impl:getDataSetFlatRequest" />
+      <wsdl:output name="getDataSetFlatResponse" message="impl:getDataSetFlatResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setMimeType">
+      <wsdl:input name="setMimeTypeRequest" message="impl:setMimeTypeRequest" />
+      <wsdl:output name="setMimeTypeResponse" message="impl:setMimeTypeResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setDefaultRecipientFilterEnabled">
+      <wsdl:input name="setDefaultRecipientFilterEnabledRequest" message="impl:setDefaultRecipientFilterEnabledRequest" />
+      <wsdl:output name="setDefaultRecipientFilterEnabledResponse" message="impl:setDefaultRecipientFilterEnabledResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="isDefaultRecipientFilterEnabled">
+      <wsdl:input name="isDefaultRecipientFilterEnabledRequest" message="impl:isDefaultRecipientFilterEnabledRequest" />
+      <wsdl:output name="isDefaultRecipientFilterEnabledResponse" message="impl:isDefaultRecipientFilterEnabledResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setOpenTrackingEnabled">
+      <wsdl:input name="setOpenTrackingEnabledRequest" message="impl:setOpenTrackingEnabledRequest" />
+      <wsdl:output name="setOpenTrackingEnabledResponse" message="impl:setOpenTrackingEnabledResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="isOpenTrackingEnabled">
+      <wsdl:input name="isOpenTrackingEnabledRequest" message="impl:isOpenTrackingEnabledRequest" />
+      <wsdl:output name="isOpenTrackingEnabledResponse" message="impl:isOpenTrackingEnabledResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setClickTrackingEnabled">
+      <wsdl:input name="setClickTrackingEnabledRequest" message="impl:setClickTrackingEnabledRequest" />
+      <wsdl:output name="setClickTrackingEnabledResponse" message="impl:setClickTrackingEnabledResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="isClickTrackingEnabled">
+      <wsdl:input name="isClickTrackingEnabledRequest" message="impl:isClickTrackingEnabledRequest" />
+      <wsdl:output name="isClickTrackingEnabledResponse" message="impl:isClickTrackingEnabledResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientListIds">
+      <wsdl:input name="getRecipientListIdsRequest" message="impl:getRecipientListIdsRequest" />
+      <wsdl:output name="getRecipientListIdsResponse" message="impl:getRecipientListIdsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setRecipientListIds">
+      <wsdl:input name="setRecipientListIdsRequest" message="impl:setRecipientListIdsRequest" />
+      <wsdl:output name="setRecipientListIdsResponse" message="impl:setRecipientListIdsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMaxRecipients">
+      <wsdl:input name="getMaxRecipientsRequest" message="impl:getMaxRecipientsRequest" />
+      <wsdl:output name="getMaxRecipientsResponse" message="impl:getMaxRecipientsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="isMaxRecipientsRandomOrder">
+      <wsdl:input name="isMaxRecipientsRandomOrderRequest" message="impl:isMaxRecipientsRandomOrderRequest" />
+      <wsdl:output name="isMaxRecipientsRandomOrderResponse" message="impl:isMaxRecipientsRandomOrderResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setMaxRecipients">
+      <wsdl:input name="setMaxRecipientsRequest" message="impl:setMaxRecipientsRequest" />
+      <wsdl:output name="setMaxRecipientsResponse" message="impl:setMaxRecipientsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setMaxRecipientsPercentage">
+      <wsdl:input name="setMaxRecipientsPercentageRequest" message="impl:setMaxRecipientsPercentageRequest" />
+      <wsdl:output name="setMaxRecipientsPercentageResponse" message="impl:setMaxRecipientsPercentageResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="isMaxRecipientsPercentage">
+      <wsdl:input name="isMaxRecipientsPercentageRequest" message="impl:isMaxRecipientsPercentageRequest" />
+      <wsdl:output name="isMaxRecipientsPercentageResponse" message="impl:isMaxRecipientsPercentageResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMaxMailsPerHour">
+      <wsdl:input name="getMaxMailsPerHourRequest" message="impl:getMaxMailsPerHourRequest" />
+      <wsdl:output name="getMaxMailsPerHourResponse" message="impl:getMaxMailsPerHourResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setMaxMailsPerHour">
+      <wsdl:input name="setMaxMailsPerHourRequest" message="impl:setMaxMailsPerHourRequest" />
+      <wsdl:output name="setMaxMailsPerHourResponse" message="impl:setMaxMailsPerHourResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getOverallRecipientCount">
+      <wsdl:input name="getOverallRecipientCountRequest" message="impl:getOverallRecipientCountRequest" />
+      <wsdl:output name="getOverallRecipientCountResponse" message="impl:getOverallRecipientCountResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getSentRecipientCount">
+      <wsdl:input name="getSentRecipientCountRequest" message="impl:getSentRecipientCountRequest" />
+      <wsdl:output name="getSentRecipientCountResponse" message="impl:getSentRecipientCountResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getFailedRecipientCount">
+      <wsdl:input name="getFailedRecipientCountRequest" message="impl:getFailedRecipientCountRequest" />
+      <wsdl:output name="getFailedRecipientCountResponse" message="impl:getFailedRecipientCountResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getPredictedRecipientCount">
+      <wsdl:input name="getPredictedRecipientCountRequest" message="impl:getPredictedRecipientCountRequest" />
+      <wsdl:output name="getPredictedRecipientCountResponse" message="impl:getPredictedRecipientCountResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="pause">
+      <wsdl:input name="pauseRequest" message="impl:pauseRequest" />
+      <wsdl:output name="pauseResponse" message="impl:pauseResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="restart">
+      <wsdl:input name="restartRequest" message="impl:restartRequest" />
+      <wsdl:output name="restartResponse" message="impl:restartResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getSendingStartedDate">
+      <wsdl:input name="getSendingStartedDateRequest" message="impl:getSendingStartedDateRequest" />
+      <wsdl:output name="getSendingStartedDateResponse" message="impl:getSendingStartedDateResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getSendingFinishedDate">
+      <wsdl:input name="getSendingFinishedDateRequest" message="impl:getSendingFinishedDateRequest" />
+      <wsdl:output name="getSendingFinishedDateResponse" message="impl:getSendingFinishedDateResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMail">
+      <wsdl:input name="sendMailRequest" message="impl:sendMailRequest" />
+      <wsdl:output name="sendMailResponse" message="impl:sendMailResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="sendMails">
+      <wsdl:input name="sendMailsRequest" message="impl:sendMailsRequest" />
+      <wsdl:output name="sendMailsResponse" message="impl:sendMailsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="sendTestMail">
+      <wsdl:input name="sendTestMailRequest" message="impl:sendTestMailRequest" />
+      <wsdl:output name="sendTestMailResponse" message="impl:sendTestMailResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="sendTestMail2">
+      <wsdl:input name="sendTestMail2Request" message="impl:sendTestMail2Request" />
+      <wsdl:output name="sendTestMail2Response" message="impl:sendTestMail2Response" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="sendTestMails">
+      <wsdl:input name="sendTestMailsRequest" message="impl:sendTestMailsRequest" />
+      <wsdl:output name="sendTestMailsResponse" message="impl:sendTestMailsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="sendTestMailToAll">
+      <wsdl:input name="sendTestMailToAllRequest" message="impl:sendTestMailToAllRequest" />
+      <wsdl:output name="sendTestMailToAllResponse" message="impl:sendTestMailToAllResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getSendingStatus">
+      <wsdl:input name="getSendingStatusRequest" message="impl:getSendingStatusRequest" />
+      <wsdl:output name="getSendingStatusResponse" message="impl:getSendingStatusResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getIdsInStatus">
+      <wsdl:input name="getIdsInStatusRequest" message="impl:getIdsInStatusRequest" />
+      <wsdl:output name="getIdsInStatusResponse" message="impl:getIdsInStatusResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getScheduleDate">
+      <wsdl:input name="getScheduleDateRequest" message="impl:getScheduleDateRequest" />
+      <wsdl:output name="getScheduleDateResponse" message="impl:getScheduleDateResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCreatedDate">
+      <wsdl:input name="getCreatedDateRequest" message="impl:getCreatedDateRequest" />
+      <wsdl:output name="getCreatedDateResponse" message="impl:getCreatedDateResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getFromName">
+      <wsdl:input name="getFromNameRequest" message="impl:getFromNameRequest" />
+      <wsdl:output name="getFromNameResponse" message="impl:getFromNameResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getFromEmailPrefix">
+      <wsdl:input name="getFromEmailPrefixRequest" message="impl:getFromEmailPrefixRequest" />
+      <wsdl:output name="getFromEmailPrefixResponse" message="impl:getFromEmailPrefixResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setReplyToName">
+      <wsdl:input name="setReplyToNameRequest" message="impl:setReplyToNameRequest" />
+      <wsdl:output name="setReplyToNameResponse" message="impl:setReplyToNameResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setReplyToAddress">
+      <wsdl:input name="setReplyToAddressRequest" message="impl:setReplyToAddressRequest" />
+      <wsdl:output name="setReplyToAddressResponse" message="impl:setReplyToAddressResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="encodeTrackingLinks">
+      <wsdl:input name="encodeTrackingLinksRequest" message="impl:encodeTrackingLinksRequest" />
+      <wsdl:output name="encodeTrackingLinksResponse" message="impl:encodeTrackingLinksResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="decodeTrackingLinks">
+      <wsdl:input name="decodeTrackingLinksRequest" message="impl:decodeTrackingLinksRequest" />
+      <wsdl:output name="decodeTrackingLinksResponse" message="impl:decodeTrackingLinksResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setVerpEnabled">
+      <wsdl:input name="setVerpEnabledRequest" message="impl:setVerpEnabledRequest" />
+      <wsdl:output name="setVerpEnabledResponse" message="impl:setVerpEnabledResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="isVerpEnabled">
+      <wsdl:input name="isVerpEnabledRequest" message="impl:isVerpEnabledRequest" />
+      <wsdl:output name="isVerpEnabledResponse" message="impl:isVerpEnabledResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="validateContent">
+      <wsdl:input name="validateContentRequest" message="impl:validateContentRequest" />
+      <wsdl:output name="validateContentResponse" message="impl:validateContentResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setAttachmentIds">
+      <wsdl:input name="setAttachmentIdsRequest" message="impl:setAttachmentIdsRequest" />
+      <wsdl:output name="setAttachmentIdsResponse" message="impl:setAttachmentIdsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getAttachmentIds">
+      <wsdl:input name="getAttachmentIdsRequest" message="impl:getAttachmentIdsRequest" />
+      <wsdl:output name="getAttachmentIdsResponse" message="impl:getAttachmentIdsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setRecipientFilterId">
+      <wsdl:input name="setRecipientFilterIdRequest" message="impl:setRecipientFilterIdRequest" />
+      <wsdl:output name="setRecipientFilterIdResponse" message="impl:setRecipientFilterIdResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setRecipientFilterIds">
+      <wsdl:input name="setRecipientFilterIdsRequest" message="impl:setRecipientFilterIdsRequest" />
+      <wsdl:output name="setRecipientFilterIdsResponse" message="impl:setRecipientFilterIdsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientFilterId">
+      <wsdl:input name="getRecipientFilterIdRequest" message="impl:getRecipientFilterIdRequest" />
+      <wsdl:output name="getRecipientFilterIdResponse" message="impl:getRecipientFilterIdResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientFilterIds">
+      <wsdl:input name="getRecipientFilterIdsRequest" message="impl:getRecipientFilterIdsRequest" />
+      <wsdl:output name="getRecipientFilterIdsResponse" message="impl:getRecipientFilterIdsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setContent">
+      <wsdl:input name="setContentRequest" message="impl:setContentRequest" />
+      <wsdl:output name="setContentResponse" message="impl:setContentResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setFrom">
+      <wsdl:input name="setFromRequest" message="impl:setFromRequest" />
+      <wsdl:output name="setFromResponse" message="impl:setFromResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCharset">
+      <wsdl:input name="getCharsetRequest" message="impl:getCharsetRequest" />
+      <wsdl:output name="getCharsetResponse" message="impl:getCharsetResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setCharset">
+      <wsdl:input name="setCharsetRequest" message="impl:setCharsetRequest" />
+      <wsdl:output name="setCharsetResponse" message="impl:setCharsetResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMimeType">
+      <wsdl:input name="getMimeTypeRequest" message="impl:getMimeTypeRequest" />
+      <wsdl:output name="getMimeTypeResponse" message="impl:getMimeTypeResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setSubject">
+      <wsdl:input name="setSubjectRequest" message="impl:setSubjectRequest" />
+      <wsdl:output name="setSubjectResponse" message="impl:setSubjectResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getIds">
+      <wsdl:input name="getIdsRequest" message="impl:getIdsRequest" />
+      <wsdl:output name="getIdsResponse" message="impl:getIdsResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getSubject">
+      <wsdl:input name="getSubjectRequest" message="impl:getSubjectRequest" />
+      <wsdl:output name="getSubjectResponse" message="impl:getSubjectResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getDescription">
+      <wsdl:input name="getDescriptionRequest" message="impl:getDescriptionRequest" />
+      <wsdl:output name="getDescriptionResponse" message="impl:getDescriptionResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setDescription">
+      <wsdl:input name="setDescriptionRequest" message="impl:setDescriptionRequest" />
+      <wsdl:output name="setDescriptionResponse" message="impl:setDescriptionResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCount">
+      <wsdl:input name="getCountRequest" message="impl:getCountRequest" />
+      <wsdl:output name="getCountResponse" message="impl:getCountResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="cancel">
+      <wsdl:input name="cancelRequest" message="impl:cancelRequest" />
+      <wsdl:output name="cancelResponse" message="impl:cancelResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getStatus">
+      <wsdl:input name="getStatusRequest" message="impl:getStatusRequest" />
+      <wsdl:output name="getStatusResponse" message="impl:getStatusResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setHeader">
+      <wsdl:input name="setHeaderRequest" message="impl:setHeaderRequest" />
+      <wsdl:output name="setHeaderResponse" message="impl:setHeaderResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="remove">
+      <wsdl:input name="removeRequest" message="impl:removeRequest" />
+      <wsdl:output name="removeResponse" message="impl:removeResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setProperty">
+      <wsdl:input name="setPropertyRequest" message="impl:setPropertyRequest" />
+      <wsdl:output name="setPropertyResponse" message="impl:setPropertyResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getProperty">
+      <wsdl:input name="getPropertyRequest" message="impl:getPropertyRequest" />
+      <wsdl:output name="getPropertyResponse" message="impl:getPropertyResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getName">
+      <wsdl:input name="getNameRequest" message="impl:getNameRequest" />
+      <wsdl:output name="getNameResponse" message="impl:getNameResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="start">
+      <wsdl:input name="startRequest" message="impl:startRequest" />
+      <wsdl:output name="startResponse" message="impl:startResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="create">
+      <wsdl:input name="createRequest" message="impl:createRequest" />
+      <wsdl:output name="createResponse" message="impl:createResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="resume">
+      <wsdl:input name="resumeRequest" message="impl:resumeRequest" />
+      <wsdl:output name="resumeResponse" message="impl:resumeResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="setName">
+      <wsdl:input name="setNameRequest" message="impl:setNameRequest" />
+      <wsdl:output name="setNameResponse" message="impl:setNameResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="copy">
+      <wsdl:input name="copyRequest" message="impl:copyRequest" />
+      <wsdl:output name="copyResponse" message="impl:copyResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getContent">
+      <wsdl:input name="getContentRequest" message="impl:getContentRequest" />
+      <wsdl:output name="getContentResponse" message="impl:getContentResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdl:input name="getVersionRequest" message="impl:getVersionRequest" />
+      <wsdl:output name="getVersionResponse" message="impl:getVersionResponse" />
+      <wsdl:fault name="WebserviceException" message="impl:WebserviceException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MailingSoapBinding" type="impl:MailingWebservice">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getHeader">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getHeaderRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getHeaderResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDataSet">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDataSetRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDataSetResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getColumnNames">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getColumnNamesRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getColumnNamesResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDataSetFlat">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDataSetFlatRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDataSetFlatResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setMimeType">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setMimeTypeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setMimeTypeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setDefaultRecipientFilterEnabled">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setDefaultRecipientFilterEnabledRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setDefaultRecipientFilterEnabledResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="isDefaultRecipientFilterEnabled">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="isDefaultRecipientFilterEnabledRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="isDefaultRecipientFilterEnabledResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setOpenTrackingEnabled">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setOpenTrackingEnabledRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setOpenTrackingEnabledResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="isOpenTrackingEnabled">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="isOpenTrackingEnabledRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="isOpenTrackingEnabledResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setClickTrackingEnabled">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setClickTrackingEnabledRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setClickTrackingEnabledResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="isClickTrackingEnabled">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="isClickTrackingEnabledRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="isClickTrackingEnabledResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientListIds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRecipientListIdsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRecipientListIdsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setRecipientListIds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setRecipientListIdsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setRecipientListIdsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMaxRecipients">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getMaxRecipientsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMaxRecipientsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="isMaxRecipientsRandomOrder">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="isMaxRecipientsRandomOrderRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="isMaxRecipientsRandomOrderResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setMaxRecipients">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setMaxRecipientsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setMaxRecipientsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setMaxRecipientsPercentage">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setMaxRecipientsPercentageRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setMaxRecipientsPercentageResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="isMaxRecipientsPercentage">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="isMaxRecipientsPercentageRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="isMaxRecipientsPercentageResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMaxMailsPerHour">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getMaxMailsPerHourRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMaxMailsPerHourResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setMaxMailsPerHour">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setMaxMailsPerHourRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setMaxMailsPerHourResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getOverallRecipientCount">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getOverallRecipientCountRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getOverallRecipientCountResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSentRecipientCount">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSentRecipientCountRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSentRecipientCountResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFailedRecipientCount">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getFailedRecipientCountRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getFailedRecipientCountResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPredictedRecipientCount">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getPredictedRecipientCountRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getPredictedRecipientCountResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="pause">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="pauseRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="pauseResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="restart">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="restartRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="restartResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSendingStartedDate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSendingStartedDateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSendingStartedDateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSendingFinishedDate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSendingFinishedDateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSendingFinishedDateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendMail">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendMailRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendMailResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendMails">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendMailsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendMailsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendTestMail">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendTestMailRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendTestMailResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendTestMail2">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendTestMail2Request">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendTestMail2Response">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendTestMails">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendTestMailsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendTestMailsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendTestMailToAll">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendTestMailToAllRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendTestMailToAllResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSendingStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSendingStatusRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSendingStatusResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getIdsInStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getIdsInStatusRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getIdsInStatusResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getScheduleDate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getScheduleDateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getScheduleDateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCreatedDate">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCreatedDateRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCreatedDateResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFromName">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getFromNameRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getFromNameResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getFromEmailPrefix">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getFromEmailPrefixRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getFromEmailPrefixResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setReplyToName">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setReplyToNameRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setReplyToNameResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setReplyToAddress">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setReplyToAddressRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setReplyToAddressResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="encodeTrackingLinks">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="encodeTrackingLinksRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="encodeTrackingLinksResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="decodeTrackingLinks">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="decodeTrackingLinksRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="decodeTrackingLinksResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setVerpEnabled">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setVerpEnabledRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setVerpEnabledResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="isVerpEnabled">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="isVerpEnabledRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="isVerpEnabledResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateContent">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="validateContentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="validateContentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setAttachmentIds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setAttachmentIdsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setAttachmentIdsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getAttachmentIds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getAttachmentIdsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getAttachmentIdsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setRecipientFilterId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setRecipientFilterIdRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setRecipientFilterIdResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setRecipientFilterIds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setRecipientFilterIdsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setRecipientFilterIdsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientFilterId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRecipientFilterIdRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRecipientFilterIdResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRecipientFilterIds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRecipientFilterIdsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRecipientFilterIdsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setContent">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setContentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setContentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setFrom">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setFromRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setFromResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCharset">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCharsetRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCharsetResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setCharset">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setCharsetRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setCharsetResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMimeType">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getMimeTypeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMimeTypeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setSubject">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setSubjectRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setSubjectResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getIds">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getIdsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getIdsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSubject">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getSubjectRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getSubjectResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDescription">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDescriptionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDescriptionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setDescription">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setDescriptionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setDescriptionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCount">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCountRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCountResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancel">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="cancelRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cancelResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getStatusRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getStatusResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setHeader">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setHeaderRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setHeaderResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="remove">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="removeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="removeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setProperty">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setPropertyRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setPropertyResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProperty">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getPropertyRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getPropertyResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getName">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getNameRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getNameResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="start">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="startRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="startResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="create">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="resume">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="resumeRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="resumeResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setName">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="setNameRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="setNameResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="copy">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="copyRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="copyResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getContent">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getContentRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getContentResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getVersion">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getVersionRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getVersionResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="WebserviceException">
+        <wsdlsoap:fault use="literal" name="WebserviceException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MailingWebserviceService">
+    <wsdl:port name="Mailing" binding="impl:MailingSoapBinding">
+      <wsdlsoap:address location="https://api.campaign.episerver.net/soap11/Mailing" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

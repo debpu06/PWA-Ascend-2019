@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>👁 Icons / Set 1 / 20 SoME - Facebook</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M1.7660944,0 C0.790606008,0 0,0.790603046 0,1.76608779 L0,30.2337923 C0,31.2091572 0.790606008,32 1.7660944,32 L17.0922688,32 L17.0922688,19.6078907 L12.921984,19.6078907 L12.921984,14.778426 L17.0922688,14.778426 L17.0922688,11.2168756 C17.0922688,7.08377452 19.6165969,4.83318159 23.3036936,4.83318159 C25.0699079,4.83318159 26.5878139,4.96458907 27.0301168,5.02333877 L27.0301168,9.34276026 L24.4729368,9.34395923 C22.4677662,9.34395923 22.0794173,10.2967834 22.0794173,11.6950261 L22.0794173,14.778426 L26.8617803,14.778426 L26.2391511,19.6078907 L22.0794173,19.6078907 L22.0794173,32 L30.2339056,32 C31.2092741,32 32,31.2091572 32,30.2337923 L32,1.76608779 C32,0.790603046 31.2092741,0 30.2339056,0 L1.7660944,0 Z" id="path-1"></path>
+    </defs>
+    <g id="👁-Icons-/-Set-1-/-20-SoME---Facebook" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="MASK" fill="#FF0000" xlink:href="#path-1"></use>
+        <g id="🌈-Color-/-Fill-/-BLACK-#000" mask="url(#mask-2)"></g>
+    </g>
+</svg>

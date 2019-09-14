@@ -1,0 +1,24 @@
+﻿@using EPiServer;
+@using EPiServer.Web.Routing;
+@using EPiServer.Reference.Commerce.Site.Features.Shared.Extensions
+
+@model EPiServer.Commerce.Catalog.ContentTypes.EntryContentBase
+
+@{ 
+    var contentLoader = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<IContentLoader>();
+    var urlResolver = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<UrlResolver>();
+    var images = Model.GetAssets<IContentImage>(contentLoader, urlResolver);
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <img src="@images.First()" style="width: 100%;" />
+    </div>
+    <div class="col-xs-12">
+        <h2>@Model.DisplayName</h2>
+        @*@Model.Description*@
+        <a href="@urlResolver.GetUrl(Model.ContentLink)">
+            <button class="btn btn-default">Learn More</button>
+        </a>
+    </div>
+</div>

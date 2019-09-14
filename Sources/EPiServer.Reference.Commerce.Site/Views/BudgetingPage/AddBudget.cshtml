@@ -1,0 +1,95 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.Budgeting.ViewModels.BudgetingPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="spacer-left-l">
+                    @{ Html.RenderAction("Index", "B2BNavigation");}
+                    <section class="spacer-bottom-l">
+                        <div class="section-title spacer-bottom-l">
+                            @if (@Model.IsSubOrganization)
+                            {
+                                <h2 class="h3">@Html.Translate("/B2B/Budgeting/NewSuborganizationBudget")</h2>
+                            }
+                            else
+                            {
+                                <h2 class="h3">@Html.Translate("/B2B/Budgeting/NewOrganizationBudget")</h2>
+                            }
+                        </div>
+                        @using (Html.BeginForm("NewBudget", "BudgetingPage", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                <label class="col-sm-2">@Html.Translate("/B2B/Budgeting/Currency")</label>
+                                <div class="custom-select">
+                                    <span class="custom-select-split"></span>
+                                    <span class="custom-select-arrow arrow-down"></span>
+                                    <select id="currencyBudget">
+                                        @foreach (var option in Model.AvailableCurrencies)
+                                        {
+                                            <option value="@option">@option</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2">@Html.Translate("/B2B/Budgeting/Allocated")</label>
+                                <input id="amount" type="text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2">@Html.Translate("/B2B/Budgeting/StartDate")</label>
+                                <div class="custom-date-input">
+                                    <input type="text" id="startDate" class="form-control" />
+                                    <span class="icon-calendar glyphicon glyphicon-calendar"></span>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2">@Html.Translate("/B2B/Budgeting/DueDate")</label>
+                                <div class="custom-date-input">
+                                    <input type="text" id="dueDate" class="form-control" />
+                                    <span class="icon-calendar glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2">@Html.Translate("/B2B/Budgeting/Status")</label>
+                                <div class="custom-select">
+                                    <span class="custom-select-split"></span>
+                                    <span class="custom-select-arrow arrow-down"></span>
+                                    <select id="statusBudget">
+                                        <option value="Planned" selected="selected">@Html.Translate("/B2B/Budgeting/Planned")</option>
+                                        <option value="OnHold">@Html.Translate("/B2B/Budgeting/OnHold")</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="spacer-top-l">
+                                <button type="button" class="btn btn-primary jsNewBudget">
+                                    @Html.Translate("/Shared/Save")
+                                </button>
+                                <a href="@Url.Action("Index", "BudgetingPage")" class="button btn-default cancelNewBudget">
+                                    @Html.Translate("/Shared/Cancel")
+                                </a>
+                            </div>
+                        }
+                        <div id="BudgetWarningMessage" class="col-md-5 col-xs-12 alert alert-danger pull-right" hidden>
+                            <button type="button" class="close" data-hide="alert">&times;</button>
+                            <span class="warning-message warning-message-data"></span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,45 @@
+﻿@using EPiServer.Commerce.Order
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.SubscriptionHistory.ViewModels.PaymentPlanHistoryViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter container--gutter-inner">
+            <div class="col-xs-12 col-md-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="recent-orders">
+                    <div class="table-responsive">
+                        <table class="data-table" id="my-orders-table">
+                            <thead>
+                                <tr class="first last">
+                                    <th>@Html.Translate("/PaymentPlanHistory/Labels/PaymentPlanID")</th>
+                                    <th>@Html.Translate("/PaymentPlanHistory/Labels/PaymentPlanDate")</th>
+                                    <th><span class="nobr">@Html.Translate("/PaymentPlanHistory/Labels/TotalPrice")</span></th>
+                                    <th>@Html.Translate("/PaymentPlanHistory/Labels/ActiveStatus")</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model.PaymentPlans)
+                                {
+                                    <tr>
+                                        <td><a href="@(Model.PaymentPlanDetailsPageUrl)?paymentPlanId=@order.Id">#@order.Id</a></td>
+                                        <td>@order.Created.ToString()</td>
+                                        <td><span class="price">@order.GetTotal().ToString()</span></td>
+                                        <td><em>@order.IsActive</em></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Link });
+            }
+        </div>
+    </div>
+</section>

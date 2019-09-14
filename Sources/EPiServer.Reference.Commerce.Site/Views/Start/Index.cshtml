@@ -1,0 +1,24 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Start.ViewModels
+@using EPiServer.Editor;
+@model StartPageViewModel
+
+
+
+<section class="main-container">
+    <div class="container">
+        @if ((Model.CurrentContent.MainBody != null && !Model.CurrentContent.MainBody.IsEmpty) || PageEditing.PageIsInEditMode)
+        {
+            <div class="row">
+                @Html.PropertyFor(m => m.CurrentContent.MainBody)
+            </div>
+        }
+        <div class="row">
+            @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row" })
+        </div>
+        <div class="row">
+            @Html.PropertyFor(x => x.CurrentContent.BottomContentArea, new { CssClass = "row" })
+        </div>
+    </div>
+</section>
+
+

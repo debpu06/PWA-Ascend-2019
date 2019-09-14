@@ -1,0 +1,150 @@
+﻿@using EPiServer.Web.Routing
+@using EPiServer.Reference.Commerce.Site.Features.TrackingBuilder.Infrastructure
+@model EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels.NavigationViewModel
+
+<header>
+    <div class="header-container">
+        <div class="row nav-util">
+            <div class="container">
+                <ul class="list-inline pull-right top-links">
+                    <li>
+                        @if (!Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                        {
+
+                            <a href="@Url.Action("Index", "Login", new { returnUrl = !ContentReference.IsNullOrEmpty(Model.CurrentContentLink) ? Url.ContentUrl(Model.CurrentContentLink) : "/"})" class="icon-account">
+                                <i class="fa fa-user fa-fw"></i>
+                                @Html.Translate("/Header/Login")
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" class="dropdown-toggle icon-account" data-toggle="dropdown">
+                                <i class="fa fa-user fa-fw"></i>
+                                @Html.Translate("/Header/Hello") @Model.Name!
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right dropdown-login-box">
+                                <h4 class="dropdown-title">@(Model.StartPage.MyAccountLabel ?? Html.Translate("/Dashboard/Labels/MyAccount"))</h4>
+                                @foreach (var menuItem in Model.UserLinks)
+                                {
+                                    <a title="@menuItem.Title" href="@Url.ContentUrl(new EPiServer.Url(menuItem.Href))" class="list-group-item">
+                                        <span>
+                                            <span>@menuItem.Text</span>
+                                        </span>
+                                    </a>
+                                }
+                            </div>
+                        }
+                    </li>
+                    <li>
+                        <div class="header-change-user">
+                            @if (!Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                            {
+                                <div class="header-nav mobile-hide">
+                                    <div>
+                                        <a href="#" class="dropdown-toggle svg-icon-bg svg-icon-bg-down-arrow" data-toggle="dropdown" title="@Html.Translate("/Header/Login")">
+                                            <span class="hidden-xs">@Html.Translate("/Shared/ChangeUser")</span>
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-login-box">
+                                            <h4 class="dropdown-title">@Html.Translate("/Header/SignInAs")</h4>
+                                            <a href="@Url.Action("Login", "Login", new {userName = "admin@example.com", returnUrl = Request.Url.ToString()})" class="list-group-item">
+                                                <span>
+                                                    <h4 class="list-group-item-heading">@Html.Translate("/Header/GlobalAdmin")</h4>
+                                                    <p class="list-group-item-text">@Html.Translate("/Header/GlobalAdminDescription")</p>
+                                                </span>
+                                            </a>
+                                            @if (Model.ShowCommerceControls)
+                                            {
+                                                <a href="@Url.Action("Login", "Login", new {userName = "admin@smith.com", returnUrl = Request.Url.ToString()})" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">@Html.Translate("/Header/CustomerCatalog")</h4>
+                                                        <p class="list-group-item-text">@Html.Translate("/Header/CustomerCatalogDescription")</p>
+                                                    </span>
+                                                </a>
+                                                <a href="@Url.Action("Login", "Login", new { userName = "b2bAdmin@episerver.com", returnUrl = Request.Url.ToString() })" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">@Html.Translate("/Header/B2BAdmin")</h4>
+                                                        <p class="list-group-item-text">@Html.Translate("/Header/B2BAdminDescription")</p>
+                                                    </span>
+                                                </a>
+                                                <a href="@Url.Action("Login", "Login", new { userName = "b2bPurchaser@episerver.com", returnUrl = Request.Url.ToString() })" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">@Html.Translate("/Header/B2BPurchaser")</h4>
+                                                        <p class="list-group-item-text">@Html.Translate("/Header/B2BPurchaserDescription")</p>
+                                                    </span>
+                                                </a>
+                                                <a href="@Url.Action("Login", "Login", new { userName = "b2bApprover@episerver.com", returnUrl = Request.Url.ToString() })" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">@Html.Translate("/Header/B2BApprover")</h4>
+                                                        <p class="list-group-item-text">@Html.Translate("/Header/B2BApproverDescription")</p>
+                                                    </span>
+                                                </a>
+                                                <a href="@Url.Action("Login", "Login", new { userName = "salesrep@example.com", returnUrl = "/en/my-pages/my-accounts/" })" class="list-group-item">
+                                                    <span>
+                                                        <h4 class="list-group-item-heading">@Html.Translate("/Header/SalesRep")</h4>
+                                                        <p class="list-group-item-text">@Html.Translate("/Header/SalesRepDescription")</p>
+                                                    </span>
+                                                </a>
+                                            }
+                                            @if (Model.StartPage.QuickAccessLogins != null)
+                                            {
+                                                foreach (SwitchableUser user in Model.StartPage.QuickAccessLogins)
+                                                {
+                                                    <a href="@Url.Action("Login", "Login", new { userName = @user.UserName, returnUrl = Request.Url.ToString() })" class="list-group-item">
+                                                        <span>
+                                                            <h4 class="list-group-item-heading">@user.FirstName @user.LastName</h4>
+                                                            <p class="list-group-item-text">@user.UserDescription</p>
+                                                        </span>
+                                                    </a>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                    @if (Model.ShowCommerceControls)
+                    {
+                        <li>
+                            <div class="header-market">
+                                @{ Html.RenderAction("Index", "Market", new { contentLink = ViewContext.RequestContext.GetContentLink() }); }
+                            </div>
+                        </li>
+                        <li class="no-space">
+                            <div class="header-store">
+                                <div class="top-market-contain pull-right">
+                                    <a id="map-toggle" href="/en/store-locator/">
+                                        <span class="glyphicon glyphicon-map-marker"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    @if (Request.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                    {
+                        <li class="no-space">
+                            <div class="header-bookmark">
+                                <div class="top-market-contain pull-right">
+                                    @if (Model.IsBookmarked)
+                                    {
+                                        <a id="bookmark-toggle" contentId="@Model.CurrentContentLink.ID" bookmarked="true">
+                                            <span title="Bookmarked" class="glyphicon glyphicon-heart"></span>
+                                        </a>
+                                    }
+                                    else if (Model.CurrentContentLink != null)
+                                    {
+                                        <a id="bookmark-toggle" contentId="@Model.CurrentContentLink.ID" href="#">
+                                            <span title="Bookmark this page" class="glyphicon glyphicon-heart-empty"></span>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

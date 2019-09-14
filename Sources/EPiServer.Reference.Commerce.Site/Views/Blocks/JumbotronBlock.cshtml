@@ -1,0 +1,15 @@
+@model IBlockViewModel<JumbotronBlock>
+
+<div style="@Model.CurrentBlock.PaddingStyles">
+    <div class="row">
+        <div class="col-md-4 hidden-tablet hidden-phone">
+            @Html.PropertyFor(m => m.CurrentBlock.Image)
+        </div>
+
+        <div class="col-md-8">
+            <h1 class="jumbotron" @Html.EditAttributes(m => m.CurrentBlock.Heading)>@Model.CurrentBlock.Heading</h1>
+            <p class="subHeader" @Html.EditAttributes(m => m.CurrentBlock.SubHeading)>@Model.CurrentBlock.SubHeading</p>
+            <a class="btn-blue right" href="@Model.CurrentBlock.ButtonLink" id="jumboLink" @Html.EditAttributes(m => m.CurrentBlock.ButtonText)>@Model.CurrentBlock.ButtonText</a>
+        </div>
+    </div>
+</div>

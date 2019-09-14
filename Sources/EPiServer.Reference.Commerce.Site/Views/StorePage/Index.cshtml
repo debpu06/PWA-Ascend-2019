@@ -1,0 +1,69 @@
+﻿@using EPiServer.Framework.Web.Resources
+
+@model EPiServer.Reference.Commerce.Site.Features.Stores.ViewModels.StorePageViewModel
+
+@{
+    ClientResources.RequireScript("https://code.jquery.com/ui/1.12.1/jquery-ui.min.js").AtFooter();
+    ClientResources.RequireStyle("https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.css").AtHeader();
+}
+
+@section AdditionalScripts
+{
+    <script type="text/javascript" src="~/Assets/Base/Scripts/Features/Selective/StoreLocator.js"></script>
+
+    <script type="text/javascript">
+        function GetMap() { StoreLocator.loadMapScenario(); };
+
+        $(document).ready(() => { StoreLocator.init(); });
+
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?&callback=GetMap' async defer></script>
+}
+
+@if (Model.StoreViewModel.Stores.Any())
+{
+    <div id="storeLocators" class="col-md-12 container-main" style="padding:50px;">
+        <h1 class="heading-title col-lg-12">@Html.Translate("/Stores/StoreLocator")</h1>
+        <div id="storesSelector" class="col-md-4 col-sm-12">
+            <input id="selectedStore" name="selectedStore" type="hidden" value="@Model.StoreViewModel.SelectedStore" />
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Html.Translate("/Stores/SelectedStore"):</h3>
+                </div>
+                <div class="panel-body">
+                    <span id="storeName">
+                        @Model.StoreViewModel.SelectedStoreName
+                    </span>
+                </div>
+            </div>
+            @foreach (var viewModel in Model.StoreViewModel.Stores)
+            {
+                <div class="row viewDetailStore">
+                    <div class="col-md-8">
+                        <div class="store-detail">
+                            <h4>@viewModel.Name</h4>
+                            <span>@viewModel.Line1</span>
+                            @if (!string.IsNullOrEmpty(viewModel.Line2))
+                            {
+                                <span>@viewModel.Line2</span>
+                            }
+                            <span>@string.Format("{0}, {1}, {2}", viewModel.City, viewModel.RegionName, viewModel.RegionCode)</span>
+                            <span class="StoreLocator" style="display:none" address="@string.Format("{0}, {1}, {2}, {3}",viewModel.Line1, viewModel.Line2, viewModel.City, viewModel.CountryName)"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="button" type="button" onclick="StoreLocator.setStore('@viewModel.Code', '@viewModel.Name');">
+                            <span>
+                                @Html.Translate("/Stores/SetDefaultStore")
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+        <h5 style="cursor: pointer; float: left" onclick="StoreLocator.showCurrentLocation()"><span style="padding-right: 5px" class="glyphicon glyphicon-map-marker"></span><u>Use current location</u></h5>
+        <div id="storeMap" class="col-md-8 col-sm-12">
+            <input id="searchMapInput" class="search-box" type="text" placeholder="Search Box" style="z-index: 1; left: 0">
+        </div>
+    </div>
+}

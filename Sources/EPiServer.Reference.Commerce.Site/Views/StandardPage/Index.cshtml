@@ -1,0 +1,19 @@
+@using EPiBootstrapArea
+@model EPiServer.Reference.Commerce.Site.Features.Editorial.ViewModels.StandardPageViewModel
+@{
+    Layout = "~/Features/Alloy/Views/Shared/Layouts/_LeftNavigation.cshtml";
+}
+
+<section class="main-container">
+    <div class="container">
+        <h1 class="heading-title" @Html.EditAttributes(x => x.CurrentContent.PageName)>@Model.CurrentContent.PageName</h1>
+        <p class="introduction" @Html.EditAttributes(x => x.CurrentContent.MetaDescription)>@Model.CurrentContent.MetaDescription</p>
+        @Html.PropertyFor(x => x.CurrentContent.TopContentArea, new { CssClass = "overflow-hidden clearfix margin-bottom-md" })
+        <div>
+            @Html.PropertyFor(x => x.CurrentContent.MainBody, new { CssClass = "overflow-hidden clearfix" })
+        </div>
+        @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "overflow-hidden clearfix" })
+    </div>
+</section>
+
+

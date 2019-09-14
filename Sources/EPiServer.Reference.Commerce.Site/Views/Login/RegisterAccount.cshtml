@@ -1,0 +1,132 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Login.ViewModels.RegisterAccountViewModel
+
+<div class="col-1 new-users jsLoginBlockWrapper">
+
+    <strong>@Html.Translate("/Registration/Heading")</strong>
+
+    <div class="content">
+        <p>
+            By creating an account with our store, you will be able to move through the checkout process faster, 
+            store multiple shipping addresses, view and track your orders in your account and more.
+        </p>
+        
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div>
+                @foreach (var item in ViewData.ModelState.Where(x => x.Key == string.Empty))
+                {
+                    foreach (var error in item.Value.Errors)
+                    {
+                        <p style="color:r">@error.ErrorMessage</p>
+                    }
+                }
+            </div>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger"><p>@Model.ErrorMessage</p></div>
+        }
+
+        @using (Html.BeginForm("RegisterAccount", "Login", FormMethod.Post, new { @class = "jsLoginBlock", @role = "form" }))
+        {
+            @Html.HiddenFor(x => x.Address.Name)
+
+            <ul class="form-list">
+                <li>
+                    @Html.LabelFor(x => x.Email) <span class="required">*</span><br />
+                    @Html.TextBoxFor(x => x.Email, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(x => x.Email)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Password) <span class="required">*</span><br />
+                    @Html.PasswordFor(x => x.Password, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(x => x.Password)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Password2) <span class="required">*</span><br />
+                    @Html.PasswordFor(x => x.Password2, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(x => x.Password2)
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(x => x.Address.FirstName) <span class="required">*</span><br />
+                            @Html.TextBoxFor(x => x.Address.FirstName, new { @class = "input-text" })
+                            @Html.ValidationMessageFor(x => x.Address.FirstName)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(x => x.Address.LastName) <span class="required">*</span><br />
+                            @Html.TextBoxFor(x => x.Address.LastName, new { @class = "input-text" })
+                            @Html.ValidationMessageFor(x => x.Address.LastName)
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Address.Line1) <span class="required">*</span><br />
+                    @Html.TextBoxFor(x => x.Address.Line1, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(x => x.Address.Line1)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Address.Line2) <br />
+                    @Html.TextBoxFor(x => x.Address.Line2, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(x => x.Address.Line2)
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-md-8">
+                            @Html.LabelFor(x => x.Address.City) <span class="required">*</span><br />
+                            @Html.TextBoxFor(x => x.Address.City, new { @class = "input-text" })
+                            @Html.ValidationMessageFor(x => x.Address.City)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(x => x.Address.PostalCode) <span class="required">*</span><br />
+                            @Html.TextBoxFor(x => x.Address.PostalCode, new { @class = "input-text" })
+                            @Html.ValidationMessageFor(x => x.Address.PostalCode)
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Address.CountryCode) <span class="required">*</span><br />
+                    @Html.DropDownListFor(x => x.Address.CountryCode, new SelectList(Model.Address.CountryOptions, "Code", "Name", Model.Address.CountryCode), new { @class = "input-text jsChangeCountry" })
+                    @Html.ValidationMessageFor(x => x.Address.CountryCode)
+                    @Html.Hidden("address-htmlfieldprefix", "Address")
+                </li>
+                <li>
+                    @Html.EditorFor(model => model.Address.CountryRegion, Model.Address.CountryRegion)
+                </li>
+                <li>
+                    <label>
+                        @Html.CheckBoxFor(x => x.Newsletter, new { @type = "checkbox" }) @Html.Translate("/Registration/Form/Label/Newsletter")
+                    </label>
+                </li>
+            </ul>
+
+            <p class="required">* Required Fields</p>
+
+            <div class="buttons-set">
+                <button type="submit" class="button create-account">@Html.Translate("/Registration/Form/Label/Submit")</button>
+            </div>
+        }
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

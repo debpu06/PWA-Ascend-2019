@@ -1,0 +1,60 @@
+﻿@model IEnumerable<EPiServer.Reference.Commerce.Site.Features.Product.ViewModels.ProductTileViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model.Any())
+{
+    <ul class="product-dropdown product-row list-unstyled">
+        <li class="list-group-item product-item search-title">
+            <a class="link--black">
+                <div class="media">
+                    <div class="media-body">
+                        <h3 class="product-row__item__title"><b>Products</b></h3>
+                    </div>
+                </div>
+            </a>
+        </li>
+        @foreach (var product in Model.Where(x => x.DiscountedPrice.HasValue))
+        {
+            var hasDiscount = product.DiscountedPrice.GetValueOrDefault() < product.PlacedPrice;
+            var productLevelClass = hasDiscount ? "list-group-item product-item has-discount" : "list-group-item product-item";
+            bool renderWishListButtons = User.Identity.IsAuthenticated && ViewBag.IsWishList != null && ViewBag.IsWishList == true;
+
+            <li class="@productLevelClass">
+                <a href="@product.Url" class="link--black">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="@product.ImageUrl" alt="@product.DisplayName" class="media-object product-row__item__image" />
+                        </div>
+                        <div class="media-body">
+                            <h3 class="product-row__item__title">@product.DisplayName</h3>
+
+                            <div class="product-row__item__price">
+                                @if (hasDiscount)
+                                {
+                                    <h5 class="product-price price--original">@Helpers.RenderMoney(product.PlacedPrice)</h5>
+                                    <h5 class="product-price--discount">@Helpers.RenderMoney(product.DiscountedPrice.GetValueOrDefault())</h5>
+                                }
+                                else
+                                {
+                                    <h5 class="product-row__item__price product-price">@Helpers.RenderMoney(product.PlacedPrice)</h5>
+                                }
+                            </div>
+
+                            <div class="product-row__item__action">
+                                @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { @class = "form-inline", data_container = "headerCart" }))
+                                {
+                                    <input type="button" class="button jsAddToCart" value="add to cart" data-container="MiniCart" />
+                                    @Html.Hidden("code", product.FirstVariationCode)
+                                }
+                            </div>
+
+
+                        </div>
+                    </div>
+                </a>
+            </li>
+        }
+    </ul>
+}

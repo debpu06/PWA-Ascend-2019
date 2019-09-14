@@ -1,0 +1,11 @@
+﻿@model ElevatedRoleViewModel
+
+@if (Model.IsAccess)
+{
+    @Html.PropertyFor(x => x.CurrentBlock.Content)
+}
+else
+{
+    <h1>Access denied.</h1>
+    <p>You don't have permission to access on this area.</p>
+}

@@ -1,0 +1,46 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Alloy.ViewModels.AlloyProfilePageViewModel
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h3>@Html.PropertyFor(m => m.CurrentContent.ProfileHeader)</h3>
+                @using (Html.BeginForm("Save", "AlloyProfilePage"))
+                {
+                    <div class="form-group">
+                        <label for="Profile_FirstName">First Name</label>
+                        @Html.TextBoxFor(m => m.Profile.FirstName, new { @class = "form-control", autofocus = "autofocus" })
+                    </div>
+                    <div class="form-group">
+                        <label for="Profile_LastName">Last Name</label>
+                        @Html.TextBoxFor(m => m.Profile.LastName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="Profile_Title">Title</label>
+                        @Html.TextBoxFor(m => m.Profile.Title, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="Profile_Email">Email</label>
+                        @Html.TextBoxFor(m => m.Profile.Email, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="Profile_Company">Company</label>
+                        @Html.TextBoxFor(m => m.Profile.Company, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="button-dark button--sm">Save Your Profile</button>
+                    </div>
+                }
+                @Html.PropertyFor(m => m.CurrentContent.LeftHandContentArea)
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div>
+                    @Html.PropertyFor(m => m.CurrentContent.MainBody)
+                </div>
+                <br />
+                <div>
+                    @Html.PropertyFor(m => m.CurrentContent.MainContentArea)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,11 @@
+@using EPiBootstrapArea
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Site.Features.Alloy.Models.Pages.AlloyStartPage>
+
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row  equal-height" })
+        </div>
+    </div>
+</section>
+

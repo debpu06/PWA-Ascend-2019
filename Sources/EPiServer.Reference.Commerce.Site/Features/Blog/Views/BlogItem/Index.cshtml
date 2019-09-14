@@ -1,0 +1,75 @@
+﻿@using EPiServer.Web.Mvc.Html
+@model EPiServer.Reference.Commerce.Site.Features.Blog.Models.ViewModels.BlogItemPageModel
+
+@Html.FullRefreshPropertiesMetaData()
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter-layout">
+            <div class="col-main col-sm-9 margin-right-z">
+                @if (Model.CurrentContent.StartPublish != null)
+                {
+                    <div @Html.EditAttributes("PageStartPublish")>
+                        @Html.PropertyFor(x => x.CurrentContent.StartPublish, new EPiServer.Web.Mvc.EditHint() { ContentDataPropertyName = "PageStartPublish" })
+                    </div>
+                }
+                <div class="blog-wrapper" id="main">
+                    <div class="site-content" id="primary">
+                        <div role="main" id="content">
+                            <article class="blog_entry clearfix">
+                                <header class="blog_entry-header clearfix">
+                                    <div class="blog_entry-header-inner">
+                                        <h3 class="blog_entry-title"> @Model.CurrentContent.MetaTitle </h3>
+                                    </div>
+                                </header>
+                                <div class="entry-content">
+                                    <div class="featured-thumb">
+                                        @if (!ContentReference.IsNullOrEmpty(Model.CurrentContent.PageImage))
+                                        {
+                                            <div @Html.EditAttributes(x => x.CurrentContent.PageImage)>
+                                                <img class="img-responsive" src="@Url.ContentUrl(Model.CurrentContent.PageImage)"/>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <img class="img-responsive" alt="blog-img4" src="/Assets/Mosey/images/blog-img1.jpg">
+                                        }
+
+                                    </div>
+                                    <div class="entry-content">
+                                        @Html.PropertyFor(x => x.CurrentContent.MainBody)
+                                    </div>
+                                </div>
+                                <footer class="entry-meta">
+                                    This entry was posted on
+                                    <time datetime="@Model.StartPublish.ToString()" class="entry-date">@Model.StartPublish.ToString()</time>
+
+                                    @if (Model.Tags.Any())
+                                    {
+                                        @Html.Raw(" with the following tags ")
+                                        foreach (var tag in Model.Tags)
+                                        {
+                                            <a rel="category tag" title="@tag.DisplayName" href="@tag.Url">
+                                                @tag.DisplayName
+                                            </a>
+                                        }
+                                    }
+                                </footer>
+                            </article>
+                            @Html.PropertyFor(x => x.CurrentContent.Comments, new { CssClass = "row", Tag = EPiBootstrapArea.ContentAreaTags.FullWidth })
+                            @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row equal-height", Tag = "col-md-8" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aside class="col-right sidebar col-sm-3">
+                <div role="complementary" class="widget_wrapper13" id="secondary">
+                    @Html.PropertyFor(x => x.CurrentContent.TagCloud)
+
+                    @Html.PropertyFor(x => x.CurrentContent.Archive)
+
+                    @Html.PropertyFor(x => x.CurrentContent.RightContentArea, new { CssClass = "row equal-height" })
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

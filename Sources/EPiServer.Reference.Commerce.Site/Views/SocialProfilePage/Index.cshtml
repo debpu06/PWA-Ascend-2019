@@ -1,0 +1,150 @@
+﻿@using EPiServer.Commerce.Order
+@using EPiServer.Reference.Commerce.Site.Features.SocialProfile.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.SocialProfile.ViewModels.SocialProfilePageViewModel
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter">
+            <div class="col-main col-sm-9">
+                <div class="my-account">
+                    <div class="page-title">
+                        <h2>@Model.LoyaltyContact.Contact.FirstName @Model.LoyaltyContact.Contact.LastName Social Page</h2>
+                    </div>
+                    <div class="add_info">
+                        <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
+                            <li class="active">
+                                <a href="#recent_orders_tabs" data-toggle="tab">Recent Orders</a>
+                            </li>
+                            <li>
+                                <a href="#comment_tabs" data-toggle="tab">Comments</a>
+                            </li>
+                        </ul>
+                        <div id="productTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="recent_orders_tabs">
+                                <div class="std">
+                                    <div class="dashboard">
+                                        <div class="recent-orders">
+                                            <div class="table-responsive">
+                                                <table class="data-table" id="my-orders-table">
+                                                    <thead>
+                                                        <tr class="first last">
+                                                            <th>@Html.Translate("/OrderHistory/Labels/OrderID")</th>
+                                                            <th>@Html.Translate("/OrderHistory/Labels/OrderDate")</th>
+                                                            <th><span class="nobr">@Html.Translate("/OrderHistory/Labels/TotalPrice")</span></th>
+                                                            <th>@Html.Translate("/OrderHistory/Labels/Status")</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var order in Model.Orders)
+                                                        {
+                                                            <tr>
+                                                                <td>#@order.PurchaseOrder.OrderNumber</td>
+
+                                                                <td>@order.PurchaseOrder.Created.ToLongDateString()</td>
+                                                                <td><span class="price">@order.PurchaseOrder.GetTotal().ToString()</span></td>
+                                                                <td><em>@order.PurchaseOrder.OrderStatus</em></td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="comment_tabs">
+                                <div class="box-reviews1">
+                                    <div class="form-add">
+                                        <fieldset>
+                                            @Html.Partial("SocialCommentForm", new SocialCommentViewModel(Model.User))
+                                            <div class="review2 comment-list">
+                                                @foreach (var comment in Model.Comments)
+                                                {
+                                                    <div style="font-weight: bold;"> @comment.Created.ToLocalTime() @comment.Author.Id said:</div>
+                                                    <div>@comment.Body </div>
+                                                    <hr />
+                                                }
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-right col-xs-12 col-md-3">
+                <div class="bblock block-account">
+                    <div class="block-title">
+                        Loyalty statistics
+                    </div>
+                    <div class="block-content">
+                        <ul>
+                            <li class="">
+                                <b class="loyalty-statistic">Points:</b> @Model.LoyaltyContact.Points
+                            </li>
+                            <li class="">
+                                <b class="loyalty-statistic">Number Of Orders:</b> @Model.LoyaltyContact.NumberOfOrders
+                            </li>
+                            <li class="">
+                                <b class="loyalty-statistic">Number Of Reviews:</b> @Model.LoyaltyContact.NumberOfReviews
+                            </li>
+                            <li class="">
+                                <b class="loyalty-statistic">Tier: </b><img class="tier-icon" src="@Model.TierUrl"> @Model.LoyaltyContact.Tier
+                            </li>
+                        </ul>
+                        <div class="loyalty-container">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                            <a class="loyalty-link" data-toggle="collapse" data-target="#loyalty-program" aria-expanded="true" aria-controls="loyalty-program">
+                                About loyalty program
+                            </a>
+                        </div>
+                        <div id="loyalty-program" class="collapse">
+                            <i>*All orders and reviews before Loyalty program started will not count and get points.</i>
+                            <br />
+                            <i>*A order - 10 points.</i>
+                            <br />
+                            <i>*A review - 1 point.</i>
+                            <br />
+                            <i>*Tiers and points:</i>
+                            <br />
+                            <img class="tier-icon" src="~/Assets/Mosey/images/tiers/classic.svg"> Classic: 0 - 100 points
+                            <br />
+                            <img class="tier-icon" src="~/Assets/Mosey/images/tiers/bronze.svg"> Bronze: 101 - 200 points
+                            <br />
+                            <img class="tier-icon" src="~/Assets/Mosey/images/tiers/silver.svg"> Silver: 201 - 500 points
+                            <br />
+                            <img class="tier-icon" src="~/Assets/Mosey/images/tiers/gold.svg"> Gold: 501 - 1000 points
+                            <br />
+                            <img class="tier-icon" src="~/Assets/Mosey/images/tiers/platium.svg"> Platium: 1001 - 2000 points
+                            <br />
+                            <img class="tier-icon" src="~/Assets/Mosey/images/tiers/diamond.svg"> Diamond: Over 2000 points
+                        </div>
+                    </div>
+                </div>
+                <div class="bblock block-account">
+                    <div class="block-title">
+                        Activity stream
+                    </div>
+                    <div class="block-content">
+                        <ul>
+                            @foreach (var feed in Model.Feeds)
+                            {
+                                <li class="">
+                                    <span class="social-feed">
+                                        @feed.Heading
+                                        @if (feed.Description != null)
+                                        {
+                                            <br />
+                                            <b>@feed.Description</b>
+                                        }
+                                    </span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

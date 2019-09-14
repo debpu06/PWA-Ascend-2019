@@ -1,0 +1,23 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Core
+@using EPiServer.Editor
+@using EPiServer.Web.Mvc.Html
+@model EPiServer.Reference.Commerce.Site.Features.Blog.Models.ViewModels.BlogItemPageModel
+
+<div class="col-md-4">
+   
+    <div @Html.EditAttributes("PageCategory")>
+        <span>
+            @Html.Translate("/Blog/Tags"):
+        </span>
+
+        @foreach (var item in Model.Tags)
+        {
+            <span class="icon-tags">&nbsp;</span> <a href="@item.Url">@item.Title</a>
+        }
+    </div>
+</div>
+
+<div class="col-md-8" @Html.EditAttributes(x => x.MainBody)>
+        @Html.DisplayFor(x => x.MainBody)
+    </div>

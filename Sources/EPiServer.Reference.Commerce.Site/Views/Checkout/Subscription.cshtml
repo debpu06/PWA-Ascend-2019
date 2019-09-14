@@ -1,0 +1,54 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.CheckoutViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+
+<section class="main-container col2-layout" id="billingInformationView">
+    <div class="main container container--gutter margin-bottom-lg">
+        <div class="col-main">
+            @Html.Partial("_CheckoutStatusBar", 7)
+        </div>
+        <div class="row">
+            <div class="col-main">
+                <form class="jsCheckoutForm" action="@Url.Action("AddSubscription", "Checkout")" method="post" novalidate>
+                    <div class="row section-box container--gutter-layout">
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(x => x.IsUsePaymentPlan)
+                                @Html.Translate("/Shared/CreateSubscription")
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.PaymentPlanSetting.CycleMode)
+                            @Html.DropDownListFor(x => x.PaymentPlanSetting.CycleMode, Model.Modes, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.PaymentPlanSetting.CycleLength)
+                            @Html.TextBoxFor(x => x.PaymentPlanSetting.CycleLength, new { @class = "form-control", type = "number" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 pull-left container-buttons-sm">
+                            <a class="button-light back margin-right-sm float-left" href="@Url.Action("BillingInformation", new
+                                                         {
+                                                             node = Model.CurrentContent.ContentLink
+                                                         })" title="@Html.Translate("/Shared/Back")">
+                                <span>
+                                    @Html.Translate("/Shared/Back")
+                                </span>
+                            </a>
+                            <button class="button-dark continue button-billing" type="button">
+                                <span>
+                                    <span>@Html.Translate("/Shared/Continue")</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

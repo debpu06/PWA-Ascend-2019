@@ -1,0 +1,168 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Search.ViewModels.SearchViewModel<EPiServer.Reference.Commerce.Site.Features.Product.Models.FashionNode>
+
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+<section class="main-container col2-left-layout">
+
+    <div class="category-description std">
+        <div class="container">
+            @Html.PropertyFor(x => x.CurrentContent.TopContentArea, new { CssClass = "row" })
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="@(Model.ShowCommerceControls ? "col-main col-sm-9 col-sm-push-3 category-grid" : "category-grid")">
+                <article class="col-main row">
+
+                    <div class="page-title">
+                        <h2>@Html.PropertyFor(x => x.CurrentContent.DisplayName)</h2>
+                    </div>
+                    @using (Html.BeginForm("Index", "Category", FormMethod.Get, new { @class = "jsSearchForm" }))
+                    {
+                        <input class="jsSearchPage" hidden id="FilterOption_Page" name="FilterOption.Page" type="text" value="@Model.FilterOption.Page" />
+                        <input class="jsSearchPageSize" hidden id="FilterOption_PageSize" name="FilterOption.PageSize" type="text" value="@Model.FilterOption.PageSize" />
+                        <input class="jsSearchSort" hidden id="FilterOption_Sort" name="FilterOption.Sort" type="text" value="@Model.FilterOption.Sort" />
+                        <input class="jsSearchSortDirection" hidden id="FilterOption_SortDirection" name="FilterOption.SortDirection" type="text" value="@Model.FilterOption.SortDirection" />
+                        <input class="jsSearchViewSwitcher" hidden id="FilterOption_ViewSwitcher" name="FilterOption.ViewSwitcher" type="text" value="@Model.FilterOption.ViewSwitcher" />
+                        <div class="toolbar">
+                            <div class="sorter">
+                                <div class="view-mode">
+                                    <span title="Grid" class="view-button @(Model.FilterOption.ViewSwitcher == "Grid" ? "button-active" : "") button-grid" onclick="Search.changeView('Grid')">&nbsp;</span>
+                                    <span title="List" class="view-button @(Model.FilterOption.ViewSwitcher == "List" ? "button-active" : "") button-list" onclick="Search.changeView('List')">&nbsp;</span>
+                                </div>
+                            </div>
+                            <div id="sort-by">
+                                <label class="left">@Html.Translate("/Search/SortBy"): </label>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            @(string.IsNullOrEmpty(Model.FilterOption.Sort) ? "Position" : Model.FilterOption.Sort)<span class="right-arrow"></span>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a onclick="Search.changeSort('Name')">@Html.Translate("/Search/Name")</a>
+                                            </li>
+                                            <li>
+                                                <a onclick="Search.changeSort('Price')">@Html.Translate("/Search/Price")</a>
+                                            </li>
+                                            <li><a onclick="Search.changeSort('Position')">@Html.Translate("/Search/Position")</a></li>
+                                            <li><a onclick="Search.changeSort('Recommended')">@Html.Translate("/Search/Recommended")</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <a class="button-asc left" onclick="Search.changeSortDirection('@(Model.FilterOption.SortDirection.Equals("Asc") ? "Desc" : "Asc")')" title="@(Model.FilterOption.SortDirection.Equals("Asc") ? Html.Translate("/Search/SetDescending") : Html.Translate("/Search/SetAscending")))">
+                                    <span class="@(Model.FilterOption.SortDirection.Equals("Asc") ? "glyphicon glyphicon-arrow-down" : "glyphicon glyphicon-arrow-up") "></span>
+                                </a>
+                            </div>
+                            <div class="pager">
+                                <div id="limiter">
+                                    <label>@Html.Translate("/Search/View"): </label>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                @Model.FilterOption.PageSize
+                                                <span class="right-arrow"></span>
+                                            </a>
+                                            <ul>
+                                                <li>
+                                                    <a onclick="Search.changePageSize(@(Model.FilterOption.PageSize == 15 ? 20 : 15))">@(Model.FilterOption.PageSize == 15 ? 20 : 15)</a>
+                                                </li>
+                                                <li>
+                                                    <a onclick="Search.changePageSize(@(Model.FilterOption.PageSize == 30 || Model.FilterOption.PageSize == 35 ? 20 : 30))">@(Model.FilterOption.PageSize == 30 || Model.FilterOption.PageSize == 35 ? 20 : 30)</a>
+                                                </li>
+                                                <li>
+                                                    <a onclick="Search.changePageSize(@(Model.FilterOption.PageSize == 35 ? 30 : 35))">@(Model.FilterOption.PageSize == 35 ? 30 : 35)</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="pages">
+                                    <label>@Html.Translate("/Search/Page"):</label>
+                                    <ul class="pagination">
+                                        <li>
+                                            <a onclick="Search.changePage(@(Model.FilterOption.Page > 1 ? Model.FilterOption.Page - 1 : Model.FilterOption.Page))">
+                                                &laquo;
+                                            </a>
+                                        </li>
+                                        @if (Model.FilterOption.Pages.Count > 0)
+                                        {
+                                            foreach (var page in Model.FilterOption.Pages)
+                                            {
+                                        <li class="@(Model.FilterOption.Page == page ? "active" : "")">
+                                            <a onclick="Search.changePage(@page)">
+                                                @page.ToString()
+                                            </a>
+                                        </li>
+                                            }
+                                        <li>
+                                            <a onclick="Search.changePage(@(Model.FilterOption.Page + 1 > Model.FilterOption.Pages.Last() ? Model.FilterOption.Pages.Last() : Model.FilterOption.Page + 1))">
+                                                &raquo;
+                                            </a>
+                                        </li>
+                                        }
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="category-products">
+                            @if (Model.FilterOption.ViewSwitcher == "Grid")
+                            {
+                                <ul class="products-grid">
+                                    @foreach (var productViewModel in Model.ProductViewModels)
+                                    {
+                                        <li class="@(Model.ShowCommerceControls ? "item col-lg-4 col-md-3 col-sm-4 col-xs-6" : "item col-lg-3 col-md-3 col-sm-4 col-xs-6")">
+                                            @Html.Partial("_ProductGrid", productViewModel)
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <ol class="products-list">
+                                    @foreach (var productViewModel in Model.ProductViewModels)
+                                    {
+                                        <li class="item">
+                                            @Html.Partial("_ProductList", productViewModel)
+                                        </li>
+                                    }
+                                </ol>
+                            }
+                        </div>
+
+                    }
+
+                </article>
+
+                @if (Model.ShowRecommendations)
+                {
+                    <div class="slider-items-products">
+                        <div class="new_title center">
+                            <h2>@Html.Translate("/Shared/RecommendationsForYou")</h2>
+                        </div>
+                        @{ Html.RenderAction("Index", "Recommendations", new { recommendations = Model.Recommendations });}
+                    </div>
+                            }
+            </div>
+
+        @if (Model.ShowCommerceControls)
+        {
+            <div class="col-left sidebar col-sidebar-3 col-xs-12 col-sm-pull-9">
+                <aside class="col-left sidebar">
+                    @Html.Partial("_CategoriesFilter", Model.CategoriesFilter)
+                    @Html.Action("Facet", new { Model.CurrentContent, Model.FilterOption })
+                    @Html.Action("RecentlyBrowsed")
+                </aside>
+            </div>
+        }
+    </div>
+    </div>
+</section>

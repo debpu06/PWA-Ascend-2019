@@ -1,0 +1,20 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.QuickOrder.ViewModels.QuickOrderPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            
+            <div class = "@(!Request.Browser.IsMobileDevice ? "col-main col-sm-9" : "col-main")">
+                 <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                    @Html.PropertyFor(m => m.CurrentContent.QuickOrderBlockContentArea)
+            </div>
+            @if (!Request.Browser.IsMobileDevice)
+            {
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Link });
+            }
+        </div>
+    </div>
+</section>

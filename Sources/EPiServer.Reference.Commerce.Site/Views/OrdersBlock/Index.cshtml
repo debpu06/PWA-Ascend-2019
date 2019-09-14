@@ -1,0 +1,38 @@
+﻿@using EPiServer.Commerce.Order
+@model EPiServer.Reference.Commerce.Site.Features.OrderHistory.ViewModels.OrderHistoryViewModel
+
+@{ 
+    Layout = null;
+}
+<br />
+            <div class="spacer-left-l">
+                <div class="section-box">
+                    @if(Model.CurrentCustomer.Organization != null) { 
+                    <h2>Welcome @Model.CurrentCustomer.Organization.Name</h2>
+                    }
+                    @Html.PropertyFor(x => x.CurrentContent.MainBody)
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>@Html.Translate("/OrderHistory/Labels/OrderID")</th>
+                            <th>@Html.Translate("/OrderHistory/Labels/OrderDate")</th>
+                            <th>@Html.Translate("/OrderHistory/Labels/Amount")</th>
+                            <th>@Html.Translate("/OrderHistory/Labels/Status")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr class="orderElement @(order.QuoteStatus ?? order.PurchaseOrder.OrderStatus.ToString())">
+                                <td><a href="@(Model.OrderDetailsPageUrl)?orderGroupId=@order.OrderGroupId">#@order.PurchaseOrder.OrderNumber</a></td>
+                                <td>@order.PurchaseOrder.Created.ToLongDateString()</td>
+                                <td>@order.PurchaseOrder.GetTotal().ToString()</td>
+                                <td>@(order.QuoteStatus ?? order.PurchaseOrder.OrderStatus.ToString())</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+    

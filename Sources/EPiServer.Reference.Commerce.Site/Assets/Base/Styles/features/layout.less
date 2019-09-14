@@ -1,0 +1,278 @@
+﻿/*=================== 2. Layout ==================*/
+.main-col {
+    margin: auto;
+    overflow: hidden;
+}
+/* Base Columns */
+.col-left {
+    margin-bottom: 0px;
+}
+
+.col-right {
+    margin-bottom: 0px;
+}
+/* 1 Column Layout */
+.col1-layout .header-background-default {
+    margin: 20px;
+    padding: 0;
+}
+
+.col1-layout .col-main {
+    float: none;
+    width: auto;
+}
+/* 2 Columns Layout */
+.col2-right-layout ol.opc .col-md-4 {
+    margin-right: 15px;
+}
+/* 3 Columns Layout */
+.col3-layout .col-main {
+}
+
+.col3-layout .col-wrapper {
+    float: left;
+    width: 780px;
+}
+
+    .col3-layout .col-wrapper .col-main {
+        float: right;
+    }
+
+.main-container {
+    min-height: 400px;
+    padding: 0px;
+}
+
+/*compare page*/
+
+.compare-table .product-shop-row td {
+    position: relative;
+    text-align: center;
+}
+
+.compare-table .btn-cancel {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.compare-table tr.odd th {
+    background-color: #ececec;
+}
+
+.compare-table tr.even th {
+    background-color: #e5e5e5;
+}
+
+/*dilevery*/
+
+.info-back-btn {
+    clear: both;
+    margin: 15px 0 0;
+    padding: 6px 15px;
+    display: inline-block;
+    border: 2px #B5B5B5 solid;
+    background-color: #E2E2E2;
+}
+
+    .info-back-btn:hover {
+        border: 2px @color-primary solid;
+        background-color: #fff;
+    }
+
+.styled-list.arrow > li:before {
+    margin: -1px 8px 0 -20px;
+    content: '\f00c';
+    font-family: FontAwesome;
+    font-size: 1em;
+}
+
+.styled-list li:before {
+    color: #666666;
+    float: left;
+}
+
+.styled-list.arrow > li {
+    margin-left: -15px;
+    padding-left: 35px;
+}
+
+.styled-list {
+    position: relative;
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+    line-height: 18px;
+}
+
+    .styled-list li {
+        margin-bottom: 6px;
+        padding: 0;
+    }
+
+.delivery h3 {
+    margin-top: auto;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cart {
+    background-color: #FFFFFF;
+    padding: 10px 0;
+    margin-top: 5px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+.grey-container {
+    background: #f2f2f2;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    color: #000;
+}
+
+
+/* FAQ */
+
+
+.accordion-faq {
+    text-align: left;
+    position: relative
+}
+
+    .accordion-faq .panel {
+        border-radius: 0;
+        box-shadow: none;
+        -webkit-box-shadow: none
+    }
+
+        .accordion-faq .panel .panel-heading {
+            padding: 0;
+            color: #fff;
+            border-radius: 0 !important;
+            background: #333
+        }
+
+    .accordion-faq .panel-heading a {
+        display: block;
+        position: relative;
+        background: #f8f8f8;
+        color: #333;
+        padding: 10px 5px 12px 15px;
+        border-radius: 0;
+        border-right: 48px solid @color-primary;
+        min-height: 50px;
+        font-weight: bold;
+    }
+
+        .accordion-faq .panel-heading a:hover {
+            text-decoration: none
+        }
+
+    .accordion-faq .panel:last-child {
+        box-shadow: none;
+        border-bottom: none
+    }
+
+    .accordion-faq .arrow-down, .accordion-faq .arrow-up {
+        position: absolute;
+        display: block;
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+        top: 50%;
+        margin-top: -15px;
+        right: -36px;
+        color: #fff;
+    }
+
+    .accordion-faq .arrow-down, .accordion-faq .collapsed .arrow-up {
+        display: none
+    }
+
+    .accordion-faq .collapsed .arrow-down {
+        display: block
+    }
+
+    .accordion-faq .panel-body {
+        border-top: 0 !important;
+        padding: 15px;
+        background: #fff;
+        border: 1px #eee solid;
+        border-top: none;
+    }
+
+    .accordion-faq.panel-group .panel + .panel {
+        margin-top: 10px
+    }
+
+.simple-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none
+}
+
+.bold-list > li > a {
+    font-weight: 700;
+    text-transform: uppercase
+}
+
+.simple-list ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: relative;
+    bottom: -.8em
+}
+
+.simple-list li {
+    margin: 0;
+    padding: 0 0 12px
+}
+
+.simple-list .icon {
+    margin-right: 9px
+}
+
+.arrow-list li {
+    padding-left: 12px;
+    position: relative
+}
+
+    .arrow-list li:before {
+        content: "";
+        display: inline;
+        font-size: 1.1em;
+        position: absolute;
+        left: 0;
+        top: -1px
+    }
+
+.simple-list li {
+    margin: 0;
+    margin-left: 12px;
+    padding: 0 0 12px;
+}
+
+.banner-text {
+    font-family: @font-primary;
+}
+
+.full-width-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}

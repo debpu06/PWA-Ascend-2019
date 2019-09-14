@@ -1,0 +1,169 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Alloy.ViewModels
+@using EPiServer.Reference.Commerce.Site.Features.Recommendations
+@using EPiServer.Editor
+@using EPiServer.Find
+@using EPiServer.Security
+@using EPiServer.Find.Api.Facets
+@using EPiServer.Framework.Web.Resources
+@using System
+@model FindSearchContentModel
+
+@{
+    Layout = null;
+    ClientResources.RequireScript("/Assets/Base/jquery/jquery.min.js");
+}
+<script language="javascript">
+    function spellcheck(query, hitsCutoff) {
+        $.ajax({
+            url: "/episerver/Find/proxy/_spellcheck?query=" + query + "&size=1&hits_cutoff=" + hitsCutoff,
+            dataType: 'jsonp',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.hits != undefined && data.hits[0] != undefined) {
+                    var suggestion = data.hits[0].suggestion;
+                    if (suggestion != undefined) {
+                        document.getElementById("pdf-suggestion").innerHTML = "<span style=\"color: red;\">@Html.Translate("/searchpagetemplate/suggestion")</span>" + ": <i><a href=\"/@Model.PageUrl" + "Search/Index?search=" + suggestion + "\">" + suggestion + "</a></i>";
+                    }
+                }
+            }
+        });
+    }
+
+    function relatedQuery(query, hitsCutoff) {
+        $.ajax({
+            url: "/episerver/Find/proxy/_didyoumean?query=" + query + "&size=3&hits_cutoff=" + hitsCutoff,
+            dataType: 'jsonp',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.hits != undefined && data.hits[0] != undefined) {
+                    var list = [];
+                    var listStats = [];
+                    for (var hit in data.hits) {
+                        if(data.hits[hit].type == 'statistical')
+                        {
+                            listStats.push("<i><a href=\"/@Model.PageUrl" + "Search/Index?search=" + data.hits[hit].suggestion + "\">" + data.hits[hit].suggestion + "</a></i>");
+                        }
+                        else
+                        {
+                            list.push("<i><a href=\"/@Model.PageUrl" + "Search/Index?search=" + data.hits[hit].suggestion + "\">" + data.hits[hit].suggestion + "</a></i>");
+                        }
+                    }
+                    if (list.length > 0)
+                        document.getElementById("pdf-suggestion").innerHTML =
+                          "<span style=\"color: red;\">@Html.Translate("/searchpagetemplate/peoplealsosearchedfor")</span>" + ": " + list.join(" ");
+                    if (listStats.length > 0)
+                        document.getElementById("pdf-suggestion2").innerHTML =
+                        "<span style=\"color: red;\">People also searched for:</span> " + listStats.join(" ");
+                }
+            }
+        });
+    }
+</script>
+<div class="row">
+    <div id="pdfResult">
+        @if (Model != null && Model.Hits != null)
+        {
+            <div class="new_title center">
+                <h2>Results found in PDF files</h2>
+            </div>
+
+            <div class="span8 grayHead">
+                <p>
+                    @Html.Translate("/searchpagetemplate/searchfor") <i><b>@Model.Query</b></i><br />
+                    @Html.Translate("/searchpagetemplate/resultedin")
+                    @if (Model.NumberOfHits > 0)
+                    {
+                        @Model.NumberOfHits
+                        @Html.Raw(" ")
+                        @Html.Translate("/searchpagetemplate/hits")
+                    }
+                    else
+                    {
+                        @Html.Translate("/searchpagetemplate/zero")
+
+                        <script type="text/javascript">spellcheck("@Model.Query", @Model.NumberOfHits);</script>
+                    }
+
+                    <script type="text/javascript">relatedQuery("@Model.Query", @Model.NumberOfHits);</script>
+
+                    @*@Html.Translate("/searchpagetemplate/hits")*@
+
+                    <div id="pdf-suggestion"></div>
+                    <div id="pdf-suggestion2"></div>
+
+                </p>
+            </div>
+
+            <div class="col-sm-12 SearchResults">
+                <ul class="product-dropdown product-row list-unstyled">
+                    @foreach (var hit in Model.Hits)
+                    {
+                        <li class="list-group-item product-item">
+                            <a href="@hit.Url" class="link--black">
+                                <div class="media">
+                                    @if (hit.ImageUri != null)
+                                    {
+                                        <div class="media-left">
+                                            <img src="@hit.ImageUri" alt="@hit.Title" class="media-object product-row__item__image" />
+                                        </div>
+                                    }
+                                    <div class="media-body">
+                                        @if (hit.IsBestBet())
+                                        {
+                                            <i class="glyphicon glyphicon-star pull-right recommend-icon"></i>
+                                        }
+                                        <h3 class="product-row__item__title"><b>@Html.Raw(hit.Title)</b></h3>
+                                        <div class="product-row__item__price">
+                                            <p>@Html.Raw(hit.Excerpt)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            @* Display paging controls.*@
+            if (Model.FilterOption.TotalCount > 0)
+            {
+                using (Html.BeginForm("Index", "Search", FormMethod.Get, new { @class = "jsSearchPdfForm" }))
+                {
+                    <input class="jsSearchContentPage" hidden id="FilterOption_Page" name="FilterOption.Page" type="text" value="@Model.FilterOption.Page" />
+                    <input class="jsSearchContentPageSize" hidden id="FilterOption_PageSize" name="FilterOption.PageSize" type="text" value="@Model.FilterOption.PageSize" />
+                    <input class="jsSearchProduct" hidden id="FilterOption_SearchProduct" name="FilterOption.SearchProduct" type="text" value="false" />
+                    <input class="jsSearchPdf" hidden id="FilterOption_SearchPdf" name="FilterOption.SearchPdf" type="text" value="true" />
+
+                    <div class="pages" id="pagingForContent">
+                        <ul class="pagination">
+                            <li>
+                                <a onclick="Search.changePdfContent(@(Model.FilterOption.Page > 1 ? Model.FilterOption.Page - 1 : Model.FilterOption.Page))">
+                                    &laquo;
+                                </a>
+                            </li>
+
+                            @foreach (var page in Model.FilterOption.Pages)
+                            {
+                                <li class="@(Model.FilterOption.Page == page ? "active" : "")">
+                                    <a onclick="Search.changePdfContent(@page)">
+                                        @page.ToString()
+                                    </a>
+                                </li>
+                            }
+                            <li>
+                                <a onclick="Search.changePdfContent(@(Model.FilterOption.Page + 1 > Model.FilterOption.Pages.Last() ? Model.FilterOption.Pages.Last() : Model.FilterOption.Page + 1))">
+                                    &raquo;
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                }
+
+            }
+            @*End of search results area. *@
+            @*</div>*@
+
+        }
+
+    </div>
+</div>

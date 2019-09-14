@@ -1,0 +1,60 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Social.ViewModels.ReviewsViewModel
+<div class="box-reviews2">
+    <h3>@Html.Translate("/Reviews/CustomerReviews")</h3>
+    <div class="box visible">
+        <ul>
+            @foreach (var review in Model.Reviews)
+            {
+                <li>
+                    <table class="ratings-table">
+                        <tbody>
+                        <tr>
+                            <th>@Html.Translate("/Reviews/Value")</th>
+                            <td>
+                                <div class="rating-box">
+                                    @if (review.Rating < 1)
+                                    {
+                                        <div class="rating"></div>
+                                    }
+                                    else if (review.Rating >= 1 && review.Rating < 2)
+                                    {
+                                        <div class="rating rating-1-star"></div>
+                                    }
+                                    else if (review.Rating >= 2 && review.Rating < 3)
+                                    {
+                                        <div class="rating rating-2-star"></div>
+                                    }
+                                    else if (review.Rating >= 3 && review.Rating < 4)
+                                    {
+                                        <div class="rating rating-3-star"></div>
+                                    }
+                                    else if (review.Rating >= 4 && review.Rating < 4.5)
+                                    {
+                                        <div class="rating rating-4-star"></div>
+                                    }
+                                    else if (review.Rating >= 4.5)
+                                    {
+                                        <div class="rating rating-5-star"></div>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="review">
+                        <h6>@review.Title</h6>
+                        <small>@Html.Translate("/Reviews/ReviewBy")
+                            <span>
+                                @review.Nickname
+                            </span>
+                            @Html.Translate("/Shared/On") @review.AddedOn.ToString()
+                        </small>
+                        <div class="review-txt">
+                            @review.Body
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

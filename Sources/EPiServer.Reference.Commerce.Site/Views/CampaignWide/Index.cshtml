@@ -1,0 +1,36 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.ContentViewModel<EPiServer.Reference.Commerce.Site.Features.CampaignWide.Pages.CampaignWidePage>
+
+<div class="category-page">
+    @*<section class="main-container">
+            <div class="container">
+                <div class="row">
+                    @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row" })
+                </div>
+            </div>
+        </section>*@
+    <div class="container">
+        <div class="row">
+            @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row" })
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <h1>
+            @Html.PropertyFor(x => x.CurrentContent.PageTitle, new { CssClass = "row" })
+        </h1>
+
+        <div class="row">
+            @Html.PropertyFor(x => x.CurrentContent.MainBody, new { CssClass = "row" })
+        </div>
+
+
+        <div class="row">
+            @Html.PropertyFor(x => x.CurrentContent.SecondaryContentArea, new { CssClass = "row" })
+        </div>
+
+    </div>
+</div>
+
+
+    
+

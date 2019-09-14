@@ -1,0 +1,24 @@
+@using EPiServer.Reference.Commerce.Site.Infrastructure
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Shared.SitePageData>
+
+@{
+    Layout = Model.Layout.MasterName;
+}
+
+
+@{ 
+    Html.RenderPartial("~/Features/Alloy/Views/Shared/Breadcrumbs.cshtml", Model);
+ }
+
+<div class="row">
+    <div class="col-xs-12 col-md-4">
+        
+        @{Html.RenderPartial("~/Features/Alloy/Views/Shared/SubNavigation.cshtml", Model);}
+        @RenderSection("RelatedContent", false)
+        
+    </div>
+               
+    <div class="col-xs-12 col-md-8 article-body">        	
+        @RenderBody()
+    </div>
+</div>

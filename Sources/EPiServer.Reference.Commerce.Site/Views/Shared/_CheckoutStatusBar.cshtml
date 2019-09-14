@@ -1,0 +1,28 @@
+﻿@model int
+
+<div>
+    <ul id="checkout-progress-state" class="checkout-progress">
+        <li class="@(Model == 1 ? "col-xs-12 col-6 active" : "col-xs-12 col-6")" title="@Html.Translate("/Checkout/CheckoutMethod")">
+            @Html.Translate("/Checkout/CheckoutMethod")
+        </li>
+        <li class="@(Model == 2 ? "col-xs-12 col-6 active" : "col-xs-12 col-6")" title="@Html.Translate("/Checkout/ShippingAddresses")">
+            @Html.Translate("/Checkout/ShippingAddresses")
+        </li>
+        <li class="@(Model == 3 ? "col-xs-12 col-6 active" : "col-xs-12 col-6")" title="@Html.Translate("/Checkout/ShippingInformation")">
+            @Html.Translate("/Checkout/ShippingInformation")
+        </li>
+        <li class="@(Model == 4 ? "col-xs-12 col-6 active" : "col-xs-12 col-6")" title="@Html.Translate("/Checkout/BilllingInformation")">
+            @Html.Translate("/Checkout/BilllingInformation")
+        </li>
+        <li class="@(Model == 7 ? "col-xs-12 col-6 active" : "col-xs-12 col-6")" title="@Html.Translate("/Checkout/Subscription")">
+            @Html.Translate("/Checkout/Subscription")
+        </li>
+        <li class="@(Model == 5 ? "col-xs-12 col-6 active" : "col-xs-12 col-6")" title="@Html.Translate("/Checkout/PlaceOrder")">
+            @Html.Translate("/Checkout/PlaceOrder")
+        </li>
+        <li class="@(Model == 6 ? "col-xs-12 col-6 active" : "col-xs-12 col-6")" title="@Html.Translate("/Checkout/OrderSuccess")">
+            @Html.Translate("/Checkout/OrderSuccess")
+        </li>
+    </ul>
+</div>
+

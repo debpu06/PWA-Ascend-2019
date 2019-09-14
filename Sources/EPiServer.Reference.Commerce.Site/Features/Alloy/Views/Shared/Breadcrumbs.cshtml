@@ -1,0 +1,35 @@
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Shared.SitePageData>
+
+@using EPiServer.Core
+@using EPiServer.Reference.Commerce.Site.Extensions
+@using EPiServer.Web
+@using EPiServer.Web.Mvc.Html
+@*Helper used as template for a page in the bread crumb, recursively triggering the rendering of the next page*@
+@helper ItemTemplate(HtmlHelpers.MenuItem breadCrumbItem)
+{
+if (breadCrumbItem.Selected)
+{
+    if (breadCrumbItem.Page.HasTemplate() && !breadCrumbItem.Page.ContentLink.CompareToIgnoreWorkID(Model.CurrentContent.ContentLink))
+    {
+            @Html.PageLink(breadCrumbItem.Page)
+    }
+    else
+    {
+            @breadCrumbItem.Page.PageName
+    }
+    if (!breadCrumbItem.Page.ContentLink.CompareToIgnoreWorkID(Model.CurrentContent.ContentLink))
+    {
+            <span class="divider">/</span>
+            @Html.MenuList(breadCrumbItem.Page.ContentLink, ItemTemplate)
+    }
+}
+}
+<div class="row hideMyTracks">
+    <div class="col-md-12">
+        <ul class="alloyBreadcrumb">
+            @Html.ContentLink(Model.CurrentContent.NavigationRoot)
+            <span class="divider">/</span>
+            @Html.MenuList(Model.CurrentContent.NavigationRoot, ItemTemplate, requireVisibleInMenu: false, requirePageTemplate: false)
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+﻿@using EPiServer.Web.Mvc.Html
+@using EPiServer.Shell.Navigation
+@inherits WebViewPage<EPiServer.Reference.Commerce.Site.modules._protected.SiteModules.ProfileStore.EditProfileStoreViewModel>
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+
+<head>
+    <title>
+        Insight
+    </title>
+    <style>
+        .gr__epidemo_site .main-container { background-color: #F1F2F7; }
+        .gr__epidemo_site .panel-heading, .gr__epidemo_site #map { background-color: #fff; box-shadow: 0px 0px 10px 0px rgba(200,200,200,1); }
+        .gr__epidemo_site .col-lg-12.col-md-12>div { border: 0 !important; border-radius: 0; padding: 0; }
+        .gr__epidemo_site .page-title { text-align: left !important; }
+        .gr__epidemo_site .page-title h2 { border: 0; margin-left: 15px; }
+        .gr__epidemo_site #profile-store-list .page-title h2 { margin-left: 0; }
+        .gr__epidemo_site .panel { border-radius: 0; box-shadow: 0px 0px 10px 0px rgba(200,200,200,1); }
+        .gr__epidemo_site .panel-heading { border-top-right-radius: 0; border-top-left-radius: 0; }
+        .gr__epidemo_site .panel-primary { border-color: #FF553E; }
+        .gr__epidemo_site .panel-primary .panel-heading { background-color: #FF553E; }
+    </style>
+</head>  
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div id="profile-store-list" class="col-main col-sm-12">
+                <div class="page-title">
+                    <h2>Dashboard</h2>
+                </div>
+                <!-- Primary Panel -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-file-text-o fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">@Model.ProfileStoreItems.Total</div>
+                                        <div>Records</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="@Url.Action("ProfileStoreDetail", "EditProfileStore")">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-cube fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">@Model.ScopeItems.Total</div>
+                                        <div>Scopes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-cubes fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">@Model.SegmentItems.Total</div>
+                                        <div>Segments</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-ban fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">@Model.BlacklistItems.Total</div>
+                                        <div>in Blacklist!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="page-title" style="text-align:center;">
+                <h2>Visitor Map</h2>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div style="height: 650px;border: 1px solid #000000;border-radius: 4px;padding:5px;">
+                    <div id="map" style="height:650px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="~/Assets/Base/Scripts/Features/Dashboard.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Dashboard.init();
+    });
+</script>
+

@@ -1,0 +1,33 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Market.ViewModels.MarketViewModel
+<div class="top-market-contain pull-right">
+    <div data-toggle="dropdown" data-hover="dropdown" class="market dropdown-toggle svg-icon-bg svg-icon-bg-down-arrow">
+        <a href="#">
+            <img src="@Model.CurrentMarket" alt="@Model.MarketId" />
+        </a>
+    </div>
+    <div class="lang-curr dropdown-menu">
+        <div data-toggle="dropdown" data-hover="dropdown" class="market dropdown-toggle"></div>
+
+        <h4 class="dropdown-title">@Html.Translate("/Header/Market/Labels/Market")</h4>
+        @foreach (var market in Model.Markets)
+        {
+            <div class="list-group-item">
+                <span>
+                    @using (Html.BeginForm("Set", "Market", new
+                    {
+                        contentLink = @Model.ContentLink
+                    }, FormMethod.Post, new
+                    {
+                    }))
+                    {
+                        @Html.Hidden("MarketId", market.Value)
+                        <a href="" title="@market.Text" class="jsMarketSelector">
+                            <img src="@market.FlagUrl" alt="@market.Text" />
+                            <span>@market.Text</span>
+                        </a>
+                    }
+                </span>
+            </div>
+        }
+    </div>
+</div>

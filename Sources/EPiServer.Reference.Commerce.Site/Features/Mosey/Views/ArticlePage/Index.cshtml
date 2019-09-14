@@ -1,0 +1,61 @@
+﻿@using EPiServer.Editor
+@using EPiServer.Web.Mvc.Html
+
+@model ArticlePageViewModel
+
+@Html.FullRefreshPropertiesMetaData(new[] { "MainBackgroundImage", "MainBackgroundVideo" })
+
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+
+                <div class="col-sm-12 col-xs-12 col-lg-12 hero-image-bg">
+
+                    <div class="hero-image-bg-scale @(Model.TopPaddingCssClass)" style="background-image: url(@Url.ContentUrl(Model.CurrentContent.MainBackgroundImage))">
+
+                        @if (PageEditing.PageIsInEditMode)
+                        {
+                            <div class="page-controls">
+                                <button class="button-dark button--sm" data-epi-property-name="MainBackgroundImage">Change Hero Image</button>
+                                <button class="button-dark button--sm" data-epi-property-name="MainBackgroundVideo">Change Hero Video</button>
+                            </div>
+                        }
+
+                        @if (Model.CurrentContent.MainBackgroundVideo != null)
+                        {
+                            <video class="video-container" autoplay loop playsinline muted>
+                                <source src="@Url.ContentUrl(Model.CurrentContent.MainBackgroundVideo)" type="video/mp4">
+                            </video>
+                        }
+                    </div>
+
+                    <article class="article-container">
+                        <header class="hero-header text-center">
+                            @if (!Model.CategoryName.IsEmpty())
+                            {
+                                <h4 class="color-light">@Model.CategoryName</h4>
+                            }
+                            <h1 class="color-light margin-bottom-z">@Html.PropertyFor(x => x.CurrentContent.Name)</h1>
+                        </header>
+                        <section class="article-content overflow-children">
+                            @if ((Model.CurrentContent.MainBody != null && !Model.CurrentContent.MainBody.IsEmpty) || PageEditing.PageIsInEditMode)
+                            {
+                                <div class="row">
+                                    @Html.PropertyFor(m => m.CurrentContent.MainBody)
+                                </div>
+                            }
+                            @Html.PropertyFor(x => x.CurrentContent.MainContentItems)
+                        </section>
+                    </article>
+
+                    <section class="text-center margin-bottom-xlg">
+                        @Html.PropertyFor(x => x.CurrentContent.SecondaryContentItems)
+                    </section>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,127 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.SubOrganization.ViewModels.SubOrganizationPageViewModel
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            @if (Model.StartPage.PageTypeName.Equals(typeof(MoseySupplyStartPage).Name))
+            {
+                @Html.Partial("_CmsNavigation", Model.CurrentContent)
+            }
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <div class="spacer-left-l">
+                    @{ Html.RenderAction("Index", "B2BNavigation");}
+
+                    @using (Html.BeginForm("Save", "SubOrganizationPage", FormMethod.Post, new { @class = "suborg-form", @id = "suborg-form" }))
+                    {
+                        @Html.HiddenFor(x => x.SubOrganizationModel.OrganizationId)
+                        <section class="spacer-bottom-l">
+                            <div class="section-title spacer-bottom-l">
+                                <h2 class="h3">@Html.Translate("/B2B/Organization/EditSub")</h2>
+                            </div>
+
+                            <div class="form-group">
+                                <label>@Html.Translate("/B2B/Organization/ParentOrganization")</label>
+                                <br />
+                                <input type="text" value="@Model.SubOrganizationModel.ParentOrganization.Name" disabled />
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.SubOrganizationModel.Name)
+                                <br />
+                                @Html.TextBoxFor(x => x.SubOrganizationModel.Name)
+                                @Html.ValidationMessageFor(x => x.SubOrganizationModel.Name)
+                            </div>
+
+                        </section>
+                        <section>
+                            <div class="section-title spacer-bottom-l">
+                                <h2 class="h3">@Html.Translate("/B2B/Organization/Locations")</h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    @Html.LabelFor(x => x.SubOrganizationModel.Address.Name)
+                                </div>
+                                <div class="col-sm-3">
+                                    @Html.LabelFor(x => x.SubOrganizationModel.Address.Street)
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            @Html.LabelFor(x => x.SubOrganizationModel.Address.City)
+                                        </div>
+                                        <div class="col-sm-6">
+                                            @Html.LabelFor(x => x.SubOrganizationModel.Address.PostalCode)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    @Html.LabelFor(x => x.SubOrganizationModel.Address.CountryCode)
+                                </div>
+
+                                <div class="col-sm-1">
+                                    <label>@Html.Translate("/B2B/Budgeting/Actions")</label>
+                                </div>
+                            </div>
+                            @for (int i = 0; i < Model.SubOrganizationModel.Locations.Count; i++)
+                            {
+                                @Html.HiddenFor(x => x.SubOrganizationModel.Locations[i].AddressId)
+                                <div class="row location-row">
+                                    <div class="form-group col-sm-2">
+                                        @Html.TextBoxFor(x => x.SubOrganizationModel.Locations[i].Name, new { required = "required" })
+                                        @Html.ValidationMessageFor(x => x.SubOrganizationModel.Locations[i].Name)
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        @Html.TextBoxFor(x => x.SubOrganizationModel.Locations[i].Street, new { required = "required" })
+                                        @Html.ValidationMessageFor(x => x.SubOrganizationModel.Locations[i].Street)
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                @Html.TextBoxFor(x => x.SubOrganizationModel.Locations[i].City, new { required = "required" })
+                                                @Html.ValidationMessageFor(x => x.SubOrganizationModel.Locations[i].City)
+                                            </div>
+                                            <div class="col-sm-6">
+                                                @Html.TextBoxFor(x => x.SubOrganizationModel.Locations[i].PostalCode, new { required = "required" })
+                                                @Html.ValidationMessageFor(x => x.SubOrganizationModel.Locations[i].PostalCode)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <div class="custom-select">
+                                            <span class="custom-select-split"></span>
+                                            <span class="custom-select-arrow arrow-down"></span>
+                                            @Html.DropDownListFor(x => x.SubOrganizationModel.Locations[i].CountryCode,
+                                                    new SelectList(Model.SubOrganizationModel.CountryOptions, "Code", "Name", Model.SubOrganizationModel.Locations[i].CountryCode),
+                                                    new { @class = "form-control" })
+                                        </div>
+                                        @Html.ValidationMessageFor(x => x.SubOrganizationModel.Locations[i].CountryCode)
+                                    </div>
+                                    <div class="col-sm-1 spacer-top-xs text-right">
+                                        <a href="#" class="btn btn-danger btn-xs delete-address-icon">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                            <a class="btn btn-sm btn-primary js-cloner" data-target="location-row">Add row</a>
+                            <div class="spacer-top-l">
+                                <button type="submit" class="btn btn-primary">@Html.Translate("/Shared/Save")</button>
+                                <a href="@Url.Action("Index", "SubOrganizationPage")?suborg=@(Model.SubOrganizationModel.OrganizationId)" class="btn btn-default">Cancel</a>
+                            </div>
+                        </section>
+                    }
+                </div>
+            </div>
+            @if (Model.StartPage.PageTypeName.CompareTo(typeof(StartPage).Name) == 0)
+            {
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

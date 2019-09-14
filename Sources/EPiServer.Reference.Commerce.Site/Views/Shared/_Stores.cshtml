@@ -1,0 +1,63 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Stores.ViewModels.StoreViewModel
+
+@if (Model.Stores.Any())
+{
+    <div class="col-md-12">
+        @if (Model.ShowDelivery)
+        {
+            <div class="form-group">
+                <input type="radio" id="storeDelivery" name="store" value="delivery" checked="checked" />&nbsp;&nbsp;@Html.Translate("/Stores/Delivery")
+                <br />
+                <input type="radio" id="pickupDelivery" name="store" value="instore" />&nbsp;&nbsp;@Html.Translate("/Stores/InStorePickup")
+            </div>
+        }
+        <div id="storesSelector" style="@(Model.ShowDelivery ? "display: none" : "")">
+            <input id="selectedStore" name="selectedStore" type="hidden" value="@Model.SelectedStore" />
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Html.Translate("/Stores/SelectedStore"):</h3>
+                </div>
+                <div class="panel-body">
+                    <span id="storeName">
+                        @Model.SelectedStoreName
+                    </span>
+                </div>
+            </div>
+            @foreach (var viewModel in Model.Stores)
+            {
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="store-detail">
+                            <h4>@viewModel.Name</h4>
+                            <span>@viewModel.Line1</span>
+                            @if (!string.IsNullOrEmpty(viewModel.Line2))
+                            {
+                                <span>@viewModel.Line2</span>
+                            }
+                            <span>@string.Format("{0}, {1}, {2}", viewModel.City, viewModel.RegionName, viewModel.RegionCode)</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        @if (Model.ShowDelivery)
+                        {
+                            <p>@viewModel.Inventory.ToString("f0") Units</p>
+                            <button class="button" type="button" onclick="ProductPage.selectStore('@viewModel.Code', '@viewModel.Name');">
+                                <span>
+                                    @Html.Translate("/Stores/Select")
+                                </span>
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="button" type="button" onclick="ProductPage.setStore('@viewModel.Code');">
+                                <span>
+                                    @Html.Translate("/Stores/SetDefaultStore")
+                                </span>
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

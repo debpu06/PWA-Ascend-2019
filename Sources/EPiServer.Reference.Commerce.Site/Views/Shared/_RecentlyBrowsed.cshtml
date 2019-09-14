@@ -1,0 +1,19 @@
+﻿@using EPiServer.Reference.Commerce.Site.Features.Shared.Extensions
+@model IEnumerable<EPiServer.Commerce.Catalog.ContentTypes.EntryContentBase>
+<div class="bblock block-list block-viewed">
+    <div class="block-title"> @Html.Translate("/Category/RecentlyViewed") </div>
+    <div class="block-content">
+        <ol id="recently-viewed-items">
+            @foreach (var  entry in Model)
+            {
+                <li class="item odd">
+                    <p class="product-name">
+                        <a href="@entry.GetUrl()">
+                            @entry.DisplayName
+                        </a>
+                    </p>
+                </li>
+            }
+        </ol>
+    </div>
+</div>

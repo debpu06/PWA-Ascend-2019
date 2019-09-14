@@ -1,0 +1,120 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.MultiAddressViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+
+<section class="main-container col2-layout" id="singleAddressView">
+    <div class="main container container--gutter-layout">
+        <div class="col-main">
+            @Html.Partial("_CheckoutStatusBar", 2)
+        </div>
+        <div class="row">
+            <div class="col-main">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <a class="button" href="@Url.Action("SingleShipment", new { node = Model.CurrentContent.ContentLink })" title="@Html.Translate("/Checkout/Shipment/SingleShipment")">
+                            <span>
+                                @Html.Translate("/Checkout/Shipment/SingleShipment")
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="pull-right">
+                            <a class="button" href="@Url.Action("AddNewAddress", new { node = Model.CurrentContent.ContentLink })" title="@Html.Translate("/Checkout/MultiShipment/AddNewAddress")">
+                                <span>
+                                    @Html.Translate("/Checkout/MultiShipment/AddNewAddress")
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="multiple_addresses">
+                    @using (Html.BeginForm("UpdateMultipleShipmentAddresses", "Checkout", FormMethod.Post))
+                    {
+                        <div class="page-title_multi">
+                            <h2>@Html.Translate("/Checkout/MultiShipment/Heading")</h2>
+                        </div>
+                        <div class="addresses">
+                            @Html.Translate("/Checkout/MultiShipment/ApplicableItems")
+                            <div class="table-responsive">
+                                <fieldset class="multiple-checkout">
+                                    <table id="multiship-addresses-table" class="data-table">
+                                        <thead>
+                                        <tr class="first last">
+                                            <th>@Html.Translate("/Shared/Image")</th>
+                                            <th>@Html.Translate("/Shared/Product")</th>
+                                            <th class="a-left">@Html.Translate("/Shared/Price")</th>
+                                            <th>@Html.Translate("/Checkout/MultiShipment/SendTo")</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @for (int index = 0; index < Model.CartItems.Count(); index++)
+                                        {
+                                            @Html.HiddenFor(model => model.CartItems[index].Code);
+                                            @Html.HiddenFor(model => model.CartItems[index].DisplayName);
+                                            @Html.HiddenFor(model => model.CartItems[index].Quantity);
+                                            @Html.HiddenFor(model => model.CartItems[index].IsGift);
+
+                                            var hasDiscount = Model.CartItems[index].DiscountedUnitPrice.HasValue;
+                                            <tr class="first odd">
+                                                <td>
+                                                    <a href="@Model.CartItems[index].Url ">
+                                                        <img height="75" src="@Model.CartItems[index].ImageUrl" class="product-image"/>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <h4 class="product-name">
+                                                        <a href="@Model.CartItems[index].Url">
+                                                            @Model.CartItems[index].DisplayName
+                                                        </a>
+                                                    </h4>
+                                                </td>
+                                                <td>
+                                                    @if (hasDiscount)
+                                                    {
+                                                        <span class="product-price">@Helpers.RenderMoney(Model.CartItems[index].PlacedPrice)</span>
+                                                        <span class="product-price product-price--discount xs-vertical-margin">@Helpers.RenderMoney(Model.CartItems[index].DiscountedUnitPrice.Value)</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="product-price xs-vertical-margin">@Helpers.RenderMoney(Model.CartItems[index].PlacedPrice)</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @{ var dropDownPlaceholder = Model.AvailableAddresses.Any() ? Html.Translate("/Checkout/MultiShipment/SelectDeliveryAddress") : Html.Translate("/Checkout/MultiShipment/NoAddressFound"); }
+                                                    @Html.DropDownListFor(model => Model.CartItems[index].AddressId,
+                                                        new SelectList(Model.AvailableAddresses, "AddressId", "MultipleAddressLabel", Model.CartItems[index].AddressId),
+                                                        dropDownPlaceholder,
+                                                        new
+                                                        {
+                                                            @class = "form-control address-dropdown"
+                                                        })
+                                                    <br/>
+                                                    @Html.ValidationMessageFor(model => Model.CartItems[index].AddressId)
+                                                </td>
+                                            </tr>
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                    <div class="buttons-set">
+                                        <button class="button btn-continue" title="@Html.Translate("/Checkout/MultiShipment/ContinueShippingInformation")" type="submit">
+                                            <span>
+                                                @Html.Translate("/Checkout/MultiShipment/ContinueShippingInformation")
+                                            </span>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

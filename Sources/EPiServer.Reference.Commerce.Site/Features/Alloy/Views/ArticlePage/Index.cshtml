@@ -1,0 +1,21 @@
+@using EPiBootstrapArea
+@model EPiServer.Reference.Commerce.Site.Features.Shared.ViewModels.IContentViewModel<EPiServer.Reference.Commerce.Site.Features.Alloy.Models.Pages.ArticlePage>
+
+@{ Layout = "~/Features/Alloy/Views/Shared/Layouts/_LeftNavigation.cshtml"; }
+
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            <h1 class="heading-title" @Html.EditAttributes(x => x.CurrentContent.PageName)>@Model.CurrentContent.PageName</h1>
+            <p class="introduction" @Html.EditAttributes(x => x.CurrentContent.MetaDescription)>@Model.CurrentContent.MetaDescription</p>
+            <div class="row">
+                <div class="col-sm-12" @Html.EditAttributes(x => x.CurrentContent.MainBody)>
+                    @Html.DisplayFor(m => m.CurrentContent.MainBody)
+                </div>
+            </div>
+            @Html.PropertyFor(x => x.CurrentContent.MainContentArea, new { CssClass = "row", Tag = ContentAreaTags.TwoThirdsWidth })
+
+        </div>
+    </div>
+</section>
+

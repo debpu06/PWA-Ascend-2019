@@ -1,0 +1,40 @@
+.valueList a {
+  cursor: pointer;
+}
+.valueList a.hidden {
+  display: none;
+}
+.valueList .collection-item .item {
+  border: 1px solid #c0c0c0;
+  /* padding-bottom: 2px; */
+  margin-bottom: 2px;
+  padding: 3px 27px 3px 3px;
+}
+.valueList .collection-item .item:hover {
+  padding-right: 3px;
+}
+.valueList .collection-item .item:hover .icons a:not(.hidden) {
+  display: inline-block;
+}
+.valueList .collection-item .drop-area {
+  display: none;
+  width: 100%;
+  height: 5px;
+  background-color: #769dc0;
+}
+.valueList .collection-item .drop-area.allow-drop {
+  display: block;
+}
+.valueList .editor-container {
+  display: inline-block;
+}
+.valueList .icons {
+  display: inline-block;
+}
+.valueList .icons a {
+  display: none;
+  padding: 4px;
+}
+.valueList .icons a span {
+  display: inline-block;
+}

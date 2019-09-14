@@ -1,0 +1,202 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.CheckoutViewModel
+
+<section class="main-container col2-layout" id="singleAddressView">
+    <div class="main container container--gutter">
+        <div class="col-main">
+            @Html.Partial("_CheckoutStatusBar", 2)
+        </div>
+        <div class="row col-main-padding">
+            <div class="col-main">
+                <div class="row">
+                    <div class="col-xs-12">
+                        @if (Model.CurrentContent.MultiShipmentPage != null)
+                        {
+                            <a class="button pull-right" href="@Url.Action("MutipleAddresses", new { node = Model.CurrentContent.ContentLink })" title="@Html.Translate("/Checkout/MultiShipment/Heading")">
+                                <span>
+                                    @Html.Translate("/Checkout/MultiShipment/Heading")
+                                </span>
+                            </a>
+                        }
+                    </div>
+                </div>
+
+                <div id="checkout-step-shipping" class="step a-item">
+                    @using (Html.BeginForm("UpdateSingleShipmentAddress", "Checkout", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(model => model.AddressType)
+                        <fieldset class="group-select">
+                            <ul>
+                                <li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(x => x.AddressType, 1, new
+                                                {
+                                                    @class = "radio jsSingleAddress",
+                                                    data_url = Url.Action("SingleAddress", "Checkout", null)
+                                                })
+                                                @Html.Translate("/Checkout/Shipment/ExistingAddress")
+                                            </label>
+                                        </div>
+                                        <br />
+                                    }
+                                    <div class="radio">
+                                        <label>
+                                            @Html.RadioButtonFor(x => x.AddressType, 0, new
+                                            {
+                                                @class = "radio jsSingleAddress",
+                                                data_url = Url.Action("SingleAddress", "Checkout", null)
+                                            })
+                                            @Html.Translate("/Checkout/Shipment/NewAddress")
+                                        </label>
+                                    </div>
+                                </li>
+                                @if (Model.AddressType == 1 && User.Identity.IsAuthenticated)
+                                {
+                                    <li>
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(model => model.Shipments[0].Address.AddressId,
+                                                new SelectList(Model.AvailableAddresses, "AddressId", "Name", !string.IsNullOrEmpty(Model.Shipments[0].Address.AddressId) ? Model.Shipments[0].Address.AddressId : string.Empty),
+                                                new
+                                                {
+                                                    @class = "form-control input-text jsChangeAddress address-dropdown shipping-single-address"
+                                                })
+
+                                            @Html.ValidationMessageFor(model => Model.Shipments[0].Address.AddressId)
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li id="shipping-new-address-form">
+
+                                        <fieldset>
+                                            @Html.HiddenFor(model => model.Shipments[0].Address.Name)
+                                            @Html.HiddenFor(model => model.Shipments[0].Address.DaytimePhoneNumber)
+                                            @Html.HiddenFor(model => model.Shipments[0].Address.BillingDefault)
+                                            @Html.HiddenFor(model => model.Shipments[0].Address.ShippingDefault)
+                                            <ul>
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.FirstName)
+                                                            @Html.TextBoxFor(model => model.Shipments[0].Address.FirstName, new
+                                                            {
+                                                                @class = "form-control input-text"
+                                                            })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.FirstName)
+                                                        </div>
+
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.LastName)
+                                                            @Html.TextBoxFor(model => model.Shipments[0].Address.LastName, new
+                                                            {
+                                                                @class = "form-control input-text"
+                                                            })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.LastName)
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.Email)
+                                                            @Html.TextBoxFor(model => model.Shipments[0].Address.Email, new
+                                                            {
+                                                                @class = "form-control input-text"
+                                                            })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.Email)
+                                                        </div>
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.Organization)
+                                                            @Html.TextBoxFor(model => model.Shipments[0].Address.Organization, new
+                                                            {
+                                                                @class = "form-control input-text"
+                                                            })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.Organization)
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.Line1)
+                                                            @Html.TextBoxFor(model => model.Shipments[0].Address.Line1, new
+                                                            {
+                                                                @class = "form-control input-text"
+                                                            })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.Line1)
+                                                        </div>
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.Line2)
+                                                            @Html.TextBoxFor(model => model.Shipments[0].Address.Line2, new
+                                                            {
+                                                                @class = "form-control input-text"
+                                                            })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.Line2)
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.City)
+                                                            @Html.TextBoxFor(model => model.Shipments[0].Address.City, new
+                                                            {
+                                                                @class = "form-control input-text jsChangeTaxAddress"
+                                                            })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.City)
+                                                        </div>
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.PostalCode)
+                                                            @Html.TextBoxFor(model => model.Shipments[0].Address.PostalCode, new
+                                                            {
+                                                                @class = "form-control input-text jsChangeTaxAddress"
+                                                            })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.PostalCode)
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.EditorFor(model => model.Shipments[0].Address.CountryRegion, Model.Shipments[0].Address.CountryRegion)
+                                                        </div>
+                                                        <div class="form-group col-xs-12 col-md-6">
+                                                            @Html.LabelFor(model => model.Shipments[0].Address.CountryCode)
+                                                            @Html.DropDownListFor(model => model.Shipments[0].Address.CountryCode,
+                                                                new SelectList(Model.Shipments[0].Address.CountryOptions, "Code", "Name", Model.Shipments[0].Address.CountryCode), new
+                                                                {
+                                                                    @class = "form-control input-text jsChangeCountry jsChangeTaxAddress"
+                                                                })
+                                                            @Html.ValidationMessageFor(model => model.Shipments[0].Address.CountryCode)
+                                                            @Html.Hidden("address-htmlfieldprefix", "Shipments[0].Address.CountryRegion")
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </fieldset>
+                                    </li>
+                                }
+                            </ul>
+                            <div class="address-required-message alert alert-danger">
+                                <h6>Shipping Addresses is required!</h6>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 pull-left">
+                                    <button class="button-dark continue button-shipping-single-address" type="submit">
+                                        <span>
+                                            <span>@Html.Translate("/Shared/Continue")</span>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

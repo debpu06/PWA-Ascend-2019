@@ -1,0 +1,240 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Checkout.ViewModels.CheckoutViewModel
+@{
+    if (Request.IsAjaxRequest())
+    {
+        Layout = null;
+    }
+}
+
+<section class="main-container col2-layout" id="billingInformationView">
+    <div class="main container container--gutter margin-bottom-lg">
+        <div class="col-main">
+            @Html.Partial("_CheckoutStatusBar", 4)
+        </div>
+        <div class="row">
+            <div class="col-main">
+                <form class="jsCheckoutForm" action="@Url.Action("UpdatePaymentAddress", "Checkout")" method="post" novalidate data-updateurl="@Url.Action("UpdatePaymentOption", "Checkout", null)">
+                    <div class="row section-box container--gutter-layout">
+                        <div id="billingAddressContainer" class="col-xs-12 col-sm-6">
+                            <div id="checkout-step-shipping" class="step a-item">
+                                @Html.HiddenFor(model => model.AddressType)
+                                <fieldset class="group-select">
+                                    <ul>
+                                        <li>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <div class="radio">
+                                                    <label>
+                                                        @Html.RadioButtonFor(x => x.AddressType, 1, new
+                                                       {
+                                                           @class = "radio jsBillingAddress",
+                                                           data_url = Url.Action("BillingInformation", "Checkout", null)
+                                                       })
+                                                        @Html.Translate("/Checkout/Billing/ExistingAddress")
+                                                    </label>
+                                                </div>
+                                                <br />
+                                            }
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(x => x.AddressType, 0, new
+                                                   {
+                                                       @class = "radio jsBillingAddress",
+                                                       data_url = Url.Action("BillingInformation", "Checkout", null)
+                                                   })
+                                                    @Html.Translate("/Checkout/Billing/NewAddress")
+                                                </label>
+                                            </div>
+                                        </li>
+                                        @if (Model.AddressType == 1 && User.Identity.IsAuthenticated)
+                                        {
+                                            <li>
+                                                <div class="form-group">
+                                                    @Html.DropDownListFor(model => model.BillingAddress.AddressId,
+                                                            new SelectList(Model.AvailableAddresses, "AddressId", "Name", !string.IsNullOrEmpty(Model.BillingAddress.AddressId) ? Model.BillingAddress.AddressId : string.Empty),
+                                                            new
+                                                            {
+                                                                @class = "form-control input-text jsChangeAddress billing-address address-dropdown"
+                                                            })
+
+                                                    @Html.ValidationMessageFor(model => Model.BillingAddress.AddressId)
+                                                </div>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li id="shipping-new-address-form">
+
+                                                <fieldset>
+                                                    @Html.HiddenFor(model => model.BillingAddress.Name)
+                                                    @Html.HiddenFor(model => model.BillingAddress.DaytimePhoneNumber)
+                                                    @Html.HiddenFor(model => model.BillingAddress.BillingDefault)
+                                                    @Html.HiddenFor(model => model.BillingAddress.ShippingDefault)
+                                                    <ul>
+                                                        <li>
+                                                            <div class="row">
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.FirstName)
+                                                                    @Html.TextBoxFor(model => model.BillingAddress.FirstName, new
+                                                                   {
+                                                                       @class = "form-control input-text"
+                                                                   })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.FirstName)
+                                                                </div>
+
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.LastName)
+                                                                    @Html.TextBoxFor(model => model.BillingAddress.LastName, new
+                                                                   {
+                                                                       @class = "form-control input-text"
+                                                                   })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.LastName)
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="row">
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.Email)
+                                                                    @Html.TextBoxFor(model => model.BillingAddress.Email, new
+                                                                   {
+                                                                       @class = "form-control input-text"
+                                                                   })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.Email)
+                                                                </div>
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.Organization)
+                                                                    @Html.TextBoxFor(model => model.BillingAddress.Organization, new
+                                                                   {
+                                                                       @class = "form-control input-text"
+                                                                   })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.Organization)
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="row">
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.Line1)
+                                                                    @Html.TextBoxFor(model => model.BillingAddress.Line1, new
+                                                                   {
+                                                                       @class = "form-control input-text"
+                                                                   })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.Line1)
+                                                                </div>
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.Line2)
+                                                                    @Html.TextBoxFor(model => model.BillingAddress.Line2, new
+                                                                   {
+                                                                       @class = "form-control input-text"
+                                                                   })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.Line2)
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="row">
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.City)
+                                                                    @Html.TextBoxFor(model => model.BillingAddress.City, new
+                                                                   {
+                                                                       @class = "form-control input-text jsChangeTaxAddress"
+                                                                   })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.City)
+                                                                </div>
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.PostalCode)
+                                                                    @Html.TextBoxFor(model => model.BillingAddress.PostalCode, new
+                                                                   {
+                                                                       @class = "form-control input-text jsChangeTaxAddress"
+                                                                   })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.PostalCode)
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="row">
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.EditorFor(model => model.BillingAddress.CountryRegion, Model.BillingAddress.CountryRegion)
+                                                                </div>
+                                                                <div class="form-group col-xs-12 col-md-6">
+                                                                    @Html.LabelFor(model => model.BillingAddress.CountryCode)
+                                                                    @Html.DropDownListFor(model => model.BillingAddress.CountryCode,
+                                                                            new SelectList(Model.BillingAddress.CountryOptions, "Code", "Name", Model.BillingAddress.CountryCode), new
+                                                                            {
+                                                                                @class = "form-control input-text jsChangeCountry jsChangeTaxAddress"
+                                                                            })
+                                                                    @Html.ValidationMessageFor(model => model.BillingAddress.CountryCode)
+                                                                    @Html.Hidden("address-htmlfieldprefix", "BillingAddress.CountryRegion")
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </fieldset>
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </fieldset>
+                                <div class="address-required-message alert alert-danger">
+                                    <h6>Billing address is required!</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <h3>@Html.Translate("/Shared/Payments")</h3>
+                            <table class="table">
+                                <tr>
+                                    <th>Payment Type</th>
+                                    <th>Amount</th>
+                                    <th></th>
+                                </tr>
+                                @foreach (var payment in Model.Payments)
+                                {
+                                    <tr>
+                                        <td>@payment.Description</td>
+                                        <td>@payment.Amount.ToString()</td>
+                                        <td><a data-system-keyword="@payment.SystemKeyword" data-url="@Url.Action("RemovePayment", "Checkout", null)" href="#" class="glyphicon glyphicon-remove jsRemovePayment"></a></td>
+                                    </tr>
+                                }
+                            </table>
+                            <hr />
+                            @if (Model.OrderSummary.PaymentTotal != 0)
+                            {
+                                @Html.ValidationMessageFor(model => model.SelectedPayment)
+                                { Html.RenderPartial("Payment", Model); }
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.OrderSummary.PaymentTotal)
+                                    @Html.TextBoxFor(model => model.OrderSummary.PaymentTotal, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.OrderSummary.PaymentTotal)
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="jsAddPayment button-dark" onclick="Checkout.addPayment('@Url.Action("UpdatePayment", "Checkout")')">
+                                        @Html.Translate("/Shared/AddPayment")
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 pull-left container-buttons-sm">
+                            <a class="button-light back margin-right-sm float-left" href="@Url.Action("ShippingInformation", new
+                                                         {
+                                                             node = Model.CurrentContent.ContentLink
+                                                         })" title="@Html.Translate("/Shared/Back")">
+                                <span>
+                                    @Html.Translate("/Shared/Back")
+                                </span>
+                            </a>
+                            <button class="button-dark continue button-billing" type="button">
+                                <span>
+                                    <span>@Html.Translate("/Shared/Continue")</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

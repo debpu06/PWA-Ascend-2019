@@ -1,0 +1,110 @@
+﻿@using EPiServer.Commerce.Order
+@using EPiServer.Reference.Commerce.Site.Extensions
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.Profile.ViewModels.ProfilePageViewModel
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row container--gutter">
+            <div class="col-main col-sm-9">
+                <div class="my-account">
+                    <div class="page-title">
+                        <h2>@Html.Translate("/Dashboard/Labels/MyDashboard")</h2>
+                    </div>
+                    <div class="dashboard">
+                        <div class="welcome-msg"> <strong>@Html.Translate("/Dashboard/Labels/Hello"), @Model.CustomerContact.FirstName @Model.CustomerContact.LastName!</strong>
+                            <p>@Html.PropertyFor(x => x.CurrentContent.MainBody)</p>
+                        </div>
+                        <div class="recent-orders">
+                            <div class="title-buttons">
+                                <strong>@Html.Translate("/Dashboard/Labels/RecentOrders")</strong>
+                                @Html.ActionLink("View All", "Index", "OrderHistory")
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" id="my-orders-table">
+                                    <thead>
+                                    <tr class="first last">
+                                        <th>@Html.Translate("/OrderHistory/Labels/OrderID")</th>
+                                        <th>@Html.Translate("/OrderHistory/Labels/OrderDate")</th>
+                                        <th>@Html.Translate("/OrderHistory/Labels/ShippedTo")</th>
+                                        <th><span class="nobr">@Html.Translate("/OrderHistory/Labels/TotalPrice")</span></th>
+                                        <th>@Html.Translate("/OrderHistory/Labels/Status")</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var order in Model.Orders)
+                                    {
+                                        <tr>
+                                            <td><a href="@(Model.OrderDetailsPageUrl)?orderGroupId=@order.PurchaseOrder.OrderLink.OrderGroupId">#@order.PurchaseOrder.OrderNumber</a></td>
+
+                                            <td>@order.PurchaseOrder.Created.ToLongDateString()</td>
+                                            <td>
+                                                @foreach (var shippingAddress in order.ShippingAddresses)
+                                                {
+                                                    @Html.Partial("_Address", shippingAddress)
+                                                }
+                                            </td>
+                                            <td><span class="price">@order.PurchaseOrder.GetTotal().ToString()</span></td>
+                                            <td><em>@order.PurchaseOrder.OrderStatus</em></td>
+                                            <td class="a-center last">
+                                                <span class="nobr">
+                                                    <a href="#" class="btn button-dark button--sm">@Html.Translate("/Dashboard/Labels/Reorder")</a>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="box-account">
+                            <div class="page-title">
+                                <h2>@Html.Translate("/Dashboard/Labels/AccountInformation")</h2>
+                            </div>
+                            <div class="col2-set">
+                                <div class="col-1">
+                                    <h5>@Html.Translate("/Dashboard/Labels/ContactInformation")</h5>
+                                    <a href="#">@Html.Translate("/Shared/Edit")</a>
+                                    <p> @Model.CustomerContact.FirstName @Model.CustomerContact.LastName<br>
+                                        @Model.SiteUser.Email<br>
+                                        @Html.ActionLink(Html.Translate("/Dashboard/Labels/ChangePassword"), "Index", "ResetPassword")
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <h5>@Html.Translate("/Dashboard/Labels/Newsletters")</h5>
+                                    <a href="#">@Html.Translate("/Shared/Edit")</a>
+                                    <p> You are currently not subscribed to any newsletter. </p>
+                                </div>
+                            </div>
+                            <div class="col2-set">
+                                <h4>@Html.Translate("/Dashboard/Labels/AddressBook")</h4>
+                                <div class="manage_add">
+                                    @Html.ActionLink(Html.Translate("/Dashboard/Labels/ManageAddresses"), "Index", "AddressBook")
+                                </div>
+                                <div class="col-1">
+                                    <h5>@Html.Translate("/Dashboard/Labels/PrimaryBillingAddress")</h5>
+                                    @if (Model.Addresses.Any(x => x.BillingDefault))
+                                    {
+                                        @Html.Partial("_Address", Model.Addresses.FirstOrDefault(x => x.BillingDefault))
+                                    }
+                                </div>
+                                <div class="col-2">
+                                    <h5>@Html.Translate("/Dashboard/Labels/PrimaryShippingAddress")</h5>
+                                    @if (Model.Addresses.Any(x => x.ShippingDefault))
+                                    {
+                                        @Html.Partial("_Address", Model.Addresses.FirstOrDefault(x => x.ShippingDefault))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    @Html.PropertyFor(x => x.CurrentContent.MembershipAffiliation, new { CssClass = "row", Tag = EPiBootstrapArea.ContentAreaTags.FullWidth })
+
+            </div>
+            @{ Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Link });}
+        </div>
+
+    </div>
+</section>

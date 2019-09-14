@@ -1,0 +1,31 @@
+﻿@using EPiServer.Core
+@using EPiServer.Reference.Commerce.Site.Extensions
+@model EPiServer.Reference.Commerce.Site.Features.Destinations.Pages.DestinationPage
+
+<h2 class="section-title no-margin-top">@Model.PageName</h2>
+<div class="row container--gutter-layout">
+    <div class="col-md-8">
+        <p class="margin-bottom">@Html.PropertyFor(x => x.MainIntro)</p>
+        <div class="well well-sm margin-small post-info-b">
+            <i class="fa fa-globe"> </i> @Model.Continent / @Model.Country
+            <a href="@Url.ContentUrl(Model.ContentLink)" class="pull-right hidden-sm hidden-xs">@Html.Translate("/common/readmore")</a>
+            <div class="clearfix"></div>
+            @if (Model.Tags != null)
+            {
+                <i class="fa fa-tags"> </i>
+                foreach (var tag in Model.Tags.FilteredItems)
+                {
+                    <span data-epi-block-id="@tag.ContentLink.ToString()">
+                        <a href="@Url.ContentUrl(tag.ContentLink)"><span class="badge badge-round">@tag.GetContent().Name</span></a>
+                    </span>
+                }
+            }
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.ContentUrl(Model.ContentLink)">
+            <img src="@Url.ImageExternalUrl(Model.Image, "Medium")" alt="@Model.PageName" class="img-post img-responsive"/>
+        </a>
+    </div>
+</div>

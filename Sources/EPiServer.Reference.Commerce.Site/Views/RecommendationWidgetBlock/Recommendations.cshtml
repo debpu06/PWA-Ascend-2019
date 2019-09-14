@@ -1,0 +1,17 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@model IEnumerable<EPiServer.Reference.Commerce.Site.Features.Recommendations.ViewModels.RecommendedProductTileViewModel>
+@if (Model.Any())
+{
+    <div class="row">
+
+        <div class="recommendations @(Model.Count() < 4 ? " recommendations-slider-similar" : "recommendations-slider" ) products-grid">
+            @foreach (var product in Model)
+            {
+                <div class="item" data-recommendation-id="@product.RecommendationId">
+                    @Html.Partial("_Product", product.TileViewModel)
+                </div>
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,55 @@
+﻿.valueList {
+
+    a {
+        cursor: pointer;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    .collection-item {
+        .item {
+            border: 1px solid #c0c0c0;
+            /* padding-bottom: 2px; */
+            margin-bottom: 2px;
+            padding: 3px 27px 3px 3px;
+
+            &:hover {
+                padding-right: 3px;
+
+                .icons a:not(.hidden) {
+                    display: inline-block;
+                }
+            }
+        }
+
+        .drop-area {
+            display: none;
+            width: 100%;
+            height: 5px;
+            background-color: #769dc0;
+        }
+
+        .drop-area.allow-drop {
+            display: block;
+        }
+    }
+
+    .editor-container {
+        display: inline-block;
+    }
+
+    .icons {
+        display: inline-block;
+
+        a {
+            display: none;
+            padding: 4px;
+
+            span {
+                display: inline-block;
+            }
+        }
+    }
+}

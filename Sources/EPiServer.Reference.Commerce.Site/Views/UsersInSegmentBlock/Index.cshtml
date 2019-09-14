@@ -1,0 +1,51 @@
+﻿@model UsersInSegmentViewModel
+<div>
+    @if (!string.IsNullOrEmpty(Model.CurrentBlock.Heading))
+    {
+        <h2 @Html.EditAttributes(x => x.CurrentBlock.Heading)>@Model.CurrentBlock.Heading</h2>
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.CurrentBlock.SegmentId);
+        @Html.HiddenFor(x => x.CurrentBlock.SegmentName);
+        @Html.HiddenFor(x => x.CurrentBlock.SegmentTrackingBlock);
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Email Address</th>
+                    <th>Viewed</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.UsersList.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.UsersList[i].Email
+                            @Html.HiddenFor(x => x.UsersList[i].Email)
+                        </td>
+                        <td>
+                            @if (Model.UsersList[i].IsFromInsight)
+                            {
+                                <text>&#10004;</text>
+                                @Html.HiddenFor(x => x.UsersList[i].Matched)
+                                @Html.HiddenFor(x => x.UsersList[i].IsFromInsight)
+                            }
+                            else
+                            {
+                                <p>
+                                    @Html.CheckBoxFor(x => x.UsersList[i].Matched)
+                                    @Html.LabelFor(x => x.UsersList[i].Matched, "Mark Matched")
+                                    @Html.HiddenFor(x => x.UsersList[i].Matched)
+                                    @Html.HiddenFor(x => x.UsersList[i].IsFromInsight)
+                                </p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    }
+</div>

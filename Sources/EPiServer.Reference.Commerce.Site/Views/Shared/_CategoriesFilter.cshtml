@@ -1,0 +1,43 @@
+﻿@model EPiServer.Reference.Commerce.Site.Features.Search.ViewModels.CategoriesFilterViewModel
+<div class="side-nav-categories">
+    <div class="block-title"> @Html.Translate("/Shared/Categories") </div>
+    <div class="box-content box-category">
+        <ul>
+            @foreach (var category in Model.Categories)
+            {
+                <li>
+                    <a href="@category.Url" title="@category.DisplayName" class="@(category.IsActive ? "active" : "")">
+                        @category.DisplayName
+                    </a>
+                    <span class="subDropdown plus"></span>
+                    <ul class="level0_415" style="display: none;">
+                        @foreach (var child in category.Children)
+                        {
+                            <li>
+                                <a href="@child.Url" title="@child.DisplayName" class="@(child.IsActive ? "active" : "")">
+                                    @child.DisplayName
+                                </a>
+                                @if (child.Children.Any())
+                                {
+                                    <span class="subDropdown minus"></span>
+                                    <ul class="level1">
+                                        @foreach (var childOfChild in child.Children)
+                                        {
+                                            <li>
+                                                <a href="@childOfChild.Url" title="@childOfChild.DisplayName" class="@(childOfChild.IsActive ? "active" : "")">
+                                                    @childOfChild.DisplayName
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
+
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>

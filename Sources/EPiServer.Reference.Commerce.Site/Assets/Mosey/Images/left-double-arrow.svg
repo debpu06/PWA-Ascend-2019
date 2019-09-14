@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>👁 Icons / Set 1 / 16</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M17.1867223,20.908 L16.4894616,21.6248177 L11,16.3124088 L16.4894616,11 L17.1867223,11.7168177 L12.4341839,16.3124088 L17.1867223,20.908 Z M21.1867223,20.908 L20.4894616,21.6248177 L15,16.3124088 L20.4894616,11 L21.1867223,11.7168177 L16.4341839,16.3124088 L21.1867223,20.908 Z" id="path-1"></path>
+    </defs>
+    <g id="👁-Icons-/-Set-1-/-16" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#FF0000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="🌈-Color-/-Fill-/-BLACK-#000" mask="url(#mask-2)"></g>
+    </g>
+</svg>

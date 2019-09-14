@@ -1,0 +1,14 @@
+﻿@model IBlockViewModel<ImageBlock>
+
+<div style="@Model.CurrentBlock.PaddingStyles">
+    @if (Model.CurrentBlock.Link != null)
+    {
+        <a href="@Url.ContentUrl(Model.CurrentBlock.Link)">
+            @Html.PropertyFor(x => x.CurrentBlock.Image)
+        </a>
+    }
+    else
+    {
+        @Html.PropertyFor(x => x.CurrentBlock.Image)
+    }
+</div>

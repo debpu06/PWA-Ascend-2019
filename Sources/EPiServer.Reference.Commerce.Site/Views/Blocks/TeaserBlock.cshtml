@@ -1,0 +1,19 @@
+@using EPiServer.Reference.Commerce.Site.Extensions
+@using EPiServer.Reference.Commerce.Site.Features.Shared.Controllers
+
+@model IBlockViewModel<TeaserBlock>
+
+<div class="border">
+    @*Link the teaser block only if a link has been set and not displayed in preview*@
+    @using (Html.BeginConditionalLink(
+        !ContentReference.IsNullOrEmpty(Model.CurrentBlock.Link) && !(ViewContext.Controller is PreviewController),
+        Url.PageLinkUrl(Model.CurrentBlock.Link),
+        Model.CurrentBlock.Heading))
+    {
+        <div style="@Model.CurrentBlock.PaddingStyles">
+            <h2 @Html.EditAttributes(x => x.CurrentBlock.Heading)>@Model.CurrentBlock.Heading</h2>
+            <p @Html.EditAttributes(x => x.CurrentBlock.Text)>@Model.CurrentBlock.Text</p>
+            <div @Html.EditAttributes(x => x.CurrentBlock.Image)><img src="@Url.ContentUrl(Model.CurrentBlock.Image)" class="img-responsive" /></div>
+        </div>
+    }
+</div>

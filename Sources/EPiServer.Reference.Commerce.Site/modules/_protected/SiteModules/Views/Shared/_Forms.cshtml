@@ -1,0 +1,32 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@model List<EPiServer.Reference.Commerce.Site.modules._protected.SiteModules.Orders.OrderFormViewModel>
+<section class="panel general">
+    <header class="panel-heading bg-aqua-gradient">
+        Forms
+    </header>
+    <div class="panel-body">
+
+        <ul class="nav nav-tabs">
+            @for (var index = 0; index < Model.Count; index++)
+            {
+                <li class="@(index == 0 ? " active" : "")">
+                    <a data-toggle="tab" href="@(string.Format(" #form{0}", index))">@(string.Format("Form {0}", index + 1))</a>
+                </li>
+            }
+            <li>
+                <a href="#" id="btnAdd"><i class="fa fa-plus"></i> Add Form</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            @for (var index = 0; index < Model.Count; index++)
+            {
+                <div id="@(string.Format(" form{0}", index))" class="@(index == 0 ? " tab-pane active" : "tab-pane")">
+                    @Html.Partial("_Shipments", Model[index].Shipments)
+                    @Html.Partial("_Payments", Model[index].Payments)
+
+                </div>
+            }
+        </div>
+    </div>
+</section>

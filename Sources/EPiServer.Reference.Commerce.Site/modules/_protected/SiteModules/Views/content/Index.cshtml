@@ -1,0 +1,88 @@
+﻿@using EPiServer.Core
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Shell.Navigation
+@inherits WebViewPage
+@Html.Raw(Html.CreatePlatformNavigationMenu())
+
+<head>
+    <title>Bulk Update</title>
+</head>
+<div class="container">
+    <div class="content-filter row">
+        <h2>@Html.Translate("/BulkUpdate/ContentFilters")</h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <label>@Html.Translate("/BulkUpdate/ContentGroup")</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <select data-val="true" data-val-required="The Content Group Filter is required." name="ContentGroupFilter" id="ContentGroupFilter">
+                            <option value="Page">@Html.Translate("/BulkUpdate/Page")</option>
+                            <option value="Block">@Html.Translate("/BulkUpdate/Block")</option>
+                            <option value="Media">@Html.Translate("/BulkUpdate/Media")</option>
+                            <option value="Node">@Html.Translate("/BulkUpdate/Node")</option>
+                            <option value="Entry">@Html.Translate("/BulkUpdate/Entry")</option>
+                            <option value="Camapign">@Html.Translate("/BulkUpdate/Campaign")</option>
+                            <option value="Discount">@Html.Translate("/BulkUpdate/Discount")</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <label>@Html.Translate("/BulkUpdate/ContentType")</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <select data-val="true" data-val-required="The Content Type Filter is required."
+                                class="content-type-filter" name="ContentTypeFilter"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <label>@Html.Translate("/BulkUpdate/Language")</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <select data-val="true" data-val-required="The Language field is required."
+                                class="content-language-filter" name="ContentLanguageFilter"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <label>@Html.Translate("/BulkUpdate/Keyword")</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8">
+                        <input type="text" placeholder="Please enter a keyword to filter"
+                               class="content-name-filter" name="ContentNameFilter" style="margin-top:0px;padding: 10px;width: 35%;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="row">
+                    <div class="form-group">
+                        <label>@Html.Translate("/BulkUpdate/Properties")</label>
+                        <div class="checkbox-content-properties"></div>
+                    </div>
+                    <div class="form-group">
+                        <button class="button button-apply-filters">@Html.Translate("/BulkUpdate/ApplyFilters")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-info row">
+        <h2>@Html.Translate("/BulkUpdate/ContentInformation")</h2>
+        <p>@Html.Translate("/BulkUpdate/FilterDescription")</p>
+        <div class="table-content-info">
+        </div>
+    </div>
+    <br />
+</div>
+@section AdditionalScripts
+{
+    <script type="text/javascript" src="~/Assets/Base/Scripts/Features/Selective/BulkContent.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            BulkContent.init();
+        });
+    </script>
+}

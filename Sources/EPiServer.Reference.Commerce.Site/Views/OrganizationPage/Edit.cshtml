@@ -1,0 +1,106 @@
+﻿@using System.Web.Mvc.Html
+@using EPiServer.Reference.Commerce.Site.Features.MoseySupply.Models
+@using EPiServer.Reference.Commerce.Site.Features.Navigation.ViewModels
+@model EPiServer.Reference.Commerce.Site.Features.Organization.ViewModels.OrganizationPageViewModel
+
+<section class="main-container col2-right-layout">
+    <div class="main container">
+        <div class="row">
+            <div class="col-main col-sm-9">
+                <div class="page-title">
+                    <h2>@Html.PropertyFor(x => x.CurrentContent.Name)</h2>
+                </div>
+                <p>@Html.PropertyFor(model => model.CurrentContent.MainBody)</p>
+                <section class="spacer-bottom-l">
+                    <div class="section-title spacer-bottom-l">
+                        @if (Model.Organization.OrganizationId == Guid.Empty)
+                        {
+                            <h2 class="h3">
+                                @Html.Translate("/B2B/Organization/AddNew")
+                            </h2>
+                        }
+                        else
+                        {
+                            <h2 class="h3">
+                                @Html.Translate("/B2B/Organization/EditParent")
+                            </h2>
+                        }
+                    </div>
+                    @using (Html.BeginForm("Save", "OrganizationPage", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Organization.Name)
+                            <br />
+                            @Html.TextBoxFor(x => x.Organization.Name, new { @class = "form-control", @maxlength = "100" })
+                            @Html.ValidationMessageFor(x => x.Organization.Name)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Organization.Address.Name)
+                            @Html.TextBoxFor(x => x.Organization.Address.Name, new { @class = "form-control", autofocus = "autofocus", @maxlength = "80" })
+                            @Html.ValidationMessageFor(x => x.Organization.Address.Name)
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    @Html.LabelFor(x => x.Organization.Address.Street)
+                                </div>
+                                <div class="col-sm-8">
+                                    @Html.LabelFor(x => x.Organization.Address.City)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    @Html.TextBoxFor(x => x.Organization.Address.Street, new { @class = "form-control", @maxlength = "80" })
+                                    @Html.ValidationMessageFor(x => x.Organization.Address.Street)
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <div class="row">
+                                        @Html.TextBoxFor(x => x.Organization.Address.City, new { @class = "form-control", @maxlength = "64" })
+                                        @Html.ValidationMessageFor(x => x.Organization.Address.City)
+                                        <div class="col-sm-6">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    @Html.LabelFor(x => x.Organization.Address.PostalCode, new { @maxlength = "20" })
+                                </div>
+                                <div class="col-sm-8">
+
+                                    @Html.LabelFor(x => x.Organization.Address.CountryCode)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(x => x.Organization.Address.PostalCode, new { @class = "form-control", @maxlength = "20" })
+                                    @Html.ValidationMessageFor(x => x.Organization.Address.PostalCode)
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="custom-select">
+                                        <span class="custom-select-split"></span>
+                                        <span class="custom-select-arrow arrow-down"></span>
+                                        @Html.DropDownListFor(x => x.Organization.Address.CountryCode, new SelectList(Model.Organization.Address.CountryOptions, "Code", "Name", Model.Organization.Address.CountryCode), new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(x => x.Organization.Address.CountryCode)
+                                </div>
+                            </div>
+                        </div>
+                        @Html.HiddenFor(x => x.Organization.Address.AddressId)
+                        @Html.HiddenFor(x => x.Organization.OrganizationId)
+                        <button type="submit" class="btn btn-primary">
+                            @Html.Translate("/Shared/Save")
+                        </button>
+                        <a href="@Url.Action("Index", "OrganizationPage")" class="btn btn-primary">
+                            @Html.Translate("/Shared/Cancel")
+                        </a>
+                    }
+                </section>
+            </div>
+            @{
+                Html.RenderAction("MyAccountMenu", "Navigation", new { id = MyAccountPageType.Organization });
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,17 @@
+﻿@model IBlockViewModel<FeatureBoxBlock>
+
+<div style="@Model.CurrentBlock.PaddingStyles">
+    <div class="feature-box">
+        <div class="icon-box">
+            <i class="fa @Html.DisplayTextFor(x => x.CurrentBlock.IconName)"></i>
+        </div>
+        @if (EPiServer.Editor.PageEditing.PageIsInEditMode)
+        {
+            <div class="content content-edit">@Html.PropertyFor(x => x.CurrentBlock.Content)</div>
+        }
+        else
+        {
+            <div class="content">@Html.PropertyFor(x => x.CurrentBlock.Content)</div>
+        }
+    </div>
+</div>

@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "Assets/Mosey/Styles/mosey-style.css",
+    "inputFile": "Assets/Mosey/Styles/mosey-style.less"
+  },
+  {
+    "outputFile": "Assets/Alloy/alloy-style.css",
+    "inputFile": "Assets/Alloy/alloy-style.less"
+  },
+  {
+    "outputFile": "Assets/MoseySupply/Styles/moseysupply-style.css",
+    "inputFile": "Assets/MoseySupply/Styles/moseysupply-style.less"
+  }
+]
