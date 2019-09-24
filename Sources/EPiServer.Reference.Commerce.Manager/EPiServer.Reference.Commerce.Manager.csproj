@@ -432,9 +432,6 @@
     <None Include="Configs\Mediachase.Search.Objects.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="connectionStrings.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="EPiServerFramework.config">
       <SubType>Designer</SubType>
     </Content>

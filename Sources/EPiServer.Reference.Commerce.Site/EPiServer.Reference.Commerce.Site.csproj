@@ -4098,9 +4098,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="connectionStrings.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="episerver.config" />
     <Content Include="EPiServerFramework.config">
       <SubType>Designer</SubType>
