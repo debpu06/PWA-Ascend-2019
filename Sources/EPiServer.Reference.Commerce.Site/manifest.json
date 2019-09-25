@@ -3,8 +3,7 @@
   "lang": "en",
   "name": "Inspiration",
   "scope": "/inspiration/",
-  "display": "browser",
-  //This will be the first page that loads in your PWA 
+  "display": "standalone",
   "start_url": "https://pwademo-dev-app.azurewebsites.net/inspiration/",
   "short_name": "Inspiration",
   "theme_color": "transparent",
@@ -23,5 +22,6 @@
       "src": "https://pwademo-dev-app.azurewebsites.net/Assets/Images/episerver.png",
       "sizes": "18x18"
     }
-  ]
+  ],
+  "splash_pages": null
 }
