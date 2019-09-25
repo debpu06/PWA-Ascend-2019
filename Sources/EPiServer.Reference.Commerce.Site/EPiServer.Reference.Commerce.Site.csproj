@@ -977,6 +977,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\.gitignore" />
+    <Content Include="Assets\Alloy\alloy-style.css" />
     <Content Include="Assets\Alloy\alloy-style.less" />
     <Content Include="Assets\Alloy\Features\blogmate.css" />
     <Content Include="Assets\Base\bootstrap\bootstrap.min.js" />
@@ -1123,6 +1124,7 @@
     <Content Include="Assets\Images\episerver.png" />
     <Content Include="Assets\MoseySupply\Styles\B2b\global.css" />
     <Content Include="Assets\MoseySupply\Styles\B2b\global.min.css" />
+    <Content Include="Assets\MoseySupply\Styles\moseysupply-style.css" />
     <Content Include="Assets\MoseySupply\Styles\moseysupply-style.less" />
     <Content Include="Assets\Mosey\Fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\Mosey\Fonts\glyphicons-halflings-regular.svg" />
@@ -1330,6 +1332,7 @@
     <Content Include="Assets\Base\TinyMceFontAwesome\fonts\fontawesome\fa-solid-900.woff" />
     <Content Include="Assets\Base\TinyMceFontAwesome\fonts\fontawesome\fa-solid-900.woff2" />
     <Content Include="Assets\Base\Styles\features\videoblock.less" />
+    <Content Include="Assets\Mosey\Styles\mosey-style.css" />
     <Content Include="Assets\Mosey\Styles\_file.less" />
     <Content Include="App_Data\GeoLite2-City-Locations-en.csv" />
     <Content Include="App_Data\GeoLite2-City.mmdb" />
