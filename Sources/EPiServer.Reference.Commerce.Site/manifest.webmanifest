@@ -1,0 +1,27 @@
+﻿{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "Inspiration",
+  "scope": "/inspiration/",
+  "display": "browser",
+  //This will be the first page that loads in your PWA 
+  "start_url": "https://pwademo-dev-app.azurewebsites.net/inspiration/",
+  "short_name": "Inspiration",
+  "theme_color": "transparent",
+  "description": "",
+  "orientation": "any",
+  "background_color": "transparent",
+  "related_applications": "",
+  "prefer_related_applications": "false",
+  "generated": "true",
+  "icons": [
+    {
+      "src": "https://pwademo-dev-app.azurewebsites.net/Assets/Images/episerver.png",
+      "sizes": "18x18"
+    },
+    {
+      "src": "https://pwademo-dev-app.azurewebsites.net/Assets/Images/episerver.png",
+      "sizes": "18x18"
+    }
+  ]
+}

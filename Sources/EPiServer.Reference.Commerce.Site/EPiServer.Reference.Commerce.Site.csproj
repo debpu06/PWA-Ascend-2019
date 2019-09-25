@@ -2661,7 +2661,10 @@
     <Content Include="modules\_protected\Shell\Shell.zip" />
     <Content Include="modules\_protected\CMS\web.config" />
     <Content Include="modules\_protected\CMS\CMS.zip" />
+    <Content Include="manifest.webmanifest" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="pwabuilder-sw-register.js" />
+    <Content Include="pwabuilder-sw.js" />
     <Content Include="resources\languagefiles\Episerver.Marketing.Automation.Forms_EN.xml" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />

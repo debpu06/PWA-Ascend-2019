@@ -13,10 +13,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
+    @*We need to reference the manifest file that includes detailed information about your PWA.*@
+    <link rel='manifest' href='/manifest.webmanifest'>
     <title> @{ Html.RenderAction("Title", "Head"); }</title>
     @Html.CanonicalLink()
-    
-    
+
+
     @if (Model.CurrentContent is CatalogContentBase)
     {
         @RenderSection("Meta", false)
@@ -46,7 +48,7 @@
             var defaultLanguage = "en";
             var requestContentLink = ViewContext.RequestContext.GetContentLink();
             @Helpers.RenderHrefLangs(requestContentLink, defaultLanguage);
-            }
+        }
     }
     @Html.RequiredClientResources("Header")
 </head>
@@ -77,7 +79,7 @@
     @{
         Html.RenderAction("Index", "Navigation");
     }
-    @RenderSection("Top", false) 
+    @RenderSection("Top", false)
     <div id="wrapper" class="quicksilver site-wrapper">
         @{Html.RenderPartial("_IdentityTracker");}
         <div id="page-content-wrapper" class="main-area">
@@ -89,7 +91,7 @@
         <div class="recommendations recommendations-right">@RenderSection("RightMarginRecommendations", false)</div>
         <div class="recommendations recommendations-bottom">@RenderSection("BottomRecommendations", false)</div>
 
-</div>
+    </div>
 
     @{ Html.RenderAction("Index", "Footer"); }
 
@@ -98,13 +100,48 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/js")
     @Html.RenderExtendedScripts(Model.CurrentContent)
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
-    
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
+
+
+    <script src="~/pwabuilder-sw-register.js" async></script>
+
+    <script>
+
+        let deferredPrompt = null;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+        });
+
+        async function install() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                console.log(deferredPrompt)
+                deferredPrompt.userChoice.then(function (choiceResult) {
+
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Your PWA has been installed');
+                    } else {
+                        console.log('User chose to not install your PWA');
+                    }
+
+                    deferredPrompt = null;
+
+                });
+
+
+            }
+        }
+
+    </script>
 
     @Html.RequiredClientResources("Footer")
 </body>
