@@ -1122,6 +1122,14 @@
     <Content Include="Assets\Fonts\source-sans-pro-v9-latin-regular.svg" />
     <Content Include="Assets\Images\BestBet.png" />
     <Content Include="Assets\Images\episerver.png" />
+    <Content Include="Assets\Images\icons\icon-128x128.png" />
+    <Content Include="Assets\Images\icons\icon-144x144.png" />
+    <Content Include="Assets\Images\icons\icon-152x152.png" />
+    <Content Include="Assets\Images\icons\icon-192x192.png" />
+    <Content Include="Assets\Images\icons\icon-384x384.png" />
+    <Content Include="Assets\Images\icons\icon-512x512.png" />
+    <Content Include="Assets\Images\icons\icon-72x72.png" />
+    <Content Include="Assets\Images\icons\icon-96x96.png" />
     <Content Include="Assets\MoseySupply\Styles\B2b\global.css" />
     <Content Include="Assets\MoseySupply\Styles\B2b\global.min.css" />
     <Content Include="Assets\MoseySupply\Styles\moseysupply-style.css" />
