@@ -53,6 +53,21 @@
       "src": "Assets/Images/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "Assets/Images/icons/icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "Assets/Images/icons/icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "Assets/Images/icons/icon-167x167.png",
+      "sizes": "167x167",
+      "type": "image/png"
     }
   ],
   "splash_pages": null
