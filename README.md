@@ -1,6 +1,6 @@
 # Ascend 2019 PWA Lab
 
-In this lab we will be demonstrating how to implement a progressive web app to your existing Episerver site. We will be demoing on Episerver's Mosey example site.
+In this lab we will be demonstrating how to build a progressive web app into your Episerver site. We will be demoing on Episerver's Mosey example site.
 
 [WHAT IS PWA BLURB]
 
@@ -63,6 +63,21 @@ The manifest file is a JSON file that tells the browser about your app and descr
       "src": "images/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "Assets/Images/icons/icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "Assets/Images/icons/icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "Assets/Images/icons/icon-167x167.png",
+      "sizes": "167x167",
+      "type": "image/png"
     }
   ],
   "splash_pages": null
@@ -84,17 +99,17 @@ We need to add the manifest file to our web folder's root. We also need to refer
 
 ## Step 2: Add the service workers
 
-The service worker is a script that runs in the background, separate from your web page. For PWAs, you can use them to handle things like push notifications, background sync, managing caching and responses.
+The service worker is a script that runs in the background, separate from your web page. It can handle things like push notifications, background sync, managing caching and responses.
 
 For our lab, we have a [sevice worker](https://github.com/nansen/PWA-Ascend-2019/blob/master/Sources/EPiServer.Reference.Commerce.Site/pwabuilder-sw.js) already setup. What we will need to do is register it. 
 
 This service worker has very basic functionality. It caches an "offline" page, that will be shown to the end user if they lose connection to the internet.
 
-More complex service workers can be setup with more complex caching policies. Some examples along with service worker scripts can be found at this [pwa builder site](https://www.pwabuilder.com/serviceworker).
+More complex service workers can be setup with more complex caching policies. Some examples along with service worker scripts are found at this [pwa builder site](https://www.pwabuilder.com/serviceworker).
 
 ## Step 3: Register the service worker
 
-In order to use the service worker, we must first register it. Again, a service worker script was already [created for you](https://github.com/nansen/PWA-Ascend-2019/blob/master/Sources/EPiServer.Reference.Commerce.Site/pwabuilder-sw-register.js). We just need to add it to our markup. 
+To use the service worker, we must first register it. Again, a service worker script was already [created for you](https://github.com/nansen/PWA-Ascend-2019/blob/master/Sources/EPiServer.Reference.Commerce.Site/pwabuilder-sw-register.js). We just need to add it to our markup. 
 
 ```html
 <script src="~/pwabuilder-sw-register.js" async></script>
@@ -106,19 +121,19 @@ Things to take note of in this script:
 
 ## Step 4: Add the offline.html file
 
-This step is fairly straight forward. Since the service work has the ability to cache an offline file that will be displayed to the user when they lose connection, we want to add that file to the solution. 
+This step is straight forward. The service work has the ability to cache an offline file. This file will be displayed to the user when they lose connection. We want to add that file to the solution.
 
-We added this [offline file](https://github.com/nansen/PWA-Ascend-2019/blob/master/Sources/EPiServer.Reference.Commerce.Site/offline.html) for you, but we wanted to call it out as it's own step to let you know that additional customization would be needed for your application.
+We added this [offline file](https://github.com/nansen/PWA-Ascend-2019/blob/master/Sources/EPiServer.Reference.Commerce.Site/offline.html) for you, but we wanted to call it out as it's own step. It is a basic html file, and you can customize it for your application.
 
 ## Step 5: Adding Icons
 
-Similar to the last step, this step was already completed and is pretty straight forward. We wanted to mention it as its own step because it is important make sure you have the correct icon sizes so your app will render correctly on multiple devices. [Google recommends](https://developers.google.com/web/tools/lighthouse/audits/install-prompt#recommendations) using at least 192x192 and 512x512 as I mentioned above. We included all the recommended Android icon sizes.
+As we did with the last step, this step was already completed and is pretty straight forward. We wanted to call it out because it is important make sure you have the correct icon sizes. As a PWA, we do not know what type of device your app will be installed on. We want to make sure it will render on all devices. [Google recommends](https://developers.google.com/web/tools/lighthouse/audits/install-prompt#recommendations) using at least 192x192 and 512x512 as I mentioned above. We included all the recommended Android and iOS icon sizes to handle most devices.
 
 ## Testing
 
 If you navigate to the [inspiration](https://pwademo-dev-app.azurewebsites.net/inspiration) section of the site on a mobile device, there are two ways to install it as an app.
 
-1. On iOS devices, if you click the share button, then select the "Add to Home Screen" option, it will show a modal that lets you set the name and link for the app, which it defaults to the values specified in the manifest. From there you click "Add", and it will be added to your home screen like any other app.
+1. On iOS devices, if you click the share button, then select the "Add to Home Screen" option, it will show a modal. Here you can set the name and link for the app, which it defaults to the values specified in the manifest. From there you click "Add", and it will be added to your home screen like any other app.
 
 2. For Android devices, it will depend on the browser you are using. But you should be able to "Add to Homescreen" in a similar fashion as iOS devices.
 
