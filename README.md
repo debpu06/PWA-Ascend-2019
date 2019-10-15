@@ -97,6 +97,8 @@ We need to add the manifest file to our web folder's root. We also need to refer
 <link rel='manifest' href='/manifest.json'>
 ```
 
+You can find this markup in the _LayoutMosey.cshtml file, where it is currently commented out. 
+
 ## Step 2: Add the service workers
 
 The service worker is a script that runs in the background, separate from your web page. It can handle things like push notifications, background sync, managing caching and responses.
@@ -115,6 +117,8 @@ To use the service worker, we must first register it. Again, a service worker sc
 <script src="~/pwabuilder-sw-register.js" async></script>
 ```
 
+You can find this markup in the _LayoutMosey.cshtml file, where it is currently commented out.
+
 Things to take note of in this script:
 * It asks us to specify the path to our service worker script. We have it in the site root along with this file.
 * It asks us to specify its scope. Just as we did in the manifest, we restrict it to the "inspiration" section of the site.
@@ -124,6 +128,8 @@ Things to take note of in this script:
 This step is straight forward. The service work has the ability to cache an offline file. This file will be displayed to the user when they lose connection. We want to add that file to the solution.
 
 We added this [offline file](https://github.com/nansen/PWA-Ascend-2019/blob/master/Sources/EPiServer.Reference.Commerce.Site/offline.html) for you, but we wanted to call it out as it's own step. It is a basic html file, and you can customize it for your application.
+
+You can see where this is referenced, at the top of the pwabuilder-sw.js.
 
 ## Step 5: Adding Icons
 
@@ -138,3 +144,5 @@ If you navigate to the [inspiration](https://pwademo-dev-app.azurewebsites.net/i
 2. For Android devices, it will depend on the browser you are using. But you should be able to "Add to Homescreen" in a similar fashion as iOS devices.
 
 If you have any issues with your application, you can go to the "Audits" tab in Chrome tools. There is an option for auditing your site as a PWA. It will catch potential issues and help with debugging.
+
+You can also go to the "Application" section of Chrome tools. There it will list any manifest files and service workers associated with a the site.
