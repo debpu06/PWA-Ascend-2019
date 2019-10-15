@@ -2661,7 +2661,6 @@
     <Content Include="modules\_protected\Shell\Shell.zip" />
     <Content Include="modules\_protected\CMS\web.config" />
     <Content Include="modules\_protected\CMS\CMS.zip" />
-    <Content Include="manifest.json" />
     <None Include="Properties\PublishProfiles\ascendblocks-dev-app - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ascendblocks-dev-app - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
