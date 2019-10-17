@@ -2,7 +2,7 @@
 
 In this lab we will be demonstrating how to build a progressive web app into your Episerver site. We will be demoing on Episerver's Mosey example site.
 
-[WHAT IS PWA BLURB]
+If you want to check out what the final product will look like, you can check it out on a [Mosey site we have already setup](https://pwademo-dev-app.azurewebsites.net).
 
 ## Step 1: Adding a manifest file
 The manifest file is a JSON file that tells the browser about your app and describes its functionality once installed on your mobile device. We will be using the example manifest below.
