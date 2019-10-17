@@ -41,8 +41,9 @@
     {
         <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59a70b2039509a0011b10e4e&product=inline-share-buttons" async="async"></script>
     }
-    @*We need to reference the manifest file that includes detailed information about your PWA.*@
-    <link rel='manifest' href='/manifest.json'>
+    @*Step 1: Adding a manifest file*@
+    @*We need to reference the manifest.json file that includes detailed information about your PWA. You can add that here*@
+    
 </head>
 <body class="cms-index-index cms-home-page theme-mosey">
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
@@ -118,8 +119,9 @@
     <script src="/signalr/hubs"></script>
     @RenderSection("AdditionalScripts", false)
 
-    <script src="~/pwabuilder-sw-register.js" async></script>
-
+    @*Step 3: Register the service worker*@
+    @*We need to register the service worker. Include the js file that does the registering.*@
+    
     <script>
 
         let deferredPrompt = null;

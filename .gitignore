@@ -1,15 +1,15 @@
 Sources/EPiServer.Reference.Commerce.Site/License.config
 Sources/EPiServer.Reference.Commerce.Site/Web.Debug.config
 Sources/EPiServer.Reference.Commerce.Site/Web.Release.config
-Sources/EPiServer.Reference.Commerce.Site/connectionStrings.config
-Sources/EPiServer.Reference.Commerce.Site/connectionStrings.config
+#Sources/EPiServer.Reference.Commerce.Site/connectionStrings.config
+#Sources/EPiServer.Reference.Commerce.Site/connectionStrings.config
 
 Sources/EPiServer.Reference.Commerce.Manager/Web.Debug.config
 Sources/EPiServer.Reference.Commerce.Manager/Web.Release.config
-Sources/EPiServer.Reference.Commerce.Manager/connectionStrings.config
-Sources/EPiServer.Reference.Commerce.Manager/connectionStrings.config
+#Sources/EPiServer.Reference.Commerce.Manager/connectionStrings.config
+#Sources/EPiServer.Reference.Commerce.Manager/connectionStrings.config
 Sources/EPiServer.Reference.Commerce.Manager/App_Data/ImportExport/*
-Sources/appdata/*
+#Sources/appdata/*
 !Sources/appdata/blobs
 Sources/appdata/blobs/*/3p!_*
 Setup/*.log
@@ -181,8 +181,8 @@ UpgradeLog*.XML
 UpgradeLog*.htm
 
 # SQL Server files
-*.mdf
-*.ldf
+#*.mdf
+#*.ldf
 
 # Business Intelligence projects
 *.rdl.data
